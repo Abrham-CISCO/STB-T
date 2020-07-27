@@ -1,0 +1,72 @@
+doctype html
+include ../layout/header.jade
+html
+  head
+    meta(charset='utf-8')
+    |   
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    |   
+    title AdminLTE 3 | Log in
+    // Tell the browser to be responsive to screen width
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Font Awesome
+    link(rel='stylesheet', href='static/plugins/fontawesome-free/css/all.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+    // icheck bootstrap
+    link(rel='stylesheet', href='static/plugins/icheck-bootstrap/icheck-bootstrap.min.css')
+    // Theme style
+    link(rel='stylesheet', href='static/dist/css/adminlte.min.css')
+    // Google Font: Source Sans Pro
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
+  body.hold-transition.login-page
+    .login-box
+      // /.login-logo
+      .card
+        .card-body.login-card-body
+          p.login-box-msg
+            img.brand-image.img-circle.elevation-3(src='static/viewsOld/img/Logo.jpg', alt='AdminLTE Logo', style='opacity: .8', width='100')
+            br
+            br
+            | &nbsp;&nbsp;&nbsp; &#x12A0;&#x12F2;&#x1235; &#x12A0;&#x1263;&#x120D; &#x1218;&#x1218;&#x12DD;&#x1308;&#x1262;&#x12EB; &#x1245;&#x133D;
+          |       
+          form(action='/login', method='post')
+            .input-group.mb-3
+              input.form-control(type='text', placeholder='ስልክ ቁጥር' name = "tel")
+              |           
+              .input-group-append
+                .input-group-text
+                  span.fas.fa-envelope
+            |         
+            .input-group.mb-3
+              input.form-control(type='password', placeholder='የይለፍ ቃል' name = "password")
+              |           
+              .input-group-append
+                .input-group-text
+                  span.fas.fa-lock
+            |         
+            .row
+              .col-8
+                .icheck-primary
+                  input#remember(type='checkbox')
+                  |               
+                  label(for='remember')
+                    | ወደፊት አስታውሰኝ
+              // /.col
+              .col-4
+                button.btn.btn-primary.btn-block(type='submit') ግባ
+              // /.col
+          |       
+          p.mb-1
+            a(href='/forgotPassword') የይለፍ ቃሌን አላስተውሰውም
+          |       
+          p.mb-0
+            a.text-center(href='/register') አዲስ አባል ነኝ እንደ አዲስ መዝግቡኝ
+        // /.login-card-body
+    // /.login-box
+    // jQuery
+    script(src='static/plugins/jquery/jquery.min.js')
+    // Bootstrap 4
+    script(src='static/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    // AdminLTE App
+    script(src='static/dist/js/adminlte.min.js')
