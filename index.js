@@ -5,11 +5,11 @@
   var io = require('socket.io')(http);
   var bodyParser = require('body-parser').json();
   var mongoose = require('mongoose');
-  var JadeFolderPath = __dirname ;
   var session = require('express-session');
   var MongoStore = require('connect-mongo')(session);
 // Routes
-  var Accounts = require('./Account/route')
+  // Accounts
+    var Accounts = require('./Account/route')
   // Workspace routes
     var AbinetTimehert = require('./Workspaces/AbinetTimhert/route');
     var MemihranMideba = require('./Workspaces/MemhiranMideba/route');
@@ -56,7 +56,8 @@
   chat.on('connection', (socket)=>{
     console.log(socket.client.id + ' connected to the chat workspace with '+socket.id);
   });
-// Configuration For Jade
+// Setting up Jade
+var JadeFolderPath = __dirname ;
 app.set('view engine', 'jade');
 app.set('views', JadeFolderPath);
 //Error Handler
@@ -68,10 +69,13 @@ app.use(function(err,req,res,next){
         error: {}
     });
 })
+
 // Creating An Express server 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
 http.listen(3000, () => {
   console.log('listening on *:3000');
+});
+
+// Display Homepage
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
 });
