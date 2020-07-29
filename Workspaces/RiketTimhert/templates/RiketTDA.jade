@@ -1,5 +1,5 @@
 doctype html
-include ../layout/header.jade
+include ../../../SharedComponents/Layouts/header.jade
 html
   head
     meta(charset='utf-8')
@@ -147,7 +147,7 @@ html
               i.fas.fa-th-large
       // /.navbar
       // Main Sidebar Container
-      include ../layout/sidebarNU.jade
+      include ../../../SharedComponents/Layouts/sidebarNU.jade
       // Content Wrapper. Contains page content
       .content-wrapper
         // Content Header (Page header)
@@ -155,14 +155,12 @@ html
           .container-fluid
             .row.mb-2
               .col-sm-6
-                h1 መምህራን ምደባ ንዑስ ክፍል
+                h1 የርቀት ትምህርት ንዑስ ክፍል
               |           
               .col-sm-6
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
                     a(href='#') Home
-                  |               
-                  li.breadcrumb-item.active User Profile
             .row
               .col-md-12
                 .card
@@ -177,12 +175,11 @@ html
                   .card-body
                     .tab-content
                       #activity.active.tab-pane
-                        div(id="userlist").memberslist
                         div(id="Messagebox")
-                        script(src="static/viewsOld/AJAX/D_Leader/DMembersMM.js")
-                        script(src="static/viewsOld/AJAX/Apps/Messaging.js")
+                        div(id="userlist").memberslist
+                        script(src="static/viewsOld/AJAX/D_Leader/DMembersRT.js")
                         script(src="static/viewsOld/jquery.min.js")   
-
+                        script(src="static/viewsOld/AJAX/Apps/Messaging.js")
                       #timeline.tab-pane
                         // The timeline
                         .timeline.timeline-inverse

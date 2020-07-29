@@ -17,7 +17,7 @@ router.get('/logout', function(req,res,next){
             if(err){
                 return next(err);
             } else{
-                res.sendFile(__dirname + '/index.html');
+                res.redirect('/');
             }
         });
     }

@@ -1,12 +1,12 @@
 doctype html
-include ../layout/header.jade
+include ../../../SharedComponents/Layouts/header.jade
 html
   head
     meta(charset='utf-8')
     |   
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     |   
-    title AdminLTE 3 | User Profile
+    title ስርዓተ ትምህርት ንዑስ ክፍል
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
@@ -147,7 +147,7 @@ html
               i.fas.fa-th-large
       // /.navbar
       // Main Sidebar Container
-      include ../layout/sidebarNU.jade
+      include ../../../SharedComponents/Layouts/sidebarNU.jade
       // Content Wrapper. Contains page content
       .content-wrapper
         // Content Header (Page header)
@@ -155,13 +155,14 @@ html
           .container-fluid
             .row.mb-2
               .col-sm-6
-                h1 የአብነት ትምህርት ንዑስ ክፍል
+                h1 ስዕራተ ትምህርት ንዑስ ክፍል
               |           
               .col-sm-6
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
                     a(href='#') Home
                   |               
+                  li.breadcrumb-item.active User Profile
             .row
               .col-md-12
                 .card
@@ -175,9 +176,12 @@ html
                   // /.card-header
                   .card-body
                     .tab-content
-                      #activity.active.tab-pane
-                        script(src="static/viewsOld/AJAX/S_D_Leader/DMembersAT_S.js")
-                        div(id="userlist").memberslist
+                      #activity.active.tab-pane  
+                      div(id="Messagebox")
+                      div(id="userlist").memberslist
+                      script(src="static/viewsOld/jquery.min.js")  
+                      script(src="static/viewsOld/AJAX/S_D_Leader/DMembersST_S.js")
+                      script(src="static/viewsOld/AJAX/Apps/Messaging.js")
                       #timeline.tab-pane
                         // The timeline
                         .timeline.timeline-inverse
@@ -316,6 +320,7 @@ html
                   // /.card-body
                 // /.nav-tabs-custom
               // /.col
+            // /.row
           // /.container-fluid
         // Main content
         section.content

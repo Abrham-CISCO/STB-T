@@ -26,19 +26,21 @@ var UserSchema = new mongoose.Schema({
     work: {
         type: Object,
         default: [
-                  {
+                  { 
+                    // Possible Improvement : Instead of saving department links on the database. define these links somewhere else.
+                    // Connect the departments with the link using s_id and parent relation
                     department:"ትምህርት ክፍል",
                     subDepartment:[
-                        {name:"ሰብሳቢ",link:"/W2",role:"ሰብሳቢ",active:false, sd_id:1, parent : 1},
-                        {name:"ጸሐፊ",link:"/W1",role:"ጸሐፊ",active:false, sd_id:2, parent : 1,slink:"/W3S"},
-                        {name:"ስርዓተ ትምህርት",link:"/W3",role:"ሰብሳቢ",active:false, sd_id:3,  parent : 1,slink:"/W3S"},
-                        {name:"ስርዓተ ትምህርት",link:"/W3",role:"አባል",active:false, sd_id:3,  parent : 3,slink:"/W3SS"},
-                        {name:"መምህራን ምደባ",link:"/W4",role:"ሰብሳቢ",active:false, sd_id:4,  parent : 1,slink:"/W4S"},
-                        {name:"መምህራን ምደባ",link:"/W4",role:"አባል",active:false, sd_id:4,  parent : 4 ,slink:"/W4SS"},
-                        {name:"የአብነት ትምህርት",link:"/W5",role:"ሰብሳቢ",active:false, sd_id:5 , parent : 1,slink:"/W5S"},
-                        {name:"የአብነት ትምህርት",link:"/W5",role:"አባል",active:false, sd_id:5,  parent : 5 ,slink:"/W5SS"},
-                        {name:"የርቀት ትምህርት",link:"/W9",role:"ሰብሳቢ",active:false, sd_id:6 , parent : 1,slink:"/W9S"},
-                        {name:"የርቀት ትምህርት",link:"/W9",role:"አባል",active:false, sd_id:6,  parent : 6 ,slink:"/W9SS"}
+                        {name:"ሰብሳቢ",DA_link:"/W2",role:"ሰብሳቢ",active:true, sd_id:1, parent : 1},
+                        {name:"ጸሐፊ",DA_link:"/W1",role:"ጸሐፊ",active:false, sd_id:2, parent : 1,slink:"/W3S"},
+                        {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:3,  parent : 1,SD_link:"/SitateTimhert/SubDepartmentAdmin",},
+                        {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"አባል",active:false, sd_id:3,  parent : 3,SD_link:"/SitateTimhert/SubDepartmentMember"},
+                        {name:"መምህራን ምደባ",DA_link:"/MemihranMideba/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:4,  parent : 1,SD_link:"/MemihranMideba/SubDepartmentAdmin"},
+                        {name:"መምህራን ምደባ",DA_link:"/MemihranMideba/DepartmentAdmin",role:"አባል",active:false, sd_id:4,  parent : 4 ,SD_link:"/MemihranMideba/SubDepartmentMember"},
+                        {name:"የአብነት ትምህርት",DA_link:"/AbinetTimehert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:5 , parent : 1,SD_link:"/AbinetTimehert/SubDepartmentAdmin"},
+                        {name:"የአብነት ትምህርት",DA_link:"/AbinetTimehert/DepartmentAdmin",role:"አባል",active:false, sd_id:5,  parent : 5 ,SD_link:"/AbinetTimehert/SubDepartmentMember"},
+                        {name:"የርቀት ትምህርት",DA_link:"/RiketTimhert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:6 , parent : 1,SD_link:"/RiketTimhert/SubDepartmentAdmin"},
+                        {name:"የርቀት ትምህርት",DA_link:"/RiketTimhert/DepartmentAdmin",role:"አባል",active:false, sd_id:6,  parent : 6 ,SD_link:"/RiketTimhert/SubDepartmentMember"}
                     ] 
                   }
                 ]

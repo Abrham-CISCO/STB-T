@@ -1,12 +1,12 @@
 doctype html
-include ../layout/header.jade
+include ../../../SharedComponents/Layouts/header.jade
 html
   head
     meta(charset='utf-8')
     |   
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     |   
-    title AdminLTE 3 | User Profile
+    title  መምህራን ምደባ ንዑስ ክፍል ፡ ሰብሳቢ
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
@@ -147,7 +147,7 @@ html
               i.fas.fa-th-large
       // /.navbar
       // Main Sidebar Container
-      include ../layout/sidebarNU.jade
+      include ../../../SharedComponents/Layouts/sidebarNU.jade
       // Content Wrapper. Contains page content
       .content-wrapper
         // Content Header (Page header)
@@ -177,7 +177,7 @@ html
                   .card-body
                     .tab-content
                       #activity.active.tab-pane
-                        script(src="static/viewsOld/AJAX/S_D_Members/DMembersMM_S_S.js")
+                        script(src="static/viewsOld/AJAX/S_D_Leader/DMembersMM_S.js")
                         div(id="userlist").memberslist
                       #timeline.tab-pane
                         // The timeline
