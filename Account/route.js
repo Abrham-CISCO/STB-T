@@ -1,12 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var IDD = "";
-var PWD = require('../models/PSDrecovery');
-var User = require('../models/user');
+var PWD = require('./Models/PSDrecovery');
+var User = require('./Models/user');
 var app = express();
-var mid = require('../middleware');
-var Message = require('../models/Message_model');
-var socketmodel = require('../models/socket');
+var mid = require('../SharedComponents/Middlewares/index');
+var Message = require('../SharedComponents/Messaging/Message_model');
 
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
@@ -77,18 +76,14 @@ router.post('/register', function(req,res,next){
                     }
                     else
                     {
-                        return res.render('Pages/Accounts/profile',user);
+                        return res.render('Account/templates/profile',user);
                     }
                     console.log(MSG);
                 });
                 
             }
         });
-        console.log(messageData);
         // use schema's 'create' method to insert document into Mongo
-
-
-        console.log(userData);
     }
     else
     {
@@ -99,51 +94,47 @@ router.post('/register', function(req,res,next){
 });
 
 router.get('/login',mid.loggedOut, function(req,res,next){
-    return res.render('Pages/Accounts/signin');
+    return res.render('Account/templates/signin');
 });
 
 router.post('/login', function(req, res, next){
-if(req.body.tel && req.body.password)
-{
- User.authenticate(req.body.tel, req.body.password, function(error, user){
-    if(error || !user){
-        var err = new Error('Wrong telephone or password.');
-        err.status = 401;
-        return next(err);                
-    } 
-    else{
-        req.session.userId = user._id;
-        req.session.name = user.name;
-        req.session.user = user;
-        console.log("User login successfull");
-        var socketData = {
-            userID: user._id,
-            socketId: "SOCKET_ID"
-        };
+    if(req.body.tel && req.body.password)
+    {
+    User.authenticate(req.body.tel, req.body.password, function(error, user){
+        if(error || !user){
+            var err = new Error('Wrong telephone or password.');
+            err.status = 401;
+            return next(err);                
+        } 
+        else{
+            req.session.userId = user._id;
+            req.session.name = user.name;
+            req.session.user = user;
+            console.log("User login successfull");
+            var socketData = {
+                userID: user._id,
+                socketId: "SOCKET_ID"
+            };
 
-    // use schema's 'create' method to insert document into Mongo
-    socketmodel.create(socketData, function(error, ack){
-        if(error){
-            return next(error);
-        }
-        else
-        {
-            return res.render('Pages/Accounts/profile',user);      
+        // use schema's 'create' method to insert document into Mongo
+        socketmodel.create(socketData, function(error, ack){
+            if(error){
+                return next(error);
+            }
+            else
+            {
+                return res.render('Account/templates/profile',user);      
+            }
+        });
         }
     });
     }
- });
-
-
-
-}
-else
-{
-    var err = new Error('Telephone Number and Password are required!');
-    err.status = 401;
-    return next(err);        
-}
-
+    else
+    {
+        var err = new Error('Telephone Number and Password are required!');
+        err.status = 401;
+        return next(err);        
+    }
 });
 
 
@@ -159,18 +150,17 @@ User.findById(req.session.userId)
             return next(error);
         } else {
             req.session.user  = (user);
-            return res.render('Pages/Accounts/profile',user);
+            return res.render('Account/templates/profile',user);
         }
     });
 
 });
 
 router.get('/forgotPassword', function(req,res,next){
-    return res.render('Pages/Accounts/forgot-password');
+    return res.render('Account/templates/forgot-password');
 });
 
 //check if the accepted password matches the retyped password.
-
 router.post('/CHPWD', function(req,res,next){
     if(req.body.password == req.body.passwordagain)
     {
@@ -202,7 +192,7 @@ router.post('/forgotPassword', function(req,res,next){
             else{
                 req.session.TUI = user._id;
                 req.session.NM = user.name;
-                return res.render('Pages/Accounts/EmailVerification', user);
+                return res.render('Account/templates/EmailVerification', user);
             }
          });
         }
@@ -242,7 +232,7 @@ router.post('/Iverify',function(req,res,next){
             err.status = 401;
             return next(err);                
         } 
-            return res.render('Pages/Accounts/recover-password',{name:req.session.NM});
+            return res.render('Account/templates/recover-password',{name:req.session.NM});
     });
 });
 
@@ -254,8 +244,5 @@ generateRandomNumber = function()
 {
     return (Math.floor(Math.random()*1000000) + 1 );
 }
-
-
-
 
 module.exports = router;

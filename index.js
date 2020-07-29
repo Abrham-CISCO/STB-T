@@ -39,8 +39,8 @@
       })
   }));
 // Defining Static File Path
-  var StaticFilePath = 'C:\\wamp64\\www\\STBF';
-  app.use('/static',express.static(StaticFilePath))
+  var StaticFilePath = 'C:\\wamp64\\www\\TK';
+  app.use('',express.static(StaticFilePath))
 // Route Definations
   app.use('/AbinetTimehert',AbinetTimehert);
   app.use('/MemihranMideba',MemihranMideba);
@@ -64,7 +64,7 @@ app.set('views', JadeFolderPath);
 // Define as the last app.use callback
 app.use(function(err,req,res,next){
     res.status(err.status || 500);
-    res.render('Pages/error',{
+    res.render('SharedComponents/error',{
         message: err.message,
         error: {}
     });

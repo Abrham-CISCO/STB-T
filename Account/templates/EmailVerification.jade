@@ -1,4 +1,5 @@
 doctype html
+include ../../SharedComponents/Layouts/header.jade
 html
   head
     meta(charset='utf-8')
@@ -25,14 +26,14 @@ html
       .card
         .card-body.login-card-body
           p.login-box-msg
-            img.brand-image.img-circle.elevation-3(src='/static/viewsOld/img/Logo.jpg', alt='AdminLTE Logo', style='opacity: .8', width='100')
+            img.brand-image.img-circle.elevation-3(src='../Account/static/logo.jpg', alt='AdminLTE Logo', style='opacity: .8', width='100')
             | &nbsp;&nbsp;&nbsp; 
             br
             br
             ሰላም #{name} 
             br
             በኢሜል አድራሻዎ የምስጢር ቁጥር ተልኮሎታል። ይህን የምስጢር ቁጥር እዚህ ያስገቡ       
-          form(action='/Iverify', method='post')
+          form(action='../Accounts/Iverify', method='post')
             .input-group.mb-3
               input.form-control(type='text', placeholder='የምስጢር ቁጥሩን እዚህ ያስገቡ', name = 'vcode')
               |           

@@ -1,5 +1,5 @@
 doctype html
-include ../layout/header.jade
+include ../../SharedComponents/Layouts/header.jade
 html
   head
     meta(charset='utf-8')
@@ -25,12 +25,12 @@ html
       .card
         .card-body.login-card-body
           p.login-box-msg
-            img.brand-image.img-circle.elevation-3(src='static/viewsOld/img/Logo.jpg', alt='AdminLTE Logo', style='opacity: .8', width='100')
+            img.brand-image.img-circle.elevation-3(src='../Account/static/logo.jpg', alt='AdminLTE Logo', style='opacity: .8', width='100')
             br
             br
             | &nbsp;&nbsp;&nbsp; &#x12A0;&#x12F2;&#x1235; &#x12A0;&#x1263;&#x120D; &#x1218;&#x1218;&#x12DD;&#x1308;&#x1262;&#x12EB; &#x1245;&#x133D;
           |       
-          form(action='/login', method='post')
+          form(action='../Accounts/login', method='post')
             .input-group.mb-3
               input.form-control(type='text', placeholder='ስልክ ቁጥር' name = "tel")
               |           
@@ -58,10 +58,10 @@ html
               // /.col
           |       
           p.mb-1
-            a(href='/forgotPassword') የይለፍ ቃሌን አላስተውሰውም
+            a(href='../Accounts/forgotPassword') የይለፍ ቃሌን አላስተውሰውም
           |       
           p.mb-0
-            a.text-center(href='/register') አዲስ አባል ነኝ እንደ አዲስ መዝግቡኝ
+            a.text-center(href='../Accounts/register') አዲስ አባል ነኝ እንደ አዲስ መዝግቡኝ
         // /.login-card-body
     // /.login-box
     // jQuery
