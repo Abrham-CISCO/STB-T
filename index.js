@@ -16,7 +16,7 @@
     var RiketTimhert = require('./Workspaces/RiketTimhert/route');
     var Sebsabi = require('./Workspaces/Sebsabi/route');
     var SirateTimhert = require('./Workspaces/SierateTimhert/route');
-    var Tsheafi = require('./Workspaces/Tsehafi/route');
+    var Tsehafi = require('./Workspaces/Tsehafi/route');
   // Shared Applications
     var Messaging = require('./SharedComponents/Messaging/route');
     var Notification = require('./SharedComponents/Notification/route');
@@ -47,7 +47,7 @@
   app.use('/RiketTimhert',RiketTimhert);
   app.use('/Sebsabi',Sebsabi);
   app.use('/SirateTimhert',SirateTimhert);
-  app.use('/Tsheafi',Tsheafi);
+  app.use('/Tsehafi',Tsehafi);
   app.use('/Accounts',Accounts);
   app.use('/Messaging',Messaging);
   app.use('/Notification',Notification);

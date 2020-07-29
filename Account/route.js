@@ -6,7 +6,7 @@ var User = require('./Models/user');
 var app = express();
 var mid = require('../SharedComponents/Middlewares/index');
 var Message = require('../SharedComponents/Messaging/Message_model');
-
+var socketmodel = require('../SharedComponents/Models/socket');
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
 
@@ -115,7 +115,6 @@ router.post('/login', function(req, res, next){
                 userID: user._id,
                 socketId: "SOCKET_ID"
             };
-
         // use schema's 'create' method to insert document into Mongo
         socketmodel.create(socketData, function(error, ack){
             if(error){

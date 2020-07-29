@@ -155,12 +155,14 @@ html
           .container-fluid
             .row.mb-2
               .col-sm-6
-                h1 የርቀት ትምህርት ንዑስ ክፍል
+                h1 ጸሐፊ
               |           
               .col-sm-6
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
                     a(href='#') Home
+                  |               
+                  li.breadcrumb-item.active User Profile
             .row
               .col-md-12
                 .card
@@ -174,9 +176,12 @@ html
                   // /.card-header
                   .card-body
                     .tab-content
-                      #activity.active.tab-pane
-                        script(src="static/viewsOld/AJAX/S_D_Leader/DMembersRT_S.js")
-                        div(id="userlist").memberslist
+                      #activity.active.tab-pane  
+                      div(id="Messagebox")
+                      div(id="userlist").memberslist
+                      script(src="static/viewsOld/jquery.min.js")  
+                      script(src="static/viewsOld/AJAX/S_D_Leader/DMembersST_S.js")
+                      script(src="static/viewsOld/AJAX/Apps/Messaging.js")
                       #timeline.tab-pane
                         // The timeline
                         .timeline.timeline-inverse
@@ -315,6 +320,7 @@ html
                   // /.card-body
                 // /.nav-tabs-custom
               // /.col
+            // /.row
           // /.container-fluid
         // Main content
         section.content
