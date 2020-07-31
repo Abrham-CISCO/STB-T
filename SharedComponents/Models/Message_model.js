@@ -33,17 +33,17 @@ MessageSchema.statics.contact = function(userID,callback)
 {
     Message.findOne({userID:userID})      
             .exec(function(error, messageHistoryL){
-                console.log("Excuting Message.findOne");
                 if(error)
                 {
-                    console.log("error");
+                    next(error);
                 }
                 else if(!messageHistoryL)
                 {
-                    console.log("Error")
-                    var err = new Error("No Message were found for this user");
+                    var err = new Error("User not found");
+                    err.emessage = "User Not Found!"
                     err.status = 401;
-                    return(err);
+                    console.log("Error");
+                    return callback(err,null);
                 }
                 for(var i = 0; i < messageHistoryL.History.length; i++)
                 {
@@ -79,7 +79,6 @@ MessageSchema.statics.contact = function(userID,callback)
                             }
                         }
                     }
-                    console.log(contactsObject);
                     return callback(null,contactsObject)
                 }
             });    
@@ -90,20 +89,20 @@ MessageSchema.statics.messageHistory = function(fromTel,callback)
             .exec(function(error, message){
                 if(error)
                 {
-                    next(error);
+                    return callback(err,null);
                 }
                 else if(!message)
                 {
                     var err = new error("Messgaes not found for this user");
                     err.status = 401;
-                    return(err);
+                    return callback(err,null);
                 }
                 console.log(message);
                 return callback(null, message);
             });    
 }
 MessageSchema.statics.MessageAdder = function(Tel,messageObject, callback){
-    Message.updateOne({userID:Tel}, {$set:{Messages:messageObject}})
+    Message.updateOne({userID:Tel}, {$set:{History:messageObject}})
         .exec(function(error,user){
             if(error){
                 next(error);

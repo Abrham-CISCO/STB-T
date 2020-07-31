@@ -6,7 +6,7 @@ var MessagesM = require('../models/Message_model');
 // processed as normal functions do. this is because the output of the function occurs
 // suddenly after the normal function completes excution. so the function shall be defined as
 // call back function or promises should be used to halt processing until something is returned.
-var createAccount =  (messageData,callback) =>{
+const createAccount =  (messageData,callback) =>{
     let oerror,oMSG,Status;
     MessagesM.create(messageData, function(error, MSG){
         if(error){
@@ -25,7 +25,7 @@ const contactList =  (TelephoneNumber,callback) =>{
         {
             var err = new Error("No contacts for this user");
             err.status = 401;
-            callback(err,null)
+            callback(error,null)
         }
         else
         {
@@ -37,12 +37,10 @@ const contactList =  (TelephoneNumber,callback) =>{
 const chatHistoryAll =  (TelephoneNumber,callback) =>{
     MessagesM.messageHistory(TelephoneNumber,function(error, messages){
         if(error || !messages){
-            var err = new Error('Wrong telephone or password.');
-            err.status = 401;
-            callback(err,null)                
+            callback(error,null)                
         } 
         else{
-            callback(null,contacts);
+            callback(null,messages);
         }
      });
 };
@@ -61,7 +59,7 @@ const sendMessage =  (FromTelephoneNumber,ToTelephoneNumber,Domain, MessageBody,
             {
                 var err = new Error('Wrong telephone or password.');
                 err.status = 401;
-                callback(err,null)
+                return callback(err,null)
             } 
             else{
                     MessageHistory = messages;
@@ -74,11 +72,12 @@ const sendMessage =  (FromTelephoneNumber,ToTelephoneNumber,Domain, MessageBody,
                 read:false
          };
     
-         MessageHistory.Messages.push(MessageObject);
-         MessagesM.MessageAdder(Tel,MessageHistory.Messages, function(error, user){
+         MessageHistory.History.push(MessageObject);
+         console.log(MessageHistory.History);
+         MessagesM.MessageAdder(Tel,MessageHistory.History, function(error, user){
             if(error){
                 var err = new Error("Update failed!");
-                callback(err,null)
+                return callback(err,null)
             }
         });
         });
