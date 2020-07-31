@@ -25,13 +25,11 @@ const contactList =  (TelephoneNumber,callback) =>{
         {
             var err = new Error("No contacts for this user");
             err.status = 401;
-            return next(err);
+            callback(err,null)
         }
         else
         {
-            res.json({
-                cont: contacts
-            });
+            callback(null,contacts);
         }
     });
 };
@@ -41,12 +39,10 @@ const chatHistoryAll =  (TelephoneNumber,callback) =>{
         if(error || !messages){
             var err = new Error('Wrong telephone or password.');
             err.status = 401;
-            return next(err);                
+            callback(err,null)                
         } 
         else{
-            res.json({
-                response: messages
-            });
+            callback(null,contacts);
         }
      });
 };
@@ -65,7 +61,7 @@ const sendMessage =  (FromTelephoneNumber,ToTelephoneNumber,Domain, MessageBody,
             {
                 var err = new Error('Wrong telephone or password.');
                 err.status = 401;
-                return next(err);                
+                callback(err,null)
             } 
             else{
                     MessageHistory = messages;
@@ -82,13 +78,14 @@ const sendMessage =  (FromTelephoneNumber,ToTelephoneNumber,Domain, MessageBody,
          MessagesM.MessageAdder(Tel,MessageHistory.Messages, function(error, user){
             if(error){
                 var err = new Error("Update failed!");
+                callback(err,null)
             }
         });
         });
     }
     RegisterMessage(toTel);
     RegisterMessage(fromTel);
-    res.send("DONE");
+    callback(null,"Message Sent");;
 };
 
     exports.createAccount = createAccount; 
