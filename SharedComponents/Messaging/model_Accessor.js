@@ -73,7 +73,6 @@ const sendMessage =  (FromTelephoneNumber,ToTelephoneNumber,Domain, MessageBody,
          };
     
          MessageHistory.History.push(MessageObject);
-         console.log(MessageHistory.History);
          MessagesM.MessageAdder(Tel,MessageHistory.History, function(error, user){
             if(error){
                 var err = new Error("Update failed!");

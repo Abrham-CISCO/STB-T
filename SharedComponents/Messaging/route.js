@@ -41,14 +41,12 @@ router.get('/historyOf/:memberTel', function(req,res){
 });
 
 
-router.post('/sendMessage/:toTel/:domain/:fromTel', jsonParser(), function(req,res){
+router.post('/sendMessage/:toTel/:domain', jsonParser(), function(req,res){
 
     var toTel = req.params.toTel;
-    // var fromTel = req.session.user.telephone;
-    var fromTel = req.params.fromTel;
+    var fromTel = req.session.user.telephone;
     var Domain = req.params.domain;
     var messageBody = req.body.message;
-    var MessageHistory;
 
     messaging.sendMessage(fromTel,toTel,Domain,messageBody,function(err, confirmation){
         if(err || !confirmation){

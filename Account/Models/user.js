@@ -54,8 +54,6 @@ var UserSchema = new mongoose.Schema({
 
 //Authenticate input against database documents
 UserSchema.statics.authenticate = function(telephone, password, callback){
-    console.log("tel : ", telephone);
-    console.log("password : ", password);
     User.findOne({telephone: telephone})
         .exec(function(error,user){
             if(error){
@@ -113,6 +111,7 @@ UserSchema.statics.UserById = function(UserId, callback){
             else if(!user){
                 var err = new Error("User Not Found");
                 err.status = 401;
+                err.message = "User Not Found : From Model";
                 return callback(err);
             }
             return callback(null,user);
@@ -142,6 +141,7 @@ UserSchema.statics.editProfile = function(userID, UserGeneral, callback){
                 err.status = 401;
                 return callback(err);
             }
+            // should return the user
             return callback(null,user)
 
         });

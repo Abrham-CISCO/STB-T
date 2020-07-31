@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var IDD = "";
 var PWD = require('./Models/PSDrecovery');
 var User = require('./Models/user');
 var app = express();
 var mid = require('../SharedComponents/Middlewares/index');
 var messaging = require('../SharedComponents/Messaging/route');
 var ModelAccessor = require('../SharedComponents/Messaging/model_Accessor');
+var UserModelAccessor = require('./Models/user_model_accessor')
+var PWDModelAccessor = require('./Models/psd_model_accessor');
 // var MessagesM = require('../SharedComponents/Models/Message_model');
 var socketmodel = require('../SharedComponents/Models/socket');
 router.use(express.json());
@@ -25,13 +26,31 @@ router.get('/logout', function(req,res,next){
     }
  });
 
+ router.get('/Info/:userId',function(req,res,next){
+     var UserId = req.params.userId
+     UserModelAccessor.userData(UserId,function(error,user){
+         if(error){
+            res.json({
+                response:error
+            })
+         }
+         else
+         {
+             res.json({
+                 response:user
+             })
+         }
+     });
+ });
+
 router.post('/updateProfile', mid.requireSignIn, function(req,res,next){
-    User.editProfile(req.session.userId, req.body, function(error, user){
+    UserModelAccessor.updateProfile(req.session.userId,req.body,function(error,user){
         if(error){
             var err = new Error("Update failed!");
         }
-        else{
-            res.render('Account/templates/profile');
+        else
+        {
+            res.render('Account/templates/profile',user);
         }
     });
 });
@@ -60,21 +79,17 @@ router.post('/register', function(req,res,next){
             userID: req.body.tel
         };
 
-        // use schema's 'create' method to insert document into Mongo
-        User.create(userData, function(error, user){
-            if(error){
-                return next(error);
+        UserModelAccessor.register(userData,messageData,function(error,user){
+            if(error)
+            {
+                return next(err);  
             }
             else
             {
                 req.session.userId = user._id;
-                IDD = user._id;
                 req.session.name = req.body.name;
                 req.session.user = user;
-                ModelAccessor.createAccount(messageData,function(err,msg){
-                    console.log(msg||err);
-                    return res.render('Account/templates/profile',user);
-                });                
+                return res.render('Account/templates/profile',user);
             }
         });
         // use schema's 'create' method to insert document into Mongo
@@ -92,35 +107,22 @@ router.get('/login',mid.loggedOut, function(req,res,next){
 });
 
 router.post('/login', function(req, res, next){
+
     if(req.body.tel && req.body.password)
     {
-    User.authenticate(req.body.tel, req.body.password, function(error, user){
-        if(error || !user){
-            var err = new Error('Wrong telephone or password.');
-            err.status = 401;
-            return next(err);                
-        } 
-        else{
-            req.session.userId = user._id;
-            req.session.name = user.name;
-            req.session.user = user;
-            console.log("User login successfull");
-            var socketData = {
-                userID: user._id,
-                socketId: "SOCKET_ID"
-            };
-        // use schema's 'create' method to insert document into Mongo
-        socketmodel.create(socketData, function(error, ack){
-            if(error){
-                return next(error);
-            }
-            else
-            {
+        UserModelAccessor.Autenticate(req.body.tel,req.body.password,function(error,user){
+            if(error || !user){
+                var err = new Error('Wrong telephone or password.');
+                err.status = 401;
+                return next(err);                
+            } 
+            else{
+                req.session.userId = user._id;
+                req.session.name = user.name;
+                req.session.user = user;
                 return res.render('Account/templates/profile',user);      
-            }
+            }        
         });
-        }
-    });
     }
     else
     {
@@ -130,23 +132,20 @@ router.post('/login', function(req, res, next){
     }
 });
 
-
 router.get('/profile', mid.requireSignIn, function(req,res,next){
 if(!req.session.userId){
     var err = new Error('You are not authorized to view this page');
     err.status = 403;
     return next(err);  
 }
-User.findById(req.session.userId)
-    .exec(function (error,user){
-        if (error){
-            return next(error);
-        } else {
-            req.session.user  = (user);
-            return res.render('Account/templates/profile',user);
-        }
-    });
-
+UserModelAccessor.userData(req.session.userId, function(error,user){
+    if (error){
+        return next(error);
+    } else {
+        req.session.user  = (user);
+        return res.render('Account/templates/profile',user);
+    }
+});
 });
 
 router.get('/forgotPassword', function(req,res,next){
@@ -157,14 +156,15 @@ router.get('/forgotPassword', function(req,res,next){
 router.post('/CHPWD', function(req,res,next){
     if(req.body.password == req.body.passwordagain)
     {
-        User.updatePassword(req.session.TUI, req.body.password, function(error, user){
-            if(error){
-                var err = new Error("Update failed!");
-            }
-            else{
-                res.json(user);
-            }
-        });
+    UserModelAccessor.updatePassword(req.session.TUI,req.body.password,function(error,notification){
+        if(error){
+            var err = new Error("Password Update failed!");
+            return next(err);
+        }
+        else{
+            res.json(notification);
+        }
+    });
     }
     else
     {
@@ -173,21 +173,37 @@ router.post('/CHPWD', function(req,res,next){
         return next(err);        
     }     
 });
+
 router.post('/forgotPassword', function(req,res,next){
         if(req.body.tel)
         {
-         User.IDentifyUserName(req.body.tel, function(error, user){
-            if(error || !user){
-                var err = new Error('Wrong telephone or password.');
-                err.status = 401;
-                return next(err);                
-            } 
-            else{
-                req.session.TUI = user._id;
-                req.session.NM = user.name;
-                return res.render('Account/templates/EmailVerification', user);
-            }
-         });
+            UserModelAccessor.userDataByTel(req.body.tel,function(error,user){
+                if(error || !user){
+                    var err = new Error('Wrong telephone or password.');
+                    err.message = "Wrong telephone or password"
+                    err.status = 401;
+                    return next(err);                
+                } 
+                else{
+                    req.session.TUI = user._id;
+                    req.session.NM = user.name;
+                    var PWDData = {
+                        uID: req.session.TUI,
+                        verificationCode: generateRandomNumber() 
+                
+                    };
+                    PWDModelAccessor.register(PWDData,function(error,user){
+                        if(error){
+                            console.log("Error at register")
+                            return next(error);
+                        }
+                        else
+                        {
+                            return res.render('Account/templates/EmailVerification', user);
+                        }
+                    });
+                }
+            });
         }
         else
         {
@@ -196,25 +212,10 @@ router.post('/forgotPassword', function(req,res,next){
             return next(err);        
         }     
 });
+
 router.post('/Iverify',function(req,res,next){
-    var PWDData = {
-        uID: req.session.TUI,
-        verificationCode: generateRandomNumber() 
-
-    };
-    console.log(PWDData);
-    PWD.create(PWDData, function(error, pwd){
-        if(error){
-            return next(error);
-        }
-        else
-        {
-            console.log(pwd);
-        }
-    });
-    PWD.verifyIdentity(req.session.TUI,req.body.vcode, function(error,response){
-
-        if(error || !response){
+    PWDModelAccessor.verify(req.session.TUI,req.body.vcode,function(error,response){
+        if(!response){
             var err = new Error('No response Recieved.');
             err.status = 401;
             return next(err);                

@@ -42,7 +42,6 @@ MessageSchema.statics.contact = function(userID,callback)
                     var err = new Error("User not found");
                     err.emessage = "User Not Found!"
                     err.status = 401;
-                    console.log("Error");
                     return callback(err,null);
                 }
                 for(var i = 0; i < messageHistoryL.History.length; i++)
@@ -97,7 +96,6 @@ MessageSchema.statics.messageHistory = function(fromTel,callback)
                     err.status = 401;
                     return callback(err,null);
                 }
-                console.log(message);
                 return callback(null, message);
             });    
 }
