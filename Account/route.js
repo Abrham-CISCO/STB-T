@@ -5,7 +5,9 @@ var PWD = require('./Models/PSDrecovery');
 var User = require('./Models/user');
 var app = express();
 var mid = require('../SharedComponents/Middlewares/index');
-var Message = require('../SharedComponents/Messaging/Message_model');
+var messaging = require('../SharedComponents/Messaging/route');
+var ModelAccessor = require('../SharedComponents/Messaging/model_Accessor');
+// var MessagesM = require('../SharedComponents/Models/Message_model');
 var socketmodel = require('../SharedComponents/Models/socket');
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
@@ -69,18 +71,10 @@ router.post('/register', function(req,res,next){
                 IDD = user._id;
                 req.session.name = req.body.name;
                 req.session.user = user;
-                
-                Message.create(messageData, function(error, MSG){
-                    if(error){
-                        return next(error);
-                    }
-                    else
-                    {
-                        return res.render('Account/templates/profile',user);
-                    }
-                    console.log(MSG);
-                });
-                
+                ModelAccessor.createAccount(messageData,function(err,msg){
+                    console.log(msg||err);
+                    return res.render('Account/templates/profile',user);
+                });                
             }
         });
         // use schema's 'create' method to insert document into Mongo

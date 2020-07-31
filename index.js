@@ -55,6 +55,11 @@
   var chat = io.of('/chat')
   chat.on('connection', (socket)=>{
     console.log(socket.client.id + ' connected to the chat workspace with '+socket.id);
+  socket.on('chat',function(message,reciever_address){
+    console.log(message,reciever_address);
+    socket.to(reciever_address).emit('chat',message,reciever_address);
+
+  });
   });
 // Setting up Jade
 var JadeFolderPath = __dirname ;

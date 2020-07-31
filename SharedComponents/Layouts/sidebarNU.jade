@@ -114,7 +114,7 @@ html
       .card-footer
         form(action='#', method='post')
           .input-group
-            input.form-control(type='text', name='message', placeholder='Type Message ...')
+            input.form-control(type='text', id='message', placeholder='Type Message ...')
             span.input-group-append
-              button.btn.btn-primary(type='submit') Send
+              button.btn.btn-primary(type='button' id='send' onclick = "Send()") Send
                     // /.card-footer
