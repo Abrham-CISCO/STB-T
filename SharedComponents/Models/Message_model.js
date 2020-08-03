@@ -1,6 +1,4 @@
 var mongoose = require('mongoose');
-var contactsObject = [];
-var noDuplicate = true;
 var MessageSchema = new mongoose.Schema({
     userID: {
         type: String,
@@ -12,15 +10,19 @@ var MessageSchema = new mongoose.Schema({
         default:
             [
                 {
+                    fromName:"ጌታቸው ብሩ",
                     fromID:"0911675507",
                     toID:"0923276844",
+                    toName:"አብርሀም ጌታቸው",
                     body:"Hi Abrham",
                     domain:"Personal",
                     read:false
                 },
                 {
+                    fromName:"አብርሀም ጌታቸው",
                     fromID:"0923276844",
                     toID:"0911675507",
+                    toName:"ጌታቸው ብሩ",
                     body:"Hi Getachew",
                     domain:"Personal",
                     read:false
@@ -31,6 +33,12 @@ var MessageSchema = new mongoose.Schema({
 // Write here a code that returns contacts of the requested person
 MessageSchema.statics.contact = function(userID,callback)
 {
+    var Duplicate = false;
+    var contactsObject = [{
+        userName:String,
+        tel:String
+    }];
+    contactsObject.pop();
     Message.findOne({userID:userID})      
             .exec(function(error, messageHistoryL){
                 if(error)
@@ -46,40 +54,39 @@ MessageSchema.statics.contact = function(userID,callback)
                 }
                 for(var i = 0; i < messageHistoryL.History.length; i++)
                 {
-                    if(!(messageHistoryL.History[i].fromID == userID))
+                    if((messageHistoryL.History[i].fromID == userID))
                     {
                         // Register the contact
                         for(var j=0; j<contactsObject.length;j++)
                         {
-                            if(contactsObject[j] == messageHistoryL.History[i].fromID)
+                            if(contactsObject[j].tel == messageHistoryL.History[i].toID)
                             {
-                                noDuplicate = false;
+                                Duplicate = true;
                             }
                         }
-                        if(noDuplicate == true)
+                        if(Duplicate == false)
                         {
-                            contactsObject.push(messageHistoryL.History[i].fromID);
-                            noDuplicate = true;
-                        }
-                    }else{
-                        if(!(messageHistoryL.History[i].toID == userID))
-                        {
-                            for(var j=0; j<contactsObject.length;j++)
-                            {
-                                if(contactsObject[j] == messageHistoryL.History[i].toID)
-                                {
-                                    noDuplicate = false;
-                                }
-                            }
-                            if(noDuplicate == true)
-                            {
-                                contactsObject.push(messageHistoryL.History[i].toID);
-                                noDuplicate = true;
-                            }
+                            contactsObject.push({userName:messageHistoryL.History[i].toName,tel:messageHistoryL.History[i].toID});
+                            Duplicate = true;
                         }
                     }
-                    return callback(null,contactsObject)
+                    if((messageHistoryL.History[i].toID == userID))
+                    {
+                        for(var j=0; j<contactsObject.length;j++)
+                        {
+                            if(contactsObject[j].tel == messageHistoryL.History[i].fromID)
+                            {
+                                Duplicate = true;
+                            }
+                        }
+                        if(Duplicate == false)
+                        {
+                            contactsObject.push({userName:messageHistoryL.History[i].fromName,tel:messageHistoryL.History[i].fromID});
+                            Duplicate = true;
+                        }
+                    }
                 }
+                return callback(null,contactsObject)
             });    
 }
 MessageSchema.statics.messageHistory = function(fromTel,callback)
@@ -92,7 +99,7 @@ MessageSchema.statics.messageHistory = function(fromTel,callback)
                 }
                 else if(!message)
                 {
-                    var err = new error("Messgaes not found for this user");
+                    var err = new Error("Messgaes not found for this user");
                     err.status = 401;
                     return callback(err,null);
                 }

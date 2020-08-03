@@ -7,7 +7,10 @@
   var mongoose = require('mongoose');
   var session = require('express-session');
   var MongoStore = require('connect-mongo')(session);
-// Routes
+// Model Accessors
+  var MessagingModel_Acc = require('./SharedComponents/Messaging/model_Accessor')
+  var UserModel_Acc = require('./Account/Models/user_model_accessor')
+  // Routes
   // Accounts
     var Accounts = require('./Account/route')
   // Workspace routes
@@ -41,7 +44,34 @@
 // Defining Static File Path
   var StaticFilePath = 'C:\\wamp64\\www\\TK';
   app.use('',express.static(StaticFilePath))
-// Route Definations
+
+    // Socket.io setup for messaging
+    var chat = io.of('/chat')
+    chat.on('connection', (socket)=>{
+      console.log(socket.client.id + ' connected to the chat workspace with '+socket.id);
+      
+
+      // Register the socket Information of the user
+      socket.on('client',function(myTel)
+      {
+        UserModel_Acc.setChatSocket(myTel,socket.id,function(error,user)
+        {
+          console.log(myTel + "'session registered on the database!")
+        })
+      });
+      socket.on('chat',function(message,reciever_address,sender_address,domain){
+        MessagingModel_Acc.sendMessage(sender_address,reciever_address,domain,{message:message},function()
+        {
+          console.log(message,reciever_address,sender_address);
+        });
+        UserModel_Acc.getChatSocket(reciever_address,function(error,ChatSocketID){
+          socket.to(ChatSocketID).emit('chat',message,reciever_address,sender_address);
+          console.log("Online Message sent to ", ChatSocketID)
+        })
+      });
+    });
+
+  // Route Definations
   app.use('/AbinetTimehert',AbinetTimehert);
   app.use('/MemihranMideba',MemihranMideba);
   app.use('/RiketTimhert',RiketTimhert);
@@ -51,16 +81,7 @@
   app.use('/Accounts',Accounts);
   app.use('/Messaging',Messaging);
   app.use('/Notification',Notification);
-// Socket.io setup 
-  var chat = io.of('/chat')
-  chat.on('connection', (socket)=>{
-    console.log(socket.client.id + ' connected to the chat workspace with '+socket.id);
-  socket.on('chat',function(message,reciever_address){
-    console.log(message,reciever_address);
-    socket.to(reciever_address).emit('chat',message,reciever_address);
 
-  });
-  });
 // Setting up Jade
 var JadeFolderPath = __dirname ;
 app.set('view engine', 'jade');

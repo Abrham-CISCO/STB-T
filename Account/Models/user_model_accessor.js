@@ -111,6 +111,34 @@ const updatePassword = (TUI,password,callback) => {
         });
 }
 
+// Chat Socket ID Setter and Getter
+const getChatSocket = (telephone,callback) =>{
+    User.getChatSocketID(telephone,function(error,ChatSocketID){
+        if(error){
+            var err = new Error("Error!");
+            callback(err,null);
+        }
+        else{
+            callback(null,ChatSocketID)
+        }
+    })
+}
+
+
+const setChatSocket = (telephone,socketID,callback) => {
+    User.setChatSocketID(telephone,socketID, function(error,notification){
+        if(error){
+            var err = new Error("Update failed!");
+            callback(err,null);
+        }
+        else{
+            callback(null,notification)
+        }
+    })
+}
+
+exports.setChatSocket = setChatSocket;
+exports.getChatSocket = getChatSocket;
 exports.userData = userData;
 exports.updateProfile = updateProfile; 
 exports.register = register;

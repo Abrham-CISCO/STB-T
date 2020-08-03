@@ -49,9 +49,36 @@ var UserSchema = new mongoose.Schema({
     role: {
         type: String,
         default: "ገና አልተመደበም"
+    },
+    ChatSocketID: {
+        type: String,
     }
 });
 
+// Chat socket tools
+    UserSchema.statics.getChatSocketID = function(telephone, callback){
+        User.findOne({telephone: telephone})
+            .exec(function(error,user){
+                if(error){
+                    return callback(error);
+                } else if ( !user ) {
+                    var err = new Error('User not found.');
+                    err.status = 401;
+                    return callback(err);
+                }
+                return callback(null,user.ChatSocketID)            
+            })
+    }
+    UserSchema.statics.setChatSocketID = function(telephone,SocketID, callback){
+        User.updateOne({telephone:telephone},{$set:{ChatSocketID:SocketID}})
+            .exec(function(error,notification){
+                if(error)
+                {
+                    return callback(error,null)
+                }
+                callback(null,notification)
+            })
+    }
 //Authenticate input against database documents
 UserSchema.statics.authenticate = function(telephone, password, callback){
     User.findOne({telephone: telephone})
@@ -77,7 +104,6 @@ UserSchema.statics.authenticate = function(telephone, password, callback){
 UserSchema.statics.IDentifyUserName = function(telephone,callback){
     User.findOne({telephone:telephone})
         .exec(function(error, user){
-            console.log(user);
             if(error){
                 return callback(error);
             } else if (!user){
@@ -125,7 +151,6 @@ UserSchema.pre('save', function(next){
             return next(err);
         }
         user.password = hash;
-        console.log(hash);
         next();
     });
 });
@@ -153,7 +178,6 @@ UserSchema.statics.updatePassword = function(userID, Password, callback){
             return next(err);
         }
         Hpassword = hash;
-        console.log(Hpassword);
     User.updateOne({_id:userID}, {$set:{password:Hpassword}})
         .exec(function(error,user){
             if(error){

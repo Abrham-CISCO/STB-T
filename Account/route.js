@@ -43,6 +43,22 @@ router.get('/logout', function(req,res,next){
      });
  });
 
+ router.get('/MyInfo/',function(req,res,next){
+    var UserId = req.session.userId;
+    UserModelAccessor.userData(UserId,function(error,user){
+        if(error){
+            next(error);
+        }
+        else
+        {
+            res.json({
+                user
+            })
+        }
+    });
+});
+
+
 router.post('/updateProfile', mid.requireSignIn, function(req,res,next){
     UserModelAccessor.updateProfile(req.session.userId,req.body,function(error,user){
         if(error){

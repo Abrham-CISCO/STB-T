@@ -18,7 +18,7 @@ router.get('/contacts/:tel',function(req,res){
         else
         {
             res.json({
-                cont: contactList
+                contactList
             });
         }
     });
@@ -41,13 +41,13 @@ router.get('/historyOf/:memberTel', function(req,res){
 });
 
 
-router.post('/sendMessage/:toTel/:domain', jsonParser(), function(req,res){
+router.post('/sendMessage/:domain', jsonParser(), function(req,res){
 
     var toTel = req.params.toTel;
-    var fromTel = req.session.user.telephone;
+    // var fromTel = req.session.user.telephone;
+    var fromTel = "0911675507"
     var Domain = req.params.domain;
     var messageBody = req.body.message;
-
     messaging.sendMessage(fromTel,toTel,Domain,messageBody,function(err, confirmation){
         if(err || !confirmation){
             res.json({

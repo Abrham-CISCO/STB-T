@@ -57,7 +57,7 @@ html
 #Messagebox.back-to-top 
   .card.card-prirary.cardutline.direct-chat.direct-chat-primary
     .card-header
-      h3.card-title Direct Chat
+      h3.card-title#chatname Direct Chat
       .card-tools
         span.badge.bg-primary(data-toggle='tooltip', title='3 New Messages') 3
         button.btn.btn-tool(type='button', data-card-widget='collapse')
@@ -86,10 +86,11 @@ html
               // /.contatcts-list
               // /.direct-chat-pane
               // /.card-body
+      #hidden_div
       .card-footer
         form(action='#', method='post')
           .input-group
             input.form-control(type='text', id='message', placeholder='Type Message ...')
             span.input-group-append
-              button.btn.btn-primary(type='button' id='send' onclick = "Send()") Send
+              button.btn.btn-primary(type='button' id='send' onclick = "SendMyMessage(document.getElementById('hidden_div').innerHtml, function(con){document.getElementsByClassName('direct-chat-messages')[0].innerHTML += con; document.getElementsByClassName('direct-chat-messages')[0].scrollTop=9999999;})") Send
                     // /.card-footer

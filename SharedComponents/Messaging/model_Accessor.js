@@ -1,5 +1,6 @@
 'use strict';
 var MessagesM = require('../models/Message_model');
+var userModelAccessor = require('../../Account/Models/user_model_accessor')
 
 
 // Because the following function contains a callback function, its result can not be
@@ -45,45 +46,58 @@ const chatHistoryAll =  (TelephoneNumber,callback) =>{
      });
 };
 
-const sendMessage =  (FromTelephoneNumber,ToTelephoneNumber,Domain, MessageBody,callback) =>{
-
+function RegisterMessage(Tel, FromTelephoneNumber,ToTelephoneNumber,Domain,MessageBody, callback){
+    var MessageHistory;
+    var repeat = 0;
     var toTel = ToTelephoneNumber;
     var fromTel = FromTelephoneNumber;
     var Domain = Domain;
-    var messageBody = MessageBody;
-    var MessageHistory;
+    var messageBody = MessageBody.message;
 
-    function RegisterMessage(Tel){
-        MessagesM.messageHistory(Tel,function(error, messages){
-            if(error || !messages)
+    MessagesM.messageHistory(Tel,function(error, messages){
+        if(error || !messages)
+        {
+            var err = new Error('Wrong telephone or password.');
+            err.status = 401;
+            return callback(err,null)
+        } 
+        else{
+                MessageHistory = messages;
+        }
+        userModelAccessor.userDataByTel(fromTel,function(error,sender){
+            userModelAccessor.userDataByTel(toTel,function(error,reciever){
+                var MessageObject = {
+                    fromName:sender.name,
+                    fromID:fromTel,
+                    toID:toTel,
+                    toName:reciever.name,
+                    body:messageBody,
+                    domain:"Personal",
+                    read:false
+                };
+                repeat += 1
+            if(repeat < 2)
             {
-                var err = new Error('Wrong telephone or password.');
-                err.status = 401;
-                return callback(err,null)
-            } 
-            else{
-                    MessageHistory = messages;
+                MessageHistory.History.push(MessageObject);
             }
-         var MessageObject = {
-                fromID:fromTel,
-                toID:toTel,
-                body:messageBody,
-                domain:Domain,
-                read:false
-         };
-    
-         MessageHistory.History.push(MessageObject);
-         MessagesM.MessageAdder(Tel,MessageHistory.History, function(error, user){
-            if(error){
-                var err = new Error("Update failed!");
-                return callback(err,null)
-            }
+                MessagesM.MessageAdder(Tel,MessageHistory.History, function(error, user){
+                    if(error){
+                        var err = new Error("Update failed!");
+                        return callback(err,null)
+                    }
+                    return callback(null,"Message Sent")
+                }); 
+            });
         });
+    });
+}
+
+const sendMessage =  (FromTelephoneNumber,ToTelephoneNumber,Domain, MessageBody,callback) =>{
+    RegisterMessage(ToTelephoneNumber, FromTelephoneNumber,ToTelephoneNumber,Domain,MessageBody, function(error,confirmation){
+        RegisterMessage(FromTelephoneNumber, FromTelephoneNumber,ToTelephoneNumber,Domain,MessageBody, function(error,confirmation){
+            callback(null,"Message Sent");;
         });
-    }
-    RegisterMessage(toTel);
-    RegisterMessage(fromTel);
-    callback(null,"Message Sent");;
+    });
 };
 
     exports.createAccount = createAccount; 

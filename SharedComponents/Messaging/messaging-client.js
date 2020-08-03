@@ -1,27 +1,60 @@
 // This js is used to chat online and load chat box when the page is refreshed.
 var socket = io('/chat');
-console.log(socket.connected);
+var Converation = "";
+var EventTel="";
+
+// Determine the user
+// Secuirity Issue : you must not send password!
+
+var myTel, myName;
+var xhr = new XMLHttpRequest
+xhr.onreadystatechange = function()
+{
+    if(xhr.readyState == 4)
+    {
+        var JSONResponse = (JSON.parse(xhr.responseText))
+        myTel = JSONResponse.user.telephone
+        myName = JSONResponse.user.name
+        socket.emit('client',myTel);
+        LoadContacts(myTel)
+    }
+}
+link = "http://localhost:3000/Accounts/MyInfo/";
+xhr.open('GET',link)
+xhr.send();
+
 function Send(message,rec_address)
 {
+var sender_address = myTel
 var message = document.getElementById("message").value;
-    socket.emit('chat',message,rec_address);
+    socket.emit('chat',message,rec_address,sender_address);
 }
 
 // When Chat message arrives
-socket.on('chat',function(message,address){
-    console.log(message);
+
+socket.on('chat',function(message,reciever_address,sender_address){
+    if(document.getElementById('hidden_div').innerHtml == sender_address)
+    {
+        messageAppender(message)
+    }
+    else
+    {
+        LoadChatBox(sender_address)
+    }
+    console.log(message,"from ",sender_address, " to ",reciever_address);
 });
 
 function LoadChatBox(Tel)
 {
+    EventTel = "0923276844"
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function(){
-  
+  Converation = ""
   if(xhr.readyState === 4){
     if(xhr.status === 200 ){
         var messageHistory = xhr.responseText;
+        MessageRenderer(JSON.parse(messageHistory).response.History,Tel)
         //Load COntacts first
-        
     } else if (xhr.status === 404) {
        //file not found
     } else if (xhr.status === 500) {
@@ -30,46 +63,115 @@ function LoadChatBox(Tel)
   }
   }
   link = "http://localhost:3000/Messaging/historyOf/"+Tel;
-  console.log(link)
   xhr.open('GET',link);
   xhr.send();
+
 }
 
-function MessageRenderer(MessageObject)
-{
+// document.getElementById("send").addEventListener('click', (event) => {SendMyMessage("0923276844")});
 
-    JSONResponse = JSON.parse(MessageObject);
-    var Converation = "";
-    for(var i = 0; i<JSONResponse.response.Messages.length; i++)
+
+function MessageRenderer(MessageObject,Tel)
+{
+    Converation = "";
+    document.getElementById('hidden_div').innerHtml = Tel;
+    for(var i = 0; i<MessageObject.length; i++)
     {
-        if(JSONResponse.response.Messages[i].fromID == ReId  & JSONResponse.response.Messages[i].toID == myTel )
+        if(MessageObject[i].fromID == Tel  & MessageObject[i].toID == myTel )
         {
             // TO ME
             Converation += "<div class='direct-chat-msg right'><div class='direct-chat-infos clearfix'>";
-            Converation += "<span class='direct-chat-name float-right'>"+ReName+"</span>";
+            Converation += "<span class='direct-chat-name float-right'>"+MessageObject[i].fromName+"</span>";
             Converation += "<span class='direct-chat-timestamp float-left'>23 Jan 2:05 pm</span></div>";
-            Converation += "<!-- /.direct-chat-infos --><img class='direct-chat-img' src='static/dist/img/user3-128x128.jpg' alt='Message User Image'>";
-            Converation += "<!-- /.direct-chat-img --><div class='direct-chat-text'>"+JSONResponse.response.Messages[i].body+"</div><!-- /.direct-chat-text --></div>";
-            document.getElementById("direct-chat-messages").innerHTML = Converation;
+            Converation += "<!-- /.direct-chat-infos --><img class='direct-chat-img' src='../ADMINLITE/dist/img/user3-128x128.jpg' alt='Message User Image'>";
+            Converation += "<!-- /.direct-chat-img --><div class='direct-chat-text'>"+MessageObject[i].body+"</div><!-- /.direct-chat-text --></div>";
+            document.getElementsByClassName("direct-chat-messages")[0].innerHTML = Converation;
             //keep the scroll bottom 
             document.getElementsByClassName("direct-chat-messages")[0].scrollTop=9999999;
-            console.log("Evaluated");                   
         }
-        else if(JSONResponse.response.Messages[i].fromID == myTel   & JSONResponse.response.Messages[i].toID == ReId  )
+        else if(MessageObject[i].fromID == myTel   & MessageObject[i].toID == Tel  )
         {
             // FROM ME
             Converation += "<div class='direct-chat-msg'><div class='direct-chat-infos clearfix'>";
-            Converation += "<span class='direct-chat-name float-left'>"+myName+"</span>";
+            Converation += "<span class='direct-chat-name float-left'>"+MessageObject[i].fromName+"</span>";
             Converation += "<span class='direct-chat-timestamp float-right'>23 Jan 2:00 pm</span></div>";
-            Converation += "<!-- /.direct-chat-infos --><img class='direct-chat-img' src='static/dist/img/user1-128x128.jpg' alt='Message User Image'>";
-            Converation += "<!-- /.direct-chat-img --><div class='direct-chat-text'>"+JSONResponse.response.Messages[i].body+"</div>";
+            Converation += "<!-- /.direct-chat-infos --><img class='direct-chat-img' src='../ADMINLITE/dist/img/user1-128x128.jpg' alt='Message User Image'>";
+            Converation += "<!-- /.direct-chat-img --><div class='direct-chat-text'>"+MessageObject[i].body+"</div>";
             Converation += "<!-- /.direct-chat-text --></div>";
-            document.getElementById("direct-chat-messages").innerHTML = Converation;
+            document.getElementsByClassName("direct-chat-messages")[0].innerHTML = Converation;
             //keep the scroll bottom 
             document.getElementsByClassName("direct-chat-messages")[0].scrollTop=9999999;
-            console.log("Evaluated");
         }
     }       
     
 }
-LoadChatBox("0923276844")
+
+
+function LoadContacts(tel)
+{
+    var xhr = new XMLHttpRequest
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4)
+        {
+            var JSONresponse = JSON.parse(xhr.responseText)
+            document.getElementsByClassName("contacts-list")[0].innerHTML= (ContactRenderer(JSONresponse.contactList))
+        }
+    }
+    link = "http://localhost:3000/Messaging/contacts/"+tel;
+    xhr.open('GET',link)
+    xhr.send()
+}
+
+
+function ContactRenderer(ContactObject)
+{
+ var output = "";
+ 
+ for(var i = 0; i < ContactObject.length; i++)
+ {
+    output += "<li>" 
+    output += "<button type='button' data-toggle='tooltip' title='Contacts' data-widget='chat-pane-toggle' class='btn btn-tool'>"
+    output += "<a href='#' onclick=LoadChatBox('"+ContactObject[i].tel+"')>"
+    output += "<img class='contacts-list-img' src='../ADMINLITE/dist/img/user1-128x128.jpg'>"       
+    output += "<div class='contacts-list-info' id="+ContactObject[i].tel+">"
+    output +="<span class='contacts-list-name'>"+ContactObject[i].userName+"<small class='contacts-list-date float-right'>2/28/2015</small></span>"
+    output +="<span class='contacts-list-msg'>How have you been? I was...</span></div>"
+    output += "</a>"
+    output += "</button>"
+    output += "</li>"
+ }
+
+ return output;
+ 
+}
+
+function SendMyMessage(teli,callback)
+{
+    var Converation=""
+    var msg = document.getElementById("message").value
+    socket.emit('chat',msg,teli,myTel,"Personal");
+    // FROM ME
+           Converation += "<div class='direct-chat-msg'><div class='direct-chat-infos clearfix'>";
+           Converation += "<span class='direct-chat-name float-left'>"+myName+"</span>";
+           Converation += "<span class='direct-chat-timestamp float-right'>23 Jan 2:00 pm</span></div>";
+           Converation += "<!-- /.direct-chat-infos --><img class='direct-chat-img' src='../ADMINLITE/dist/img/user1-128x128.jpg' alt='Message User Image'>";
+           Converation += "<!-- /.direct-chat-img --><div class='direct-chat-text'>"+msg+"</div>";
+           Converation += "<!-- /.direct-chat-text --></div>";
+           callback(Converation)
+
+}
+
+function messageAppender(msg)
+{
+    var Converation=""
+    Converation += "<div class='direct-chat-msg right'><div class='direct-chat-infos clearfix'>";
+    Converation += "<span class='direct-chat-name float-right'>"+myName+"</span>";
+    Converation += "<span class='direct-chat-timestamp float-left'>23 Jan 2:05 pm</span></div>";
+    Converation += "<!-- /.direct-chat-infos --><img class='direct-chat-img' src='../ADMINLITE/dist/img/user3-128x128.jpg' alt='Message User Image'>";
+    Converation += "<!-- /.direct-chat-img --><div class='direct-chat-text'>"+msg+"</div><!-- /.direct-chat-text --></div>";
+    document.getElementsByClassName('direct-chat-messages')[0].innerHTML += Converation    
+    //keep the scroll bottom 
+    document.getElementsByClassName("direct-chat-messages")[0].scrollTop=9999999;
+
+}
