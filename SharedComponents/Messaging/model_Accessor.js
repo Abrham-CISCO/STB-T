@@ -100,7 +100,60 @@ const sendMessage =  (FromTelephoneNumber,ToTelephoneNumber,Domain, MessageBody,
     });
 };
 
+const messageNotification = (TelephoneNumber,callback) =>{
+    // Load All Messages
+    MessagesM.messageHistory(TelephoneNumber,function(error, messages){
+        var Notification = [
+            {
+                name:String,
+                telephone:String,
+                message:String
+            }
+        ]
+        Notification.pop();
+        var Edit = false;
+        var NotIndex = 0;    
+        if(error || !messages){
+            callback(error,null)                
+        } 
+        else{
+            // Store last message per person as an object in an array
+                // Separate recieved messages from sent messages
+                var PureMessage = messages.History
+                for(var i = 0;i<PureMessage.length;i++)
+                {
+                    if(PureMessage[i].toID == TelephoneNumber & PureMessage[i].fromID != TelephoneNumber)
+                    {
+                        for(var j=0; j<Notification.length;j++)
+                        {
+                            if(Notification[j].telephone == PureMessage[i].fromID)
+                            {
+                                Edit = true;
+                                NotIndex = j;
+                            }
+                        }
+                        if(Edit == true)
+                        {
+                            // Update the data
+                            Notification[NotIndex].name = PureMessage[i].fromName
+                            Notification[NotIndex].message = PureMessage[i].body
+                            Edit = false;
+                            NotIndex = 0;
+                        }
+                        else
+                        {
+                            // Add the data
+                            Notification.push({name:PureMessage[i].fromName,telephone:PureMessage[i].fromID,message:PureMessage[i].body})
+                        }
+                    }
+                }
+            // Return the array object
+            callback(null,Notification);
+        }
+     });
+}
     exports.createAccount = createAccount; 
     exports.contactList = contactList;
     exports.chatHistoryAll = chatHistoryAll;
     exports.sendMessage = sendMessage;
+    exports.messageNotification = messageNotification;

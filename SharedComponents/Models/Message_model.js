@@ -26,6 +26,42 @@ var MessageSchema = new mongoose.Schema({
                     body:"Hi Getachew",
                     domain:"Personal",
                     read:false
+                },
+                {
+                    fromName:"ሶስና ሰሀሉ",
+                    fromID:"0913706279",
+                    toID:"0923276844",
+                    toName:"አብርሀም ጌታቸው",
+                    body:"Hi Abrham",
+                    domain:"Personal",
+                    read:false
+                },
+                {
+                    fromName:"አብርሀም ጌታቸው",
+                    fromID:"0923276844",
+                    toID:"0913706279",
+                    toName:"ሶስና ሰሀሉ",
+                    body:"Hi Sosina",
+                    domain:"Personal",
+                    read:false
+                },
+                {
+                    fromName:"ሶስና ሰሀሉ",
+                    fromID:"0913706279",
+                    toID:"0911675507",
+                    toName:"ጌታቸው ብሩ",
+                    body:"Hi Getachew",
+                    domain:"Personal",
+                    read:false
+                },
+                {
+                    fromName:"ጌታቸው ብሩ",
+                    fromID:"0911675507",
+                    toID:"0913706279",
+                    toName:"ሶስና ሰሀሉ",
+                    body:"Hi Sosina",
+                    domain:"Personal",
+                    read:false
                 }
             ]
     }
@@ -57,6 +93,7 @@ MessageSchema.statics.contact = function(userID,callback)
                     if((messageHistoryL.History[i].fromID == userID))
                     {
                         // Register the contact
+                        Duplicate = false;
                         for(var j=0; j<contactsObject.length;j++)
                         {
                             if(contactsObject[j].tel == messageHistoryL.History[i].toID)
@@ -67,11 +104,11 @@ MessageSchema.statics.contact = function(userID,callback)
                         if(Duplicate == false)
                         {
                             contactsObject.push({userName:messageHistoryL.History[i].toName,tel:messageHistoryL.History[i].toID});
-                            Duplicate = true;
                         }
                     }
                     if((messageHistoryL.History[i].toID == userID))
                     {
+                        Duplicate = false;
                         for(var j=0; j<contactsObject.length;j++)
                         {
                             if(contactsObject[j].tel == messageHistoryL.History[i].fromID)
@@ -82,7 +119,6 @@ MessageSchema.statics.contact = function(userID,callback)
                         if(Duplicate == false)
                         {
                             contactsObject.push({userName:messageHistoryL.History[i].fromName,tel:messageHistoryL.History[i].fromID});
-                            Duplicate = true;
                         }
                     }
                 }

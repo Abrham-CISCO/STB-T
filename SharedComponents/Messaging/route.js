@@ -62,4 +62,14 @@ router.post('/sendMessage/:domain', jsonParser(), function(req,res){
     });
     });
 
+router.get('/Notification/:tel',function(req,res){
+    var Tel = req.params.tel;
+    messaging.messageNotification(Tel,function(error,RNotification){
+        res.json(
+            {
+                RNotification
+            }
+        )
+    })
+})
 module.exports = router;

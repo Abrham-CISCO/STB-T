@@ -32,11 +32,11 @@ function LoadMessagingNotification()
         if(xhr2.readyState == 4)
         {
             var JSONResponse = (JSON.parse(xhr2.responseText))
-            RenderMessagingNotification(JSONResponse.response.History,5);
+            RenderMessagingNotification(JSONResponse.RNotification,5);
             console.log(JSONResponse.response.History)
         }
     }
-    link = "http://localhost:3000/Messaging/historyOf/0923276844";
+    link = "http://localhost:3000/Messaging/Notification/"+myTel;
     xhr2.open('GET',link)
     xhr2.send();
 }
@@ -46,19 +46,17 @@ function RenderMessagingNotification(MessageNotificationObject,limit)
     var j = 0;
     for(var i = 0; i<MessageNotificationObject.length; i++)
     {
-        if(MessageNotificationObject[i].toID == myTel & j<limit)
-        {
+
             j=j+1;
-            console.log(MessageNotificationObject[i].fromName);
-            Message += "<a href='#' class='dropdown-item'><!-- Message Start--><div class='media'>"
+            Message += "<a href='#' onclick = LoadChatBox('"+MessageNotificationObject[i].telephone+"')  class='dropdown-item'><!-- Message Start--><div class='media'>"
             Message += "<img src='../ADMINLITE/dist/img/user1-128x128.jpg' alt='User Avatar' class='img-size-50 mr-3 img-circle'>"
-            Message += "<div class='media-body'><h3 class='dropdown-item-title'>"+MessageNotificationObject[i].fromName+"<span class='float-right text-sm text-danger'>"
+            Message += "<div class='media-body'><h3 class='dropdown-item-title'>"+MessageNotificationObject[i].name+"<span class='float-right text-sm text-danger'>"
             Message += "<i class='fas fa-star'></i></span></h3>"    
-            Message += "<p class='text-sm'>"+MessageNotificationObject[i].body+"</p>"      
+            Message += "<p class='text-sm'>"+MessageNotificationObject[i].message+"</p>"      
             Message += "<p class='text-sm text-muted'><i class='far fa-clock mr-1'>"
             Message += "</i> 4 Hours Ago</p></div></div><!-- Message End--></a>"
             Message += "<div class='dropdown-divider'></div>"
-        }
+
     }
     Message += "<a href='#' class='dropdown-item dropdown-footer'>See All Messages</a>";
     document.getElementById("messageNotification").innerHTML = Message;
@@ -162,7 +160,7 @@ function LoadContacts(tel)
 function ContactRenderer(ContactObject)
 {
  var output = "";
- 
+ console.log(ContactObject)
  for(var i = 0; i < ContactObject.length; i++)
  {
     output += "<li>" 
