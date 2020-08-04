@@ -23,13 +23,46 @@ link = "http://localhost:3000/Accounts/MyInfo/";
 xhr.open('GET',link)
 xhr.send();
 
-function Send(message,rec_address)
+//For Message notification
+function LoadMessagingNotification()
 {
-var sender_address = myTel
-var message = document.getElementById("message").value;
-    socket.emit('chat',message,rec_address,sender_address);
+    var xhr2 = new XMLHttpRequest
+    xhr2.onreadystatechange = function()
+    {
+        if(xhr2.readyState == 4)
+        {
+            var JSONResponse = (JSON.parse(xhr2.responseText))
+            RenderMessagingNotification(JSONResponse.response.History,5);
+            console.log(JSONResponse.response.History)
+        }
+    }
+    link = "http://localhost:3000/Messaging/historyOf/0923276844";
+    xhr2.open('GET',link)
+    xhr2.send();
 }
-
+function RenderMessagingNotification(MessageNotificationObject,limit)
+{
+    var Message = "";
+    var j = 0;
+    for(var i = 0; i<MessageNotificationObject.length; i++)
+    {
+        if(MessageNotificationObject[i].toID == myTel & j<limit)
+        {
+            j=j+1;
+            console.log(MessageNotificationObject[i].fromName);
+            Message += "<a href='#' class='dropdown-item'><!-- Message Start--><div class='media'>"
+            Message += "<img src='../ADMINLITE/dist/img/user1-128x128.jpg' alt='User Avatar' class='img-size-50 mr-3 img-circle'>"
+            Message += "<div class='media-body'><h3 class='dropdown-item-title'>"+MessageNotificationObject[i].fromName+"<span class='float-right text-sm text-danger'>"
+            Message += "<i class='fas fa-star'></i></span></h3>"    
+            Message += "<p class='text-sm'>"+MessageNotificationObject[i].body+"</p>"      
+            Message += "<p class='text-sm text-muted'><i class='far fa-clock mr-1'>"
+            Message += "</i> 4 Hours Ago</p></div></div><!-- Message End--></a>"
+            Message += "<div class='dropdown-divider'></div>"
+        }
+    }
+    Message += "<a href='#' class='dropdown-item dropdown-footer'>See All Messages</a>";
+    document.getElementById("messageNotification").innerHTML = Message;
+}
 // When Chat message arrives
 
 socket.on('chat',function(message,reciever_address,sender_address){
@@ -75,11 +108,13 @@ function MessageRenderer(MessageObject,Tel)
 {
     Converation = "";
     document.getElementById('hidden_div').innerHtml = Tel;
+
     for(var i = 0; i<MessageObject.length; i++)
     {
         if(MessageObject[i].fromID == Tel  & MessageObject[i].toID == myTel )
         {
             // TO ME
+            document.getElementById("chatwith").innerText = MessageObject[i].fromName;
             Converation += "<div class='direct-chat-msg right'><div class='direct-chat-infos clearfix'>";
             Converation += "<span class='direct-chat-name float-right'>"+MessageObject[i].fromName+"</span>";
             Converation += "<span class='direct-chat-timestamp float-left'>23 Jan 2:05 pm</span></div>";
