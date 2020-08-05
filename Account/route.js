@@ -136,6 +136,7 @@ router.post('/login', function(req, res, next){
                 req.session.userId = user._id;
                 req.session.name = user.name;
                 req.session.user = user;
+
                 return res.render('Account/templates/profile',user);      
             }        
         });
@@ -190,6 +191,13 @@ router.post('/CHPWD', function(req,res,next){
     }     
 });
 
+router.get('/User', function(req,res,next){
+    var telephoneArray = ["0923276844","0911675507"];
+    UserModelAccessor.userObjectByTel(telephoneArray,function(error,users){
+        res.json(users);
+    })
+});
+
 router.post('/forgotPassword', function(req,res,next){
         if(req.body.tel)
         {
@@ -215,6 +223,7 @@ router.post('/forgotPassword', function(req,res,next){
                         }
                         else
                         {
+                            console.log(user);
                             return res.render('Account/templates/EmailVerification', user);
                         }
                     });

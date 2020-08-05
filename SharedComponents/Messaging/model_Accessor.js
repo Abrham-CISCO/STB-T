@@ -30,7 +30,19 @@ const contactList =  (TelephoneNumber,callback) =>{
         }
         else
         {
-            callback(null,contacts);
+            // Embedd an image with contacts list
+                // Create an array of telephone numbers
+                var Tels = []
+                for(var i = 0; i < contacts.length; i++)
+                {
+                    Tels.push(contacts[i].tel)
+                }
+                console.log(Tels);
+                // using the array request an array user object
+                userModelAccessor.userObjectByTel(Tels,function(error,users){
+                // send the array object as an arguement along with the callback function.
+                    callback(null,users);
+                });
         }
     });
 };
@@ -41,6 +53,18 @@ const chatHistoryAll =  (TelephoneNumber,callback) =>{
             callback(error,null)                
         } 
         else{
+            callback(null,messages);
+        }
+     });
+};
+
+const chatHistoryAllWithPic =  (TelephoneNumber,callback) =>{
+    MessagesM.messageHistory(TelephoneNumber,function(error, messages){
+        if(error || !messages){
+            callback(error,null)                
+        } 
+        else{
+            // The response should come with pic
             callback(null,messages);
         }
      });
@@ -107,7 +131,8 @@ const messageNotification = (TelephoneNumber,callback) =>{
             {
                 name:String,
                 telephone:String,
-                message:String
+                message:String,
+                pro_img:String
             }
         ]
         Notification.pop();
@@ -148,7 +173,29 @@ const messageNotification = (TelephoneNumber,callback) =>{
                     }
                 }
             // Return the array object
-            callback(null,Notification);
+            // Convert the Notification Object to telephone Array
+            var Tels = []
+            for(var i = 0; i<Notification.length; i++)
+            {
+                Tels.push(Notification[i].telephone)
+            }
+
+            // Send the Telephone Array to user model accessor, so that it is converted to user object
+            userModelAccessor.userObjectByTel(Tels,function(error,users){
+                console.log(Tels)
+                // Edit notification object to include pro_img
+                for(var j=0; j<users.length; j++)
+                {
+                    for(var i = 0; i<Notification.length; i++)
+                    {
+                        if(users[j].telephone == Notification[i].telephone){
+                            Notification[i].pro_img = users[j].pro_img
+                        }
+                    } 
+                }
+                callback(null,Notification);
+            }) 
+
         }
      });
 }

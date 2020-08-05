@@ -52,6 +52,10 @@ var UserSchema = new mongoose.Schema({
     },
     ChatSocketID: {
         type: String,
+    },
+    pro_img: {
+        type: String,
+        default: "../ADMINLITE/dist/img/user4-128x128.jpg"
     }
 });
 
@@ -128,11 +132,36 @@ UserSchema.statics.Allusers = function(callback){
             return callback(null,user);
         });
 }
-
 UserSchema.statics.UserById = function(UserId, callback){
     User.findOne({_id:UserId})
         .exec(function(error, user){
             if(error){
+            }
+            else if(!user){
+                var err = new Error("User Not Found");
+                err.status = 401;
+                err.message = "User Not Found : From Model";
+                return callback(err);
+            }
+            return callback(null,user);
+        })
+}
+
+UserSchema.statics.UserObjByTelephone = function(telephoneArray, callback){
+
+    var searchObj = {
+        $or: [
+            ]
+        }
+    for(var i = 0; i<telephoneArray.length; i++)
+    {
+        searchObj.$or.push({telephone:telephoneArray[i]})
+    }
+    console.log(searchObj)
+    User.find(searchObj,{name:true,telephone:true,pro_img:true})
+        .exec(function(error, user){
+            if(error){
+                console.log(error)
             }
             else if(!user){
                 var err = new Error("User Not Found");

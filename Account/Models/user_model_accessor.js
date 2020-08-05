@@ -2,6 +2,15 @@ var PWD = require('./PSDrecovery');
 var User = require('../Models/user');
 var ModelAccessor = require('../../SharedComponents/Messaging/model_Accessor');
 
+// Write a function which accepts an array of telephone numbers and returns an array of objects that
+// contain detail informations. the detail informations are id,name,pro_img,telephone
+
+const userObjectByTel = (telephoneArray,callback) =>
+{
+        User.UserObjByTelephone(telephoneArray,function(error,user){
+            callback(null,user)            
+        })
+}
 const userData = (userId, callback) => {
     User.UserById(userId,function(error,user){
         if(error || !user)
@@ -145,3 +154,4 @@ exports.register = register;
 exports.Autenticate = Autenticate;
 exports.updatePassword = updatePassword;
 exports.userDataByTel = userDataByTel;
+exports.userObjectByTel = userObjectByTel;
