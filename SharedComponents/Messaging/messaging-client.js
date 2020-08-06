@@ -4,7 +4,7 @@ var Converation = "";
 var EventTel="";
 
 // Determine the user
-// Secuirity Issue : you must not send password!
+// Secuirity Issue : you must not send password to me!
 
 var myTel, myName,myPic;
 var xhr = new XMLHttpRequest

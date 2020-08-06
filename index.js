@@ -80,7 +80,7 @@
   app.use('/Tsehafi',Tsehafi);
   app.use('/Accounts',Accounts);
   app.use('/Messaging',Messaging);
-  app.use('/Notification',Notification);
+  app.use('/Notifications',Notification);
 
 // Setting up Jade
 var JadeFolderPath = __dirname ;

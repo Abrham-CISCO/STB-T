@@ -15,7 +15,7 @@ nav.main-header.navbar.navbar-expand.navbar-white.navbar-light
   ul.navbar-nav.ml-auto
     // Messages Dropdown Menu
     li.nav-item.dropdown
-      a.nav-link(data-toggle='dropdown', href='#')
+      a.nav-link(data-toggle='dropdown', href='#', onClick = "LoadMessagingNotification();")
         i.far.fa-comments(onClick = "LoadMessagingNotification();")
         |           
         span.badge.badge-danger.navbar-badge 3
@@ -27,41 +27,17 @@ nav.main-header.navbar.navbar-expand.navbar-white.navbar-light
               h3(class="dropdown-item-title") Loading...
     // Notifications Dropdown Menu
     li.nav-item.dropdown
-      a.nav-link(data-toggle='dropdown', href='#')
+      a.nav-link(data-toggle='dropdown', href='#', onClick = "LoadNotification()")
         i.far.fa-bell
         |           
         span.badge.badge-warning.navbar-badge 15
       |         
-      .dropdown-menu.dropdown-menu-lg.dropdown-menu-right
-        span.dropdown-item.dropdown-header 15 Notifications
-        |           
+      .dropdown-menu.dropdown-menu-lg.dropdown-menu-right#Notification
         .dropdown-divider
-        |           
-        a.dropdown-item(href='#')
-          i.fas.fa-envelope.mr-2
-          |  4 new messages
-          |             
-          span.float-right.text-muted.text-sm 3 mins
-        |           
+        | 
+        span.dropdown-item.dropdown-header 15 Notifications         
         .dropdown-divider
-        |           
-        a.dropdown-item(href='#')
-          i.fas.fa-users.mr-2
-          |  8 friend requests
-          |             
-          span.float-right.text-muted.text-sm 12 hours
-        |           
-        .dropdown-divider
-        |           
-        a.dropdown-item(href='#')
-          i.fas.fa-file.mr-2
-          |  3 new reports
-          |             
-          span.float-right.text-muted.text-sm 2 days
-        |           
-        .dropdown-divider
-        |           
-        a.dropdown-item.dropdown-footer(href='#') See All Notifications
+        | 
     |       
     li.nav-item
       a.nav-link(data-widget='control-sidebar', data-slide='true', href='#')

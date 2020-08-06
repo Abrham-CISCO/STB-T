@@ -1,7 +1,7 @@
 var PWD = require('./PSDrecovery');
 var User = require('../Models/user');
 var ModelAccessor = require('../../SharedComponents/Messaging/model_Accessor');
-
+var NotificatonAccessor = require('../../SharedComponents/Notification/model_Accessor')
 // Write a function which accepts an array of telephone numbers and returns an array of objects that
 // contain detail informations. the detail informations are id,name,pro_img,telephone
 
@@ -79,7 +79,9 @@ const register = (userData,messageData,callback) =>{
         else
         {
             ModelAccessor.createAccount(messageData,function(err,msg){
-                callback(null,user);
+                NotificatonAccessor.createNotification(userData.telephone,function(error,notification){
+                    callback(null,user);
+                });
             });                
         }
     });

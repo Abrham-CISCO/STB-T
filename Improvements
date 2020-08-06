@@ -1,14 +1,15 @@
 Chat 
     Message Numbering
-    
+
 Notification
 
 Logging System
 
 Profile System
     Enable users to set up their profile image
-
+    The System shall start with default male pic for male users and defaut female pic for female users
 User Navigation
 
 Session
     Register Users socket when the server refreshes
+    Do not send password to the client
