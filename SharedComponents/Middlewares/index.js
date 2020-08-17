@@ -1,7 +1,7 @@
 function loggedOut(req, res, next){
     console.log(req.session && req.session.userId);
     if(req.session.userId){
-        return res.redirect('Accounts/profile');
+        return res.redirect('../Accounts/profile');
     }
     return next();
 }

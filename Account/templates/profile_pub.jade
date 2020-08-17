@@ -1,0 +1,383 @@
+doctype html
+include ../../SharedComponents/Layouts/header.jade
+html
+  head
+    meta(charset='utf-8')
+    |   
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    |   
+    title AdminLTE 3 | User Profile
+    // Tell the browser to be responsive to screen width
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Font Awesome
+    link(rel='stylesheet', href='http://localhost:3000/adminlite/plugins/fontawesome-free/css/all.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+    // Theme style
+    link(rel='stylesheet', href='http://localhost:3000/adminlite/dist/css/adminlte.min.css')
+    // Google Font: Source Sans Pro
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
+  body.hold-transition.sidebar-mini
+    .wrapper
+      // Navbar
+      include ../../SharedComponents/Layouts/navigation.jade
+      // Main Sidebar Container
+      include ../../SharedComponents/Layouts/sidebarNU_public.jade
+      // Content Wrapper. Contains page content
+      .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+          .container-fluid
+            .row.mb-2
+              .col-sm-6
+                h1 Profile
+              |           
+              .col-sm-6
+                ol.breadcrumb.float-sm-right
+                  li.breadcrumb-item
+                    a(href='#') Home
+                  |               
+                  li.breadcrumb-item.active User Profile
+          // /.container-fluid
+        // Main content
+        section.content
+          .container-fluid
+            .row
+              .col-md-3
+                // Profile Image
+                .card.card-primary.card-outline
+                  .card-body.box-profile
+                    .text-center
+                      img.profile-user-img.img-fluid.img-circle(src='http://localhost:3000/#{loadeduser.pro_img}', alt='User profile picture')
+                    |                 
+                    h3.profile-username.text-center #{loadeduser.name}
+                    |                 
+                    p.text-muted.text-center
+                    |                 
+                    ul.list-group.list-group-unbordered.mb-3
+                      li.list-group-item
+                        b የስራ ድርሻ
+                        ul
+                          each val in loadeduser.work
+                            each val in loadeduser.work  
+                              li=val.department
+                                each val2 in val.subDepartment    
+                                  ul
+                                    if val2.active == true
+                                      li=val2.name
+                                      ul 
+                                        li=val2.role
+                                  
+                
+                      li.list-group-item
+                        b Friends
+                        |  
+                        a.float-right 13,287
+                    |                 
+                    a.btn.btn-primary.btn-block(href='#')
+                      b Follow
+                  // /.card-body
+                // /.card
+                // About Me Box
+                .card.card-primary
+                  .card-header
+                    h3.card-title About Me
+                  // /.card-header
+                  .card-body
+                    strong
+                      i.fas.fa-book.mr-1
+                      |  Education
+                    |                 
+                    p.text-muted
+                      | B.S. in Computer Science from the University of Tennessee at Knoxville
+                    |                 
+                    hr
+                    |                 
+                    strong
+                      i.fas.fa-map-marker-alt.mr-1
+                      |  Location
+                    |                 
+                    p.text-muted Malibu, California
+                    |                 
+                    hr
+                    |                 
+                    strong
+                      i.fas.fa-pencil-alt.mr-1
+                      |  Skills
+                    |                 
+                    p.text-muted
+                      span.tag.tag-danger UI Design
+                      |                   
+                      span.tag.tag-success Coding
+                      |                   
+                      span.tag.tag-info Javascript
+                      |                   
+                      span.tag.tag-warning PHP
+                      |                   
+                      span.tag.tag-primary Node.js
+                    |                 
+                    hr
+                    |                 
+                    strong
+                      i.far.fa-file-alt.mr-1
+                      |  Notes
+                    |                 
+                    p.text-muted
+                      | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.
+                  // /.card-body
+                // /.card
+              // /.col
+              .col-md-9
+                .card
+                  .card-header.p-2
+                    ul.nav.nav-pills
+                      li.nav-item
+                        a.nav-link.active(href='#activity', data-toggle='tab') Activity
+                      |                   
+                      li.nav-item
+                        a.nav-link(href='#timeline', data-toggle='tab') Timeline
+                      |                   
+                  // /.card-header
+                  .card-body
+                    .tab-content
+                      #activity.active.tab-pane
+                        // Post
+                        .post
+                          .user-block
+                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user1-128x128.jpg', alt='user image')
+                            |                         
+                            span.username
+                              a(href='#') Jonathan Burke Jr.
+                              |                           
+                              a.float-right.btn-tool(href='#')
+                                i.fas.fa-times
+                            |                         
+                            span.description Shared publicly - 7:30 PM today
+                          // /.user-block
+                          p
+                            | Lorem ipsum represents a long-held tradition for designers,
+                            | typographers and the like. Some people hate it and argue for
+                            | its demise, but others ignore the hate as they create awesome
+                            | tools to help create filler text for everyone from bacon lovers
+                            | to Charlie Sheen fans.
+                          |                       
+                          p
+                            a.link-black.text-sm.mr-2(href='#')
+                              i.fas.fa-share.mr-1
+                              |  Share
+                            |                         
+                            a.link-black.text-sm(href='#')
+                              i.far.fa-thumbs-up.mr-1
+                              |  Like
+                            |                         
+                            span.float-right
+                              a.link-black.text-sm(href='#')
+                                i.far.fa-comments.mr-1
+                                |  Comments (5)
+                          |                       
+                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
+                        // /.post
+                        // Post
+                        .post.clearfix
+                          .user-block
+                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user7-128x128.jpg', alt='User Image')
+                            |                         
+                            span.username
+                              a(href='#') Sarah Ross
+                              |                           
+                              a.float-right.btn-tool(href='#')
+                                i.fas.fa-times
+                            |                         
+                            span.description Sent you a message - 3 days ago
+                          // /.user-block
+                          p
+                            | Lorem ipsum represents a long-held tradition for designers,
+                            | typographers and the like. Some people hate it and argue for
+                            | its demise, but others ignore the hate as they create awesome
+                            | tools to help create filler text for everyone from bacon lovers
+                            | to Charlie Sheen fans.
+                          |                       
+                          form.form-horizontal
+                            .input-group.input-group-sm.mb-0
+                              input.form-control.form-control-sm(placeholder='Response')
+                              |                           
+                              .input-group-append
+                                button.btn.btn-danger(type='submit') Send
+                        // /.post
+                        // Post
+                        .post
+                          .user-block
+                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user6-128x128.jpg', alt='User Image')
+                            |                         
+                            span.username
+                              a(href='#') Adam Jones
+                              |                           
+                              a.float-right.btn-tool(href='#')
+                                i.fas.fa-times
+                            |                         
+                            span.description Posted 5 photos - 5 days ago
+                          // /.user-block
+                          .row.mb-3
+                            .col-sm-6
+                              img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
+                            // /.col
+                            .col-sm-6
+                              .row
+                                .col-sm-6
+                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo2.png', alt='Photo')
+                                  |                               
+                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo3.jpg', alt='Photo')
+                                // /.col
+                                .col-sm-6
+                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo4.jpg', alt='Photo')
+                                  |                               
+                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
+                                // /.col
+                              // /.row
+                            // /.col
+                          // /.row
+                          p
+                            a.link-black.text-sm.mr-2(href='#')
+                              i.fas.fa-share.mr-1
+                              |  Share
+                            |                         
+                            a.link-black.text-sm(href='#')
+                              i.far.fa-thumbs-up.mr-1
+                              |  Like
+                            |                         
+                            span.float-right
+                              a.link-black.text-sm(href='#')
+                                i.far.fa-comments.mr-1
+                                |  Comments (5)
+                          |                       
+                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
+                        // /.post
+                      // /.tab-pane
+                      #timeline.tab-pane
+                        // The timeline
+                        .timeline.timeline-inverse
+                          // timeline time label
+                          .time-label
+                            span.bg-danger
+                              | 10 Feb. 2014
+                          // /.timeline-label
+                          // timeline item
+                          div
+                            i.fas.fa-envelope.bg-primary
+                            |                         
+                            .timeline-item
+                              span.time
+                                i.far.fa-clock
+                                |  12:05
+                              |                           
+                              h3.timeline-header
+                                a(href='#') Support Team
+                                |  sent you an email
+                              |                           
+                              .timeline-body
+                                | Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                                | weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                                | jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                                | quora plaxo ideeli hulu weebly balihoo...
+                              |                           
+                              .timeline-footer
+                                a.btn.btn-primary.btn-sm(href='#') Read more
+                                |                             
+                                a.btn.btn-danger.btn-sm(href='#') Delete
+                          // END timeline item
+                          // timeline item
+                          div
+                            i.fas.fa-user.bg-info
+                            |                         
+                            .timeline-item
+                              span.time
+                                i.far.fa-clock
+                                |  5 mins ago
+                              |                           
+                              h3.timeline-header.border-0
+                                a(href='#') Sarah Young
+                                |  accepted your friend request
+                          // END timeline item
+                          // timeline item
+                          div
+                            i.fas.fa-comments.bg-warning
+                            |                         
+                            .timeline-item
+                              span.time
+                                i.far.fa-clock
+                                |  27 mins ago
+                              |                           
+                              h3.timeline-header
+                                a(href='#') Jay White
+                                |  commented on your post
+                              |                           
+                              .timeline-body
+                                | Take me to your leader!
+                                | Switzerland is small and neutral!
+                                | We are more like Germany, ambitious and misunderstood!
+                              |                           
+                              .timeline-footer
+                                a.btn.btn-warning.btn-flat.btn-sm(href='#') View comment
+                          // END timeline item
+                          // timeline time label
+                          .time-label
+                            span.bg-success
+                              | 3 Jan. 2014
+                          // /.timeline-label
+                          // timeline item
+                          div
+                            i.fas.fa-camera.bg-purple
+                            |                         
+                            .timeline-item
+                              span.time
+                                i.far.fa-clock
+                                |  2 days ago
+                              |                           
+                              h3.timeline-header
+                                a(href='#') Mina Lee
+                                |  uploaded new photos
+                              |                           
+                              .timeline-body
+                                img(src='http://placehold.it/150x100', alt='...')
+                                |                             
+                                img(src='http://placehold.it/150x100', alt='...')
+                                |                             
+                                img(src='http://placehold.it/150x100', alt='...')
+                                |                             
+                                img(src='http://placehold.it/150x100', alt='...')
+                          // END timeline item
+                          div
+                            i.far.fa-clock.bg-gray
+                      // /.tab-pane
+                    // /.tab-content
+                  // /.card-body
+                // /.nav-tabs-custom
+              // /.col
+            // /.row
+          // /.container-fluid
+        // /.content
+      // /.content-wrapper
+      footer.main-footer
+        .float-right.d-none.d-sm-block
+          b Version
+          |  3.0.2-pre
+        |     
+        strong
+          | Copyright &copy; 2014-2019 
+          a(href='http://adminlte.io') AdminLTE.io
+          | .
+        |  All rights
+        |     reserved.
+      // Control Sidebar
+      aside.control-sidebar.control-sidebar-dark
+        // Control sidebar content goes here
+      // /.control-sidebar
+    // ./wrapper
+    // jQuery
+    script(src='http://localhost:3000/ADMINLITE/plugins/jquery/jquery.min.js')
+    // Bootstrap 4
+    script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    // AdminLTE App
+    script(src='http://localhost:3000/ADMINLITE/dist/js/adminlte.min.js')
+    // AdminLTE for demo purposes
+    script(src='http://localhost:3000/ADMINLITE/dist/js/demo.js')

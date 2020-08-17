@@ -107,6 +107,7 @@ function LoadChatBox(Tel,pro_img)
 function MessageRenderer(MessageObject,Tel,pro_img)
 {
     Converation = "";
+    console.log(MessageObject)
     document.getElementById('hidden_div').innerHtml = Tel;
 
     for(var i = 0; i<MessageObject.length; i++)
@@ -118,7 +119,7 @@ function MessageRenderer(MessageObject,Tel,pro_img)
             Converation += "<div class='direct-chat-msg right'><div class='direct-chat-infos clearfix'>";
             Converation += "<span class='direct-chat-name float-right'>"+MessageObject[i].fromName+"</span>";
             Converation += "<span class='direct-chat-timestamp float-left'>23 Jan 2:05 pm</span></div>";
-            Converation += "<!-- /.direct-chat-infos --><img class='direct-chat-img' src='"+pro_img+"' alt='Message User Image'>";
+            Converation += "<!-- /.direct-chat-infos --><img class='direct-chat-img' src='"+MessageObject[i].pro_img+"' alt='Message User Image'>";
             Converation += "<!-- /.direct-chat-img --><div class='direct-chat-text'>"+MessageObject[i].body+"</div><!-- /.direct-chat-text --></div>";
             document.getElementsByClassName("direct-chat-messages")[0].innerHTML = Converation;
             //keep the scroll bottom 
@@ -136,6 +137,10 @@ function MessageRenderer(MessageObject,Tel,pro_img)
             document.getElementsByClassName("direct-chat-messages")[0].innerHTML = Converation;
             //keep the scroll bottom 
             document.getElementsByClassName("direct-chat-messages")[0].scrollTop=9999999;
+        }
+        else
+        {
+            Converation="";
         }
     }       
     

@@ -5,7 +5,7 @@ html
     aside.main-sidebar.sidebar-dark-primary.elevation-4
       // Brand Logo
       a.brand-link(href='static/index3.html')
-        img.brand-image.img-circle.elevation-3(src='../SharedComponents/static/logo.jpg', alt='AdminLTE Logo', style='opacity: .8')
+        img.brand-image.img-circle.elevation-3(src='http://localhost:3000/SharedComponents/static/logo.jpg', alt='AdminLTE Logo', style='opacity: .8')
         |       
         span.brand-text.font-weight-light አምደ ተዋሕዶ
       // Sidebar
@@ -13,17 +13,17 @@ html
         // Sidebar user (optional)
         .user-panel.mt-3.pb-3.mb-3.d-flex
           .image
-            img.img-circle.elevation-2(src='#{pro_img}', alt='User Image')
+            img.img-circle.elevation-2(src='http://localhost:3000/#{loaderuser.pro_img}', alt='User Image')
           |         
           .info
-            a.d-block(href='/accounts/profile') #{name}
+            a.d-block(href='http://localhost:3000/accounts/profile') #{loaderuser.name}
         // Sidebar Menu
         nav.mt-2
           ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview', role='menu', data-accordion='false')
             //
               Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library
-            each val in work   
+            each val in loaderuser.work   
               li.nav-item.has-treeview.menu.open
                      
                 a(href="#").nav-link.active
@@ -75,7 +75,7 @@ html
         ul.contacts-list
           li
             a(href='#')
-              img.contacts-list-img(src='../ADMINLITE/dist/img/user1-128x128.jpg')
+              img.contacts-list-img(src='http://localhost:3000/ADMINLITE/dist/img/user1-128x128.jpg')
               .contacts-list-info
                 span.contacts-list-name
                   | Count Dracula

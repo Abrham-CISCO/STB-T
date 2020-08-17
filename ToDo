@@ -1,0 +1,44 @@
+Department Member Management System
+    The function of Member Management is to add or remove ትምህርት ክፍል members to or from sub departments.
+    for this to work we need to define a route for 
+    1. Adding Members (Adding Member as a leader or member)
+    http://localhost:3000/accounts/add/:subDepartment/:role/:userTelephone
+        What really happens when a new member is added to a subdepartment as a leader or member.
+            the user's document gets updated
+                the subdepartment object for that user gets updated
+                    the old subdepartment's leader or member object active property is changed to false
+                    the new subdepartment's leader or member object active property is changed to true 
+                work: {
+                    type: Object,
+                    default: [
+                            { 
+                                // Possible Improvement : Instead of saving department links on the database. define these links somewhere else.
+                                // Connect the departments with the link using s_id and parent relation
+                                department:"ትምህርት ክፍል",
+                                subDepartment:[
+                                    {name:"ሰብሳቢ",DA_link:"/Sebsabi",role:"ሰብሳቢ",active:true, sd_id:1, parent : 1},
+                                    {name:"ጸሐፊ",DA_link:"/Tsehafi/DepartmentAdmin",role:"ጸሐፊ",active:false, sd_id:2, parent : 1, SD_link:"/Tsehafi/SubDepartmentAdmin"},
+                                    {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:3,  parent : 1,SD_link:"/SitateTimhert/SubDepartmentAdmin",},
+                                    {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"አባል",active:false, sd_id:3,  parent : 3,SD_link:"/SitateTimhert/SubDepartmentMember"},
+                                    {name:"መምህራን ምደባ",DA_link:"/MemihranMideba/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:4,  parent : 1,SD_link:"/MemihranMideba/SubDepartmentAdmin"},
+                                    {name:"መምህራን ምደባ",DA_link:"/MemihranMideba/DepartmentAdmin",role:"አባል",active:false, sd_id:4,  parent : 4 ,SD_link:"/MemihranMideba/SubDepartmentMember"},
+                                    {name:"የአብነት ትምህርት",DA_link:"/AbinetTimehert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:5 , parent : 1,SD_link:"/AbinetTimehert/SubDepartmentAdmin"},
+                                    {name:"የአብነት ትምህርት",DA_link:"/AbinetTimehert/DepartmentAdmin",role:"አባል",active:false, sd_id:5,  parent : 5 ,SD_link:"/AbinetTimehert/SubDepartmentMember"},
+                                    {name:"የርቀት ትምህርት",DA_link:"/RiketTimhert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:6 , parent : 1,SD_link:"/RiketTimhert/SubDepartmentAdmin"},
+                                    {name:"የርቀት ትምህርት",DA_link:"/RiketTimhert/DepartmentAdmin",role:"አባል",active:false, sd_id:6,  parent : 6 ,SD_link:"/RiketTimhert/SubDepartmentMember"}
+                                ] 
+                            }
+                            ]
+                            
+                }
+    2. Removing Members
+    http://localhost:3000/accounts/remove/:subDepartment/:role/:userTelephone
+    Sending Message to member by selecting the reciever from department member list.
+    Viewing Profile 
+Department Information System   
+    - The function of this system is to give information to members about the department they have been assigned.
+Training System
+    - This system is used to train members things like leadership, communication, and ... skills
+Project Management system
+    - Lets members manage projects effectively
+Department Specific Systems

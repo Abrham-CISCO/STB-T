@@ -57,6 +57,29 @@ const userDataByTel = (userTel, callback) => {
     });
 }
 
+const profileLoaderByTel = (userTel, askerObject, callback) => {
+    User.IDentifyUserName(userTel,function(error,user){
+        if(error || !user)
+        {
+            if(error)
+            {
+                callback(error);
+            }
+            if(!user)
+            {
+                var err = new Error("User Not Found");
+                err.status = 401;
+                err.message = "User Not Found";
+                callback(err);
+            }
+        }
+        else
+        {
+            callback(null,user, askerObject);
+        }
+    });
+}
+
 const updateProfile =  (userId, changeObject,callback) =>{
     User.editProfile(userId, changeObject, function(error, user){
         if(error){
@@ -148,6 +171,101 @@ const setChatSocket = (telephone,socketID,callback) => {
     })
 }
 
+const allUsers = (callback) => {
+    User.Allusers(function(error,users){
+        if(error){
+            var err = new Error("An Error Has Occurred!");
+            callback(err,null);
+        }
+        else{
+            callback(null,users)
+        }
+    })
+}
+
+const addMemberToSubDepartment = (userTelephone, subDepartment, role, callback) => {
+    User.UserByTelephone(userTelephone,function(error, user){
+        if(error || !user){
+            var err = new Error('Wrong telephone or password.');
+            err.status = 401;
+            return next(err);                
+        } 
+        else{
+            // A user can not be a leader and a user
+            for(var i = 0; i<user.work[0].subDepartment.length; i++)
+            {
+
+                if(role == "Leader")
+                {   
+                    if(user.work[0].subDepartment[i].sd_id == subDepartment & user.work[0].subDepartment[i].parent == 1)
+                    {
+                            user.work[0].subDepartment[i].active = true;
+                    }
+                }
+                else
+                {
+                    if(user.work[0].subDepartment[i].parent == subDepartment & user.work[0].subDepartment[i].sd_id == subDepartment)
+                    {
+                        user.work[0].subDepartment[i].active = true;
+                    }
+                }                 
+            }
+            User.AssignRole(user.telephone,user.work,function(error, user){
+                if(error || !user){
+                    var err = new Error('Wrong telephone.');
+                    err.status = 401;
+                    return next(err);                
+                } 
+                    console.log("Finished")
+                    return callback(null);
+             });
+        }
+     });
+}
+
+
+const removeMemberFromSubDepartment = (userTelephone, subDepartment, role, callback) => 
+{
+    User.UserByTelephone(userTelephone,function(error, user){
+        if(error || !user){
+            var err = new Error('Wrong telephone.');
+            err.status = 401;
+            return callback(err);                
+        } 
+        else{
+
+            for(var i = 0; i<10; i++)
+            {
+                if(role == "Leader")
+                {
+                    if(user.work[0].subDepartment[i].active == true & user.work[0].subDepartment[i].sd_id == subDepartment & user.work[0].subDepartment[i].parent == 1)
+                    {
+                        user.work[0].subDepartment[i].active = false;
+                    }
+                }
+                else
+                {
+                    if(user.work[0].subDepartment[i].active == true & user.work[0].subDepartment[i].parent == subDepartment & user.work[0].subDepartment[i].sd_id == subDepartment)
+                    {
+                        user.work[0].subDepartment[i].active = false;
+                    }
+                }
+            }
+            User.AssignRole(user.telephone,user.work,function(error, user){
+                if(error || !user){
+                    var err = new Error('Wrong telephone or password.');
+                    err.status = 401;
+                    return next(err);                
+                }
+                return callback(null);
+            });
+        }
+    });
+}
+
+exports.addMemberToSubDepartment = addMemberToSubDepartment;
+exports.removeMemberFromSubDepartment = removeMemberFromSubDepartment;
+exports.allUsers = allUsers;
 exports.setChatSocket = setChatSocket;
 exports.getChatSocket = getChatSocket;
 exports.userData = userData;
@@ -157,3 +275,4 @@ exports.Autenticate = Autenticate;
 exports.updatePassword = updatePassword;
 exports.userDataByTel = userDataByTel;
 exports.userObjectByTel = userObjectByTel;
+exports.profileLoaderByTel = profileLoaderByTel;

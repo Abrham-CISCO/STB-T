@@ -1,5 +1,10 @@
 Chat 
     Message Numbering
+    Message Pagination
+    Every message is being sent to the user and the user is made to choose and render the message from sent messaging object.
+        Instead of this make the front end ask the messaging history for certain user only. Make also the front end respond with
+        a conversation of the user and one another user only.
+    The front end is not loading profile picture of the sender. correct this issue.
 
 Notification
 
@@ -8,6 +13,7 @@ Logging System
 Profile System
     Enable users to set up their profile image
     The System shall start with default male pic for male users and defaut female pic for female users
+        use pre save middle ware to achieve this
 User Navigation
 
 Session

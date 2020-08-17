@@ -26,6 +26,14 @@ router.get('/logout', function(req,res,next){
     }
  });
 
+ router.get('/All', function(req,res,next){
+    UserModelAccessor.allUsers(function(error,Users){
+        res.json({
+            response:Users
+        })
+    })
+ });
+
  router.get('/Info/:userId',function(req,res,next){
      var UserId = req.params.userId
      UserModelAccessor.userData(UserId,function(error,user){
@@ -155,6 +163,7 @@ if(!req.session.userId){
     err.status = 403;
     return next(err);  
 }
+
 UserModelAccessor.userData(req.session.userId, function(error,user){
     if (error){
         return next(error);
@@ -163,6 +172,23 @@ UserModelAccessor.userData(req.session.userId, function(error,user){
         return res.render('Account/templates/profile',user);
     }
 });
+});
+
+router.get('/public/profile/:telephone', function(req,res,next){
+    var Tel = req.params.telephone;    
+
+    UserModelAccessor.profileLoaderByTel(Tel,req.session.user, function(error,user, askerObject){
+        var resultObject = {}
+        resultObject.loaderuser = askerObject
+        resultObject.loadeduser = user
+        console.log(resultObject)
+        if (error){
+            return next(error);
+        } else {
+
+            return res.render('Account/templates/profile_pub',resultObject);
+        }
+    });
 });
 
 router.get('/forgotPassword', function(req,res,next){
@@ -263,5 +289,25 @@ generateRandomNumber = function()
 {
     return (Math.floor(Math.random()*1000000) + 1 );
 }
+
+router.get('/add/:subDepartment/:role/:userTelephone', function(req,res,next){
+    var subDepartment = req.params.subDepartment;
+    var role = req.params.role;
+    var userTelephone = req.params.userTelephone;
+
+    UserModelAccessor.addMemberToSubDepartment(userTelephone,subDepartment,role, function(err){
+        res.send("Done. Member Successfully Assigned")
+    })
+});
+
+router.get('/remove/:subDepartment/:role/:userTelephone', function(req,res,next){
+    var subDepartment = req.params.subDepartment;
+    var role = req.params.role;
+    var userTelephone = req.params.userTelephone;
+
+    UserModelAccessor.removeMemberFromSubDepartment(userTelephone,subDepartment,role, function(err){
+        res.send("Done. Member Successfully Removed")
+    })
+});
 
 module.exports = router;

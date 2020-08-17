@@ -33,7 +33,7 @@ var UserSchema = new mongoose.Schema({
                     subDepartment:[
                         {name:"ሰብሳቢ",DA_link:"/Sebsabi",role:"ሰብሳቢ",active:true, sd_id:1, parent : 1},
                         {name:"ጸሐፊ",DA_link:"/Tsehafi/DepartmentAdmin",role:"ጸሐፊ",active:false, sd_id:2, parent : 1, SD_link:"/Tsehafi/SubDepartmentAdmin"},
-                        {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:3,  parent : 1,SD_link:"/SitateTimhert/SubDepartmentAdmin",},
+                        {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"ሰብሳቢ",active:true, sd_id:3,  parent : 1,SD_link:"/SitateTimhert/SubDepartmentAdmin",},
                         {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"አባል",active:false, sd_id:3,  parent : 3,SD_link:"/SitateTimhert/SubDepartmentMember"},
                         {name:"መምህራን ምደባ",DA_link:"/MemihranMideba/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:4,  parent : 1,SD_link:"/MemihranMideba/SubDepartmentAdmin"},
                         {name:"መምህራን ምደባ",DA_link:"/MemihranMideba/DepartmentAdmin",role:"አባል",active:false, sd_id:4,  parent : 4 ,SD_link:"/MemihranMideba/SubDepartmentMember"},
@@ -104,8 +104,24 @@ UserSchema.statics.authenticate = function(telephone, password, callback){
             })
         });
 }
+
 //based on an inputted telehphone determine the username
 UserSchema.statics.IDentifyUserName = function(telephone,callback){
+    User.findOne({telephone:telephone})
+        .exec(function(error, user){
+            if(error){
+                return callback(error);
+            } else if (!user){
+                var err = new Error('User not found.');
+                err.status = 401;
+                return callback(err);
+            }
+            return callback(null, user);
+        });
+}
+
+//based on an inputted telehphone determine the username
+UserSchema.statics.UserByTelephone = function(telephone,callback){
     User.findOne({telephone:telephone})
         .exec(function(error, user){
             if(error){
@@ -223,8 +239,8 @@ UserSchema.statics.updatePassword = function(userID, Password, callback){
     });
 }
 
-UserSchema.statics.AssignRole = function(userID, UserWorkObject,  callback){
-    User.updateOne({_id:userID},{$set:{work:UserWorkObject}})
+UserSchema.statics.AssignRole = function(UserTelephone, UserWorkObject,  callback){
+    User.updateOne({telephone:UserTelephone},{$set:{work:UserWorkObject}})
     .exec(function(error, user){
         if(error){
             next(error);
