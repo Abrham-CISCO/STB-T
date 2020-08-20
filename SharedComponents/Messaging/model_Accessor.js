@@ -65,7 +65,20 @@ const chatHistoryAllWithPic =  (TelephoneNumber,callback) =>{
         } 
         else{
             // The response should come with pic
-            callback(null,messages);
+                // determine all peoples that have chatted with the person
+                contactList(TelephoneNumber,function(error, contactList){
+                    for(var i = 0; i < messages.History.length; i++)
+                    {
+                        for(var j = 0; j < contactList.length; j++)
+                        {
+                            if(contactList[j].telephone == messages.History[i].toID)
+                            {
+                                messages.History[i].img = contactList[j].pro_img
+                            }                            
+                        }
+                    }
+                    callback(null,messages);
+                })
         }
      });
 };
@@ -204,3 +217,4 @@ const messageNotification = (TelephoneNumber,callback) =>{
     exports.chatHistoryAll = chatHistoryAll;
     exports.sendMessage = sendMessage;
     exports.messageNotification = messageNotification;
+    exports.chatHistoryAllWithPic = chatHistoryAllWithPic;

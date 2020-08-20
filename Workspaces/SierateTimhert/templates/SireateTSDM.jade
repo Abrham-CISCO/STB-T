@@ -30,7 +30,7 @@ html
           .container-fluid
             .row.mb-2
               .col-sm-6
-                h1 ስዕራተ ትምህርት ንዑስ ክፍል
+                h1 ስዕራተ ትምህርት ንዑስ ክፍል ፡ አባል
               |           
               .col-sm-6
                 ol.breadcrumb.float-sm-right
@@ -52,9 +52,8 @@ html
                   .card-body
                     .tab-content
                       #activity.active.tab-pane
-                        
-                        script(src="static/viewsOld/AJAX/S_D_Members/DMembersST_S_S.js")
                         div(id="userlist").memberslist
+                        script(src="http://localhost:3000/workspaces/SierateTimhert/js/DMembersST_S_S.js")
                       #timeline.tab-pane
                         // The timeline
                         .timeline.timeline-inverse
@@ -225,3 +224,5 @@ html
     script(src='../ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
     script(src='../ADMINLITE/dist/js/demo.js')
+    script.
+      document.getElementById('3').className = "nav-link active"

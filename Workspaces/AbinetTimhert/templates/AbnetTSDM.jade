@@ -1,5 +1,5 @@
 doctype html
-include ../../../SharedComponents/Layouts/header.jadehtml
+include ../../../SharedComponents/Layouts/header.jade
   head
     meta(charset='utf-8')
     |   
@@ -50,8 +50,8 @@ include ../../../SharedComponents/Layouts/header.jadehtml
                   .card-body
                     .tab-content
                       #activity.active.tab-pane
-                        script(src="static/viewsOld/AJAX/S_D_Members/DMembersAT_S_S.js")
                         div(id="userlist").memberslist
+                        script(src="http://localhost:3000/workspaces/AbinetTimhert/js/DMembersAT_S_S.js")
                       #timeline.tab-pane
                         // The timeline
                         .timeline.timeline-inverse

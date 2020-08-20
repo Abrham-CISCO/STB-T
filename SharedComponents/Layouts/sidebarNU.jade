@@ -24,8 +24,7 @@ html
               Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library
             each val in work   
-              li.nav-item.has-treeview.menu.open
-                     
+              li.nav-item.has-treeview.menu.open                     
                 a(href="#").nav-link.active
                   i.nav-icon.fas.fa-tachometer-alt
                   p=val.department 
@@ -47,6 +46,17 @@ html
                                 a(href=val3.SD_link, id=val3.sd_id).nav-link
                                   i.far.fa-circle.nav-icon
                                   p=val3.name     
+              li.nav-item.has-treeview.menu.open 
+                a(href="#").nav-link
+                  i.nav-icon.fas.fa-tachometer-alt
+                  p ጉባኤያት
+                    i.right.fas.fa-angle-left
+                ul(style="display: block;").nav.nav-treeview#pr 
+                  each classes in classRoom   
+                    li.nav-item
+                      a(href="/Project/Open/#{classes.name}/ProjectManager", id=classes.name).nav-link
+                        i.far.fa-circle.nav-icon
+                        p=classes.name
             li.nav-item
               a.nav-link(href='../Accounts/logout')
                 i.fas.fa-circle.nav-icon

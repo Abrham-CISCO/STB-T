@@ -23,6 +23,16 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required : true
     },
+    // classRoom:[
+    //     {
+    //         name:{type:String},
+    //         id:{type:String}
+    //     }
+    // ],
+    classRoom:{
+        type:Object,
+        default:[{name:"ቅዱስ ቂርቆስ",id:"8791"},{name:"ቅድስት ኢየሉጣ",id:"8790"}]
+    },
     work: {
         type: Object,
         default: [
@@ -31,10 +41,10 @@ var UserSchema = new mongoose.Schema({
                     // Connect the departments with the link using s_id and parent relation
                     department:"ትምህርት ክፍል",
                     subDepartment:[
-                        {name:"ሰብሳቢ",DA_link:"/Sebsabi",role:"ሰብሳቢ",active:true, sd_id:1, parent : 1},
+                        {name:"ሰብሳቢ",DA_link:"/Sebsabi",role:"ሰብሳቢ",active:false, sd_id:1, parent : 1},
                         {name:"ጸሐፊ",DA_link:"/Tsehafi/DepartmentAdmin",role:"ጸሐፊ",active:false, sd_id:2, parent : 1, SD_link:"/Tsehafi/SubDepartmentAdmin"},
-                        {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"ሰብሳቢ",active:true, sd_id:3,  parent : 1,SD_link:"/SitateTimhert/SubDepartmentAdmin",},
-                        {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"አባል",active:false, sd_id:3,  parent : 3,SD_link:"/SitateTimhert/SubDepartmentMember"},
+                        {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:3,  parent : 1,SD_link:"/SirateTimhert/SubDepartmentAdmin",},
+                        {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"አባል",active:false, sd_id:3,  parent : 3,SD_link:"/SirateTimhert/SubDepartmentMember"},
                         {name:"መምህራን ምደባ",DA_link:"/MemihranMideba/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:4,  parent : 1,SD_link:"/MemihranMideba/SubDepartmentAdmin"},
                         {name:"መምህራን ምደባ",DA_link:"/MemihranMideba/DepartmentAdmin",role:"አባል",active:false, sd_id:4,  parent : 4 ,SD_link:"/MemihranMideba/SubDepartmentMember"},
                         {name:"የአብነት ትምህርት",DA_link:"/AbinetTimehert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:5 , parent : 1,SD_link:"/AbinetTimehert/SubDepartmentAdmin"},
@@ -107,7 +117,7 @@ UserSchema.statics.authenticate = function(telephone, password, callback){
 
 //based on an inputted telehphone determine the username
 UserSchema.statics.IDentifyUserName = function(telephone,callback){
-    User.findOne({telephone:telephone})
+    User.findOne({telephone:telephone},{password:false})
         .exec(function(error, user){
             if(error){
                 return callback(error);
@@ -122,7 +132,7 @@ UserSchema.statics.IDentifyUserName = function(telephone,callback){
 
 //based on an inputted telehphone determine the username
 UserSchema.statics.UserByTelephone = function(telephone,callback){
-    User.findOne({telephone:telephone})
+    User.findOne({telephone:telephone},{password:false})
         .exec(function(error, user){
             if(error){
                 return callback(error);
@@ -136,7 +146,7 @@ UserSchema.statics.UserByTelephone = function(telephone,callback){
 }
 
 UserSchema.statics.Allusers = function(callback){
-    User.find({})
+    User.find({},{password:false})
         .exec(function(error, user){
             if(error){
 
@@ -149,7 +159,7 @@ UserSchema.statics.Allusers = function(callback){
         });
 }
 UserSchema.statics.UserById = function(UserId, callback){
-    User.findOne({_id:UserId})
+    User.findOne({_id:UserId},{password:false})
         .exec(function(error, user){
             if(error){
             }

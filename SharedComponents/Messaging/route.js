@@ -26,7 +26,7 @@ router.get('/contacts/:tel',function(req,res){
 
 router.get('/historyOf/:memberTel', function(req,res){
     var MemberTel = req.params.memberTel;
-   messaging.chatHistoryAll(MemberTel,function(err,History){
+   messaging.chatHistoryAllWithPic(MemberTel,function(err,History){
     if(err || !History){
         res.json({
             response: err

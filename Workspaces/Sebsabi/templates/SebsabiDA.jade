@@ -52,11 +52,7 @@ html
                   .card-body
                     .tab-content
                       #activity.active.tab-pane  
-                      div(id="Messagebox")
-                      div(id="userlist").memberslist
-                      script(src="static/viewsOld/jquery.min.js")  
-                      script(src="static/viewsOld/AJAX/S_D_Leader/DMembersST_S.js")
-                      script(src="static/viewsOld/AJAX/Apps/Messaging.js")
+
                       #timeline.tab-pane
                         // The timeline
                         .timeline.timeline-inverse
@@ -227,3 +223,5 @@ html
     script(src='../ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
     script(src='../ADMINLITE/dist/js/demo.js')
+    script.
+      document.getElementById('1').className = "nav-link active"
