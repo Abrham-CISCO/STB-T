@@ -55,14 +55,27 @@ html
                         div(id="userlist").memberslist
                         script(src="http://localhost:3000/workspaces/SierateTimhert/js/DMembersST_S.js")
                       #classRooms.tab-pane
-                        .row
-                          each classes in classRoom
-                            .col-12.col-sm-6.col-md-3.d-flex.align-items-stretch
-                              .card.card-primary
-                                .card-header
-                                  h3.card-title #{classes.name}
-                                .card-body
-                                  p The body of the card
+                        .row.d-flex.align-items-stretch
+                          each classes in classRoom       
+                            .col-12.col-sm-6.col-md-4               
+                              .info-box
+                                .info-box-icon.bg-info
+                                  .fas.fa-users
+                                .info-box-content
+                                  span.info-box-text ጉባኤ #{classes.name}
+                                  span.info-box-text የአባላት ብዛት ፡ 1,459 
+                                  span.info-box-text አስተባባሪ ፡ አብረሀም ጌታቸው
+                          .col-12.col-sm-6.col-md-4               
+                            .info-box
+                              .info-box-icon.bg-info
+                                .fas.fa-plus
+                              .info-box-content
+                                span.info-box-text የጉባኤው ስም
+                                span.info-box-text 
+                                  .input-group.input-group-sm
+                                    input(type="text" class="form-control")
+                                    span.input-group-append
+                                      button(type="button" class="btn btn-info btn-flat") ፍጠር
                         // The timeline
                       // /.tab-pane
                     // /.tab-pane

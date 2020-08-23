@@ -136,7 +136,7 @@ router.post('/login', function(req, res, next){
     {
         UserModelAccessor.Autenticate(req.body.tel,req.body.password,function(error,user){
             if(error || !user){
-                var err = new Error('Wrong telephone or password.');
+                var err = new Error('የተሳሳተ ስልክ ቁጥር ወይንም የይለፍ ቃል ነው ያስገቡት እናክኦትን በድጋሜ ይሞክሩ።');
                 err.status = 401;
                 return next(err);                
             } 
