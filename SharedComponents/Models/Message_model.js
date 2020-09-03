@@ -65,7 +65,7 @@ var MessageSchema = new mongoose.Schema({
                 }
             ]
     }
-});
+},{timestamps:true});
 // Write here a code that returns contacts of the requested person
 MessageSchema.statics.contact = function(userID,callback)
 {

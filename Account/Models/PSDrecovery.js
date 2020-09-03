@@ -16,7 +16,7 @@ var PWDSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-});
+},{timestamps:true});
 
 PWDSchema.statics.verifyIdentity = function(userID, verCode, callback){
 // Check if the verification code is right if it is reply true

@@ -1,0 +1,641 @@
+doctype html
+include ../../../SharedComponents/Layouts/header.jade
+html
+  head
+    meta(charset='utf-8')
+    |   
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    |   
+    title #{gubaye.name}
+    // Tell the browser to be responsive to screen width
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Font Awesome
+    link(rel='stylesheet', href='https://localhost:3000/adminlite/plugins/fontawesome-free/css/all.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+    // Theme style
+    link(rel='stylesheet', href='static/dist/css/adminlte.min.css')
+    // Google Font: Source Sans Pro
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
+    script(src='http://localhost:3000/ADMINLITE/plugins/jquery/jquery.min.js')
+
+  body.hold-transition.sidebar-mini
+    .wrapper
+      // Navbar
+      include ../../../SharedComponents/Layouts/navigation.jade
+      // Main Sidebar Container
+      include ../../../SharedComponents/Layouts/sidebarNU.jade
+      script(src="http://localhost:3000/workspaces/SierateTimhert/js/GubayeTSDA.js") 
+
+      // Content Wrapper. Contains page content
+      .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+          .container-fluid
+            .row.mb-2
+              .col-sm-9
+                h1 ጉባኤ #{gubaye.name}
+                br
+                h6 #{gubaye.description}
+              |           
+              .col-sm-3
+                ol.breadcrumb.float-sm-right
+                  li.breadcrumb-item
+                    a(href='#') Home
+                  |               
+                  li.breadcrumb-item.active User Profile
+            .row
+              .col-md-12
+                .card
+                  .card-header.p-2
+                    ul.nav.nav-pills
+                      li.nav-item
+                        a.nav-link.active(href='#wall', data-toggle='tab') ግድግዳ
+                      |                   
+                      li.nav-item
+                        a.nav-link(href='#member', data-toggle='tab') አባላት
+                      |                   
+                      li.nav-item
+                        a.nav-link(href='#attendance', data-toggle='tab') አቴንዳንስ
+                      |                   
+                      li.nav-item
+                        a.nav-link(href='#marklist', data-toggle='tab') የነጥብ ሰንጠረዥ
+                      |                   
+                      li.nav-item
+                        a.nav-link(href='#management', data-toggle='tab') ቁጥጥር
+                  // /.card-header
+                  .card-body
+                    .tab-content
+                      #wall.active.tab-pane
+                        // Post
+                        .post
+                          .user-block
+                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user1-128x128.jpg', alt='user image')
+                            |                         
+                            span.username
+                              a(href='#') Jonathan Burke Jr.
+                              |                           
+                              a.float-right.btn-tool(href='#')
+                                i.fas.fa-times
+                            |                         
+                            span.description Shared publicly - 7:30 PM today
+                          // /.user-block
+                          p
+                            | Lorem ipsum represents a long-held tradition for designers,
+                            | typographers and the like. Some people hate it and argue for
+                            | its demise, but others ignore the hate as they create awesome
+                            | tools to help create filler text for everyone from bacon lovers
+                            | to Charlie Sheen fans.
+                          |                       
+                          p
+                            a.link-black.text-sm.mr-2(href='#')
+                              i.fas.fa-share.mr-1
+                              |  Share
+                            |                         
+                            a.link-black.text-sm(href='#')
+                              i.far.fa-thumbs-up.mr-1
+                              |  Like
+                            |                         
+                            span.float-right
+                              a.link-black.text-sm(href='#')
+                                i.far.fa-comments.mr-1
+                                |  Comments (5)
+                          |                       
+                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
+                        // /.post
+                        // Post
+                        .post.clearfix
+                          .user-block
+                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user7-128x128.jpg', alt='User Image')
+                            |                         
+                            span.username
+                              a(href='#') Sarah Ross
+                              |                           
+                              a.float-right.btn-tool(href='#')
+                                i.fas.fa-times
+                            |                         
+                            span.description Sent you a message - 3 days ago
+                          // /.user-block
+                          p
+                            | Lorem ipsum represents a long-held tradition for designers,
+                            | typographers and the like. Some people hate it and argue for
+                            | its demise, but others ignore the hate as they create awesome
+                            | tools to help create filler text for everyone from bacon lovers
+                            | to Charlie Sheen fans.
+                          |                       
+                          form.form-horizontal
+                            .input-group.input-group-sm.mb-0
+                              input.form-control.form-control-sm(placeholder='Response')
+                              |                           
+                              .input-group-append
+                                button.btn.btn-danger(type='submit') Send
+                        // /.post
+                        // Post
+                        .post
+                          .user-block
+                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user6-128x128.jpg', alt='User Image')
+                            |                         
+                            span.username
+                              a(href='#') Adam Jones
+                              |                           
+                              a.float-right.btn-tool(href='#')
+                                i.fas.fa-times
+                            |                         
+                            span.description Posted 5 photos - 5 days ago
+                          // /.user-block
+                          .row.mb-3
+                            .col-sm-6
+                              img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
+                            // /.col
+                            .col-sm-6
+                              .row
+                                .col-sm-6
+                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo2.png', alt='Photo')
+                                  |                               
+                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo3.jpg', alt='Photo')
+                                // /.col
+                                .col-sm-6
+                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo4.jpg', alt='Photo')
+                                  |                               
+                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
+                                // /.col
+                              // /.row
+                            // /.col
+                          // /.row
+                          p
+                            a.link-black.text-sm.mr-2(href='#')
+                              i.fas.fa-share.mr-1
+                              |  Share
+                            |                         
+                            a.link-black.text-sm(href='#')
+                              i.far.fa-thumbs-up.mr-1
+                              |  Like
+                            |                         
+                            span.float-right
+                              a.link-black.text-sm(href='#')
+                                i.far.fa-comments.mr-1
+                                |  Comments (5)
+                          |                       
+                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
+                        // /.post
+                      
+                      #member.tab-pane
+                        .row
+                          .col-6  
+                            ul.users-list.clearfix
+                              each val in gubayemembers
+                                li
+                                  img(src="../#{val.pro_img}" alt="User Image")
+                                  a.users-list-name(href="http://localhost:3000/accounts/public/profile/#{val.telephone}") #{val.name}
+                              li
+                                span(class="users-list-date") 
+                                span(class="users-list-date") 
+                                button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-sm')
+                                  div(class="fas fa-plus nav-plus")
+                                a(href="#" class="users-list-name") አባል ጨምር
+                                
+                                  // jQuery
+
+                        // Bootstrap 4
+                        script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+                        // SweetAlert2
+                        script(src='http://localhost:3000/ADMINLITE/plugins/sweetalert2/sweetalert2.min.js')
+                        // Toastr
+                        script(src='http://localhost:3000/ADMINLITE/plugins/toastr/toastr.min.js')
+                        // AdminLTE App
+                        script(src='http://localhost:3000/ADMINLITE/dist/js/adminlte.min.js')
+                        // AdminLTE for demo purposes
+                        script(src='http://localhost:3000/ADMINLITE/dist/js/demo.js')
+
+                      #modal-sm.modal.fade(style='display: none;', aria-hidden='true')
+                        .modal-dialog.modal-lg
+                          .modal-content
+                            .modal-header
+                              h4.modal-title ጉባኤ #{gubaye.name} : አዲስ አባል ይጨምሩ
+                              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                            .modal-body
+                              // Font Awesome
+                              link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/fontawesome-free/css/all.min.css')
+                              // Ionicons
+                              link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+                              // daterange picker
+                              link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/daterangepicker/daterangepicker.css')
+                              // iCheck for checkboxes and radio inputs
+                              link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/icheck-bootstrap/icheck-bootstrap.min.css')
+                              // Bootstrap Color Picker
+                              link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css')
+                              // Tempusdominus Bbootstrap 4
+                              link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')
+                              // Select2
+                              link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/select2/css/select2.min.css')
+                              link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')
+                              // Bootstrap4 Duallistbox
+                              link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')
+                              // Theme style
+                              link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/dist/css/adminlte.min.css')
+                              // Google Font: Source Sans Pro
+                              link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
+                              .form-group(data-select2-id='39')
+                                label ወደ ጉባኤው ለማስገባት የሚፈልጉትን አባል ይምረጡና ሲጨርስሱ Save የሚለውን በተን ይጫኑ 
+                                select.select2.select2-hidden-accessible(multiple='', data-placeholder='አባል ይምረጡ', style='width: 100%;', data-select2-id='7', tabindex='-1', aria-hidden='true')
+                                  each uuser in allusers
+                                    option(data-select2-id='#{uuser._id}' value='#{uuser._id}') #{uuser.name}
+                               // Bootstrap 4
+                              script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+                              // Select2
+                              script(src='http://localhost:3000/ADMINLITE/plugins/select2/js/select2.full.min.js')
+                              // Bootstrap4 Duallistbox
+                              script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')
+                              // InputMask
+                              script(src='http://localhost:3000/ADMINLITE/plugins/moment/moment.min.js')
+                              script(src='http://localhost:3000/ADMINLITE/plugins/inputmask/min/jquery.inputmask.bundle.min.js')
+                              // date-range-picker
+                              script(src='http://localhost:3000/ADMINLITE/plugins/daterangepicker/daterangepicker.js')
+                              // bootstrap color picker
+                              script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js')
+                              // Tempusdominus Bootstrap 4
+                              script(src='http://localhost:3000/ADMINLITE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')
+                              // Bootstrap Switch
+                              script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap-switch/js/bootstrap-switch.min.js')
+                              // AdminLTE App
+                              script(src='http://localhost:3000/ADMINLITE/dist/js/adminlte.min.js')
+                              // AdminLTE for demo purposes
+                              script(src='http://localhost:3000/ADMINLITE/dist/js/demo.js')
+                              // Page script
+                              script.
+                                $(function () {
+                                //Initialize Select2 Elements
+                                $('.select2').select2()
+                                //Initialize Select2 Elements
+                                $('.select2bs4').select2({
+                                theme: 'bootstrap4'
+                                })
+                                //Datemask dd/mm/yyyy
+                                $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+                                //Datemask2 mm/dd/yyyy
+                                $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+                                //Money Euro
+                                $('[data-mask]').inputmask()
+                                //Date range picker
+                                $('#reservation').daterangepicker()
+                                //Date range picker with time picker
+                                $('#reservationtime').daterangepicker({
+                                timePicker: true,
+                                timePickerIncrement: 30,
+                                locale: {
+                                format: 'MM/DD/YYYY hh:mm A'
+                                }
+                                })
+                                //Date range as a button
+                                $('#daterange-btn').daterangepicker(
+                                {
+                                ranges   : {
+                                'Today'       : [moment(), moment()],
+                                'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                                'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                                },
+                                startDate: moment().subtract(29, 'days'),
+                                endDate  : moment()
+                                },
+                                function (start, end) {
+                                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                                }
+                                )
+                                //Timepicker
+                                $('#timepicker').datetimepicker({
+                                format: 'LT'
+                                })
+                                //Bootstrap Duallistbox
+                                $('.duallistbox').bootstrapDualListbox()
+                                //Colorpicker
+                                $('.my-colorpicker1').colorpicker()
+                                //color picker with addon
+                                $('.my-colorpicker2').colorpicker()
+                                $('.my-colorpicker2').on('colorpickerChange', function(event) {
+                                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+                                });
+                                $("input[data-bootstrap-switch]").each(function(){
+                                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+                                });
+                                })
+
+
+                            .modal-footer.justify-content-between
+                              button.btn.btn-default(type='button', data-dismiss='modal') Close
+                              button.btn.btn-primary(type='button' onclick="addmembers('#{gubaye._id}');") Save changes
+                          // /.modal-content
+                          // /.modal-dialog
+
+
+
+                      #attendance.tab-pane
+                        .card
+                          .card-header
+                            h3.card-title DataTable with default features
+                          // /.card-header
+                          .card-body
+                            #example1_wrapper.dataTables_wrapper.dt-bootstrap4
+                              .row
+                                .col-sm-12.col-md-6
+                                  #example1_length.dataTables_length
+                                    label
+                                      | Show 
+                                      select.custom-select.custom-select-sm.form-control.form-control-sm(name='example1_length', aria-controls='example1')
+                                        option(value='10') 10
+                                        option(value='25') 25
+                                        option(value='50') 50
+                                        option(value='100') 100
+                                      |  entries
+                                .col-sm-12.col-md-6
+                                  #example1_filter.dataTables_filter
+                                    label
+                                      | Search:
+                                      input.form-control.form-control-sm(type='search', placeholder='', aria-controls='example1')
+                              .row
+                                .col-sm-12
+                                  table#example1.table.table-bordered.table-striped.dataTable(role='grid', aria-describedby='example1_info')
+                                    thead
+                                      tr(role='row')
+                                        th.sorting_asc(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-sort='ascending', aria-label='Rendering engine: activate to sort column descending', style='width: 156.2px;') Rendering engine
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') Browser
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Platform(s): activate to sort column ascending', style='width: 191.4px;') Platform(s)
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Engine version: activate to sort column ascending', style='width: 130.6px;') Engine version
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='CSS grade: activate to sort column ascending', style='width: 92.4px;') CSS grade
+                                    tbody
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Firefox 1.0
+                                        td Win 98+ / OSX.2+
+                                        td 1.7
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Firefox 1.5
+                                        td Win 98+ / OSX.2+
+                                        td 1.8
+                                        td A
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Firefox 2.0
+                                        td Win 98+ / OSX.2+
+                                        td 1.8
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Firefox 3.0
+                                        td Win 2k+ / OSX.3+
+                                        td 1.9
+                                        td A
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Camino 1.0
+                                        td OSX.2+
+                                        td 1.8
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Camino 1.5
+                                        td OSX.3+
+                                        td 1.8
+                                        td A
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Netscape 7.2
+                                        td Win 95+ / Mac OS 8.6-9.2
+                                        td 1.7
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Netscape Browser 8
+                                        td Win 98SE+
+                                        td 1.7
+                                        td A
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Netscape Navigator 9
+                                        td Win 98+ / OSX.2+
+                                        td 1.8
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Mozilla 1.0
+                                        td Win 95+ / OSX.1+
+                                        td 1
+                                        td A
+                                    tfoot
+                                      tr
+                                        th(rowspan='1', colspan='1') Rendering engine
+                                        th(rowspan='1', colspan='1') Browser
+                                        th(rowspan='1', colspan='1') Platform(s)
+                                        th(rowspan='1', colspan='1') Engine version
+                                        th(rowspan='1', colspan='1') CSS grade
+                              .row
+                                .col-sm-12.col-md-5
+                                  #example1_info.dataTables_info(role='status', aria-live='polite') Showing 1 to 10 of 57 entries
+                                .col-sm-12.col-md-7
+                                  #example1_paginate.dataTables_paginate.paging_simple_numbers
+                                    ul.pagination
+                                      li#example1_previous.paginate_button.page-item.previous.disabled
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='0', tabindex='0') Previous
+                                      li.paginate_button.page-item.active
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='1', tabindex='0') 1
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='2', tabindex='0') 2
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='3', tabindex='0') 3
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='4', tabindex='0') 4
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='5', tabindex='0') 5
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='6', tabindex='0') 6
+                                      li#example1_next.paginate_button.page-item.next
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='7', tabindex='0') Next
+                          // /.card-body
+
+                      #marklist.tab-pane
+                        .card
+                          .card-header
+                            h3.card-title DataTable with default features
+                          // /.card-header
+                          .card-body
+                            #example1_wrapper.dataTables_wrapper.dt-bootstrap4
+                              .row
+                                .col-sm-12.col-md-6
+                                  #example1_length.dataTables_length
+                                    label
+                                      | Show 
+                                      select.custom-select.custom-select-sm.form-control.form-control-sm(name='example1_length', aria-controls='example1')
+                                        option(value='10') 10
+                                        option(value='25') 25
+                                        option(value='50') 50
+                                        option(value='100') 100
+                                      |  entries
+                                .col-sm-12.col-md-6
+                                  #example1_filter.dataTables_filter
+                                    label
+                                      | Search:
+                                      input.form-control.form-control-sm(type='search', placeholder='', aria-controls='example1')
+                              .row
+                                .col-sm-12
+                                  table#example1.table.table-bordered.table-striped.dataTable(role='grid', aria-describedby='example1_info')
+                                    thead
+                                      tr(role='row')
+                                        th.sorting_asc(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-sort='ascending', aria-label='Rendering engine: activate to sort column descending', style='width: 156.2px;') Rendering engine
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') Browser
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Platform(s): activate to sort column ascending', style='width: 191.4px;') Platform(s)
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Engine version: activate to sort column ascending', style='width: 130.6px;') Engine version
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='CSS grade: activate to sort column ascending', style='width: 92.4px;') CSS grade
+                                    tbody
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Firefox 1.0
+                                        td Win 98+ / OSX.2+
+                                        td 1.7
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Firefox 1.5
+                                        td Win 98+ / OSX.2+
+                                        td 1.8
+                                        td A
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Firefox 2.0
+                                        td Win 98+ / OSX.2+
+                                        td 1.8
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Firefox 3.0
+                                        td Win 2k+ / OSX.3+
+                                        td 1.9
+                                        td A
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Camino 1.0
+                                        td OSX.2+
+                                        td 1.8
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Camino 1.5
+                                        td OSX.3+
+                                        td 1.8
+                                        td A
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Netscape 7.2
+                                        td Win 95+ / Mac OS 8.6-9.2
+                                        td 1.7
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Netscape Browser 8
+                                        td Win 98SE+
+                                        td 1.7
+                                        td A
+                                      tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Netscape Navigator 9
+                                        td Win 98+ / OSX.2+
+                                        td 1.8
+                                        td A
+                                      tr.even(role='row')
+                                        td.sorting_1 Gecko
+                                        td Mozilla 1.0
+                                        td Win 95+ / OSX.1+
+                                        td 1
+                                        td A
+                                    tfoot
+                                      tr
+                                        th(rowspan='1', colspan='1') Rendering engine
+                                        th(rowspan='1', colspan='1') Browser
+                                        th(rowspan='1', colspan='1') Platform(s)
+                                        th(rowspan='1', colspan='1') Engine version
+                                        th(rowspan='1', colspan='1') CSS grade
+                              .row
+                                .col-sm-12.col-md-5
+                                  #example1_info.dataTables_info(role='status', aria-live='polite') Showing 1 to 10 of 57 entries
+                                .col-sm-12.col-md-7
+                                  #example1_paginate.dataTables_paginate.paging_simple_numbers
+                                    ul.pagination
+                                      li#example1_previous.paginate_button.page-item.previous.disabled
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='0', tabindex='0') Previous
+                                      li.paginate_button.page-item.active
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='1', tabindex='0') 1
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='2', tabindex='0') 2
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='3', tabindex='0') 3
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='4', tabindex='0') 4
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='5', tabindex='0') 5
+                                      li.paginate_button.page-item
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='6', tabindex='0') 6
+                                      li#example1_next.paginate_button.page-item.next
+                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='7', tabindex='0') Next
+                          // /.card-body
+
+                      #management.tab-pane
+                        p የጉባኤ ስም መሰየም እና መቀየር ፣ ጉባኤ ማጥፋት ፣ Description መሙላት
+                    // /.tab-content
+                  // /.card-body
+                // /.nav-tabs-custom
+              // /.col
+            // /.row
+          // /.container-fluid
+        // Main content
+        section.content
+          .container-fluid
+          // /.container-fluid
+        // /.content
+      // /.content-wrapper
+      footer.main-footer
+        .float-right.d-none.d-sm-block
+          b Version
+          |  3.0.2-pre
+        |     
+        strong
+          | Copyright &copy; 2014-2019 
+          a(href='http://adminlte.io') AdminLTE.io
+          | .
+        |  All rights
+        |     reserved.
+      // Control Sidebar
+      aside.control-sidebar.control-sidebar-dark
+        // Control sidebar content goes here
+      // /.control-sidebar
+    // ./wrapper
+    // jQuery
+    // Bootstrap 4
+    script(src='http://localhost:3000/ADMINLITE/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    // AdminLTE App
+    script(src='http://localhost:3000/ADMINLITE/ADMINLITE/dist/js/adminlte.min.js')
+    // AdminLTE for demo purposes
+    script(src='http://localhost:3000/ADMINLITE/ADMINLITE/dist/js/demo.js')
+    // DataTables
+  script(src='http://localhost:3000/ADMINLITE/ADMINLITE/plugins/datatables/jquery.dataTables.js')
+  script(src='http://localhost:3000/ADMINLITE/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')
+  script(src='http://localhost:3000/ADMINLITE/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+  // DataTables
+  link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
+  script.
+    document.getElementById('3').className = "nav-link active"
+    document.getElementById('#{GubayeID}').className = "nav-link active"
+    $(function () {
+      $("#example1").DataTable();
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+      });
+    });

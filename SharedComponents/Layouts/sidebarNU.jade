@@ -4,8 +4,8 @@ html
   body
     aside.main-sidebar.sidebar-dark-primary.elevation-4
       // Brand Logo
-      a.brand-link(href='static/index3.html')
-        img.brand-image.img-circle.elevation-3(src='../SharedComponents/static/logo.jpg', alt='AdminLTE Logo', style='opacity: .8')
+      a.brand-link(href='http://localhost:3000/adminlite/index3.html')
+        img.brand-image.img-circle.elevation-3(src='http://localhost:3000/SharedComponents/static/logo.jpg', alt='AdminLTE Logo', style='opacity: .8')
         |       
         span.brand-text.font-weight-light አምደ ተዋሕዶ
       // Sidebar
@@ -13,7 +13,7 @@ html
         // Sidebar user (optional)
         .user-panel.mt-3.pb-3.mb-3.d-flex
           .image
-            img.img-circle.elevation-2(src='#{pro_img}', alt='User Image')
+            img.img-circle.elevation-2(src='http://localhost:3000/#{pro_img}', alt='User Image')
           |         
           .info
             a.d-block(href='/accounts/profile') #{name}
@@ -52,13 +52,14 @@ html
                   p ጉባኤያት
                     i.right.fas.fa-angle-left
                 ul(style="display: block;").nav.nav-treeview#pr 
-                  each classes in classRoom   
-                    li.nav-item
-                      a(href="/Project/Open/#{classes.name}/ProjectManager", id=classes.name).nav-link
-                        i.far.fa-circle.nav-icon
-                        p=classes.name
+                  if(classRoom)
+                    each classes in classRoom   
+                      li.nav-item                                  
+                        a(href="http://localhost:3000/SirateTimhert/Gubaye/#{classes.id}", id=classes.id).nav-link
+                          i.far.fa-circle.nav-icon
+                          p=classes.name
             li.nav-item
-              a.nav-link(href='../Accounts/logout')
+              a.nav-link(href='http://localhost:3000/Accounts/logout')
                 i.fas.fa-circle.nav-icon
                 |               
                 p Log out
@@ -85,7 +86,7 @@ html
         ul.contacts-list
           li
             a(href='#')
-              img.contacts-list-img(src='../ADMINLITE/dist/img/user1-128x128.jpg')
+              img.contacts-list-img(src='http://localhost:3000/ADMINLITE/dist/img/user1-128x128.jpg')
               .contacts-list-info
                 span.contacts-list-name
                   | Count Dracula

@@ -3,13 +3,14 @@
   var app = express();
   var http = require('http').createServer(app);
   var io = require('socket.io')(http);
-  var bodyParser = require('body-parser').json();
+  var bodyParser = require('body-parser');
   var mongoose = require('mongoose');
   var session = require('express-session');
   var MongoStore = require('connect-mongo')(session);
 // Model Accessors
   var MessagingModel_Acc = require('./SharedComponents/Messaging/model_Accessor')
   var UserModel_Acc = require('./Account/Models/user_model_accessor')
+  var classRoom_ModelAccessor = require('./Workspaces/SierateTimhert/models/classRoom_ModelAcessor');
   // Routes
   // Accounts
     var Accounts = require('./Account/route')
@@ -70,6 +71,30 @@
         })
       });
     });
+    var gubaye = io.of('gubaye')
+    gubaye.on('connection',(socket)=>
+    {
+      // Socket for Gubaye (Class Rooms)
+      socket.on('gubaye', function(gubayeName){
+        classRoom_ModelAccessor.createGubaye(gubayeName,"No Description.", function(error,gubaye){
+          if(!error)
+          {
+            console.log(gubaye," Gubaye Created");
+          }
+        });
+      });
+      // Socket for Gubaye members (Class Rooms)
+      socket.on('GubayeMembers', function(gubayeId, gubayeMembersArray)
+      {
+        UserModel_Acc.NameArrayToTelArray(gubayeMembersArray,function(error,userTelArray){
+          classRoom_ModelAccessor.memberAdder(gubayeId,userTelArray,function(error,response){
+            console.log(response);
+          })
+        })
+      });
+    });
+  // Parse to JSON
+  app.use(bodyParser.json()); 
 
   // Route Definations
   app.use('/AbinetTimehert',AbinetTimehert);

@@ -56,26 +56,24 @@ html
                         script(src="http://localhost:3000/workspaces/SierateTimhert/js/DMembersST_S.js")
                       #classRooms.tab-pane
                         .row.d-flex.align-items-stretch
-                          each classes in classRoom       
+                          each classes in gubaeat       
                             .col-12.col-sm-6.col-md-4               
                               .info-box
                                 .info-box-icon.bg-info
                                   .fas.fa-users
                                 .info-box-content
-                                  span.info-box-text ጉባኤ #{classes.name}
-                                  span.info-box-text የአባላት ብዛት ፡ 1,459 
-                                  span.info-box-text አስተባባሪ ፡ አብረሀም ጌታቸው
+                                  a(href="http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/#{classes.id}")
+                                    span.info-box-text ጉባኤ #{classes.name}
+                                  span.info-box-text የአባላት ብዛት ፡ #{classes.members.length}
+                                  span.info-box-text አስተባባሪ ፡ #{classes.leader}
                           .col-12.col-sm-6.col-md-4               
                             .info-box
                               .info-box-icon.bg-info
                                 .fas.fa-plus
                               .info-box-content
-                                span.info-box-text የጉባኤው ስም
                                 span.info-box-text 
-                                  .input-group.input-group-sm
-                                    input(type="text" class="form-control")
-                                    span.input-group-append
-                                      button(type="button" class="btn btn-info btn-flat") ፍጠር
+                                  input(type="text" name = "gname" id="gname" placeholder="የጉባኤው ስም" class="form-control")
+                                  button(type="button" onclick = "CreateClass();" name="btn_add" class="btn btn-info btn-flat") ፍጠር
                         // The timeline
                       // /.tab-pane
                     // /.tab-pane

@@ -19,6 +19,18 @@ function requireSignIn(req, res, next){
     }
 }
 
+function requiresToBeSTKNS(req,res,next){
+    if(req.session.user.work[0].subDepartment[2].active){
+        return next()
+    }
+    else
+    {
+        var err = new Error('ይህን ገጽ ለማየት እና ተጠቃሚ ለመሆን የስርዕእተ ትምህርት ክፍል ሰብሳቢ መሆን አለቦት!');
+        err.status = 401;
+        return next(err);                
+    }
+}
+
 function requiresToBeLeader(req, res, next){
     if(req.session.user.work[0].subDepartment[0].active){
         return next();
@@ -33,3 +45,4 @@ function requiresToBeLeader(req, res, next){
 module.exports.loggedOut = loggedOut;
 module.exports.requireSignIn = requireSignIn;
 module.exports.requiresToBeLeader = requiresToBeLeader;
+module.exports.requiresToBeSTKNS = requiresToBeSTKNS;

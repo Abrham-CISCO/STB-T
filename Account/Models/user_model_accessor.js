@@ -2,6 +2,7 @@ var PWD = require('./PSDrecovery');
 var User = require('../Models/user');
 var ModelAccessor = require('../../SharedComponents/Messaging/model_Accessor');
 var NotificatonAccessor = require('../../SharedComponents/Notification/model_Accessor')
+var GubayeModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoom_ModelAcessor')
 // Write a function which accepts an array of telephone numbers and returns an array of objects that
 // contain detail informations. the detail informations are id,name,pro_img,telephone
 
@@ -11,6 +12,41 @@ const userObjectByTel = (telephoneArray,callback) =>
             callback(null,user)            
         })
 }
+
+const NameArrayToTelArray = (nameArray,callback) =>
+{
+        User.NameArrayToTelephoneArray(nameArray,function(error,user){
+            if(error)
+            {
+                console.log(error)
+            }
+            else
+            {
+                console.log(user)
+            callback(null,user)         
+            }   
+        })
+}
+
+const AddMemberToG = (telephoneArray, GubayeID, callback) =>
+{
+    console.log("UMA ",telephoneArray)
+    var tel = []
+    tel.pop();
+    for(var i = 0; i<telephoneArray.length; i++)
+    {
+        tel.push(telephoneArray[i].telephone)
+    }
+    console.log(tel)
+    GubayeModelAccessor.gubayeDetail(GubayeID,function(error,Gubaye){
+        User.addMember(tel,GubayeID,Gubaye.name,function(error,response){
+            console.log(response)
+            callback(null,response);
+            
+        })
+    })
+}
+
 const userData = (userId, callback) => {
     User.UserById(userId,function(error,user){
         if(error || !user)
@@ -276,3 +312,5 @@ exports.updatePassword = updatePassword;
 exports.userDataByTel = userDataByTel;
 exports.userObjectByTel = userObjectByTel;
 exports.profileLoaderByTel = profileLoaderByTel;
+exports.NameArrayToTelArray = NameArrayToTelArray;
+exports.AddMemberToG = AddMemberToG;

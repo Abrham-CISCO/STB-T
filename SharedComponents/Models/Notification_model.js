@@ -19,7 +19,7 @@ var NotificationSchema = new mongoose.Schema ({
             }
         ]
     }
-})
+},{timestamps:true})
 // Required functions
 // 1. a function that loads notification object of a selected user
 // 2. a function that writes notifiaction on selected user's notification document

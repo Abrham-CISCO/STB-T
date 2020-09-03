@@ -30,8 +30,7 @@ var UserSchema = new mongoose.Schema({
     //     }
     // ],
     classRoom:{
-        type:Object,
-        default:[{name:"ቅዱስ ቂርቆስ",id:"8791"},{name:"ቅድስት ኢየሉጣ",id:"8790"}]
+        type:Object
     },
     work: {
         type: Object,
@@ -67,7 +66,9 @@ var UserSchema = new mongoose.Schema({
         type: String,
         default: "../ADMINLITE/dist/img/user4-128x128.jpg"
     }
-});
+},{timestamps:true});
+
+
 
 // Chat socket tools
     UserSchema.statics.getChatSocketID = function(telephone, callback){
@@ -198,6 +199,33 @@ UserSchema.statics.UserObjByTelephone = function(telephoneArray, callback){
             return callback(null,user);
         })
 }
+
+UserSchema.statics.NameArrayToTelephoneArray = function(nameArray, callback){
+
+    var searchObj = {
+        $or: [
+            ]
+        }
+    for(var i = 0; i<nameArray.length; i++)
+    {
+        searchObj.$or.push({name:nameArray[i]})
+    }
+    User.find(searchObj,{telephone:true,_id:false})
+        .exec(function(error, user){
+            if(error){
+                console.log(error)
+            }
+            else if(!user){
+                var err = new Error("User Not Found");
+                err.status = 401;
+                err.message = "User Not Found : From Model";
+                return callback(err);
+            }
+            return callback(null,user);
+        })
+}
+
+
 //hash password before saving to database
 UserSchema.pre('save', function(next){
     var user = this;
@@ -262,6 +290,54 @@ UserSchema.statics.AssignRole = function(UserTelephone, UserWorkObject,  callbac
         }
         return callback(null,user);
     });
+}
+
+// Add memeber to a group // Accepts Array
+UserSchema.statics.addMember = function(telephoneArray, groupID, groupName, callback)
+{
+    var searchObj = {
+        $or: [
+            ]
+        }
+    for(var i = 0; i<telephoneArray.length; i++)
+    {
+        searchObj.$or.push({telephone:telephoneArray[i]})
+    }
+    User.find(searchObj,{classRoom:true,_id:false})
+    .exec(function(error, user){
+        if(error){
+            console.log(error)
+        }
+        else if(!user){
+            var err = new Error("User Not Found");
+            err.status = 401;
+            err.message = "User Not Found : From Model";
+            return callback(err);
+        }
+        for(var i =0; i<user.length;i++)
+        {
+            user[i].classRoom.push({name:groupName,id:groupID})
+            console.log("user[i].classRoom",user[i].classRoom)
+        }
+        console.log(user)
+        for(var i =0; i<user.length;i++)
+        {
+            console.log(telephoneArray[i])
+            User.updateOne({telephone:telephoneArray[i]},{$set:{classRoom:user[i].classRoom}})
+            .exec(function(error,notification){
+                if(error)
+                {
+                    console.log(error);
+                    return callback(error,null)
+
+                }
+                console.log(notification)
+
+            })
+        }
+        callback(null,"notification")
+
+    })
 }
 
 var User = mongoose.model('User',UserSchema);
