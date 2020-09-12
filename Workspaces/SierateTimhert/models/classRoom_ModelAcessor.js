@@ -25,10 +25,7 @@ const createGubaye =  (gubayeName,gubayeDescription,callback) =>{
         name: gubayeName,
         description:gubayeDescription,
         leader:"No One",
-        members:[
-                {memberId:"0923276844"},
-                {memberId:"0911675507"}
-        ]
+        members:[]
     }
     classRoom.create(gubayeObject, function(error, gubaye){
         if(error)
@@ -44,7 +41,47 @@ const Gubaeyat = (callback) => {
         callback(null,gubaeyat)
     })
 }
+
+const updateGubaye = (ClassRoomID, gubayeName, Description, leader, callback) => {
+    classRoom.UpdateInfo(ClassRoomID, gubayeName, Description, leader, function(error, result){
+        if(error)
+        {
+            callback(error)
+        }
+        else{
+            callback(null,result)
+        }
+    })
+}
+
+const deleteGubaye = (ClassRoomID, callback) => {
+    classRoom.DeleteGubaye(ClassRoomID,function(error,result){
+        if(error)
+        {
+            callback(error)
+        }
+        else{
+            callback(null,result)
+        }
+    })
+}
+const IDArrayToNameArray = (IDArray,callback) => {
+    classRoom.IDArrayToNameArray(IDArray,function(error, gubaeyat){
+        console.log("CMA ", gubaeyat)
+        if(error)
+        {
+            callback(error)
+        }
+        else{
+            callback(null,gubaeyat)
+        }
+    })
+}
+
+exports.IDArrayToNameArray = IDArrayToNameArray;
+exports.deleteGubaye = deleteGubaye;
 exports.Gubaeyat = Gubaeyat;
 exports.gubayeDetail = gubayeDetail;
 exports.createGubaye = createGubaye;
 exports.memberAdder = memberAdder;
+exports.updateGubaye = updateGubaye;

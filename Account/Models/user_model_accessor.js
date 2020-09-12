@@ -1,10 +1,12 @@
 var PWD = require('./PSDrecovery');
 var User = require('../Models/user');
-var ModelAccessor = require('../../SharedComponents/Messaging/model_Accessor');
-var NotificatonAccessor = require('../../SharedComponents/Notification/model_Accessor')
-var GubayeModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoom_ModelAcessor')
+var Messaging_ModelAccessor = require('../../SharedComponents/Messaging/model_Accessor');
+var Notificaton_ModelAccessor = require('../../SharedComponents/Notification/model_Accessor')
+var Gubaye_ModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoom_ModelAcessor')
+var GubayeInd_ModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoomInd_ModelAccessor')
 // Write a function which accepts an array of telephone numbers and returns an array of objects that
 // contain detail informations. the detail informations are id,name,pro_img,telephone
+
 
 const userObjectByTel = (telephoneArray,callback) =>
 {
@@ -38,12 +40,26 @@ const AddMemberToG = (telephoneArray, GubayeID, callback) =>
         tel.push(telephoneArray[i].telephone)
     }
     console.log(tel)
-    GubayeModelAccessor.gubayeDetail(GubayeID,function(error,Gubaye){
-        User.addMember(tel,GubayeID,Gubaye.name,function(error,response){
-            console.log(response)
-            callback(null,response);
-            
-        })
+    Gubaye_ModelAccessor.gubayeDetail(GubayeID,function(error,Gubaye){
+        if(error)
+        {
+            callback(error)
+        }
+        else
+        {
+            GubayeInd_ModelAccessor.addARRYMemberToGroup(tel,GubayeID,function(error,response){
+                if(error)
+                {
+                    callback(error)
+                }
+                else
+                {
+                    console.log(response)
+                    callback(null,response);
+                }   
+    
+            })
+        }       
     })
 }
 
@@ -130,20 +146,35 @@ const updateProfile =  (userId, changeObject,callback) =>{
     });
 }
 
-const register = (userData,messageData,callback) =>{
-    User.create(userData, function(error, user){
-        if(error){
-            callback(error,null);
+const registerNewUser = (userData,messageData,callback) =>{
+    User.register(new User({name:userData.name,username:userData.telephone,email:userData.email,telephone:userData.telephone}), userData.password, (err, user) => 
+    {
+        if(err) {
+            callback(err)
+            console.log(err)
         }
         else
         {
-            ModelAccessor.createAccount(messageData,function(err,msg){
-                NotificatonAccessor.createNotification(userData.telephone,function(error,notification){
-                    callback(null,user);
-                });
-            });                
+            console.log("Accessing UserModelAccessor.registerNewUser Else")
+            GubayeInd_ModelAccessor.newUser(userData.telephone,function(error,gubayeInd){
+                Messaging_ModelAccessor.createAccount(messageData,function(err,msg){
+                    Notificaton_ModelAccessor.createNotification(userData.telephone,function(error,notification){
+                        callback(null,user);
+                        console.log(user)
+                    });
+                });                
+            })
         }
-    });
+    })
+    // User.create(userData, function(error, user){
+    //     if(error){
+    //         callback(error,null);
+    //     }
+    //     else
+    //     {
+            
+    //     }
+    // });
 };
 
 const Autenticate = (tel,password,callback) => {
@@ -218,6 +249,58 @@ const allUsers = (callback) => {
         }
     })
 }
+const NonMemberUsers = (groupID, callback) => {
+    var nonMembers = []
+    nonMembers.pop();
+    var isMember = false;
+    User.Allusers(function(error,user){
+        for(var i = 0; i<user.length; i++)
+        {
+            isMember = false;
+            for(var j=0; j<user[i].classRoom.length; j++)
+            {
+                if(user[i].classRoom[j].class_ID == groupID)
+                {
+                    isMember = true;
+                }
+            }
+            if(isMember == false)
+            {
+                nonMembers.push(user[i])
+            }
+
+        }
+        callback(null,nonMembers)
+    })
+}
+
+// build a function that returns list of students (ID and Name) that are not a member of a given gubaye
+const nonMembers = (groupID,callback) =>
+{
+    var nonMembers = []
+    nonMembers.pop();
+    var isMember = false;
+    User.Allusers(function(error,user){
+        for(var i = 0; i<user.length; i++)
+        {
+            isMember = false;
+            for(var j=0; j<user[i].classRoom.length; j++)
+            {
+                if(user[i].classRoom[j].class_ID == groupID)
+                {
+                    isMember = true;
+                }
+            }
+            if(isMember == false)
+            {
+                nonMembers.push(user[i])
+            }
+
+        }
+        callback(nonMembers)
+    })
+}
+
 
 const addMemberToSubDepartment = (userTelephone, subDepartment, role, callback) => {
     User.UserByTelephone(userTelephone,function(error, user){
@@ -306,7 +389,7 @@ exports.setChatSocket = setChatSocket;
 exports.getChatSocket = getChatSocket;
 exports.userData = userData;
 exports.updateProfile = updateProfile; 
-exports.register = register;
+exports.registerNewUser = registerNewUser;
 exports.Autenticate = Autenticate;
 exports.updatePassword = updatePassword;
 exports.userDataByTel = userDataByTel;
@@ -314,3 +397,5 @@ exports.userObjectByTel = userObjectByTel;
 exports.profileLoaderByTel = profileLoaderByTel;
 exports.NameArrayToTelArray = NameArrayToTelArray;
 exports.AddMemberToG = AddMemberToG;
+exports.nonMembers = nonMembers;
+exports.NonMemberUsers = NonMemberUsers;

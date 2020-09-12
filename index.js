@@ -7,7 +7,11 @@
   var mongoose = require('mongoose');
   var session = require('express-session');
   var MongoStore = require('connect-mongo')(session);
-// Model Accessors
+  var passport = require('passport')
+  var authenticate = require('./Account/authenticate')
+
+  
+  // Model Accessors
   var MessagingModel_Acc = require('./SharedComponents/Messaging/model_Accessor')
   var UserModel_Acc = require('./Account/Models/user_model_accessor')
   var classRoom_ModelAccessor = require('./Workspaces/SierateTimhert/models/classRoom_ModelAcessor');
@@ -35,6 +39,7 @@
 // Sessions setup : for storing sessions data on mongodb via mongoose
   // use sessions for tracking logins
   app.use(session({
+      name:"session-id",
       secret: "Abrham",
       resave: true,
       saveUninitialized: false,
@@ -42,6 +47,27 @@
           mongooseConnection:db
       })
   }));
+
+// Passport Setup
+
+// passport.use(new LocalStrategy({usernameField: 'telephone', passwordField:'password'},
+// function(username, password, done){
+//     User.findOne({username:username}, function(error, user){
+//         if(error) {return done(error);}
+//         if(!user) {
+//             return done(null, false, {message: 'Incorrect telephone.'});
+//         }
+//         if(!user.validPassword(password)){
+//             return done(null, false, {message: 'Incorrect password.'});
+//         }
+//         return done(null, user);
+//     })
+// }
+// ))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Defining Static File Path
   var StaticFilePath = 'C:\\wamp64\\www\\TK';
   app.use('',express.static(StaticFilePath))
@@ -75,22 +101,34 @@
     gubaye.on('connection',(socket)=>
     {
       // Socket for Gubaye (Class Rooms)
-      socket.on('gubaye', function(gubayeName){
+      socket.on('CreateGubaye', function(gubayeName){
         classRoom_ModelAccessor.createGubaye(gubayeName,"No Description.", function(error,gubaye){
           if(!error)
           {
-            console.log(gubaye," Gubaye Created");
+            socket.emit('CreateGubaye',"Created")
           }
         });
       });
       // Socket for Gubaye members (Class Rooms)
-      socket.on('GubayeMembers', function(gubayeId, gubayeMembersArray)
-      {
+      socket.on('AddGubayeMembers', function(gubayeId, gubayeMembersArray)
+      { 
         UserModel_Acc.NameArrayToTelArray(gubayeMembersArray,function(error,userTelArray){
           classRoom_ModelAccessor.memberAdder(gubayeId,userTelArray,function(error,response){
-            console.log(response);
+            var message = "Added to "+gubayeId
+            socket.emit('AddGubayeMembers',message)
           })
         })
+      });
+      socket.on('UpdateGubaye',function(ClassRoomID, gubayeName, Description, leader){
+        classRoom_ModelAccessor.updateGubaye(ClassRoomID,gubayeName,Description,leader,function(error, result){
+          socket.emit('UpdateGubaye',"Updated")
+        })
+      });
+      socket.on('deleteGubaye',function(ClassRoomID){
+        classRoom_ModelAccessor.deleteGubaye(ClassRoomID, function(error,result){
+          console.log(result);
+          socket.emit('deleteGubaye',"Deleted")
+        });
       });
     });
   // Parse to JSON

@@ -5,11 +5,15 @@ var User = require('./Models/user');
 var app = express();
 var mid = require('../SharedComponents/Middlewares/index');
 var messaging = require('../SharedComponents/Messaging/route');
+var classRoomInd_ModelAccessor = require('../Workspaces/SierateTimhert/models/classRoomInd_ModelAccessor')
 var ModelAccessor = require('../SharedComponents/Messaging/model_Accessor');
+var classRoom_ModelAccessor = require('../Workspaces/SierateTimhert/models/classRoom_ModelAcessor')
 var UserModelAccessor = require('./Models/user_model_accessor')
 var PWDModelAccessor = require('./Models/psd_model_accessor');
 // var MessagesM = require('../SharedComponents/Models/Message_model');
 var socketmodel = require('../SharedComponents/Models/socket');
+const passport = require('passport')
+
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
 
@@ -20,6 +24,7 @@ router.get('/logout', function(req,res,next){
             if(err){
                 return next(err);
             } else{
+                res.clearCookie('session-id');
                 res.redirect('/');
             }
         });
@@ -84,7 +89,8 @@ router.get('/register', mid.loggedOut, function(req,res,next){
 });
 
 router.post('/register', function(req,res,next){
-    if(req.body.tel && req.body.password && req.body.rpassword && req.body.name && req.body.email)
+    // Check All fields
+    if(req.body.telephone && req.body.password && req.body.rpassword && req.body.name && req.body.email)
     {
         //Confirm that user typed same password twice
         if(req.body.password !== req.body.rpassword)
@@ -94,7 +100,7 @@ router.post('/register', function(req,res,next){
             return next(err);        
         }
         var userData = {
-            telephone: req.body.tel,
+            telephone: req.body.telephone,
             name: req.body.name,
             password: req.body.password,
             email: req.body.email
@@ -102,18 +108,23 @@ router.post('/register', function(req,res,next){
         var messageData = {
             userID: req.body.tel
         };
-
-        UserModelAccessor.register(userData,messageData,function(error,user){
+        
+        UserModelAccessor.registerNewUser(userData,messageData,function(error,user){
+            console.log("Accessing UserModelAccessor.registerNewUser")
             if(error)
             {
                 return next(err);  
             }
             else
-            {
-                req.session.userId = user._id;
-                req.session.name = req.body.name;
-                req.session.user = user;
-                return res.render('Account/templates/profile',user);
+            {  
+                console.log(user)
+                passport.authenticate('local',{failureRedirect: "/accounts/login"})(req, res, () => {
+                    console.log("Accessing UserModelAccessor.registerNewUser Authenticating")
+                    req.session.userId = user._id;
+                    req.session.name = req.body.name;
+                    req.session.user = user;
+                    return res.render('Account/templates/profile',user);
+                })
             }
         });
         // use schema's 'create' method to insert document into Mongo
@@ -130,25 +141,46 @@ router.get('/login',mid.loggedOut, function(req,res,next){
     return res.render('Account/templates/signin');
 });
 
-router.post('/login', function(req, res, next){
+router.get('/login/Error',mid.loggedOut, function(req,res,next){
+    return res.render('Account/templates/signinError');
+});
 
-    if(req.body.tel && req.body.password)
+router.post('/login', passport.authenticate('local',{failureRedirect:"login/Error"}), function(req, res, next){
+    console.log(req.body.tel);
+    if(req.body.telephone && req.body.password)
     {
-        UserModelAccessor.Autenticate(req.body.tel,req.body.password,function(error,user){
-            if(error || !user){
-                var err = new Error('የተሳሳተ ስልክ ቁጥር ወይንም የይለፍ ቃል ነው ያስገቡት እናክኦትን በድጋሜ ይሞክሩ።');
-                err.status = 401;
-                return next(err);                
-            } 
-            else{
-                req.session.userId = user._id;
-                req.session.name = user.name;
-                req.session.user = user;
-
-                return res.render('Account/templates/profile',user);      
-            }        
-        });
-    }
+        console.log("req.user ", req.user);
+                req.session.userId = req.user._id;
+                req.session.name = req.user.name;
+                req.session.user = req.user;
+                var gubaeat = [];
+                gubaeat.pop();
+                classRoomInd_ModelAccessor.joinedClass(req.body.telephone,function(error,gubaeats)
+                {
+                    if(!(gubaeats.length == 0))
+                    {
+                        console.log(gubaeats)
+                        for(var i = 0; i<gubaeats.length; i++)
+                        {
+                            gubaeat.push(gubaeats[i].classID);
+                            console.log("ClassRooms", gubaeat)
+                        }
+                        classRoom_ModelAccessor.IDArrayToNameArray(gubaeat,function(error,gubaeatName){
+                            if(!error && gubaeatName)
+                            {
+                                console.log("gubaeatName ",gubaeatName)
+                                req.session.user.classRoom = gubaeatName.name;
+                                console.log("After Gubaye name added ", req.session.user)
+                                return res.render('Account/templates/profile',user);    
+                            }
+    
+                        })
+                    }
+                    else{
+                        return res.render('Account/templates/profile',req.user);    
+                    }
+                })
+    }        
     else
     {
         var err = new Error('Telephone Number and Password are required!');

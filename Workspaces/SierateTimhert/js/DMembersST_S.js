@@ -137,8 +137,11 @@ function CreateClass()
 {
   var socket = io('/gubaye');
   className = document.getElementById("gname").value;
-  socket.emit('gubaye',className);
+  socket.emit('CreateGubaye',className);
   console.log(className)
-  window.location.href = "http://localhost:3000/SirateTimhert/SubDepartmentAdmin";
-
+  
+  socket.on('CreateGubaye',function(Confirmation){
+    alert(Confirmation);
+    window.location.href = "http://localhost:3000/SirateTimhert/SubDepartmentAdmin";
+  });
 }

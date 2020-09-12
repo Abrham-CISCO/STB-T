@@ -183,10 +183,11 @@ html
                         .row
                           .col-6  
                             ul.users-list.clearfix
-                              each val in gubayemembers
-                                li
-                                  img(src="../#{val.pro_img}" alt="User Image")
-                                  a.users-list-name(href="http://localhost:3000/accounts/public/profile/#{val.telephone}") #{val.name}
+                              if(gubayemembers)
+                                each val in gubayemembers
+                                  li
+                                    img(src="../#{val.pro_img}" alt="User Image")
+                                    a.users-list-name(href="http://localhost:3000/accounts/public/profile/#{val.telephone}") #{val.name}
                               li
                                 span(class="users-list-date") 
                                 span(class="users-list-date") 
@@ -355,18 +356,29 @@ html
                                     label
                                       | Search:
                                       input.form-control.form-control-sm(type='search', placeholder='', aria-controls='example1')
-                              .row
+                              .row( style="overflow-x:auto;")
                                 .col-sm-12
                                   table#example1.table.table-bordered.table-striped.dataTable(role='grid', aria-describedby='example1_info')
                                     thead
                                       tr(role='row')
-                                        th.sorting_asc(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-sort='ascending', aria-label='Rendering engine: activate to sort column descending', style='width: 156.2px;') Rendering engine
-                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') Browser
+                                        th.sorting_asc(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-sort='ascending', aria-label='Rendering engine: activate to sort column descending', style='width: 156.2px;') ስም
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') 28/12/2012
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') 28/12/2012
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') 28/12/2012
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') 28/12/2012
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') 28/12/2012
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') 28/12/2012
+                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') 28/12/2012                                             
                                         th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Platform(s): activate to sort column ascending', style='width: 191.4px;') Platform(s)
                                         th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Engine version: activate to sort column ascending', style='width: 130.6px;') Engine version
                                         th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='CSS grade: activate to sort column ascending', style='width: 92.4px;') CSS grade
                                     tbody
                                       tr.odd(role='row')
+                                        td.sorting_1 Gecko
+                                        td Firefox 1.0
+                                        td Win 98+ / OSX.2+
+                                        td 1.7
+                                        td A
                                         td.sorting_1 Gecko
                                         td Firefox 1.0
                                         td Win 98+ / OSX.2+
@@ -584,6 +596,66 @@ html
 
                       #management.tab-pane
                         p የጉባኤ ስም መሰየም እና መቀየር ፣ ጉባኤ ማጥፋት ፣ Description መሙላት
+                        .row
+                          .col-md-3
+                            // Profile Image
+                            .card.card-primary.card-outline
+                              .card-body.box-profile
+                                .text-center
+                                  img.profile-user-img.img-fluid.img-circle(src='http://localhost:3000/ADMINLITE/dist/img/user4-128x128.jpg', alt='User profile picture')
+                                |                 
+                                h3.profile-username.text-center ጉባኤ #{gubaye.name}
+                                |                 
+                                p.text-muted.text-center
+                                |                 
+                                ul.list-group.list-group-unbordered.mb-3
+                                  li.list-group-item
+                                    b ዝርዝር
+                                    p #{gubaye.description}
+                                a.btn.btn-danger.btn-block(href='#' onclick="deleteGubaye()")
+                                  b ጉባኤውን ሰርዝ
+                              // /.card-body
+                            // /.card
+                            // About Me Box
+                          .col-md-9
+                            .card
+                              .card-header.p-2
+                                ul.nav.nav-pills                 
+                                  li.nav-item
+                                    a.nav-link.active(href='#settings', data-toggle='tab') Settings
+                              // /.card-header
+                              .card-body
+                                .tab-content
+                                  #settings.active.tab-pane
+                                    form(method="post", action="../Gubaye/Update").form-horizontal
+                                      .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputName') የጉባኤው ስም
+                                        |                         
+                                        .col-sm-10
+                                          input.form-control(type='text', placeholder='የጋባኤው ስም', value="#{gubaye.name}", id="name", name='name')
+                                        |                       
+                                      .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputEmail') ዝርዝር
+                                        |                         
+                                        .col-sm-10
+                                          input.form-control(type='text', placeholder='ዝርዝር', value="#{gubaye.description}", id="description", name='description')
+                                      |                      
+                                      .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputTel') ጉባኤ አስተዳዳሪ
+                                        |                         
+                                        .col-sm-10
+                                          input.form-control(type='text', placeholder='ጉብኤ አስተዳዳሪ', value="#{gubaye.leader}", id="admin", name='admin') 
+                                          input(type='hidden', placeholder='የጋባኤው ስም', value="#{gubaye._id}", name='_id', id='_id')
+                                      |                       
+                                      .form-group.row
+                                        .offset-sm-2.col-sm-10
+                                          button.btn.btn-primary(type='button' onclick="updateGubaye()") Submit
+                                  // /.tab-pane
+                                // /.tab-content
+                              // /.card-body
+                            // /.nav-tabs-custom
+                          // /.col
+                    
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom

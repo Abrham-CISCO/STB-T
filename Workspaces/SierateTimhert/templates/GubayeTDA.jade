@@ -176,40 +176,10 @@ html
                         .row
                           .col-6  
                             ul.users-list.clearfix
-                              li
-                                img(src="http://localhost:3000/adminlite/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                                span.users-list-date Today
-                              li
-                                img(src="http://localhost:3000/adminlite/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                                span.users-list-date Today
-                              li
-                                img(src="http://localhost:3000/adminlite/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                                span.users-list-date Today
-                              li
-                                img(src="http://localhost:3000/adminlite/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                                span.users-list-date Today
-                          .col-6  
-                            ul.users-list.clearfix
-                              li
-                                img(src="http://localhost:3000/adminlite/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                                span.users-list-date Today
-                              li
-                                img(src="http://localhost:3000/adminlite/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                                span.users-list-date Today
-                              li
-                                img(src="http://localhost:3000/adminlite/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                                span.users-list-date Today
-                              li
-                                img(src="http://localhost:3000/adminlite/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                                span.users-list-date Today
+                              each val in gubayemembers
+                                li
+                                  img(src="../#{val.pro_img}" alt="User Image")
+                                  a.users-list-name(href="http://localhost:3000/accounts/public/profile/#{val.telephone}") #{val.name}
                       #attendance.tab-pane
                       #marklist.tab-pane
                     // /.tab-content

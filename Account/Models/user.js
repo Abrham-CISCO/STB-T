@@ -1,19 +1,17 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var passportLocalMongoose = require('passport-local-mongoose');
+var passport = require('passport');
+var ClassRoomSchema = new mongoose.Schema({
+class_ID:{type:String,required:true},
+tname:{type:String,default:"ጉባኤ"}
+});
 var UserSchema = new mongoose.Schema({
     telephone: {
         type: String,
         unique: true,
         required: true,
         trim: true
-    },
-    name: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true
     },
     RegDate: {
         type: Date,
@@ -23,15 +21,12 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required : true
     },
-    // classRoom:[
-    //     {
-    //         name:{type:String},
-    //         id:{type:String}
-    //     }
-    // ],
-    classRoom:{
-        type:Object
+    name: {
+        type: String,
+        required : true
     },
+    skipPassword:{type:Boolean,default:false},
+    classRoom:[ClassRoomSchema],
     work: {
         type: Object,
         default: [
@@ -67,7 +62,6 @@ var UserSchema = new mongoose.Schema({
         default: "../ADMINLITE/dist/img/user4-128x128.jpg"
     }
 },{timestamps:true});
-
 
 
 // Chat socket tools
@@ -227,16 +221,17 @@ UserSchema.statics.NameArrayToTelephoneArray = function(nameArray, callback){
 
 
 //hash password before saving to database
-UserSchema.pre('save', function(next){
-    var user = this;
-    bcrypt.hash(user.password, 10, function(err, hash){
-        if (err){
-            return next(err);
-        }
-        user.password = hash;
-        next();
-    });
-});
+// UserSchema.pre('save', function(next){
+//     var user = this;
+    
+//         bcrypt.hash(user.password, 10, function(err, hash){
+//             if (err){
+//                 return next(err);
+//             }
+//             user.password = hash;
+//             next();
+//         });
+// });
 
 UserSchema.statics.editProfile = function(userID, UserGeneral, callback){
     User.updateOne({_id:userID}, {$set:{name:UserGeneral.name,email:UserGeneral.email,telephone:UserGeneral.telephone}})
@@ -316,23 +311,22 @@ UserSchema.statics.addMember = function(telephoneArray, groupID, groupName, call
         }
         for(var i =0; i<user.length;i++)
         {
-            user[i].classRoom.push({name:groupName,id:groupID})
+            user[i].classRoom.push({Class_ID:groupID})
             console.log("user[i].classRoom",user[i].classRoom)
+            console.log(user[i].classRoom);
         }
-        console.log(user)
+        console.log("After Addition ",user)
         for(var i =0; i<user.length;i++)
         {
             console.log(telephoneArray[i])
-            User.updateOne({telephone:telephoneArray[i]},{$set:{classRoom:user[i].classRoom}})
-            .exec(function(error,notification){
-                if(error)
-                {
-                    console.log(error);
-                    return callback(error,null)
-
-                }
-                console.log(notification)
-
+            User.findOne({telephone:telephoneArray[i]})
+            .exec(function(error,user){
+                console.log("Group Id ",groupID)
+                user.classRoom.push({class_ID:groupID})
+                // skip the password do not save it.
+                user.skipPassword = true;
+                user.save();
+                console.log("After user addition ",user)
             })
         }
         callback(null,"notification")
@@ -340,5 +334,6 @@ UserSchema.statics.addMember = function(telephoneArray, groupID, groupName, call
     })
 }
 
-var User = mongoose.model('User',UserSchema);
-module.exports = User;
+UserSchema.plugin(passportLocalMongoose);
+
+module.exports = mongoose.model('User',UserSchema);

@@ -55,9 +55,9 @@ html
                   if(classRoom)
                     each classes in classRoom   
                       li.nav-item                                  
-                        a(href="http://localhost:3000/SirateTimhert/Gubaye/#{classes.id}", id=classes.id).nav-link
+                        a(href="http://localhost:3000/SirateTimhert/Gubaye/public/#{classes.id}", id=classes.id).nav-link
                           i.far.fa-circle.nav-icon
-                          p=classes.name
+                          p ጉባኤ #{classes.tname}
             li.nav-item
               a.nav-link(href='http://localhost:3000/Accounts/logout')
                 i.fas.fa-circle.nav-icon
