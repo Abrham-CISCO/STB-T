@@ -49,22 +49,6 @@
   }));
 
 // Passport Setup
-
-// passport.use(new LocalStrategy({usernameField: 'telephone', passwordField:'password'},
-// function(username, password, done){
-//     User.findOne({username:username}, function(error, user){
-//         if(error) {return done(error);}
-//         if(!user) {
-//             return done(null, false, {message: 'Incorrect telephone.'});
-//         }
-//         if(!user.validPassword(password)){
-//             return done(null, false, {message: 'Incorrect password.'});
-//         }
-//         return done(null, user);
-//     })
-// }
-// ))
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -113,6 +97,7 @@ app.use(passport.session());
       socket.on('AddGubayeMembers', function(gubayeId, gubayeMembersArray)
       { 
         UserModel_Acc.NameArrayToTelArray(gubayeMembersArray,function(error,userTelArray){
+          console.log(userTelArray);
           classRoom_ModelAccessor.memberAdder(gubayeId,userTelArray,function(error,response){
             var message = "Added to "+gubayeId
             socket.emit('AddGubayeMembers',message)

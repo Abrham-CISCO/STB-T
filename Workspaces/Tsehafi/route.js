@@ -9,17 +9,17 @@ var SubDepartmentAdminLink = "Workspaces/"+subDepartment+"/templates/"+ filePref
 var SubDepartmentMemberLink="Workspaces/"+subDepartment+"/templates/"+ filePrefix+"SDM";
 // For Department Admins
 router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader, function(req,res,next){
-    return res.render(DepartmentAdminLink,req.session.user);
+    return res.render(DepartmentAdminLink,req.session);
 });
 
 // For Sub Department Admins
 router.get('/SubDepartmentAdmin', mid.requireSignIn, function(req,res,next){
-    return res.render(SubDepartmentAdminLink,req.session.user);
+    return res.render(SubDepartmentAdminLink,req.session);
 });
 
 // For Sub Department Members
 router.get('/SubDepartmentMember', mid.requireSignIn, function(req,res,next){
-    return res.render(SubDepartmentMemberLink,req.session.user);
+    return res.render(SubDepartmentMemberLink,req.session);
 });
 
 module.exports = router;

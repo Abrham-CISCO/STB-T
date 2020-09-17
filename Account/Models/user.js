@@ -4,7 +4,7 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var passport = require('passport');
 var ClassRoomSchema = new mongoose.Schema({
 class_ID:{type:String,required:true},
-tname:{type:String,default:"ጉባኤ"}
+name:{type:String,default:"ጉባኤ"}
 });
 var UserSchema = new mongoose.Schema({
     telephone: {
@@ -62,7 +62,6 @@ var UserSchema = new mongoose.Schema({
         default: "../ADMINLITE/dist/img/user4-128x128.jpg"
     }
 },{timestamps:true});
-
 
 // Chat socket tools
     UserSchema.statics.getChatSocketID = function(telephone, callback){
@@ -200,14 +199,15 @@ UserSchema.statics.NameArrayToTelephoneArray = function(nameArray, callback){
         $or: [
             ]
         }
+
     for(var i = 0; i<nameArray.length; i++)
     {
         searchObj.$or.push({name:nameArray[i]})
     }
-    User.find(searchObj,{telephone:true,_id:false})
+    User.find(searchObj,{telephone:true})
         .exec(function(error, user){
             if(error){
-                console.log(error)
+                console.error(error)
             }
             else if(!user){
                 var err = new Error("User Not Found");
@@ -218,20 +218,6 @@ UserSchema.statics.NameArrayToTelephoneArray = function(nameArray, callback){
             return callback(null,user);
         })
 }
-
-
-//hash password before saving to database
-// UserSchema.pre('save', function(next){
-//     var user = this;
-    
-//         bcrypt.hash(user.password, 10, function(err, hash){
-//             if (err){
-//                 return next(err);
-//             }
-//             user.password = hash;
-//             next();
-//         });
-// });
 
 UserSchema.statics.editProfile = function(userID, UserGeneral, callback){
     User.updateOne({_id:userID}, {$set:{name:UserGeneral.name,email:UserGeneral.email,telephone:UserGeneral.telephone}})
@@ -336,4 +322,5 @@ UserSchema.statics.addMember = function(telephoneArray, groupID, groupName, call
 
 UserSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('User',UserSchema);
+User = mongoose.model('User',UserSchema);
+module.exports = User 

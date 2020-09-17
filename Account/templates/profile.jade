@@ -48,9 +48,9 @@ html
                 .card.card-primary.card-outline
                   .card-body.box-profile
                     .text-center
-                      img.profile-user-img.img-fluid.img-circle(src='#{pro_img}', alt='User profile picture')
+                      img.profile-user-img.img-fluid.img-circle(src='#{user.pro_img}', alt='User profile picture')
                     |                 
-                    h3.profile-username.text-center #{name}
+                    h3.profile-username.text-center #{user.name}
                     |                 
                     p.text-muted.text-center
                     |                 
@@ -58,8 +58,8 @@ html
                       li.list-group-item
                         b የስራ ድርሻ
                         ul
-                          each val in work
-                            each val in work  
+                          each val in user.work
+                            each val in user.work  
                               li=val.department
                                 each val2 in val.subDepartment    
                                   ul
@@ -357,19 +357,19 @@ html
                             label.col-sm-2.col-form-label(for='inputName') ሙሉ ስም
                             |                         
                             .col-sm-10
-                              input#inputName.form-control(type='text', placeholder='ሙሉ ስም', value="#{name}", name='name')
+                              input#inputName.form-control(type='text', placeholder='ሙሉ ስም', value="#{user.name}", name='name')
                           |                       
                           .form-group.row
                             label.col-sm-2.col-form-label(for='inputEmail') ኢ-ሜል
                             |                         
                             .col-sm-10
-                              input#inputEmail.form-control(type='email', placeholder='ኢ-ሜል', value="#{email}", name='email')
+                              input#inputEmail.form-control(type='email', placeholder='ኢ-ሜል', value="#{user.email}", name='email')
                           |                      
                           .form-group.row
                             label.col-sm-2.col-form-label(for='inputTel') ስልክ ቁጥር
                             |                         
                             .col-sm-10
-                              input#inputTel.form-control(type='text', placeholder='ስልክ ቁጥር', value="#{telephone}", name='telephone') 
+                              input#inputTel.form-control(type='text', placeholder='ስልክ ቁጥር', value="#{user.telephone}", name='telephone') 
                           |                          
                           .form-group.row
                             label.col-sm-2.col-form-label(for='inputSkills') Skills

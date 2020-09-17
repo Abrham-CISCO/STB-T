@@ -25,7 +25,7 @@ html
       include ../../../SharedComponents/Layouts/navigation.jade
       // Main Sidebar Container
       include ../../../SharedComponents/Layouts/sidebarNU.jade
-      script(src="http://localhost:3000/workspaces/SierateTimhert/js/GubayeTSDA.js") 
+      script(src="http://localhost:3000/workspaces/SierateTimhert/js/GubayeTSDM.js") 
 
       // Content Wrapper. Contains page content
       .content-wrapper
@@ -60,9 +60,6 @@ html
                       |                   
                       li.nav-item
                         a.nav-link(href='#marklist', data-toggle='tab') የነጥብ ሰንጠረዥ
-                      |                   
-                      li.nav-item
-                        a.nav-link(href='#management', data-toggle='tab') ቁጥጥር
                   // /.card-header
                   .card-body
                     .tab-content
@@ -188,7 +185,7 @@ html
                                   li
                                     img(src="../#{val.pro_img}" alt="User Image")
                                     a.users-list-name(href="http://localhost:3000/accounts/public/profile/#{val.telephone}") #{val.name}
-                                    a(href="http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/Remove/#{val.telephone}")
+                                    a(href="http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/MRemove/#{val.telephone}")
                                       button(type='button', class="btn btn-block btn-danger btn-xs") Remove
                               li 
                                 span(class="users-list-date") 
@@ -332,9 +329,6 @@ html
                               button.btn.btn-primary(type='button' onclick="addmembers('#{user.gubaye._id}');") Save changes
                           // /.modal-content
                           // /.modal-dialog
-
-
-
                       #attendance.tab-pane
                         .card
                           .card-header
@@ -596,67 +590,6 @@ html
                                         a.page-link(href='#', aria-controls='example1', data-dt-idx='7', tabindex='0') Next
                           // /.card-body
 
-                      #management.tab-pane
-                        p የጉባኤ ስም መሰየም እና መቀየር ፣ ጉባኤ ማጥፋት ፣ Description መሙላት
-                        .row
-                          .col-md-3
-                            // Profile Image
-                            .card.card-primary.card-outline
-                              .card-body.box-profile
-                                .text-center
-                                  img.profile-user-img.img-fluid.img-circle(src='http://localhost:3000/ADMINLITE/dist/img/user4-128x128.jpg', alt='User profile picture')
-                                |                 
-                                h3.profile-username.text-center ጉባኤ #{user.gubaye.name}
-                                |                 
-                                p.text-muted.text-center
-                                |                 
-                                ul.list-group.list-group-unbordered.mb-3
-                                  li.list-group-item
-                                    b ዝርዝር
-                                    p #{user.gubaye.description}
-                                a.btn.btn-danger.btn-block(href='#' onclick="deleteGubaye()")
-                                  b ጉባኤውን ሰርዝ
-                              // /.card-body
-                            // /.card
-                            // About Me Box
-                          .col-md-9
-                            .card
-                              .card-header.p-2
-                                ul.nav.nav-pills                 
-                                  li.nav-item
-                                    a.nav-link.active(href='#settings', data-toggle='tab') Settings
-                              // /.card-header
-                              .card-body
-                                .tab-content
-                                  #settings.active.tab-pane
-                                    form(method="post", action="../Gubaye/Update").form-horizontal
-                                      .form-group.row
-                                        label.col-sm-2.col-form-label(for='inputName') የጉባኤው ስም
-                                        |                         
-                                        .col-sm-10
-                                          input.form-control(type='text', placeholder='የጋባኤው ስም', value="#{user.gubaye.name}", id="name", name='name')
-                                        |                       
-                                      .form-group.row
-                                        label.col-sm-2.col-form-label(for='inputEmail') ዝርዝር
-                                        |                         
-                                        .col-sm-10
-                                          input.form-control(type='text', placeholder='ዝርዝር', value="#{user.gubaye.description}", id="description", name='description')
-                                      |                      
-                                      .form-group.row
-                                        label.col-sm-2.col-form-label(for='inputTel') ጉባኤ አስተዳዳሪ
-                                        |                         
-                                        .col-sm-10
-                                          input.form-control(type='text', placeholder='ጉብኤ አስተዳዳሪ', value="#{user.gubaye.leader}", id="admin", name='admin') 
-                                          input(type='hidden', placeholder='የጋባኤው ስም', value="#{user.gubaye._id}", name='_id', id='_id')
-                                      |                       
-                                      .form-group.row
-                                        .offset-sm-2.col-sm-10
-                                          button.btn.btn-primary(type='button' onclick="updateGubaye()") Submit
-                                  // /.tab-pane
-                                // /.tab-content
-                              // /.card-body
-                            // /.nav-tabs-custom
-                          // /.col
                     
                     // /.tab-content
                   // /.card-body
@@ -688,15 +621,15 @@ html
     // ./wrapper
     // jQuery
     // Bootstrap 4
-    script(src='http://localhost:3000/ADMINLITE/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
     // AdminLTE App
-    script(src='http://localhost:3000/ADMINLITE/ADMINLITE/dist/js/adminlte.min.js')
+    script(src='http://localhost:3000/ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
-    script(src='http://localhost:3000/ADMINLITE/ADMINLITE/dist/js/demo.js')
+    script(src='http://localhost:3000/ADMINLITE/dist/js/demo.js')
     // DataTables
-  script(src='http://localhost:3000/ADMINLITE/ADMINLITE/plugins/datatables/jquery.dataTables.js')
-  script(src='http://localhost:3000/ADMINLITE/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')
-  script(src='http://localhost:3000/ADMINLITE/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+  script(src='http://localhost:3000/ADMINLITE/plugins/datatables/jquery.dataTables.js')
+  script(src='http://localhost:3000/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')
+  script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
   // DataTables
   link(rel='stylesheet', href='http://localhost:3000/ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
   script.

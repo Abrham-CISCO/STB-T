@@ -19,6 +19,18 @@ function requireSignIn(req, res, next){
     }
 }
 
+function ValidateSigninForm(req,res, next){
+    if(req.body.telephone && req.body.password)
+    {
+        return next();
+    }        
+    else
+    {
+        var err = new Error('Telephone Number and Password are required!');
+        err.status = 401;
+        return next(err);        
+    }
+}
 function requiresToBeSTKNS(req,res,next){
     if(req.session.user.work[0].subDepartment[2].active){
         return next()
@@ -26,6 +38,18 @@ function requiresToBeSTKNS(req,res,next){
     else
     {
         var err = new Error('ይህን ገጽ ለማየት እና ተጠቃሚ ለመሆን የስርዕእተ ትምህርት ክፍል ሰብሳቢ መሆን አለቦት!');
+        err.status = 401;
+        return next(err);                
+    }
+}
+
+function requiresToBeSTKNA(req,res,next){
+    if(req.session.user.work[0].subDepartment[3].active){
+        return next()
+    }
+    else
+    {
+        var err = new Error('ይህን ገጽ ለማየት እና ተጠቃሚ ለመሆን የስርዕእተ ትምህርት ክፍል አባል መሆን አለቦት!');
         err.status = 401;
         return next(err);                
     }
@@ -46,3 +70,5 @@ module.exports.loggedOut = loggedOut;
 module.exports.requireSignIn = requireSignIn;
 module.exports.requiresToBeLeader = requiresToBeLeader;
 module.exports.requiresToBeSTKNS = requiresToBeSTKNS;
+module.exports.ValidateSigninForm = ValidateSigninForm;
+module.exports.requiresToBeSTKNA = requiresToBeSTKNA;

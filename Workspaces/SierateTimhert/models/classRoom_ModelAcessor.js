@@ -53,7 +53,18 @@ const updateGubaye = (ClassRoomID, gubayeName, Description, leader, callback) =>
         }
     })
 }
-
+const removeMem = (GubayeID,telephone,callback) =>
+{
+    classRoom.removeMember(GubayeID,telephone,function(error, gubaye){
+        if(error)
+        {
+            callback(error)
+        }
+        else{
+            callback(null,gubaye)
+        }
+    });
+}
 const deleteGubaye = (ClassRoomID, callback) => {
     classRoom.DeleteGubaye(ClassRoomID,function(error,result){
         if(error)
@@ -85,3 +96,4 @@ exports.gubayeDetail = gubayeDetail;
 exports.createGubaye = createGubaye;
 exports.memberAdder = memberAdder;
 exports.updateGubaye = updateGubaye;
+exports.removeMem = removeMem;

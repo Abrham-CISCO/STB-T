@@ -14,6 +14,27 @@ var classRoomIndSchema = new mongoose.Schema({
     joinedClasses:[classRoomsSchema]
 },{timestamps:true})
 
+classRoomIndSchema.statics.leave = function(userTelephone, groupID, callback)
+{
+    ClassRoomInd.findOne({userTel:userTelephone},function(error,user)
+    {
+        if(error)
+        {
+            callback(error)
+        }
+        else{
+            user.joinedClasses.forEach(function(Gubaye,index,ar){
+                if(Gubaye.classID == groupID)
+                {
+                    user.joinedClasses.splice(index,1)
+                    user.save();
+                }
+                callback(null,user)
+            })
+        }
+    });
+}
+
 classRoomIndSchema.statics.AddMemberToGroup = function(UserTelephone, GroupID, callback)
 {
     ClassRoomInd.find({userTel:UserTelephone})

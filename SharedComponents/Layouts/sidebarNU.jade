@@ -13,17 +13,17 @@ html
         // Sidebar user (optional)
         .user-panel.mt-3.pb-3.mb-3.d-flex
           .image
-            img.img-circle.elevation-2(src='http://localhost:3000/#{pro_img}', alt='User Image')
+            img.img-circle.elevation-2(src='http://localhost:3000/#{user.pro_img}', alt='User Image')
           |         
           .info
-            a.d-block(href='/accounts/profile') #{name}
+            a.d-block(href='/accounts/profile') #{user.name}
         // Sidebar Menu
         nav.mt-2
           ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview', role='menu', data-accordion='false')
             //
               Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library
-            each val in work   
+            each val in user.work   
               li.nav-item.has-treeview.menu.open                     
                 a(href="#").nav-link.active
                   i.nav-icon.fas.fa-tachometer-alt
@@ -52,12 +52,12 @@ html
                   p ጉባኤያት
                     i.right.fas.fa-angle-left
                 ul(style="display: block;").nav.nav-treeview#pr 
-                  if(classRoom)
-                    each classes in classRoom   
+                  if(JoinedclassRooms)
+                    each classes in JoinedclassRooms   
                       li.nav-item                                  
                         a(href="http://localhost:3000/SirateTimhert/Gubaye/public/#{classes.id}", id=classes.id).nav-link
                           i.far.fa-circle.nav-icon
-                          p ጉባኤ #{classes.tname}
+                          p ጉባኤ #{classes.name}
             li.nav-item
               a.nav-link(href='http://localhost:3000/Accounts/logout')
                 i.fas.fa-circle.nav-icon

@@ -11,12 +11,35 @@ var classRoomSchema = new mongoose.Schema({
         }
     ]
 },{timestamps:true});
+classRoomSchema.statics.removeMember = (GubayeID,telephone,callback) => {
+    classRoom.findOne({_id:GubayeID})
+            .exec(function(error,gubaye){
+                if(error)
+                {
+                    callback(error)
+                }
+                else
+                {
+                    gubaye.members.forEach(function(member, index, ar){
+                        if(member.memberId == telephone)
+                        {
+                            console.log(member.memberId, index, telephone)
+                            console.log(gubaye.members.splice(index,1))
+                            gubaye.save();
+                        }
+                    })
+                    callback(null,gubaye)
+                }
+
+            })
+}
 classRoomSchema.statics.addMember = (ClassRoomID,membersArray,callback) => {
     classRoom.findOne({_id:ClassRoomID})
             .exec(function(error, gubaye){
                 if(!error)
                 {
                     var Members = gubaye.members
+                    console.log("gubaye ", gubaye);
                     for(var i =0; i<membersArray.length;i++)
                     {
                         Members.push({memberId:membersArray[i].telephone});

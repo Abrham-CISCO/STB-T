@@ -23,3 +23,5 @@ Session
 
 Gubaieyat
     Prepare gubayie page
+    Gubaye side bar menu is activated or prepared when the user signs in only this needs to changed
+        the side bar menu shall automatically be updated any time there is a change.

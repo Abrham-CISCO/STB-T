@@ -97,9 +97,23 @@ const addMemberToGroup = (userTel, groupID, callback) => {
     })
 }
 
+const leaveGroup = (userTelephone, groupID, callback) => {
+    ClassRoomInd.leave(userTelephone, groupID, function(error,user){
+        if(error)
+        {
+            callback(error)
+        }
+        else
+        {
+            callback(null,user)
+        }
+    });
+}
+
 exports.addMemberToGroup = addMemberToGroup;
 exports.newUser = newUser;
 exports.addARRYMemberToGroup = addARRYMemberToGroup;
 exports.allUsers = allUsers;
 exports.NonMemberUsers = NonMemberUsers;
 exports.joinedClass = joinedClass;
+exports.leaveGroup = leaveGroup;

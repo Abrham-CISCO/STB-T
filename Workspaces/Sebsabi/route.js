@@ -9,7 +9,7 @@ var SubDepartmentAdminLink = "Workspaces/"+subDepartment+"/templates/"+ filePref
 var SubDepartmentMemberLink="Workspaces/"+subDepartment+"/templates/"+ filePrefix+"SDM";
 // For Department Admins
 router.get('/', mid.requireSignIn, mid.requiresToBeLeader, function(req,res,next){
-    return res.render(DepartmentAdminLink,req.session.user);
+    return res.render(DepartmentAdminLink,req.session);
 });
 
 

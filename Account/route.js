@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var PWD = require('./Models/PSDrecovery');
-var User = require('./Models/user');
+// var User = require('./Models/user');
 var app = express();
 var mid = require('../SharedComponents/Middlewares/index');
 var messaging = require('../SharedComponents/Messaging/route');
@@ -79,7 +79,8 @@ router.post('/updateProfile', mid.requireSignIn, function(req,res,next){
         }
         else
         {
-            res.render('Account/templates/profile',user);
+            req.session.user = user;
+            res.render('Account/templates/profile',req.session);
         }
     });
 });
@@ -123,7 +124,7 @@ router.post('/register', function(req,res,next){
                     req.session.userId = user._id;
                     req.session.name = req.body.name;
                     req.session.user = user;
-                    return res.render('Account/templates/profile',user);
+                    return res.render('Account/templates/profile',req.session);
                 })
             }
         });
@@ -145,48 +146,43 @@ router.get('/login/Error',mid.loggedOut, function(req,res,next){
     return res.render('Account/templates/signinError');
 });
 
-router.post('/login', passport.authenticate('local',{failureRedirect:"login/Error"}), function(req, res, next){
-    console.log(req.body.tel);
-    if(req.body.telephone && req.body.password)
+router.post('/login', mid.ValidateSigninForm, mid.loggedOut, passport.authenticate('local',{failureRedirect:"login/Error"}), function(req, res, next){
+    req.session.userId = req.user._id;
+    req.session.name = req.user.name;
+    req.session.user = req.user;
+    var gubaeat = [];
+    gubaeat.pop();
+    classRoomInd_ModelAccessor.joinedClass(req.body.telephone,function(error,gubaeats)
     {
-        console.log("req.user ", req.user);
-                req.session.userId = req.user._id;
-                req.session.name = req.user.name;
-                req.session.user = req.user;
-                var gubaeat = [];
-                gubaeat.pop();
-                classRoomInd_ModelAccessor.joinedClass(req.body.telephone,function(error,gubaeats)
+        if(!(gubaeats.length == 0))
+        {
+            for(var i = 0; i<gubaeats.length; i++)
+            {
+                gubaeat.push(gubaeats[i].classID);
+                console.log("ClassRooms", gubaeat)
+            }
+            classRoom_ModelAccessor.IDArrayToNameArray(gubaeat,function(error,gubaeatName){
+                var gubayeSmall = []; 
+                gubayeSmall.pop();
+                for(var j=0; j<gubaeats.length; j++){
+                    gubayeSmall.push({name:gubaeatName[j].name, id:gubaeats[j].classID});
+                }
+                console.log("gubayeSmall ", gubayeSmall)
+                if(!error && gubaeatName)
                 {
-                    if(!(gubaeats.length == 0))
-                    {
-                        console.log(gubaeats)
-                        for(var i = 0; i<gubaeats.length; i++)
-                        {
-                            gubaeat.push(gubaeats[i].classID);
-                            console.log("ClassRooms", gubaeat)
-                        }
-                        classRoom_ModelAccessor.IDArrayToNameArray(gubaeat,function(error,gubaeatName){
-                            if(!error && gubaeatName)
-                            {
-                                console.log("gubaeatName ",gubaeatName)
-                                req.session.user.classRoom = gubaeatName.name;
-                                console.log("After Gubaye name added ", req.session.user)
-                                return res.render('Account/templates/profile',user);    
-                            }
-    
-                        })
-                    }
-                    else{
-                        return res.render('Account/templates/profile',req.user);    
-                    }
-                })
-    }        
-    else
-    {
-        var err = new Error('Telephone Number and Password are required!');
-        err.status = 401;
-        return next(err);        
-    }
+                    console.log("gubaeatName ",gubaeatName)
+                    req.session.user.classRoom.pop();
+                    req.session.JoinedclassRooms = (gubayeSmall);
+                    console.log("After Gubaye name added ", req.session)
+                    return res.render('Account/templates/profile',req.session);    
+                }
+
+            })
+        }
+        else{
+            return res.render('Account/templates/profile',req.session);    
+        }
+    })
 });
 
 router.get('/profile', mid.requireSignIn, function(req,res,next){
@@ -201,7 +197,7 @@ UserModelAccessor.userData(req.session.userId, function(error,user){
         return next(error);
     } else {
         req.session.user  = (user);
-        return res.render('Account/templates/profile',user);
+        return res.render('Account/templates/profile',req.session);
     }
 });
 });

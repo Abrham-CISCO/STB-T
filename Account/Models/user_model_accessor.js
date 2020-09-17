@@ -1,9 +1,11 @@
 var PWD = require('./PSDrecovery');
-var User = require('../Models/user');
+var User = require('./user');
 var Messaging_ModelAccessor = require('../../SharedComponents/Messaging/model_Accessor');
 var Notificaton_ModelAccessor = require('../../SharedComponents/Notification/model_Accessor')
 var Gubaye_ModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoom_ModelAcessor')
 var GubayeInd_ModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoomInd_ModelAccessor')
+
+
 // Write a function which accepts an array of telephone numbers and returns an array of objects that
 // contain detail informations. the detail informations are id,name,pro_img,telephone
 
@@ -381,6 +383,7 @@ const removeMemberFromSubDepartment = (userTelephone, subDepartment, role, callb
         }
     });
 }
+
 
 exports.addMemberToSubDepartment = addMemberToSubDepartment;
 exports.removeMemberFromSubDepartment = removeMemberFromSubDepartment;

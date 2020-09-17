@@ -159,19 +159,19 @@ html
                             label.col-sm-2.col-form-label(for='inputName') ሙሉ ስም
                             |                         
                             .col-sm-10
-                              input#inputName.form-control(type='text', placeholder='ሙሉ ስም', value="#{name}", name='name')
+                              input#inputName.form-control(type='text', placeholder='ሙሉ ስም', value="#{user.name}", name='name')
                           |                       
                           .form-group.row
                             label.col-sm-2.col-form-label(for='inputEmail') ኢ-ሜል
                             |                         
                             .col-sm-10
-                              input#inputEmail.form-control(type='email', placeholder='ኢ-ሜል', value="#{email}", name='email')
+                              input#inputEmail.form-control(type='email', placeholder='ኢ-ሜል', value="#{user.email}", name='email')
                           |                      
                           .form-group.row
                             label.col-sm-2.col-form-label(for='inputTel') ስልክ ቁጥር
                             |                         
                             .col-sm-10
-                              input#inputTel.form-control(type='text', placeholder='ስልክ ቁጥር', value="#{telephone}", name='telephone') 
+                              input#inputTel.form-control(type='text', placeholder='ስልክ ቁጥር', value="#{user.telephone}", name='telephone') 
                           |                          
                           .form-group.row
                             label.col-sm-2.col-form-label(for='inputSkills') Skills
