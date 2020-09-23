@@ -37,7 +37,20 @@ const courseDetailPR = new Promise((successFunction, failureFunction)=>{
 
 const updateCourseDetail = function(courseId, inputObject, callback)
 {
-    
+    course.findById(courseId).then((courseDetails)
+    {
+        courseDetails = inputObject;
+        courseDetails.save().then((error, savedCourse) => {
+            if(error)
+            {
+                callback(error)
+            }
+            else
+            {
+                callback(savedCourse)
+            }
+        })
+    });
 }
 // Every model accessor should has document creating, removing, editing and deleting methods
 exports.createCourse = createCourse;
