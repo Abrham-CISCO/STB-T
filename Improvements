@@ -14,8 +14,9 @@ Profile System
     Enable users to set up their profile image
     The System shall start with default male pic for male users and defaut female pic for female users
         use pre save middle ware to achieve this
+    Add Sex
 User Navigation
-
+    When gubaye is opened the gubaye menue should be active
 Session
     Register Users socket when the server refreshes
     Do not send password to the client
@@ -25,3 +26,5 @@ Gubaieyat
     Prepare gubayie page
     Gubaye side bar menu is activated or prepared when the user signs in only this needs to changed
         the side bar menu shall automatically be updated any time there is a change.
+General 
+    Give title to all pages.

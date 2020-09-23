@@ -1,0 +1,97 @@
+doctype html
+include ../../../SharedComponents/Layouts/header.jade
+html
+  head
+    meta(charset='utf-8')
+    |   
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    |   
+    title የቤተ ክርስቲያን ታሪክ በኢትዮጵያ
+    // Tell the browser to be responsive to screen width
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Font Awesome
+    link(rel='stylesheet', href='https://localhost:3000/adminlite/plugins/fontawesome-free/css/all.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+    // Theme style
+    link(rel='stylesheet', href='static/dist/css/adminlte.min.css')
+    // Google Font: Source Sans Pro
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
+  body.hold-transition.sidebar-mini
+    .wrapper
+      // Navbar
+      include ../../../SharedComponents/Layouts/navigation.jade
+      // Main Sidebar Container
+      include ../../../SharedComponents/Layouts/sidebarNU.jade
+      // Content Wrapper. Contains page content
+      .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+          .container-fluid
+            .row.mb-2
+              .col-sm-9
+                h1 የቤተ ክርስቲያን ታሪክ በኢትዮጵያ : Public
+                br
+                h6 ይህ ኮርስ ለወጣት ክፍል አባላት የተዘጋጀ ሲሆን ይዘቱም ስለ ኢትዮጵያ ኦርቶዶክስ ተዋህዶ ቤተክርስቲያን ነው።
+              |           
+              .col-sm-3
+                ol.breadcrumb.float-sm-right
+                  li.breadcrumb-item
+                    a(href='#') Home
+                  |               
+                  li.breadcrumb-item.active User Profile
+            .row
+              .col-md-12
+                .card
+                  .card-header.p-2
+                    ul.nav.nav-pills
+                      li.nav-item
+                        a.nav-link.active(href='#courseOutine', data-toggle='tab') ይዘት
+                      li.nav-item
+                        a.nav-link(href='#books', data-toggle='tab') መጻህፍት
+                  // /.card-header
+                  .card-body
+                    .tab-content
+                      #courseOutine.active.tab-pane
+                        iframe(src = "http://localhost:3000/Workspaces/SierateTimhert/static/kerestosyehulugetanew.pdf" style="width:100%" height=420)
+                      #books.tab-pane
+                        iframe(src = "http://localhost:3000/Workspaces/SierateTimhert/static/kerestosyehulugetanew.pdf" style="width:100%" height=420)
+                    // /.tab-content
+                  // /.card-body
+                // /.nav-tabs-custom
+              // /.col
+            // /.row
+          // /.container-fluid
+        // Main content
+        section.content
+          .container-fluid
+          // /.container-fluid
+        // /.content
+      // /.content-wrapper
+      footer.main-footer
+        .float-right.d-none.d-sm-block
+          b Version
+          |  3.0.2-pre
+        |     
+        strong
+          | Copyright &copy; 2014-2019 
+          a(href='http://adminlte.io') AdminLTE.io
+          | .
+        |  All rights
+        |     reserved.
+      // Control Sidebar
+      aside.control-sidebar.control-sidebar-dark
+        // Control sidebar content goes here
+      // /.control-sidebar
+    // ./wrapper
+    // jQuery
+    script(src='http://localhost:3000/ADMINLITE/plugins/jquery/jquery.min.js')
+    // Bootstrap 4
+    script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    // AdminLTE App
+    script(src='http://localhost:3000/ADMINLITE/dist/js/adminlte.min.js')
+    // AdminLTE for demo purposes
+    script(src='http://localhost:3000/ADMINLITE/dist/js/demo.js')
+    script.
+      document.getElementById('3').className = "nav-link active"
+      document.getElementById('#{user.GubayeID}').className = "nav-link active"

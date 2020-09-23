@@ -10,7 +10,28 @@ var SubDepartmentMemberLink="Workspaces/"+subDepartment+"/templates/"+ filePrefi
 var GubayeLink = "Workspaces/SierateTimhert/templates/Gubaye.jade"
 var UserModelAccessor = require('../../Account/Models/user_model_accessor');
 var classRoomInd_ModelAccessor = require('./models/classRoomInd_ModelAccessor');
-const classRoom = require('./models/classRoom');
+var classRoom = require('./models/classRoom');
+var multer = require('multer')
+var course_ModelAccessor = require('./models/courseModelAccessor')
+
+var storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, 'C:/wamp64/www/TK/Workspaces/SierateTimhert/static');
+    },
+    filename: (req,file,cb) => {
+        cb(null, file.originalname)
+    }
+})
+
+var documentFileFilter = (req, file, cb) => {
+    if(!file.originalname.match(/\.(pdf|doc|docx|xls|jpg|jpeg|png|gif)$/))
+    {
+        return cb(new Error('You can upload word, excel and image files only!'))
+    }
+    cb(null, true);
+}
+
+const upload = multer({storage:storage, fileFilter:documentFileFilter});
 
 // For Gubayes
     router.post('/Gubaye/Update/', function(req,res,next){
@@ -164,6 +185,17 @@ const classRoom = require('./models/classRoom');
 
                 })
     });
+    router.post('/Gubaye_Nius_Sebsabi/upload/courseoutline', mid.requiresToBeSTKNS,
+     upload.single('courseOutlineFile'), function(req,res,next){
+        res.json(req.file)
+    });
+    router.post('/Gubaye_Nius_Sebsabi/upload/book', mid.requiresToBeSTKNS,
+    upload.single('bookFile'), function(req,res,next){
+       res.json(req.file)
+    });
+    router.post('/Gubaye_Nius_Sebsabi/course/new',function(req,res,next){
+      course_ModelAccessor.createCourse(req.body.name, req.body.description,(error, newCourse)=>{res.json({newCourse:newCourse});})
+    });
     router.get('/Gubaye_Nius_Abal/:GubayeID', mid.requiresToBeSTKNA, function(req,res,next){
         var GubayeID = req.params.GubayeID;
         var membersTel = []
@@ -207,7 +239,17 @@ const classRoom = require('./models/classRoom');
 
                 })
     });
-// For Department Admins
+//  For courses
+    router.get('/course/public/:courseId', function(req,res,next){
+        return res.render("Workspaces/SierateTimhert/templates/course.jade",req.session)
+    })
+    router.get('/course/sebsabi/:courseId',mid.requiresToBeLeader, function(req,res,next){
+        return res.render("Workspaces/SierateTimhert/templates/courseTDA.jade",req.session)
+    })
+    router.get('/course/nius_sebsabi/:courseId',mid.requiresToBeSTKNS, function(req,res,next){
+        return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)
+    })
+    // For Department Admins
 router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader, function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;

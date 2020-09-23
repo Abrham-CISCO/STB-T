@@ -12,8 +12,8 @@ var UserModelAccessor = require('./Models/user_model_accessor')
 var PWDModelAccessor = require('./Models/psd_model_accessor');
 // var MessagesM = require('../SharedComponents/Models/Message_model');
 var socketmodel = require('../SharedComponents/Models/socket');
-const passport = require('passport')
-
+var passport = require('passport')
+var authenticate = require('./authenticate');
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
 
@@ -150,6 +150,8 @@ router.post('/login', mid.ValidateSigninForm, mid.loggedOut, passport.authentica
     req.session.userId = req.user._id;
     req.session.name = req.user.name;
     req.session.user = req.user;
+    // grant the user a JSON Web token
+    var token = authenticate.getToken({_id:req.user._id})
     var gubaeat = [];
     gubaeat.pop();
     classRoomInd_ModelAccessor.joinedClass(req.body.telephone,function(error,gubaeats)

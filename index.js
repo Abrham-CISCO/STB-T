@@ -8,14 +8,16 @@
   var session = require('express-session');
   var MongoStore = require('connect-mongo')(session);
   var passport = require('passport')
-  var authenticate = require('./Account/authenticate')
 
+// Local Imports
+  var authenticate = require('./Account/authenticate')
+  var config = require('./Account/config');
   
-  // Model Accessors
+ // Model Accessors
   var MessagingModel_Acc = require('./SharedComponents/Messaging/model_Accessor')
   var UserModel_Acc = require('./Account/Models/user_model_accessor')
   var classRoom_ModelAccessor = require('./Workspaces/SierateTimhert/models/classRoom_ModelAcessor');
-  // Routes
+// Routes
   // Accounts
     var Accounts = require('./Account/route')
   // Workspace routes
@@ -32,7 +34,7 @@
   var socketmodel = require('./SharedComponents/Models/socket');
 // Mongoose Setup 
   //mongoose connection
-  mongoose.connect("mongodb://localhost:27017/S");
+  mongoose.connect(config.mongoUrl);
   var db = mongoose.connection;
   //mongo error
   db.on('error', console.error.bind(console, 'connection error:'));

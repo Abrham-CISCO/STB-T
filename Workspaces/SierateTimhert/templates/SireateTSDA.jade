@@ -45,9 +45,10 @@ html
                     ul.nav.nav-pills
                       li.nav-item
                         a.nav-link.active(href='#activity', data-toggle='tab') አባላት
-                      |                   
                       li.nav-item
                         a.nav-link(href='#classRooms', data-toggle='tab') ጉባኤያት
+                      li.nav-item
+                        a.nav-link(href='#courses', data-toggle='tab') ኮርሶች
                   // /.card-header
                   .card-body
                     .tab-content
@@ -75,6 +76,26 @@ html
                                   input(type="text" name = "gname" id="gname" placeholder="የጉባኤው ስም" class="form-control")
                                   button(type="button" onclick = "CreateClass();" name="btn_add" class="btn btn-info btn-flat") ፍጠር
                         // The timeline
+                      #courses.tab-pane
+                        .row.d-flex.align-items-stretch
+                          .col-12.col-sm-6.col-md-4               
+                            .info-box
+                              .info-box-icon.bg-warning
+                                .fas.fa-book
+                              .info-box-content 
+                                a(href="http://localhost:3000/SirateTimhert/course/nius_sebsabi/5f64f4d122b72c19b8c6b97d")
+                                  span.info-box-text የቤተ ክርስቲያን ታሪክ በኢትዮጵያ
+                                span.info-box-text 0 ተማሪዎች ተምረውታል።
+                                  span.info-box-text 0 ተማሪዎች በመማር ላይ ይገኛሉ።
+                          .col-12.col-sm-6.col-md-4               
+                            .info-box
+                              .info-box-icon.bg-warning
+                                .fas.fa-plus
+                              .info-box-content
+                                span.info-box-text 
+                                  form(method="post", action="../SirateTimhert/Gubaye_Nius_Sebsabi/course/new").form-horizontal
+                                    input(type="text" name = "name" id="courseName" placeholder="የኮርሱ ስም" class="form-control")
+                                    button(type="submit" name="btn_add" class="btn btn-warning btn-flat") ፍጠር
                       // /.tab-pane
                     // /.tab-pane
                     // /.tab-content
