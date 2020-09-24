@@ -119,7 +119,9 @@ app.use(passport.session());
       });
     });
   // Parse to JSON
-  app.use(bodyParser.json()); 
+  app.use(express.json());
+  app.use(express.urlencoded({extended: true}));
+  
 
   // Route Definations
   app.use('/AbinetTimehert',AbinetTimehert);

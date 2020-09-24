@@ -1,16 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var mid = require('../../SharedComponents/Middlewares/index');
-var subDepartment = "SierateTimhert";
-var filePrefix = "SireateT";
 var classRoom_ModelAccessor = require('./models/classRoom_ModelAcessor');
-var DepartmentAdminLink = "Workspaces/SierateTimhert/templates/SireateTDA";
-var SubDepartmentAdminLink = "Workspaces/"+subDepartment+"/templates/"+ filePrefix+"SDA";
-var SubDepartmentMemberLink="Workspaces/"+subDepartment+"/templates/"+ filePrefix+"SDM";
 var GubayeLink = "Workspaces/SierateTimhert/templates/Gubaye.jade"
 var UserModelAccessor = require('../../Account/Models/user_model_accessor');
 var classRoomInd_ModelAccessor = require('./models/classRoomInd_ModelAccessor');
-var classRoom = require('./models/classRoom');
 var multer = require('multer')
 var course_ModelAccessor = require('./models/courseModelAccessor')
 
@@ -194,7 +188,18 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
        res.json(req.file)
     });
     router.post('/Gubaye_Nius_Sebsabi/course/new',function(req,res,next){
-      course_ModelAccessor.createCourse(req.body.name, req.body.description,(error, newCourse)=>{res.json({newCourse:newCourse});})
+        course_ModelAccessor.createCourse(req.body.name, req.body.description,req.user._id,(error, newCourse)=>{
+          if(error)
+          {
+            
+            res.json(error);    
+          }
+          else
+          {
+              res.json(newCourse)
+          }
+          
+        })
     });
     router.get('/Gubaye_Nius_Abal/:GubayeID', mid.requiresToBeSTKNA, function(req,res,next){
         var GubayeID = req.params.GubayeID;

@@ -1,20 +1,15 @@
 var course = require('./course');
 
-const createCourse = function(name, description, callback)
+const createCourse = function(name, description, createdBy, callback)
 {
     var courseObject = {
         name:name,
-        description:description
+        description:description,
+        createdBy:createdBy,
     }
-    course.create(courseObject).then((error,newCourse) => {
-        if(error)
-        {
-            return callback(error)
-        }
-        else
-        {
-            return callback(null, newCourse)
-        }})
+    course.create(courseObject).then((newCourse) => {
+            callback(null, newCourse)
+        }).catch((error) => callback(error))
 }
 const courseDetail = function(courseId,callback)
 {
@@ -22,21 +17,15 @@ const courseDetail = function(courseId,callback)
     {callback(null, courseDetails)}).catch(function(error){callback(error)});
 }
 
-const courseDetailPR = new Promise((successFunction, failureFunction)=>{
-    course.findById(courseId).then(
-        function(error, courseDetails)
-            {
-                successFunction(courseDetails)
-            }).catch(
-                    function(error)
-                    {
-                        failureFunction(error)
-                    });
-}):
+// const courseDetailPR(courseId) = new Promise((successFunction, failureFunction)=>{
+//     course.findById(courseId).then(
+//         function(courseDetails){successFunction(courseDetails)}).catch(
+//         function(error){failureFunction(error)});
+// })
 
 const updateCourseDetail = function(courseId, inputObject, callback)
 {
-    course.findById(courseId).then((courseDetails)
+    course.findById(courseId).then((courseDetails)=>
     {
         courseDetails = inputObject;
         courseDetails.save().then((error, savedCourse) => {
@@ -79,7 +68,7 @@ const deleteBook = (courseId, bookId, callback) => {course.findById(courseId).th
 }).catch((error)=>{callback(error)});}
 
 exports.createCourse = createCourse;
-exports.courseDetailPR = courseDetailPR;
+// exports.courseDetailPR = courseDetailPR;
 exports.courseDetail = courseDetail;
 exports.deleteCourse = deleteCourse;
 exports.updateCourseDetail = updateCourseDetail;
