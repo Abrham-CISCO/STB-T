@@ -105,16 +105,33 @@ const UpdateMarkList = (courseId, InputObject, classRoomId, callback) => {
 
 const DeleteMarkListByClassroom = (courseId, classRoomId, callback) =>
 {
-    
+    course.findById(courseId).then((singleCourse) => {
+        singleCourse.markList.findMany({classRoomId:classRoomId}).then((singleCourseByClassRoom)=>
+            {
+                singleCourseByClassRoom.remove();
+                callback(null,true);
+            }).catch((error)=>{callback(error, false)})  
+    }).catch((error)=>{callback(error, false)})  
 }
-
 const DeleteMarkListByClassroomAndStudent = (courseId, classRoomId, studentId, callback) =>
 {
-    
+    course.findById(courseId).then((singleCourse) => {
+    singleCourse.markList.findOne({classRoomId:classRoomId, studentId:studentId}).then((singleCourseByClassRoomAndStudent)=>
+        {
+            singleCourseByClassRoomAndStudent.remove();
+            callback(null,true);
+        }).catch((error)=>{callback(error, false)})  
+    }).catch((error)=>{callback(error, false)})  
 }
 const DeleteMarkListByStudent = (studentId, callback) =>
 {
-    
+    course.findById(courseId).then((singleCourse) => {
+        singleCourse.markList.findMany({studentId:studentId}).then((singleCourseByStudent)=>
+            {
+                singleCourseByStudent.remove();
+                callback(null,true);
+            }).catch((error)=>{callback(error, false)})  
+    }).catch((error)=>{callback(error, false)})    
 }
 
 const MarkListByStudent = (courseId, studentId, callback) => {
@@ -133,10 +150,15 @@ const MarkListByStudent = (courseId, studentId, callback) => {
 
 
 // Marklist Name Sub-document - create, edit, remove, read
+
 // Marklist Sub-docuement - create, edit, remove, read
 exports.MarkListByClassRoom = MarkListByClassRoom;
 exports.MarkListByStudent = MarkListByStudent;
 exports.UpdateMarkList = UpdateMarkList;
+exports.DeleteMarkListByClassroom = DeleteMarkListByClassroom;
+exports.DeleteMarkListByClassroomAndStudent = DeleteMarkListByClassroomAndStudent;
+exports.DeleteMarkListByStudent = DeleteMarkListByStudent;
+
 // Attendance Sub-docuement - create, edit, remove, read
 
 
