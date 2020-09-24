@@ -10,6 +10,8 @@ var attendanceSchema = new mongoose.Schema({
   lateTime:{type:string}
 },{timestamps:true})
 var markListSchema = new mongoose.Schema({
+    studentId:{type:String},
+    studentTelephone:{type:String},
     column_1_value:{type:String},
     column_2_value:{type:String},
     column_3_value:{type:String},
