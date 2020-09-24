@@ -78,6 +78,10 @@ const deleteBook = (courseId, bookId, callback) => {course.findById(courseId).th
     callback(null, course.books)
 }).catch((error)=>{callback(error)});}
 
+// Marklist Name Sub-document - create, edit, remove, read
+// Marklist Sub-docuement - create, edit, remove, read
+// Attendance Sub-docuement - create, edit, remove, read
+
 exports.createCourse = createCourse;
 exports.courseDetailPR = courseDetailPR;
 exports.courseDetail = courseDetail;
