@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var attendanceSchema = new mongoose.Schema({
   date:{type:date},
+  classRoomId:{type:String},
   studentId:{type:String},
   studentTelephone:{type:String},
   abscent:{type:boolean},
@@ -11,6 +12,7 @@ var attendanceSchema = new mongoose.Schema({
 },{timestamps:true})
 var markListSchema = new mongoose.Schema({
     studentId:{type:String},
+    classRoomId:{type:String},
     studentTelephone:{type:String},
     column_1_value:{type:String},
     column_2_value:{type:String},
@@ -29,6 +31,7 @@ var markListSchema = new mongoose.Schema({
     column_15_value:{type:String},
 },{timestamps:true});
 var markListColumnNameSchema = new mongoose.Schema({
+    classRoomId:{type:String},
     MarkListColumn_1_name:{type:String},
     MarkListColumn_2_name:{type:String},
     MarkListColumn_3_name:{type:String},
