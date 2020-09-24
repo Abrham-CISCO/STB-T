@@ -21,6 +21,10 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required : true
     },
+    sex: {
+        type:Object,
+        default: {male:true, female:false}
+    },
     name: {
         type: String,
         required : true
