@@ -1,3 +1,4 @@
+const ClassRoomInd = require('./classRoomInd');
 var course = require('./course');
 
 const createCourse = function(name, description, createdBy, callback)
@@ -13,8 +14,7 @@ const createCourse = function(name, description, createdBy, callback)
 }
 const courseDetail = function(courseId,callback)
 {
-    course.findById(courseId).then(function(error, courseDetails)
-    {callback(null, courseDetails)}).catch(function(error){callback(error)});
+    course.findById(courseId).then((courseDetails)=>{callback(null, courseDetails)}).catch((error)=>{callback(error, false)});
 }
 
 // const courseDetailPR(courseId) = new Promise((successFunction, failureFunction)=>{
@@ -40,6 +40,48 @@ const updateCourseDetail = function(courseId, inputObject, callback)
         })
     });
 }
+
+const allCourses = function(callback)
+{
+    course.find({},{name:true, _id:true}).then((courses)=>
+    {
+        callback(null, courses)
+    }).catch((error) => {callback(error)});
+}
+const addCourse = function(courseIdArray, gubayeId, callback)
+{
+        // What does happen when a course is added to a classroom
+        // An instance of (MarkList, MarklistColumnName, Book and Attendance) for that newly added gubaye is added to the course. 
+    courseIdArray.forEach((courseId)=>{
+        course.findById(courseId)
+        .then((singleCourse) => 
+        {
+            var defaultMarkListName =     
+            {
+                classRoomId:gubayeId,
+                MarkListColumn_1_name:"10",
+                MarkListColumn_2_name:"10",
+                MarkListColumn_3_name:"10",
+                MarkListColumn_4_name:"10",
+                MarkListColumn_5_name:"10",
+                MarkListColumn_6_name:"10",
+                MarkListColumn_7_name:"10",
+                MarkListcolumn_8_name:"10",
+                MarkListcolumn_9_name:"10",
+                MarkListcolumn_10_name:"10",
+                MarkListColumn_11_name:"10",
+                MarkListColumn_12_name:"10",
+                MarkListColumn_13_name:"10",
+                MarkListColumn_14_name:"10",
+                MarkListColumn_15_name:"10"
+            }
+            singleCourse.markListColumnName = defaultMarkListName;
+            singleCourse.save();
+            callback(null, singleCourse)
+        }).catch((error) => {callback(error)});
+    });
+}
+
 const deleteCourse = (courseId, callback) => 
 {
     course.deleteById(courseId).then((status) => {callback(null,status)}).catch((error) => {callback(error)})
@@ -139,6 +181,101 @@ const MarkListByStudent = (courseId, studentId, callback) => {
 
 
 // Marklist Name Sub-document - create, edit, remove, read
+const MarklistCoulmnName = (courseId, classRoomId, callback) =>
+{
+    course.findById(courseId).then((singleCourse)=>{
+        singleCourse.markListColumnName.findOne({classRoomId:classRoomId}).then((singleCourseCoulmnName) => {
+            callback(null,singleCourseCoulmnName);
+        }).catch((error)=>{callback(error, false)})
+    }).catch((error)=>{callback(error, false)}) 
+}
+
+const DeleteMarklistName = (courseId, classRoomId, callback) =>
+{
+    course.findById(courseId).then((singleCourse)=>{
+        singleCourse.markListColumnName.findOne({classRoomId:classRoomId}).then((singleCourseCoulmnName) => {
+            singleCourseCoulmnName.remove();
+            singleCourseCoulmnName.save();
+            callback(null,singleCourseCoulmnName);
+        }).catch((error)=>{callback(error, false)})
+    });
+}
+
+const changeMarklistName = (courseId, classRoomId, inputObject, callback) =>
+{
+    course.findById(courseId).then((singleCourse)=>{
+        singleCourse.markListColumnName.findOne({classRoomId:classRoomId}).then((singleCourseCoulmnName) => {
+            singleCourseCoulmnName = inputObject;
+            singleCourseCoulmnName.save();
+            callback(null,singleCourseCoulmnName);
+        }).catch((error)=>{callback(error, false)})
+    });
+}
+
+
+const createMarkList = (courseId, classRoomId, inputObject, callback) => 
+{
+    course.findById(courseId).then((singleCourse)=>{
+        singleCourse.markListColumnName.create(inputObject).then((newMarkListName)=>{
+            callback(null, newMarkListName);
+        }).catch((error)=>{callback(error, false)})
+    });
+}
+
+// Attendance Sub-docuement - add, edit, remove, read
+const readAtendance = (courseId, classRoomId,callback) => {
+    course.findById(courseId).then((singleCourseAttendance) => {
+        singleCourseAttendance.attendance.findMany({classRoomId:classRoomId}).then((singleCourseAndClassAttendance)=>{
+            callback(null,singleCourseAndClassAttendance)
+        })
+    }).catch((error)=>{callback(error, false)})
+}
+
+const addAttenanceElement = (courseId, studentObject, callback) => {
+    course.findById(courseId).then((singleCourseAttendance) => {
+        singleCourseAttendance.push(studentObject)
+        singleCourseAttendance.save().then((singleCourseAttendance) => {callback(null,singleCourseAttendance)
+        }).catch((error)=>{callback(error, false)})
+    }).catch((error)=>{callback(error, false)})
+}
+
+// date:{type:Date},
+// classRoomId:{type:String},
+// studentId:{type:String},
+// studentTelephone:{type:String},
+// abscent:{type:Boolean},
+// late:{type:Boolean},
+// permission:{type:Boolean},
+// remark:{type:Boolean},
+// lateTime:{type:String}
+
+const upadteAttenanceElement = (courseId, attendanceObject, callback) => {
+    course.findById(courseId).then((singleCourseAttendance) => {
+        singleCourseAttendance.attendance.updateOne({date:attendanceObject.date, 
+        classRoomId:attendanceObject.classRoomId, studentId:attendanceObject.studentId},
+        {$set:{abscent:attendanceObject.abscent,late:attendanceObject.late,permission:attendanceObject.permission,
+            remark:attendanceObject.remark,lateTime:attendanceObject.lateTime}});
+    }).catch((error)=>{callback(error, false)})
+}
+
+const removeAttendanceElement = (courseId, classRoomId, date, studentId, callback) => {
+    course.findById(courseId).then((singleCourseAttendance) => {
+        singleCourseAttendance.attendance.findOne({classRoomId:classRoomId, date:date,
+        studentId:studentId}).then((singleCourseAndClassAttendance)=>{
+            singleCourseAndClassAttendance.remove(notification => {
+                callback(null, notification)
+            }).catch((error)=>{callback(error, false)})
+        })
+    }).catch((error)=>{callback(error, false)})
+}
+
+const removeAttendanceByClass = (courseId, classRoomId, callback) => {
+    course.findById(courseId).then((singleCourseAttendance) => {
+        singleCourseAttendance.attendance.findMany({classRoomId:classRoomId}).then((singleCourseAndClassAttendance)=>{
+            singleCourseAndClassAttendance.remove();
+        })
+    }).catch((error)=>{callback(error, false)})
+}
 
 // Marklist Sub-docuement - create, edit, remove, read
 exports.MarkListByClassRoom = MarkListByClassRoom;
@@ -148,7 +285,18 @@ exports.DeleteMarkListByClassroom = DeleteMarkListByClassroom;
 exports.DeleteMarkListByClassroomAndStudent = DeleteMarkListByClassroomAndStudent;
 exports.DeleteMarkListByStudent = DeleteMarkListByStudent;
 
-// Attendance Sub-docuement - create, edit, remove, read
+// Marklist Name Sub-document - create, edit, remove, read
+exports.changeMarklistName = changeMarklistName;
+exports.createMarkList = createMarkList;
+exports.DeleteMarklistName = DeleteMarklistName;
+exports.MarklistCoulmnName = MarklistCoulmnName;
+
+// Attendance Sub-docuement - add, edit, remove, read
+exports.readAtendance = readAtendance;
+exports.upadteAttenanceElement = upadteAttenanceElement;
+exports.addAttenanceElement = addAttenanceElement;
+exports.removeAttendanceElement = removeAttendanceElement;
+exports.removeAttendanceByClass = removeAttendanceByClass;
 
 
 exports.createCourse = createCourse;
@@ -156,6 +304,8 @@ exports.createCourse = createCourse;
 exports.courseDetail = courseDetail;
 exports.deleteCourse = deleteCourse;
 exports.updateCourseDetail = updateCourseDetail;
+exports.addCourse = addCourse;
+exports.allCourses = allCourses;
 
 exports.addBook = addBook;
 exports.booksByCourse = booksByCourse;

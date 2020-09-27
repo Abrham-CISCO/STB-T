@@ -110,6 +110,7 @@ const leaveGroup = (userTelephone, groupID, callback) => {
     });
 }
 
+
 exports.addMemberToGroup = addMemberToGroup;
 exports.newUser = newUser;
 exports.addARRYMemberToGroup = addARRYMemberToGroup;

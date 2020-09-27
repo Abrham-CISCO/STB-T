@@ -28,3 +28,4 @@ Gubaieyat
         the side bar menu shall automatically be updated any time there is a change.
 General 
     Give title to all pages.
+    move all socket codes from index.js to a single file

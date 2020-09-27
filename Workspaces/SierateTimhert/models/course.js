@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 var attendanceSchema = new mongoose.Schema({
-  date:{type:date},
+  date:{type:Date},
   classRoomId:{type:String},
   studentId:{type:String},
   studentTelephone:{type:String},
-  abscent:{type:boolean},
-  late:{type:boolean},
-  permission:{type:boolean},
-  remark:{type:boolean},
-  lateTime:{type:string}
+  abscent:{type:Boolean},
+  late:{type:Boolean},
+  permission:{type:Boolean},
+  remark:{type:Boolean},
+  lateTime:{type:String}
 },{timestamps:true})
 var markListSchema = new mongoose.Schema({
     studentId:{type:String},

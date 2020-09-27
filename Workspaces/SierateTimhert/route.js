@@ -6,7 +6,8 @@ var GubayeLink = "Workspaces/SierateTimhert/templates/Gubaye.jade"
 var UserModelAccessor = require('../../Account/Models/user_model_accessor');
 var classRoomInd_ModelAccessor = require('./models/classRoomInd_ModelAccessor');
 var multer = require('multer')
-var course_ModelAccessor = require('./models/courseModelAccessor')
+var course_ModelAccessor = require('./models/courseModelAccessor');
+const course = require('./models/course');
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -153,8 +154,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     UserModelAccessor.userObjectByTel(membersTel,function(error,contacts){
                         req.session.user.gubaye = gubaye; 
                         req.session.user.gubayemembers = contacts;
-                        
-
                         classRoomInd_ModelAccessor.NonMemberUsers(GubayeID,function(error,users){
                             var tela = []
                             tela.pop();
@@ -170,13 +169,26 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                         console.log(users[i].name)
                                     }
                                     req.session.user.allusers = users;
-                                    console.log(req.session.user);
-                                    return res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
+                                    // req.session.returnedCourse = returnedCourse;
+                                    // console.log("returnedCourse",req.session)
+
+                                    course_ModelAccessor.allCourses((error,courses)=>{
+                                        req.session.courses = courses
+                                        console.log("courses ",req.session.courses)
+                                        // return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)
+                                        classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedClass){
+                                            req.session.unjoinedCourses = unjoinedCourses
+                                            req.session.JoinedClass = JoinedClass;
+                                            return res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
+                                        })
+                                        // console.log(req.session.user);
+
+                                    })
+
                                 })
                         })
 
                     })
-
                 })
     });
     router.post('/Gubaye_Nius_Sebsabi/upload/courseoutline', mid.requiresToBeSTKNS,
@@ -252,7 +264,24 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
         return res.render("Workspaces/SierateTimhert/templates/courseTDA.jade",req.session)
     })
     router.get('/course/nius_sebsabi/:courseId',mid.requiresToBeSTKNS, function(req,res,next){
-        return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)
+        course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
+        {
+            if(error)
+            {
+                next(error)
+            }
+            else
+            {
+                req.session.returnedCourse = returnedCourse;
+                console.log("returnedCourse",req.session)
+                course_ModelAccessor.allCourses((courses)=>{
+                    req.session.courses = courses
+                    console.log(req.session.courses)
+                    return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)
+                })
+            }
+        });
+
     })
     // For Department Admins
 router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader, function(req,res,next){

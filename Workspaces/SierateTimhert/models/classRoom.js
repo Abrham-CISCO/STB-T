@@ -1,4 +1,7 @@
 var mongoose = require("mongoose");
+var courseSchema = new mongoose.Schema({
+    course_id:{type:String}
+},{timestamps:true})
 var classRoomSchema = new mongoose.Schema({
     name:{type:String,unique:true,required:true},
     description:{type:String},
@@ -10,7 +13,9 @@ var classRoomSchema = new mongoose.Schema({
             }
         }
     ]
+    ,addedCourses:[courseSchema]
 },{timestamps:true});
+
 classRoomSchema.statics.removeMember = (GubayeID,telephone,callback) => {
     classRoom.findOne({_id:GubayeID})
             .exec(function(error,gubaye){

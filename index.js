@@ -17,7 +17,8 @@
   var MessagingModel_Acc = require('./SharedComponents/Messaging/model_Accessor')
   var UserModel_Acc = require('./Account/Models/user_model_accessor')
   var classRoom_ModelAccessor = require('./Workspaces/SierateTimhert/models/classRoom_ModelAcessor');
-// Routes
+  var Course_ModelAccessor = require('./Workspaces/SierateTimhert/models/courseModelAccessor');
+  // Routes
   // Accounts
     var Accounts = require('./Account/route')
   // Workspace routes
@@ -101,8 +102,25 @@ app.use(passport.session());
         UserModel_Acc.NameArrayToTelArray(gubayeMembersArray,function(error,userTelArray){
           console.log(userTelArray);
           classRoom_ModelAccessor.memberAdder(gubayeId,userTelArray,function(error,response){
-            var message = "Added to "+gubayeId
-            socket.emit('AddGubayeMembers',message)
+            socket.emit('AddGubayeMembers','Done')
+          })
+        })
+      });
+      socket.on('AddGubayeCourses', function(gubayeId, CoursesArray)
+      { 
+        // What does happen when a course is added to a classroom
+        // An instance of (MarkList, MarklistColumnName, Book and Attendance) for that newly added gubaye is added to the course. 
+        Course_ModelAccessor.addCourse(CoursesArray,gubayeId, function(error, updatedCourse){
+          classRoom_ModelAccessor.addCourse(gubayeId, CoursesArray, function(error, gubaye)
+          {
+            if(error)
+            {
+              console.error(error)
+            }
+            else{
+              socket.emit('AddGubayeCourses',"Added")
+            }
+
           })
         })
       });

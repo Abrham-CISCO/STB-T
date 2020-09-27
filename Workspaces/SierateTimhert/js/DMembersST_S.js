@@ -41,7 +41,7 @@ xhr.onreadystatechange = function(){
                 Output += users.response[i].name;
                 MembersName.push(users.response[i].name);
                 MembersID.push(users.response[i].telephone);
-                Output += "</b></h2><p class='text-muted text-sm'><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p><ul class='ml-4 mb-0 fa-ul text-muted'>"
+                Output += "</b></h2><ul class='ml-4 mb-0 fa-ul text-muted'>"
                 Output += "<li class='small'><span class='fa-li'><i class='fas fa-lg fa-envelope'></i></span> Email: "+users.response[i].email+"</li>"
                 Output += "<li class='small'><span class='fa-li'><i class='fas fa-lg fa-phone'></i></span> Phone #: " + users.response[i].telephone +"</li>"
                 Output += "</ul></div><div class='col-5 text-center'><img src='http://localhost:3000/" + users.response[i].pro_img +"' alt='' class='img-circle img-fluid'>"
