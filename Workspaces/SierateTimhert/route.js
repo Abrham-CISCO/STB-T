@@ -296,8 +296,11 @@ router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader, functi
 router.get('/SubDepartmentAdmin', mid.requireSignIn,  function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
-        console.log(req.session.user.gubaeat);
-        return res.render("Workspaces/SierateTimhert/templates/SireateTSDA.jade",req.session);
+        course_ModelAccessor.allCourses((error,courses)=>{
+            req.session.courses = courses;
+            console.log(req.session)
+            return res.render("Workspaces/SierateTimhert/templates/SireateTSDA.jade",req.session);
+        });
     });
 });
 
