@@ -56,10 +56,10 @@ html
                         a.nav-link(href='#member', data-toggle='tab') አባላት
                       |                   
                       li.nav-item
-                        a.nav-link(href='#attendance', data-toggle='tab') አቴንዳንስ
+                        a.nav-link(href='#education', data-toggle='tab') ትምህርት
                       |                   
                       li.nav-item
-                        a.nav-link(href='#marklist', data-toggle='tab') የነጥብ ሰንጠረዥ
+                        a.nav-link(href='#attendance', data-toggle='tab') አቴንዳንስ
                   // /.card-header
                   .card-body
                     .tab-content
@@ -465,131 +465,14 @@ html
                                         a.page-link(href='#', aria-controls='example1', data-dt-idx='7', tabindex='0') Next
                           // /.card-body
 
-                      #marklist.tab-pane
-                        .card
-                          .card-header
-                            h3.card-title DataTable with default features
-                          // /.card-header
-                          .card-body
-                            #example1_wrapper.dataTables_wrapper.dt-bootstrap4
-                              .row
-                                .col-sm-12.col-md-6
-                                  #example1_length.dataTables_length
-                                    label
-                                      | Show 
-                                      select.custom-select.custom-select-sm.form-control.form-control-sm(name='example1_length', aria-controls='example1')
-                                        option(value='10') 10
-                                        option(value='25') 25
-                                        option(value='50') 50
-                                        option(value='100') 100
-                                      |  entries
-                                .col-sm-12.col-md-6
-                                  #example1_filter.dataTables_filter
-                                    label
-                                      | Search:
-                                      input.form-control.form-control-sm(type='search', placeholder='', aria-controls='example1')
-                              .row
-                                .col-sm-12
-                                  table#example1.table.table-bordered.table-striped.dataTable(role='grid', aria-describedby='example1_info')
-                                    thead
-                                      tr(role='row')
-                                        th.sorting_asc(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-sort='ascending', aria-label='Rendering engine: activate to sort column descending', style='width: 156.2px;') Rendering engine
-                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending', style='width: 205.8px;') Browser
-                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Platform(s): activate to sort column ascending', style='width: 191.4px;') Platform(s)
-                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='Engine version: activate to sort column ascending', style='width: 130.6px;') Engine version
-                                        th.sorting(tabindex='0', aria-controls='example1', rowspan='1', colspan='1', aria-label='CSS grade: activate to sort column ascending', style='width: 92.4px;') CSS grade
-                                    tbody
-                                      tr.odd(role='row')
-                                        td.sorting_1 Gecko
-                                        td Firefox 1.0
-                                        td Win 98+ / OSX.2+
-                                        td 1.7
-                                        td A
-                                      tr.even(role='row')
-                                        td.sorting_1 Gecko
-                                        td Firefox 1.5
-                                        td Win 98+ / OSX.2+
-                                        td 1.8
-                                        td A
-                                      tr.odd(role='row')
-                                        td.sorting_1 Gecko
-                                        td Firefox 2.0
-                                        td Win 98+ / OSX.2+
-                                        td 1.8
-                                        td A
-                                      tr.even(role='row')
-                                        td.sorting_1 Gecko
-                                        td Firefox 3.0
-                                        td Win 2k+ / OSX.3+
-                                        td 1.9
-                                        td A
-                                      tr.odd(role='row')
-                                        td.sorting_1 Gecko
-                                        td Camino 1.0
-                                        td OSX.2+
-                                        td 1.8
-                                        td A
-                                      tr.even(role='row')
-                                        td.sorting_1 Gecko
-                                        td Camino 1.5
-                                        td OSX.3+
-                                        td 1.8
-                                        td A
-                                      tr.odd(role='row')
-                                        td.sorting_1 Gecko
-                                        td Netscape 7.2
-                                        td Win 95+ / Mac OS 8.6-9.2
-                                        td 1.7
-                                        td A
-                                      tr.even(role='row')
-                                        td.sorting_1 Gecko
-                                        td Netscape Browser 8
-                                        td Win 98SE+
-                                        td 1.7
-                                        td A
-                                      tr.odd(role='row')
-                                        td.sorting_1 Gecko
-                                        td Netscape Navigator 9
-                                        td Win 98+ / OSX.2+
-                                        td 1.8
-                                        td A
-                                      tr.even(role='row')
-                                        td.sorting_1 Gecko
-                                        td Mozilla 1.0
-                                        td Win 95+ / OSX.1+
-                                        td 1
-                                        td A
-                                    tfoot
-                                      tr
-                                        th(rowspan='1', colspan='1') Rendering engine
-                                        th(rowspan='1', colspan='1') Browser
-                                        th(rowspan='1', colspan='1') Platform(s)
-                                        th(rowspan='1', colspan='1') Engine version
-                                        th(rowspan='1', colspan='1') CSS grade
-                              .row
-                                .col-sm-12.col-md-5
-                                  #example1_info.dataTables_info(role='status', aria-live='polite') Showing 1 to 10 of 57 entries
-                                .col-sm-12.col-md-7
-                                  #example1_paginate.dataTables_paginate.paging_simple_numbers
-                                    ul.pagination
-                                      li#example1_previous.paginate_button.page-item.previous.disabled
-                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='0', tabindex='0') Previous
-                                      li.paginate_button.page-item.active
-                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='1', tabindex='0') 1
-                                      li.paginate_button.page-item
-                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='2', tabindex='0') 2
-                                      li.paginate_button.page-item
-                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='3', tabindex='0') 3
-                                      li.paginate_button.page-item
-                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='4', tabindex='0') 4
-                                      li.paginate_button.page-item
-                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='5', tabindex='0') 5
-                                      li.paginate_button.page-item
-                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='6', tabindex='0') 6
-                                      li#example1_next.paginate_button.page-item.next
-                                        a.page-link(href='#', aria-controls='example1', data-dt-idx='7', tabindex='0') Next
-                          // /.card-body
-
+                      #education.tab-pane
+                        .row
+                          .col-6  
+                            ul.users-list.clearfix
+                              each val in JoinedClass
+                                li
+                                  img(src="http://localhost:3000/SharedComponents/static/logo.jpg" alt="User Image")
+                                  a.users-list-name(href="http://localhost:3000/accounts/public/profile/") #{val.name}
                     
                     // /.tab-content
                   // /.card-body

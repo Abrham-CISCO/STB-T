@@ -1,6 +1,7 @@
 var classRoom = require('./classRoom')
 var UserAccModelAcc = require('../../../Account/Models/user_model_accessor');
 var course_modelAccessor = require('./courseModelAccessor');
+const course = require('./course');
 const gubayeDetail = (GubayeID, callback) => {
     classRoom.gubayeDetails(GubayeID, function(error,gubaye){
         callback(null,gubaye);
@@ -78,7 +79,6 @@ const deleteGubaye = (ClassRoomID, callback) => {
 }
 const IDArrayToNameArray = (IDArray,callback) => {
     classRoom.IDArrayToNameArray(IDArray,function(error, gubaeyat){
-        console.log("CMA ", gubaeyat)
         if(error)
         {
             callback(error)
@@ -91,14 +91,16 @@ const IDArrayToNameArray = (IDArray,callback) => {
 
 const addCourse = (gubayeId,coursesArray,callback) => 
 {
+    console.log(coursesArray)
     classRoom.findById(gubayeId).then((gubaye)=>
     {
+        console.log(coursesArray)
         coursesArray.forEach((courseId) => {
-            console.log({course_id:courseId})
             gubaye.addedCourses.push({course_id:courseId})
         })
-        gubaye.save().then().catch((error) => {callback(error,false)})
-        callback(null,gubaye)
+        gubaye.save().then((response) => {callback(null,gubaye)
+        }).catch((error) => {callback(error,false)})
+        
     }).catch((error) => {callback(error,false)})
 }
 
@@ -111,20 +113,12 @@ const notAddedCourses = (gubayeId, callback) =>
             notAdded.pop();
             var AddedC = [{name:String, id:String}]
             AddedC.pop();
-            console.log("courses ", courses)
-            console.log(gubaye.addedCourses)
             courses.forEach((course)=> {
                 addedFlag = false;
                 gubaye.addedCourses.forEach((addedCourse)=>{
-                    console.log(course._id)
                     if(course._id == addedCourse.course_id)
                     {
-                        console.log(course._id, " is equal with ", addedCourse.course_id)
                         addedFlag = true;
-                    }
-                    else
-                    {
-                        console.log(course._id, " is not equal with ", addedCourse.course_id)
                     }
                 })
                 if(addedFlag == false)
@@ -136,12 +130,42 @@ const notAddedCourses = (gubayeId, callback) =>
                     AddedC.push({name:course.name, id:course._id})
                 }
             })
-            console.log(notAdded)
             callback(null, notAdded, AddedC)
         })
     }).catch((error) => {callback(error,false)})
 }
 
+const removeCourse = (courseID, GubayeId, callback) => 
+{
+    classRoom.findOne({_id:GubayeId}).then((gub)=>{
+        var index=0;
+        gub.addedCourses.forEach((singleCourse) => {
+            
+            if(singleCourse.course_id === courseID)
+            {
+                gub.addedCourses.splice(index,1)       
+            }
+            index += 1;
+        });
+        console.log(gub.addedCourses)
+        classRoom.findByIdAndUpdate(GubayeId,{$set:gub}).then((resp)=>
+        {
+            callback(null,resp);
+        }).catch((error) => {callback(error,false)})
+
+
+        // gub.addedCourses.findOne({course_id:courseID}).then((course)=>
+        // {
+        //     course.remove().then(notification=> {
+        //         course.save().then(response=>{
+        //             callback(null,notification)
+        //         }).catch((error) => {callback(error,false)})                
+        //     }).catch((error) => {callback(error,false)})
+        // }).catch((error) => {callback(error,false)})
+    }).catch((error) => {callback(error,false)})
+}
+
+exports.removeCourse = removeCourse;
 exports.notAddedCourses = notAddedCourses;
 exports.IDArrayToNameArray = IDArrayToNameArray;
 exports.deleteGubaye = deleteGubaye;

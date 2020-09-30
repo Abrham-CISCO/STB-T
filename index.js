@@ -110,18 +110,23 @@ app.use(passport.session());
       { 
         // What does happen when a course is added to a classroom
         // An instance of (MarkList, MarklistColumnName, Book and Attendance) for that newly added gubaye is added to the course. 
-        Course_ModelAccessor.addCourse(CoursesArray,gubayeId, function(error, updatedCourse){
-          classRoom_ModelAccessor.addCourse(gubayeId, CoursesArray, function(error, gubaye)
-          {
-            if(error)
-            {
-              console.error(error)
-            }
-            else{
-              socket.emit('AddGubayeCourses',"Added")
-            }
-
+        Course_ModelAccessor.courseIds(CoursesArray,function(error, course_ids){
+          console.log("course_ids",course_ids)
+          Course_ModelAccessor.addCourse(course_ids,gubayeId, function(error, updatedCourse){
+            console.log("course_ids",course_ids)
           })
+            classRoom_ModelAccessor.addCourse(gubayeId, course_ids, function(error, gubaye)
+            {
+              if(error)
+              {
+                console.error(error)
+              }
+              else{
+                socket.emit('AddGubayeCourses',CoursesArray)
+              }
+  
+            })
+          
         })
       });
       socket.on('UpdateGubaye',function(ClassRoomID, gubayeName, Description, leader){

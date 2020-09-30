@@ -6,7 +6,7 @@ html
     |   
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     |   
-    title ስርዓተ ትምህርት ንዑስ ክፍል
+    title #{user.gubaye.name}
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
@@ -29,10 +29,12 @@ html
         section.content-header
           .container-fluid
             .row.mb-2
-              .col-sm-6
-                h1 ስዕራተ ትምህርት ንዑስ ክፍል ፡ አባል
+              .col-sm-9
+                h1 #{user.gubaye.name}
+                br
+                h6 #{user.gubaye.description}
               |           
-              .col-sm-6
+              .col-sm-3
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
                     a(href='#') Home
@@ -44,150 +46,146 @@ html
                   .card-header.p-2
                     ul.nav.nav-pills
                       li.nav-item
-                        a.nav-link.active(href='#activity', data-toggle='tab') አባላት
-                      |                   
+                        a.nav-link.active(href='#wall', data-toggle='tab') ግድግዳ
                       li.nav-item
-                        a.nav-link(href='#timeline', data-toggle='tab') Timeline
+                        a.nav-link(href='#member', data-toggle='tab') አባላት
+                      li.nav-item
+                        a.nav-link(href='#education', data-toggle='tab') ትምህርት
+                      li.nav-item
+                        a.nav-link(href='#attendance', data-toggle='tab') አቴንዳንስ
                   // /.card-header
                   .card-body
                     .tab-content
-                      #activity.active.tab-pane
-                        div(id="userlist").memberslist
-                        script(src="http://localhost:3000/workspaces/SierateTimhert/js/DMembersST_S_S.js")
-                      #timeline.tab-pane
-                        // The timeline
-                        .timeline.timeline-inverse
-                          // timeline time label
-                          .time-label
-                            span.bg-danger
-                              | 10 Feb. 2014
-                          // /.timeline-label
-                          // timeline item
-                          div
-                            i.fas.fa-envelope.bg-primary
+                      #wall.active.tab-pane
+                        // Post
+                        .post
+                          .user-block
+                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user1-128x128.jpg', alt='user image')
                             |                         
-                            .timeline-item
-                              span.time
-                                i.far.fa-clock
-                                |  12:05
+                            span.username
+                              a(href='#') Jonathan Burke Jr.
                               |                           
-                              h3.timeline-header
-                                a(href='#') Support Team
-                                |  sent you an email
-                              |                           
-                              .timeline-body
-                                | Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                | weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                | jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                | quora plaxo ideeli hulu weebly balihoo...
-                              |                           
-                              .timeline-footer
-                                a.btn.btn-primary.btn-sm(href='#') Read more
-                                |                             
-                                a.btn.btn-danger.btn-sm(href='#') Delete
-                          // END timeline item
-                          // timeline item
-                          div
-                            i.fas.fa-user.bg-info
+                              a.float-right.btn-tool(href='#')
+                                i.fas.fa-times
                             |                         
-                            .timeline-item
-                              span.time
-                                i.far.fa-clock
-                                |  5 mins ago
-                              |                           
-                              h3.timeline-header.border-0
-                                a(href='#') Sarah Young
-                                |  accepted your friend request
-                          // END timeline item
-                          // timeline item
-                          div
-                            i.fas.fa-comments.bg-warning
-                            |                         
-                            .timeline-item
-                              span.time
-                                i.far.fa-clock
-                                |  27 mins ago
-                              |                           
-                              h3.timeline-header
-                                a(href='#') Jay White
-                                |  commented on your post
-                              |                           
-                              .timeline-body
-                                | Take me to your leader!
-                                | Switzerland is small and neutral!
-                                | We are more like Germany, ambitious and misunderstood!
-                              |                           
-                              .timeline-footer
-                                a.btn.btn-warning.btn-flat.btn-sm(href='#') View comment
-                          // END timeline item
-                          // timeline time label
-                          .time-label
-                            span.bg-success
-                              | 3 Jan. 2014
-                          // /.timeline-label
-                          // timeline item
-                          div
-                            i.fas.fa-camera.bg-purple
-                            |                         
-                            .timeline-item
-                              span.time
-                                i.far.fa-clock
-                                |  2 days ago
-                              |                           
-                              h3.timeline-header
-                                a(href='#') Mina Lee
-                                |  uploaded new photos
-                              |                           
-                              .timeline-body
-                                img(src='http://placehold.it/150x100', alt='...')
-                                |                             
-                                img(src='http://placehold.it/150x100', alt='...')
-                                |                             
-                                img(src='http://placehold.it/150x100', alt='...')
-                                |                             
-                                img(src='http://placehold.it/150x100', alt='...')
-                          // END timeline item
-                          div
-                            i.far.fa-clock.bg-gray
-                      // /.tab-pane
-                      #settings.tab-pane
-                        form(method="post", action="/updateProfile").form-horizontal
-                          .form-group.row
-                            label.col-sm-2.col-form-label(for='inputName') ሙሉ ስም
-                            |                         
-                            .col-sm-10
-                              input#inputName.form-control(type='text', placeholder='ሙሉ ስም', value="#{user.name}", name='name')
+                            span.description Shared publicly - 7:30 PM today
+                          // /.user-block
+                          p
+                            | Lorem ipsum represents a long-held tradition for designers,
+                            | typographers and the like. Some people hate it and argue for
+                            | its demise, but others ignore the hate as they create awesome
+                            | tools to help create filler text for everyone from bacon lovers
+                            | to Charlie Sheen fans.
                           |                       
-                          .form-group.row
-                            label.col-sm-2.col-form-label(for='inputEmail') ኢ-ሜል
+                          p
+                            a.link-black.text-sm.mr-2(href='#')
+                              i.fas.fa-share.mr-1
+                              |  Share
                             |                         
-                            .col-sm-10
-                              input#inputEmail.form-control(type='email', placeholder='ኢ-ሜል', value="#{user.email}", name='email')
-                          |                      
-                          .form-group.row
-                            label.col-sm-2.col-form-label(for='inputTel') ስልክ ቁጥር
+                            a.link-black.text-sm(href='#')
+                              i.far.fa-thumbs-up.mr-1
+                              |  Like
                             |                         
-                            .col-sm-10
-                              input#inputTel.form-control(type='text', placeholder='ስልክ ቁጥር', value="#{user.telephone}", name='telephone') 
-                          |                          
-                          .form-group.row
-                            label.col-sm-2.col-form-label(for='inputSkills') Skills
-                            |                         
-                            .col-sm-10
-                              input#inputSkills.form-control(type='text', placeholder='Skills')
+                            span.float-right
+                              a.link-black.text-sm(href='#')
+                                i.far.fa-comments.mr-1
+                                |  Comments (5)
                           |                       
-                          .form-group.row
-                            .offset-sm-2.col-sm-10
-                              .checkbox
-                                label
-                                  input(type='checkbox')
-                                  |  I agree to the 
-                                  a(href='#') terms and conditions
+                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
+                        // /.post
+                        // Post
+                        .post.clearfix
+                          .user-block
+                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user7-128x128.jpg', alt='User Image')
+                            |                         
+                            span.username
+                              a(href='#') Sarah Ross
+                              |                           
+                              a.float-right.btn-tool(href='#')
+                                i.fas.fa-times
+                            |                         
+                            span.description Sent you a message - 3 days ago
+                          // /.user-block
+                          p
+                            | Lorem ipsum represents a long-held tradition for designers,
+                            | typographers and the like. Some people hate it and argue for
+                            | its demise, but others ignore the hate as they create awesome
+                            | tools to help create filler text for everyone from bacon lovers
+                            | to Charlie Sheen fans.
                           |                       
-                          .form-group.row
-                            .offset-sm-2.col-sm-10
-                              button.btn.btn-danger(type='submit') Submit
-                      // /.tab-pane
+                          form.form-horizontal
+                            .input-group.input-group-sm.mb-0
+                              input.form-control.form-control-sm(placeholder='Response')
+                              |                           
+                              .input-group-append
+                                button.btn.btn-danger(type='submit') Send
+                        // /.post
+                        // Post
+                        .post
+                          .user-block
+                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user6-128x128.jpg', alt='User Image')
+                            |                         
+                            span.username
+                              a(href='#') Adam Jones
+                              |                           
+                              a.float-right.btn-tool(href='#')
+                                i.fas.fa-times
+                            |                         
+                            span.description Posted 5 photos - 5 days ago
+                          // /.user-block
+                          .row.mb-3
+                            .col-sm-6
+                              img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
+                            // /.col
+                            .col-sm-6
+                              .row
+                                .col-sm-6
+                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo2.png', alt='Photo')
+                                  |                               
+                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo3.jpg', alt='Photo')
+                                // /.col
+                                .col-sm-6
+                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo4.jpg', alt='Photo')
+                                  |                               
+                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
+                                // /.col
+                              // /.row
+                            // /.col
+                          // /.row
+                          p
+                            a.link-black.text-sm.mr-2(href='#')
+                              i.fas.fa-share.mr-1
+                              |  Share
+                            |                         
+                            a.link-black.text-sm(href='#')
+                              i.far.fa-thumbs-up.mr-1
+                              |  Like
+                            |                         
+                            span.float-right
+                              a.link-black.text-sm(href='#')
+                                i.far.fa-comments.mr-1
+                                |  Comments (5)
+                          |                       
+                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
+                        // /.post
+                      
+                      #member.tab-pane
+                        .row
+                          .col-6  
+                            ul.users-list.clearfix
+                              each val in user.gubayemembers
+                                li
+                                  img(src="../../#{val.pro_img}" alt="User Image")
+                                  a.users-list-name(href="http://localhost:3000/accounts/public/profile/#{val.telephone}") #{val.name}
+                      #attendance.tab-pane
+                      #education.tab-pane
+                        .row
+                          .col-6  
+                            ul.users-list.clearfix
+                              each val in JoinedClass
+                                li
+                                  img(src="http://localhost:3000/SharedComponents/static/logo.jpg" alt="User Image")
+                                  a.users-list-name(href="http://localhost:3000/accounts/public/profile/") #{val.name}
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom
@@ -217,13 +215,13 @@ html
       // /.control-sidebar
     // ./wrapper
     // jQuery
-    script(src='../../ADMINLITE/plugins/jquery/jquery.min.js')
+    script(src='http://localhost:3000/ADMINLITE/plugins/jquery/jquery.min.js')
     // Bootstrap 4
-    script(src='../../ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
     // AdminLTE App
-    script(src='../../ADMINLITE/dist/js/adminlte.min.js')
+    script(src='http://localhost:3000/ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
-    script(src='../../ADMINLITE/dist/js/demo.js')
+    script(src='http://localhost:3000/ADMINLITE/dist/js/demo.js')
     script.
       document.getElementById('3').className = "nav-link active"
       document.getElementById('#{user.GubayeID}').className = "nav-link active"

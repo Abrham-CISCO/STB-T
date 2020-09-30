@@ -19,14 +19,15 @@ function addmembers(gubayeID)
 function addCourse(gubayeID)
 {
     var socket = io('/gubaye');
-    var courses = ['5f70c41dc2c157323025abd3'];
-    // courses.pop();
-    // var selectionConut = document.getElementsByClassName("select2-selection__rendered")[1].childNodes.length - 1;
-    // for(var i = 0; (i<selectionConut); i++)
-    // {
-    //     courses.push(document.getElementsByClassName("select2-selection__rendered")[1].childNodes[i].title)
+    var courses = [];
+    courses.pop();
+    var selectionConut = document.getElementsByClassName("select2-selection__rendered")[1].childNodes.length - 1;
+    for(var i = 0; (i<selectionConut); i++)
+    {
+        courses.push(document.getElementsByClassName("select2-selection__rendered")[1].childNodes[i].title)
         
-    // }
+    }
+    console.log(courses);
     socket.emit('AddGubayeCourses',gubayeID,courses);
   socket.on('AddGubayeCourses',function(Confirmation){
     console.log(Confirmation);

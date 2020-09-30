@@ -149,15 +149,14 @@ const updateProfile =  (userId, changeObject,callback) =>{
 }
 
 const registerNewUser = (userData,messageData,callback) =>{
-    User.register(new User({name:userData.name,username:userData.telephone,email:userData.email,telephone:userData.telephone}), userData.password, (err, user) => 
+    User.register(new User({name:userData.name,username:userData.telephone,email:userData.email,telephone:userData.telephone,
+    cname:userData.cname, sex:userData.sex}), userData.password, (err, user) => 
     {
         if(err) {
             callback(err)
-            console.log(err)
         }
         else
         {
-            console.log("Accessing UserModelAccessor.registerNewUser Else")
             GubayeInd_ModelAccessor.newUser(userData.telephone,function(error,gubayeInd){
                 Messaging_ModelAccessor.createAccount(messageData,function(err,msg){
                     Notificaton_ModelAccessor.createNotification(userData.telephone,function(error,notification){

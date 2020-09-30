@@ -343,7 +343,7 @@ html
                                 li
                                   img(src="http://localhost:3000/SharedComponents/static/logo.jpg" alt="User Image")
                                   a.users-list-name(href="http://localhost:3000/accounts/public/profile/") #{val.name}
-                                  a(href="http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/RemoveC/#{val.id}")
+                                  a(href="http://localhost:3000/SirateTimhert/course/remove/#{val.id}/#{user.gubaye._id}")                                  
                                     button(type='button', class="btn btn-block btn-danger btn-xs") Remove
                               li 
                                 span(class="users-list-date") 
@@ -469,8 +469,8 @@ html
 
 
                             .modal-footer.justify-content-between
-                              button.btn.btn-default(type='button', data-dismiss='modal') Close
-                              button.btn.btn-primary(type='button' onclick="addCourse('#{user.gubaye._id}');") Save changes
+                              button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
+                              button.btn.btn-primary(type='button' onclick="addCourse('#{user.gubaye._id}');") ጨምር
                           // /.modal-content
                           // /.modal-dialog
 

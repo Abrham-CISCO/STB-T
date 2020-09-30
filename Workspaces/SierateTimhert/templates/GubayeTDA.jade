@@ -47,15 +47,12 @@ html
                     ul.nav.nav-pills
                       li.nav-item
                         a.nav-link.active(href='#wall', data-toggle='tab') ግድግዳ
-                      |                   
                       li.nav-item
                         a.nav-link(href='#member', data-toggle='tab') አባላት
-                      |                   
+                      li.nav-item
+                        a.nav-link(href='#education', data-toggle='tab') ትምህርት
                       li.nav-item
                         a.nav-link(href='#attendance', data-toggle='tab') አቴንዳንስ
-                      |                   
-                      li.nav-item
-                        a.nav-link(href='#marklist', data-toggle='tab') የነጥብ ሰንጠረዥ
                   // /.card-header
                   .card-body
                     .tab-content
@@ -181,7 +178,14 @@ html
                                   img(src="../#{val.pro_img}" alt="User Image")
                                   a.users-list-name(href="http://localhost:3000/accounts/public/profile/#{val.telephone}") #{val.name}
                       #attendance.tab-pane
-                      #marklist.tab-pane
+                      #education.tab-pane
+                        .row
+                          .col-6  
+                            ul.users-list.clearfix
+                              each val in JoinedClass
+                                li
+                                  img(src="http://localhost:3000/SharedComponents/static/logo.jpg" alt="User Image")
+                                  a.users-list-name(href="http://localhost:3000/accounts/public/profile/") #{val.name}
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom

@@ -29,6 +29,10 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required : true
     },
+    cname: {
+        type: String,
+        required : true
+    },
     skipPassword:{type:Boolean,default:false},
     classRoom:[ClassRoomSchema],
     work: {
@@ -63,9 +67,22 @@ var UserSchema = new mongoose.Schema({
     },
     pro_img: {
         type: String,
-        default: "../ADMINLITE/dist/img/user4-128x128.jpg"
+        default: "../Account/static/maleAvatar.png"
     }
 },{timestamps:true});
+
+UserSchema.pre('save', function(next){
+    var user = this;
+    if(user.sex.male == false)
+    {
+        user.pro_img = "../Account/static/femaleAvatar.png"
+        next();
+    }
+    else
+    {
+        next();
+    }
+});
 
 // Chat socket tools
     UserSchema.statics.getChatSocketID = function(telephone, callback){

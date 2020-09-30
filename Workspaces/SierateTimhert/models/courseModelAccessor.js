@@ -12,6 +12,7 @@ const createCourse = function(name, description, createdBy, callback)
             callback(null, newCourse)
         }).catch((error) => callback(error))
 }
+
 const courseDetail = function(courseId,callback)
 {
     course.findById(courseId).then((courseDetails)=>{callback(null, courseDetails)}).catch((error)=>{callback(error, false)});
@@ -75,11 +76,38 @@ const addCourse = function(courseIdArray, gubayeId, callback)
                 MarkListColumn_14_name:"10",
                 MarkListColumn_15_name:"10"
             }
-            singleCourse.markListColumnName = defaultMarkListName;
+            singleCourse.markListColumnName.push(defaultMarkListName);
             singleCourse.save();
             callback(null, singleCourse)
         }).catch((error) => {callback(error)});
     });
+}
+
+const courseIds = (nameArray, callback) => {
+    var searchObj = {
+        $or: [
+            ]
+        }
+    
+
+    for(var i = 0; i<nameArray.length; i++)
+    {
+        searchObj.$or.push({name:nameArray[i]})
+    }
+
+    
+    console.log(nameArray,searchObj)
+
+    course.find(searchObj).then((courses)=>{
+        var idOnly = []; 
+        idOnly.pop();
+
+        courses.forEach(coursee =>{
+            idOnly.push(coursee._id);
+        })
+        callback(null, idOnly)
+    }).catch((error) => {callback(error, false)})
+    
 }
 
 const deleteCourse = (courseId, callback) => 
@@ -306,6 +334,7 @@ exports.deleteCourse = deleteCourse;
 exports.updateCourseDetail = updateCourseDetail;
 exports.addCourse = addCourse;
 exports.allCourses = allCourses;
+exports.courseIds = courseIds;
 
 exports.addBook = addBook;
 exports.booksByCourse = booksByCourse;

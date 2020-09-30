@@ -90,8 +90,11 @@ router.get('/register', mid.loggedOut, function(req,res,next){
 });
 
 router.post('/register', function(req,res,next){
+    console.log(req.body)
     // Check All fields
-    if(req.body.telephone && req.body.password && req.body.rpassword && req.body.name && req.body.email)
+    if(req.body.telephone && req.body.password && 
+        req.body.rpassword && req.body.name
+        && req.body.cname && req.body.sex && req.body.email)
     {
         //Confirm that user typed same password twice
         if(req.body.password !== req.body.rpassword)
@@ -100,11 +103,18 @@ router.post('/register', function(req,res,next){
             err.status = 400;
             return next(err);        
         }
+        var sexObject = {male:true, female:false}
+        if(req.body.sex == "ሴት")
+        {
+            sexObject = {male:false, female:true}
+        }
         var userData = {
             telephone: req.body.telephone,
             name: req.body.name,
             password: req.body.password,
-            email: req.body.email
+            email: req.body.email,
+            cname: req.body.cname,
+            sex: sexObject
         };
         var messageData = {
             userID: req.body.tel
@@ -164,21 +174,26 @@ router.post('/login', mid.ValidateSigninForm, mid.loggedOut, passport.authentica
                 console.log("ClassRooms", gubaeat)
             }
             classRoom_ModelAccessor.IDArrayToNameArray(gubaeat,function(error,gubaeatName){
+                
+                    console.log("gubaeats", gubaeats)
                 var gubayeSmall = []; 
-                gubayeSmall.pop();
-                for(var j=0; j<gubaeats.length; j++){
-                    gubayeSmall.push({name:gubaeatName[j].name, id:gubaeats[j].classID});
-                }
-                console.log("gubayeSmall ", gubayeSmall)
-                if(!error && gubaeatName)
-                {
-                    console.log("gubaeatName ",gubaeatName)
-                    req.session.user.classRoom.pop();
-                    req.session.JoinedclassRooms = (gubayeSmall);
-                    console.log("After Gubaye name added ", req.session)
-                    return res.render('Account/templates/profile',req.session);    
-                }
-
+                    gubayeSmall.pop();
+                    for(var j=0; j<gubaeats.length; j++){
+                        if(gubaeatName[j])
+                        {
+                        gubayeSmall.push({name:gubaeatName[j].name, id:gubaeats[j].classID});
+                        }
+                    }
+                    console.log("gubayeSmall ", gubayeSmall)
+                    if(!error && gubaeatName)
+                    {
+                        console.log("gubaeatName ",gubaeatName)
+                        req.session.user.classRoom.pop();
+                        req.session.JoinedclassRooms = (gubayeSmall);
+                        console.log("After Gubaye name added ", req.session)
+                        return res.render('Account/templates/profile',req.session);    
+                    }
+                
             })
         }
         else{

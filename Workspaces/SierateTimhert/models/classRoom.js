@@ -28,8 +28,6 @@ classRoomSchema.statics.removeMember = (GubayeID,telephone,callback) => {
                     gubaye.members.forEach(function(member, index, ar){
                         if(member.memberId == telephone)
                         {
-                            console.log(member.memberId, index, telephone)
-                            console.log(gubaye.members.splice(index,1))
                             gubaye.save();
                         }
                     })
@@ -44,7 +42,6 @@ classRoomSchema.statics.addMember = (ClassRoomID,membersArray,callback) => {
                 if(!error)
                 {
                     var Members = gubaye.members
-                    console.log("gubaye ", gubaye);
                     for(var i =0; i<membersArray.length;i++)
                     {
                         Members.push({memberId:membersArray[i].telephone});
@@ -119,11 +116,10 @@ classRoomSchema.statics.IDArrayToNameArray = function(idArray, callback){
     {
         searchObj.$or.push({_id:idArray[i]})
     }
-    console.log("CRM ", searchObj)
     classRoom.find(searchObj,{name:true,_id:false})
         .exec(function(error, gubayeats){
             if(error){
-                console.log(error)
+                callback(error)
             }
             return callback(null,gubayeats);
         })
