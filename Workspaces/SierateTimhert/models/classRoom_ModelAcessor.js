@@ -8,6 +8,32 @@ const gubayeDetail = (GubayeID, callback) => {
     });
 }
 
+// you need to create a function that converts an array of gubayeId to an array of gubaye name
+
+const gubayeIdArrayToNameArray = (gubayeIdArray, callback) =>
+{
+    var searchObject = {
+        $or: [
+        ]
+    }
+
+    gubayeIdArray.forEach((gubayeId) => {
+        searchObject.$or.push({_id:gubayeId});
+    })
+        console.log(searchObject)
+    var gNames = [
+        {name:String,_id:String,membersCount:Number,leader:String}
+    ]
+    gNames.pop();
+    classRoom.find(searchObject).then((gubayeat)=>
+    {
+        gubayeat.forEach((gubaye)=>
+        {
+            gNames.push({name:gubaye.name,_id:gubaye._id,membersCount:gubaye.members.length,leader:gubaye.leader})
+        })
+        callback(null,gNames)
+    }).catch((error)=>{callback(error, false)})
+}
 const memberAdder = (gubayeID, Members, callback) => {
     classRoom.addMember(gubayeID,Members,function(error,response){
         if(!error){
@@ -176,3 +202,4 @@ exports.memberAdder = memberAdder;
 exports.updateGubaye = updateGubaye;
 exports.removeMem = removeMem;
 exports.addCourse = addCourse;
+exports.gubayeIdArrayToNameArray = gubayeIdArrayToNameArray;

@@ -266,15 +266,28 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
+                    var gubayeIds = []
+                    gubayeIds.pop();
                     returnedCourse.markListColumnName.forEach(courseColumnName => {
-                        classRoom_ModelAccessor.gubayeDetail(courseColumnName.classRoomId, function(error,classRoom){
-                            // classRoom.name
-                            
-                        })
+                        gubayeIds.push(courseColumnName.classRoomId)
                     })
-                return res.render("Workspaces/SierateTimhert/templates/courseTDA.jade",req.session)
+                    classRoom_ModelAccessor.gubayeIdArrayToNameArray(gubayeIds, 
+                        function(error,gubayeNameArr){
+                            if(error)
+                            {
+                                next(error)
+                            }
+                            else
+                            {
+                                req.session.classRooms = gubayeNameArr;
+                                UserModelAccessor.userData(returnedCourse.createdBy,function(error,user){
+                                    req.session.returnedCourse.createdBy = user.name;
+                                    console.log(gubayeNameArr)
+                                    return res.render("Workspaces/SierateTimhert/templates/courseTDA.jade",req.session)                    
+                                })
+                            }
+                        })
 
-                    
                 })
             }
         });
@@ -322,12 +335,7 @@ router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader, functi
         req.session.user.gubaeat= gubaeat;
         course_ModelAccessor.allCourses((error,courses)=>{
             req.session.courses = courses;
-            courses.markListColumnName.forEach(courseColumnName => {
-                classRoom_ModelAccessor.gubayeDetail(courseColumnName.classRoomId, function(error,classRoom){
-                    console.log(classRoom.name)
                     return res.render("Workspaces/SierateTimhert/templates/SireateTDA.jade",req.session);
-                })
-            })
         });
     });
 });

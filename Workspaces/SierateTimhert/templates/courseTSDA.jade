@@ -52,7 +52,7 @@ html
                         a.nav-link(href='#books', data-toggle='tab') መጻህፍት
                       |                   
                       li.nav-item
-                        a.nav-link(href='#teachers', data-toggle='tab') መምህራን
+                        a.nav-link(href='#classRooms', data-toggle='tab') ጉባኤያት
                       |                               
                       li.nav-item
                         a.nav-link(href='#settings', data-toggle='tab') አስተካክል
@@ -60,7 +60,6 @@ html
                   .card-body
                     .tab-content
                       #courseOutine.active.tab-pane
-                        p ይህ ክፍል Course Outline የሚያዩበት ክፍል ነው።
                         form(method="post", action="http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/upload/courseoutline",
                          enctype="multipart/form-data")
                           input(type="file" name="courseOutlineFile")
@@ -68,11 +67,39 @@ html
                             
                         iframe(src = "http://localhost:3000/Workspaces/SierateTimhert/static/kerestosyehulugetanew.pdf" style="width:100%" height=420)
                       #books.tab-pane
-                        form(method="post", action="http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/upload/book", 
-                        enctype="multipart/form-data")
-                          input(type="file" name="bookFile")
-                          input(type="submit")
-                      #teachers.tab-pane
+                        .card-header.p-2
+                            ul.nav.nav-pills
+                              li.nav-item
+                                a.nav-link.active(href='#book1', data-toggle='tab') መጽሐፍ 1
+                              | 
+                              li.nav-item
+                                a.nav-link(href='#book2', data-toggle='tab') መጽሐፍ 2
+                              |                   
+                              li.nav-item
+                                a.nav-link(href='#book3', data-toggle='tab') መጽሐፍ 3
+                              |                   
+                              li.nav-item
+                                a.nav-link(href='#book4', data-toggle='tab') መጽሐፍ 4
+                              li.nav-item
+                                a.nav-link(href='#newBook', data-toggle='tab') 
+                                  div(class="fas fa-plus nav-plus") አዲስ መጽሐፍ አካት
+                          // /.card-header
+                        .card-body
+                          .tab-content
+                            #book1.active.tab-pane
+                              iframe(src = "http://localhost:3000/Workspaces/SierateTimhert/static/kerestosyehulugetanew.pdf" style="width:100%" height=420)
+                            #book2.tab-pane
+                              iframe(src = "http://localhost:3000/Workspaces/SierateTimhert/static/kerestosyehulugetanew.pdf" style="width:100%" height=420)
+                            #book3.tab-pane
+                              iframe(src = "http://localhost:3000/Workspaces/SierateTimhert/static/kerestosyehulugetanew.pdf" style="width:100%" height=420)
+                            #book4.tab-pane
+                              iframe(src = "http://localhost:3000/Workspaces/SierateTimhert/static/kerestosyehulugetanew.pdf" style="width:100%" height=420)
+                            #newBook.tab-pane
+                              form(method="post", action="http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/upload/book", 
+                              enctype="multipart/form-data")
+                                input(type="file" name="bookFile")
+                                input(type="submit")
+                      #classRooms.tab-pane
                         p እዚህ ክፍል ላይ መምህራን በመምህራን ምደባ ክፍል ሰልጥነው ሲመደቡ ይታያሉ። ክፍሉ መምህራን ምደባ ክፍልን መምህር የሚጠይቀው እዚህ ክፍል ነው።
                       #settings.tab-pane
                         p እዚህ ክፍል ላይ ኮርሱን በተመለከተ የሚስተካከሉ ነገሮች ይስተካከላሉ። ኮርሱ የሚሰረዘው እዚህ ነው።
