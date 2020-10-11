@@ -11,7 +11,7 @@ var attendanceSchema = new mongoose.Schema({
   lateTime:{type:String}
 },{timestamps:true})
 var markListSchema = new mongoose.Schema({
-    studentId:{type:String},
+    studentId:{type:mongoose.Schema.Types.ObjectId, ref:'User'},
     classRoomId:{type:String},
     studentTelephone:{type:String},
     column_1_value:{type:String},
@@ -23,12 +23,7 @@ var markListSchema = new mongoose.Schema({
     column_7_value:{type:String},
     column_8_value:{type:String},
     column_9_value:{type:String},
-    column_10_value:{type:String},
-    column_11_value:{type:String},
-    column_12_value:{type:String},
-    column_13_value:{type:String},
-    column_14_value:{type:String},
-    column_15_value:{type:String},
+    column_10_value:{type:String}
 },{timestamps:true});
 var markListColumnNameSchema = new mongoose.Schema({
     classRoomId:{type:String},

@@ -1,0 +1,628 @@
+doctype html
+include ../../../SharedComponents/Layouts/header.jade
+html
+  head
+    meta(charset='utf-8')
+    |   
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    |   
+    title #{returnedCourse.name}
+    // Tell the browser to be responsive to screen width
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Font Awesome
+    link(rel='stylesheet', href='https://localhost:3000/adminlite/plugins/fontawesome-free/css/all.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+    // Theme style
+    link(rel='stylesheet', href='static/dist/css/adminlte.min.css')
+    // Google Font: Source Sans Pro
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
+  body.hold-transition.sidebar-mini
+    .wrapper
+      // Navbar
+      include ../../../SharedComponents/Layouts/navigation.jade
+      // Main Sidebar Container
+      include ../../../SharedComponents/Layouts/sidebarNU.jade
+      // Content Wrapper. Contains page content
+      .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+          .container-fluid
+            .row.mb-2
+              .col-sm-12
+                h1 #{returnedCourse.name}           
+              .col-sm-12
+                ol.breadcrumb.float-sm-right
+                  li.breadcrumb-item
+                    a(href='http://localhost:3000/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
+                  li.breadcrumb-item
+                    a(href='http://localhost:3000/SirateTimhert/Gubaye_Sebsabi/#{classRoom._id}') ጉባኤ #{classRoom.name}
+                  li.breadcrumb-item.active #{returnedCourse.name} ኮርስ
+            .row
+              .col-md-12
+                .card
+                  .card-header.p-2
+                    ul.nav.nav-pills
+                      li.nav-item
+                        a.nav-link.active(href='#points', data-toggle='tab') ነጥብ
+                      li.nav-item
+                        a.nav-link(href='#attendance', data-toggle='tab') አቴንዳንስ
+                      li.nav-item
+                        a.nav-link(href='#detail', data-toggle='tab') ዝርዝር
+                  // /.card-header
+                  .card-body
+                    input(type="hidden", value="#{returnedCourse}", id="courseData")
+                    input(type="hidden", value="#{classRoom}", id="classRoomData")
+
+                    script.
+                      var data = #{returnedCourse.markListColumnName}
+                      console.log(data)
+                    .tab-content
+                      #points.active.tab-pane
+                        .card
+                          .card-header
+                            .row  
+                              .col-11
+                                h3.card-title #{returnedCourse.name} ኮርስ የነጥብ ሰንጠረዥ
+                              .col-1
+                                button(type="button" class="btn btn-block btn-primary") Save
+                            
+                          // /.card-header
+                          .card-body(style="overflow-x:auto")
+                            table#example1.table.table-bordered.table-striped
+                              thead
+                                tr
+                                  each val in returnedCourse.markListColumnName
+                                    if(classRoom._id == val.classRoomId )
+                                      th ተራ. ቁጥር
+                                      th ስም
+                                        font(style="color:white")
+                                          ስምስምስምስምስምስም
+                                      th ID
+                                      th ከ#{val.MarkListColumn_1_name}
+                                      th ከ#{val.MarkListColumn_2_name}
+                                      th ከ#{val.MarkListColumn_3_name}
+                                      th ከ#{val.MarkListColumn_4_name}
+                                      th ከ#{val.MarkListColumn_5_name}
+                                      th ከ#{val.MarkListColumn_6_name}
+                                      th ከ#{val.MarkListColumn_7_name}
+                                      th ከከከ#{val.MarkListColumn_8_name}
+                                      th ከከከ#{val.MarkListColumn_9_name}
+                                      th ከከከ#{val.MarkListColumn_10_name}
+                                      th ከ100
+                                      th ደረጃ  
+                              tbody
+                                script.
+                                  var rank = 1
+                                each val in returnedCourse.markList
+                                  tr
+                                    if(classRoom._id == val.classRoomId )
+                                      td 
+                                        div(id="rank_#{val.studentId._id}")
+                                      td #{val.studentId.name}
+                                      td _______
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 1,document.getElementById('#{val.studentId._id}_1').value)" id = "#{val.studentId._id}_1" value="#{val.column_1_value}")
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 2,document.getElementById('#{val.studentId._id}_2').value)" id = "#{val.studentId._id}_2" value="#{val.column_2_value}")
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 3,document.getElementById('#{val.studentId._id}_3').value)" id = "#{val.studentId._id}_3" value="#{val.column_3_value}")
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 4,document.getElementById('#{val.studentId._id}_4').value)" id = "#{val.studentId._id}_4" value="#{val.column_4_value}")
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 5,document.getElementById('#{val.studentId._id}_5').value)" id = "#{val.studentId._id}_5" value="#{val.column_5_value}")
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 6,document.getElementById('#{val.studentId._id}_6').value)" id = "#{val.studentId._id}_6" value="#{val.column_6_value}")
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 7,document.getElementById('#{val.studentId._id}_7').value)" id = "#{val.studentId._id}_7" value="#{val.column_7_value}")
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 8,document.getElementById('#{val.studentId._id}_8').value)" id = "#{val.studentId._id}_8" value="#{val.column_8_value}")
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 9,document.getElementById('#{val.studentId._id}_9').value)" id = "#{val.studentId._id}_9" value="#{val.column_9_value}")
+                                      td 
+                                        input(type="text" class="form-control" style= "padding: 0rem 0rem;" onChange="registerChanges('#{val.studentId._id}', 10,document.getElementById('#{val.studentId._id}_10').value)" id = "#{val.studentId._id}_10" value="#{val.column_10_value}")
+                                      td 
+                                        div(id="#{val.studentId._id}")
+                                      td 
+                                        div(id="rank2_#{val.studentId._id}")
+                                      script.
+                                        var totalMarks = #{val.column_1_value} + #{val.column_2_value} + #{val.column_3_value} + #{val.column_4_value} + #{val.column_5_value} + #{val.column_6_value} + #{val.column_7_value} + #{val.column_8_value} + #{val.column_9_value} + #{val.column_10_value}
+                                        document.getElementById('#{val.studentId._id}').innerText =  totalMarks
+                                        document.getElementById('rank_#{val.studentId._id}').innerText =  rank
+                                        document.getElementById('rank2_#{val.studentId._id}').innerText =  rank
+                                        rank += 1
+                                        
+
+
+                          // /.card-body
+
+                      #attendance.tab-pane
+                        .card
+                          .card-header
+                            h3.card-title DataTable with default features
+                          // /.card-header
+                          .card-body(style="overflow-x:auto")
+                            table#example3.table.table-bordered.table-striped
+                              thead
+                                tr
+                                  th
+                                    span(style="writing-mode: vertical-rl") ተራ.ቁጥር
+                                  th(style="width:'30%'") ስም
+                                  th ID
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  th
+                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                              tbody
+                                tr
+                                  td 1
+                                  td አብረሀም ጌታቸው
+                                  td ETS0084/06
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary2(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary3(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary4(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary5(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                tr
+                                  td 2
+                                  td ሩት ጌታቸው
+                                  td ETS0085/06
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                tr
+                                  td 3
+                                  td ጌታቸው ብሩ
+                                  td ETS0086/06
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                tr
+                                  td 4
+                                  td ሶስና ሰሀሉ
+                                  td ETS0087/06
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                tr
+                                  td 5
+                                  td አብረሀም ጌታቸው
+                                  td ETS0088/06
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td 
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                                  td  
+                                    .icheck-primary.d-inline
+                                      input#checkboxPrimary1(type='checkbox' checked='')
+                                      label(for='checkboxPrimary1')
+                          // /.card-body
+                      #detail.tab-pane
+                        .row
+                          .col-md-3
+                            // Profile Image
+                            .card.card-primary.card-outline
+                              .card-body.box-profile
+                                .text-center
+                                  img.profile-user-img.img-fluid.img-circle(src='http://localhost:3000/SharedComponents/static/logo.jpg', alt='User profile picture')
+                                |                 
+                                h3.profile-username.text-center #{returnedCourse.name}
+                                |                 
+                                p.text-muted.text-center 
+                                |                 
+                                ul.list-group.list-group-unbordered.mb-3
+                                  li.list-group-item
+                                    b የተከፈተበት ቀን
+                                    p #{returnedCourse.createdAt}
+                                  li.list-group-item
+                                    b መስራች
+                                    p #{returnedCourse.createdBy}
+                              // /.card-body
+                            // /.card
+                            // About Me Box
+                          .col-md-9
+                            .card
+                              .card-header.p-2
+                                ul.nav.nav-pills                 
+                                  li.nav-item
+                                    a.nav-link.active(href='#settings', data-toggle='tab') Settings
+                              // /.card-header
+                              .card-body
+                                .tab-content
+                                  #settings.active.tab-pane
+                                    ul.list-group.list-group-unbordered.mb-3
+                                      li.list-group-item
+                                        b ዝርዝር
+                                        p #{returnedCourse.description}
+                                    form(method="post", action="../Gubaye/Update").form-horizontal
+                                      .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputName') የጉባኤው ስም
+                                        |                         
+                                        .col-sm-10
+                                          input.form-control(type='text', placeholder='የጋባኤው ስም', value="#{returnedCourse.name}", id="name", name='name')
+                                        |                       
+                                      .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputEmail') ዝርዝር
+                                        |                         
+                                        .col-sm-10
+                                          input.form-control(type='text', placeholder='ዝርዝር', value="#{returnedCourse.description}", id="description", name='description')
+                                      |                      
+                                      .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputTel') ጉባኤ አስተዳዳሪ
+                                        |                         
+                                        .col-sm-10
+                                          input.form-control(type='text', placeholder='ጉብኤ አስተዳዳሪ', value="#{returnedCourse.createdBy}", id="admin", name='admin') 
+                                          input(type='hidden', placeholder='የጋባኤው ስም', value="#{returnedCourse.createdAt}", name='_id', id='_id')
+                                  // /.tab-pane
+                                // /.tab-content
+                              // /.card-body
+                            // /.nav-tabs-custom
+                          // /.col
+                    // /.tab-content
+                  // /.card-body
+                // /.nav-tabs-custom
+              // /.col
+            // /.row
+          // /.container-fluid
+        // Main content
+        section.content
+          .container-fluid
+          // /.container-fluid
+        // /.content
+      // /.content-wrapper
+      footer.main-footer
+        .float-right.d-none.d-sm-block
+          b Version
+          |  3.0.2-pre
+        |     
+        strong
+          | Copyright &copy; 2014-2019 
+          a(href='http://adminlte.io') AdminLTE.io
+          | .
+        |  All rights
+        |     reserved.
+      // Control Sidebar
+      aside.control-sidebar.control-sidebar-dark
+        // Control sidebar content goes here
+      // /.control-sidebar
+    // ./wrapper
+    // jQuery
+    script(src='http://localhost:3000/ADMINLITE/plugins/jquery/jquery.min.js')
+    // Bootstrap 4
+    script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    // AdminLTE App
+    script(src='http://localhost:3000/ADMINLITE/dist/js/adminlte.min.js')
+    // AdminLTE for demo purposes
+    script(src='http://localhost:3000/ADMINLITE/dist/js/demo.js')
+    script(src="http://localhost:3000/ADMINLITE/plugins/datatables/jquery.dataTables.js")
+    script(src="http://localhost:3000/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js")
+    script.
+      document.getElementById('3').className = "nav-link active"
+      document.getElementById('#{user.GubayeID}').className = "nav-link active"
+    script(src="http://localhost:3000/Workspaces/SierateTimhert/js/classRoomCourseTSDA.js")

@@ -183,13 +183,47 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     })
                 })
     });
-    router.post('/Gubaye_Nius_Sebsabi/upload/courseoutline', mid.requiresToBeSTKNS,
+    router.post('/Gubaye_Nius_Sebsabi/upload/:courseId/courseoutline', mid.requiresToBeSTKNS,
      upload.single('courseOutlineFile'), function(req,res,next){
-        res.json(req.file)
+         var courseId = req.params.courseId;
+        course_ModelAccessor.courseDetail(courseId,function(error, singleCourse){
+            singleCourse.courseOutline = "http://localhost:3000/Workspaces/SierateTimhert/static/" + req.file.originalname
+            course_ModelAccessor.editCourse(courseId,{courseOutline:singleCourse.courseOutline},function(error,confirmation){
+                if(error)
+                {
+                    next(error)
+                }
+                else
+                {
+                    var url="http://localhost:3000/SirateTimhert/course/nius_sebsabi/"+courseId
+                    res.redirect(url) 
+                }
+            })
+        })
+
     });
-    router.post('/Gubaye_Nius_Sebsabi/upload/book', mid.requiresToBeSTKNS,
+    router.post('/Gubaye_Nius_Sebsabi/upload/:courseId/book', mid.requiresToBeSTKNS,
     upload.single('bookFile'), function(req,res,next){
-       res.json(req.file)
+        var courseId = req.params.courseId;
+        course_ModelAccessor.courseDetail(courseId,function(error,singleCourse){
+            singleCourse.books.push({bookName:"NONE",filePath:req.file.originalname})
+            course_ModelAccessor.editCourse(courseId,{books:singleCourse.books},function(error,confirmation){
+                if(error)
+                {
+                    
+                    // res.json(books)
+                    next(error)
+                }
+                else
+                {
+                    var url="http://localhost:3000/SirateTimhert/course/nius_sebsabi/"+courseId
+                    console.log(confirmation)
+                    
+                    res.json(confirmation)
+                    // res.redirect(url) 
+                }
+            })
+        })
     });
     router.post('/Gubaye_Nius_Sebsabi/course/new',function(req,res,next){
         course_ModelAccessor.createCourse(req.body.name, req.body.description,req.user._id,(error, newCourse)=>{
@@ -233,12 +267,12 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                 UserModelAccessor.userObjectByTel(tela,function(error, userWithName){
                                     for(var i = 0; i<users.length; i++)
                                     {
-
                                         users[i].name = userWithName[i].name
                                     }
                                     req.session.user.allusers = users;
                                     classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedClass){
                                         req.session.unjoinedCourses = unjoinedCourses
+                                        console.log("JoinedClass ",JoinedClass)
                                         req.session.JoinedClass = JoinedClass;
                                     return res.render("Workspaces/SierateTimhert/templates/GubayeTSDM.jade",req.session)
                                     })
@@ -292,6 +326,142 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
         });
     })
+    router.get('/course/sebsabi/:courseId/:gubayeId',mid.requiresToBeLeader, function(req,res,next){
+        course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
+        { 
+            if(error)
+            {
+                next(error)
+            }
+            else
+            {
+                console.log("returnedCourse",returnedCourse.markList.sort((a,b)=> {
+                    var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
+                        + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
+                    var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
+                        + b.column_6_value + b.column_7_value + b.column_8_value + b.column_9_value + b.column_10_value);
+
+                    return aColumn - bColumn
+                }))
+                req.session.returnedCourse = returnedCourse;
+                course_ModelAccessor.allCourses((courses)=>{
+                    req.session.courses = courses
+                    var gubayeIds = []
+                    gubayeIds.pop();
+                    returnedCourse.markListColumnName.forEach(courseColumnName => {
+                        gubayeIds.push(courseColumnName.classRoomId)
+                    })
+                                UserModelAccessor.userData(returnedCourse.createdBy,function(error,user)
+                                {
+                                    console.log(returnedCourse)
+                                    req.session.returnedCourse.createdBy = user.name;
+                                    classRoom_ModelAccessor.gubayeDetail(req.params.gubayeId, function(error,classRoom){
+                                        req.session.classRoom = classRoom;
+                                        return res.render("Workspaces/SierateTimhert/templates/courseClassRoomTDA.jade",req.session)                    
+                                    })
+                                })                          
+                })
+            }
+        });
+    })
+    router.get('/course/Gubaye_Nius_Sebsabi/:courseId/:gubayeId',mid.requiresToBeSTKNS, function(req,res,next){
+        course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
+        { 
+            if(error)
+            {
+                next(error)
+            }
+            else
+            {
+                console.log("returnedCourse",returnedCourse.markList.sort((a,b)=> {
+                    var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
+                        + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
+                    var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
+                        + b.column_6_value + b.column_7_value + b.column_8_value + b.column_9_value + b.column_10_value);
+
+                    return aColumn - bColumn
+                }))
+                req.session.returnedCourse = returnedCourse;
+                course_ModelAccessor.allCourses((courses)=>{
+                    req.session.courses = courses
+                    var gubayeIds = []
+                    gubayeIds.pop();
+                    returnedCourse.markListColumnName.forEach(courseColumnName => {
+                        gubayeIds.push(courseColumnName.classRoomId)
+                    })
+                                UserModelAccessor.userData(returnedCourse.createdBy,function(error,user)
+                                {
+                                    console.log(returnedCourse)
+                                    req.session.returnedCourse.createdBy = user.name;
+                                    classRoom_ModelAccessor.gubayeDetail(req.params.gubayeId, function(error,classRoom){
+                                        req.session.classRoom = classRoom;
+                                        return res.render("Workspaces/SierateTimhert/templates/courseClassRoomTSDA.jade",req.session)                    
+                                    })
+                                })                          
+                })
+            }
+        });
+    })
+    router.get('/course/Gubaye_Nius_Abal/:courseId/:gubayeId',mid.requiresToBeSTKNA, function(req,res,next){
+        course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
+        { 
+            if(error)
+            {
+                next(error)
+            }
+            else
+            {
+                console.log("returnedCourse",returnedCourse)
+                req.session.returnedCourse = returnedCourse;
+                course_ModelAccessor.allCourses((courses)=>{
+                    req.session.courses = courses
+                    var gubayeIds = []
+                    gubayeIds.pop();
+                    returnedCourse.markListColumnName.forEach(courseColumnName => {
+                        gubayeIds.push(courseColumnName.classRoomId)
+                    })
+                                UserModelAccessor.userData(returnedCourse.createdBy,function(error,user)
+                                {
+                                    req.session.returnedCourse.createdBy = user.name;
+                                    classRoom_ModelAccessor.gubayeDetail(req.params.gubayeId, function(error,classRoom){
+                                        req.session.classRoom = classRoom;
+                                        return res.render("Workspaces/SierateTimhert/templates/courseClassRoomTSDM.jade",req.session)                    
+                                    })
+                                })                          
+                })
+            }
+        });
+    })
+    router.get('/course/public/:courseId/:gubayeId', function(req,res,next){
+        course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
+        { 
+            if(error)
+            {
+                next(error)
+            }
+            else
+            {
+                console.log("returnedCourse",returnedCourse)
+                req.session.returnedCourse = returnedCourse;
+                course_ModelAccessor.allCourses((courses)=>{
+                    req.session.courses = courses
+                    var gubayeIds = []
+                    gubayeIds.pop();
+                    returnedCourse.markListColumnName.forEach(courseColumnName => {
+                        gubayeIds.push(courseColumnName.classRoomId)
+                    })
+                                UserModelAccessor.userData(returnedCourse.createdBy,function(error,user)
+                                {
+                                    req.session.returnedCourse.createdBy = user.name;
+                                    classRoom_ModelAccessor.gubayeDetail(req.params.gubayeId, function(error,classRoom){
+                                        req.session.classRoom = classRoom;
+                                        return res.render("Workspaces/SierateTimhert/templates/courseClassRoomPublic.jade",req.session)                    
+                                    })
+                                })                          
+                })
+            }
+        });
+    })
     router.get('/course/nius_sebsabi/:courseId',mid.requiresToBeSTKNS, function(req,res,next){
         course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
         {
@@ -305,11 +475,31 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
-                    return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)
+                    var gubayeIds = []
+                    gubayeIds.pop();
+                    returnedCourse.markListColumnName.forEach(courseColumnName => {
+                        gubayeIds.push(courseColumnName.classRoomId)
+                    })
+                    classRoom_ModelAccessor.gubayeIdArrayToNameArray(gubayeIds, 
+                        function(error,gubayeNameArr){
+                            if(error)
+                            {
+                                next(error)
+                            }
+                            else
+                            {
+                                req.session.classRooms = gubayeNameArr;
+                                UserModelAccessor.userData(returnedCourse.createdBy,function(error,user){
+                                    req.session.returnedCourse.createdBy = user.name;
+                                    console.log(gubayeNameArr)
+                                    return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)                    
+                                })
+                            }
+                        })
+
                 })
             }
         });
-
     })
     router.get('/course/remove/:courseID/:gubayeId',mid.requiresToBeSTKNS, function(req,res,next){
         var courseId = req.params.courseID;
@@ -328,7 +518,9 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
         })
 
     })
-
+    //for removing course : Deleting Course
+        // What should happen when a course is removed or deleted?
+         
     // For Department Admins
 router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader, function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){

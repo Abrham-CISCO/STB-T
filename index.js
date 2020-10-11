@@ -8,6 +8,7 @@
   var session = require('express-session');
   var MongoStore = require('connect-mongo')(session);
   var passport = require('passport')
+  var autonumber = require('mongoose-auto-number')
 
 // Local Imports
   var authenticate = require('./Account/authenticate')
@@ -37,6 +38,7 @@
   //mongoose connection
   mongoose.connect(config.mongoUrl);
   var db = mongoose.connection;
+  autonumber.init(db)
   //mongo error
   db.on('error', console.error.bind(console, 'connection error:'));
 // Sessions setup : for storing sessions data on mongodb via mongoose
@@ -173,10 +175,13 @@ app.use(function(err,req,res,next){
 
 // Creating An Express server 
 http.listen(3000, () => {
-  console.log('listening on *:3000');
+  console.log('listening on port:3000');
+});
+
+app.get('/', function(req,res){
+  res.render('Account/templates/menu.jade');
 });
 
 // Display Homepage
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
+
+

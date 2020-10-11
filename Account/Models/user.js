@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var passportLocalMongoose = require('passport-local-mongoose');
 var passport = require('passport');
+var autoNumber = require('mongoose-auto-number')
+
 var ClassRoomSchema = new mongoose.Schema({
 class_ID:{type:String,required:true},
 name:{type:String,default:"ጉባኤ"}
@@ -13,6 +15,7 @@ var UserSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    STB_ID:{type:Number,autoIncreament:true},
     RegDate: {
         type: Date,
         default: Date.now
@@ -342,6 +345,7 @@ UserSchema.statics.addMember = function(telephoneArray, groupID, groupName, call
 }
 
 UserSchema.plugin(passportLocalMongoose);
+UserSchema.plugin(autoNumber.plugin,'User')
 
 User = mongoose.model('User',UserSchema);
 module.exports = User 

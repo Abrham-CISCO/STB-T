@@ -15,7 +15,7 @@ const createCourse = function(name, description, createdBy, callback)
 
 const courseDetail = function(courseId,callback)
 {
-    course.findById(courseId).then((courseDetails)=>{callback(null, courseDetails)}).catch((error)=>{callback(error, false)});
+    course.findById(courseId).populate('markList.studentId').then((courseDetails)=>{callback(null, courseDetails)}).catch((error)=>{callback(error, false)});
 }
 
 // const courseDetailPR(courseId) = new Promise((successFunction, failureFunction)=>{
@@ -67,14 +67,9 @@ const addCourse = function(courseIdArray, gubayeId, callback)
                 MarkListColumn_5_name:"10",
                 MarkListColumn_6_name:"10",
                 MarkListColumn_7_name:"10",
-                MarkListcolumn_8_name:"10",
-                MarkListcolumn_9_name:"10",
-                MarkListcolumn_10_name:"10",
-                MarkListColumn_11_name:"10",
-                MarkListColumn_12_name:"10",
-                MarkListColumn_13_name:"10",
-                MarkListColumn_14_name:"10",
-                MarkListColumn_15_name:"10"
+                MarkListColumn_8_name:"10",
+                MarkListColumn_9_name:"10",
+                MarkListColumn_10_name:"10"
             }
             singleCourse.markListColumnName.push(defaultMarkListName);
             singleCourse.save();
@@ -82,6 +77,12 @@ const addCourse = function(courseIdArray, gubayeId, callback)
         }).catch((error) => {callback(error)});
     });
 }
+
+const editCourse = (courseId, inputObject, callback) => {
+    course.findByIdAndUpdate(courseId,{$set:inputObject}).then((confirmation)=>{
+        callback(null,confirmation);
+    }).catch((error) => {callback(error)});
+} 
 
 const courseIds = (nameArray, callback) => {
     var searchObj = {
@@ -335,6 +336,7 @@ exports.updateCourseDetail = updateCourseDetail;
 exports.addCourse = addCourse;
 exports.allCourses = allCourses;
 exports.courseIds = courseIds;
+exports.editCourse = editCourse;
 
 exports.addBook = addBook;
 exports.booksByCourse = booksByCourse;

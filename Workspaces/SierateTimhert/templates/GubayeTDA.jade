@@ -29,17 +29,14 @@ html
         section.content-header
           .container-fluid
             .row.mb-2
-              .col-sm-9
+              .col-sm-12
                 h1 #{user.gubaye.name}
-                br
-                h6 #{user.gubaye.description}
               |           
-              .col-sm-3
+              .col-sm-12
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
-                    a(href='#') Home
-                  |               
-                  li.breadcrumb-item.active User Profile
+                    a(href='http://localhost:3000/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
+                  li.breadcrumb-item.active ጉባኤ #{user.gubaye.name}
             .row
               .col-md-12
                 .card
@@ -51,8 +48,6 @@ html
                         a.nav-link(href='#member', data-toggle='tab') አባላት
                       li.nav-item
                         a.nav-link(href='#education', data-toggle='tab') ትምህርት
-                      li.nav-item
-                        a.nav-link(href='#attendance', data-toggle='tab') አቴንዳንስ
                   // /.card-header
                   .card-body
                     .tab-content
@@ -177,7 +172,6 @@ html
                                 li
                                   img(src="../#{val.pro_img}" alt="User Image")
                                   a.users-list-name(href="http://localhost:3000/accounts/public/profile/#{val.telephone}") #{val.name}
-                      #attendance.tab-pane
                       #education.tab-pane
                         .row
                           .col-6  
@@ -185,7 +179,7 @@ html
                               each val in JoinedClass
                                 li
                                   img(src="http://localhost:3000/SharedComponents/static/logo.jpg" alt="User Image")
-                                  a.users-list-name(href="http://localhost:3000/accounts/public/profile/") #{val.name}
+                                  a.users-list-name(href="http://localhost:3000/SirateTimhert/course/sebsabi/#{val.id}/#{user.gubaye._id}") #{val.name}
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom

@@ -29,17 +29,14 @@ html
         section.content-header
           .container-fluid
             .row.mb-2
-              .col-sm-9
+              .col-sm-12
                 h1 #{returnedCourse.name}
-                br
-                h6 #{returnedCourse.description}
               |           
-              .col-sm-3
+              .col-sm-12
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
-                    a(href='#') Home
-                  |               
-                  li.breadcrumb-item.active User Profile
+                    a(href='http://localhost:3000/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
+                  li.breadcrumb-item.active #{returnedCourse.name}
             .row
               .col-md-12
                 .card
@@ -94,7 +91,7 @@ html
                                 .info-box-icon.bg-info
                                   .fas.fa-users
                                 .info-box-content 
-                                  a(href="http://localhost:3000/SirateTimhert/Gubaye_Sebsabi")
+                                  a(href="http://localhost:3000/SirateTimhert/course/sebsabi/#{returnedCourse._id}/#{gubaye._id}")
                                     span.info-box-text #{gubaye.name}
                                   span.info-box-text የአባላት ብዛት ፡ #{gubaye.membersCount}
                                   span.info-box-text አስተባባሪ ፡ #{gubaye.leader} 
