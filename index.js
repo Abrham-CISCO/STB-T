@@ -143,7 +143,24 @@ app.use(passport.session());
         });
       });
     });
-  // Parse to JSON
+  
+    var course = io.of('/course')
+    course.on('connection', (socket)=>
+    {
+      socket.on('updateCourse', function(registeredChanges, courseId, gubayeId){
+        Course_ModelAccessor.UpdateMarkList(registeredChanges, gubayeId, courseId, function(error,notification){
+          console.log(notification)
+          socket.emit('updateCourse',"Created")
+        })
+
+      });
+    })
+
+    // var socket = io.of('/course');
+    // socket.emit('updateCourse',registeredChanges, courseId, gubayeId);
+
+
+    // Parse to JSON
   app.use(express.json());
   app.use(express.urlencoded({extended: true}));
   

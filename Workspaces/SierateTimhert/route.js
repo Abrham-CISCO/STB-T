@@ -335,7 +335,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                console.log("returnedCourse",returnedCourse.markList.sort((a,b)=> {
+                console.log("returnedCourse",returnedCourse.markList.sort((b,a)=> {
                     var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
                         + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
                     var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
@@ -357,6 +357,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                     req.session.returnedCourse.createdBy = user.name;
                                     classRoom_ModelAccessor.gubayeDetail(req.params.gubayeId, function(error,classRoom){
                                         req.session.classRoom = classRoom;
+                                        console.log("returnedCourse.attendance",returnedCourse.attendance)
                                         return res.render("Workspaces/SierateTimhert/templates/courseClassRoomTDA.jade",req.session)                    
                                     })
                                 })                          
@@ -373,7 +374,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                console.log("returnedCourse",returnedCourse.markList.sort((a,b)=> {
+                console.log("returnedCourse",returnedCourse.markList.sort((b,a)=> {
                     var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
                         + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
                     var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
@@ -411,7 +412,14 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                console.log("returnedCourse",returnedCourse)
+                console.log("returnedCourse",returnedCourse.markList.sort((b,a)=> {
+                    var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
+                        + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
+                    var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
+                        + b.column_6_value + b.column_7_value + b.column_8_value + b.column_9_value + b.column_10_value);
+
+                    return aColumn - bColumn
+                }))
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
@@ -422,10 +430,11 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     })
                                 UserModelAccessor.userData(returnedCourse.createdBy,function(error,user)
                                 {
+                                    console.log(returnedCourse)
                                     req.session.returnedCourse.createdBy = user.name;
                                     classRoom_ModelAccessor.gubayeDetail(req.params.gubayeId, function(error,classRoom){
                                         req.session.classRoom = classRoom;
-                                        return res.render("Workspaces/SierateTimhert/templates/courseClassRoomTSDM.jade",req.session)                    
+                                        return res.render("Workspaces/SierateTimhert/templates/courseClassRoomTSDm.jade",req.session)                    
                                     })
                                 })                          
                 })

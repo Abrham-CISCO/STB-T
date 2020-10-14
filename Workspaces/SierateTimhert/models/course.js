@@ -7,11 +7,12 @@ var attendanceSchema = new mongoose.Schema({
   abscent:{type:Boolean},
   late:{type:Boolean},
   permission:{type:Boolean},
-  remark:{type:Boolean},
+  remark:{type:String},
   lateTime:{type:String}
 },{timestamps:true})
 var markListSchema = new mongoose.Schema({
     studentId:{type:mongoose.Schema.Types.ObjectId, ref:'User'},
+    // use mongoose populate
     classRoomId:{type:String},
     studentTelephone:{type:String},
     column_1_value:{type:String},
@@ -71,5 +72,7 @@ var courseSchema = new mongoose.Schema({
     markList:[markListSchema]
 },{timestamps:true})
 
+
 var course = mongoose.model('course',courseSchema);
 module.exports = course
+

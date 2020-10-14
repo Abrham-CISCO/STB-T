@@ -65,7 +65,7 @@ html
                               .col-11
                                 h3.card-title #{returnedCourse.name} ኮርስ የነጥብ ሰንጠረዥ
                               .col-1
-                                button(type="button" class="btn btn-block btn-primary") Save
+                                button(type="button" class="btn btn-block btn-primary" onclick = "save('#{returnedCourse._id}', '#{classRoom._id}')") Save
                             
                           // /.card-header
                           .card-body(style="overflow-x:auto")

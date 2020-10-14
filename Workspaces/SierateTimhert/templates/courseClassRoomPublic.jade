@@ -93,6 +93,7 @@ html
                                       script.
                                         rank += 1
                                       if(user._id == val.studentId._id)
+                                        
                                         td 
                                           div(id="rank_#{val.studentId._id}")
                                         td #{val.studentId.name}
@@ -114,9 +115,9 @@ html
                                         script.
                                           var totalMarks = #{val.column_1_value} + #{val.column_2_value} + #{val.column_3_value} + #{val.column_4_value} + #{val.column_5_value} + #{val.column_6_value} + #{val.column_7_value} + #{val.column_8_value} + #{val.column_9_value} + #{val.column_10_value}
                                           document.getElementById('#{val.studentId._id}').innerText =  totalMarks
-                                          document.getElementById('rank_#{val.studentId._id}').innerText =  rank
-                                          document.getElementById('rank2_#{val.studentId._id}').innerText =  rank
-                                          rank += 1
+                                          document.getElementById('rank_#{val.studentId._id}').innerText =  rank - 1
+                                          document.getElementById('rank2_#{val.studentId._id}').innerText =  rank - 1
+                                    
                                         
 
 

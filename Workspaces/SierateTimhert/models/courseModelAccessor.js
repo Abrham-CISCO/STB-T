@@ -154,14 +154,14 @@ const MarkListByClassRoom = (courseId, classRoomId, callback) => {
     }).catch((error)=>{callback(error, false)})   
 }
 
-const UpdateMarkList = (courseId, InputObject, classRoomId, callback) => {
-    course.findById(courseId).then((singleCourse)=>{
-        singleCourse.markList = InputObject;
-        singleCourse.save().then((notification) => {
-          callback(null, singleCourse);  
-        }).catch((error)=>{callback(error, false)})
-    }).catch((error)=>{callback(error, false)})   
-}
+// const UpdateMarkList = (courseId, InputObject, classRoomId, callback) => {
+//     course.findById(courseId).then((singleCourse)=>{
+//         singleCourse.markList = InputObject;
+//         singleCourse.save().then((notification) => {
+//           callback(null, singleCourse);  
+//         }).catch((error)=>{callback(error, false)})
+//     }).catch((error)=>{callback(error, false)})   
+// }
 
 const DeleteMarkListByClassroom = (courseId, classRoomId, callback) =>
 {
@@ -304,6 +304,66 @@ const removeAttendanceByClass = (courseId, classRoomId, callback) => {
             singleCourseAndClassAttendance.remove();
         })
     }).catch((error)=>{callback(error, false)})
+}
+
+// Write a function that accepts student's mark as an array and register it on the database.
+
+// function registerChanges(userId, coulumnNumber, value, gubayeId, courseId)
+const UpdateMarkList = (changes, gubayeId, courseId, callback) => {
+    course.findById(courseId).then((singleCourse)=>{
+        changes.forEach((change)=>{
+            singleCourse.markList.forEach((student)=>{
+                if(student.studentId == change.userId && student.classRoomId == gubayeId)
+                {
+                    console.log(change.columnNumber)
+                    if(change.columnNumber == 1)
+                    {
+                        student.column_1_value = change.value
+                    }
+                    else if(change.columnNumber == 2)
+                    {
+                        student.column_2_value = change.value
+                    }
+                    else if(change.columnNumber == 3)
+                    {
+                        student.column_3_value = change.value
+                    }
+                    else if(change.columnNumber == 4)
+                    {
+                        student.column_4_value = change.value
+                    }
+                    else if(change.columnNumber == 5)
+                    {
+                        student.column_5_value = change.value
+                    }
+                    else if(change.columnNumber == 6)
+                    {
+                        student.column_6_value = change.value
+                    }
+                    else if(change.columnNumber == 7)
+                    {
+                        student.column_7_value = change.value
+                    }
+                    else if(change.columnNumber == 8)
+                    {
+                        student.column_8_value = change.value
+                    }
+                    else if(change.columnNumber == 9)
+                    {
+                        student.column_9_value = change.value
+                    }
+                    else if(change.columnNumber == 10)
+                    {
+                        student.column_10_value = change.value
+                    }
+
+                }
+            })  
+        })
+        singleCourse.save().then((notification)=>{
+            callback(null, notification)
+        })
+    })
 }
 
 // Marklist Sub-docuement - create, edit, remove, read
