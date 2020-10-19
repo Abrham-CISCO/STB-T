@@ -139,7 +139,11 @@ html
                       #attendance.tab-pane
                         .card
                           .card-header
-                            h3.card-title DataTable with default features
+                            .row  
+                              .col-11
+                                h3.card-title #{returnedCourse.name} Attendance
+                              .col-1
+                                button(type="button" class="btn btn-block btn-primary" onclick = "saveAttAbscent('#{returnedCourse._id}', '#{classRoom._id}')") Save
                           // /.card-header
                           .card-body(style="overflow-x:auto")
                             table#example3.table.table-bordered.table-striped
@@ -149,380 +153,38 @@ html
                                     span(style="writing-mode: vertical-rl") ተራ.ቁጥር
                                   th(style="width:'30%'") ስም
                                   th ID
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  each val in returnedCourse.attendanceColumnName
+                                    th
+                                      span(style="writing-mode: vertical-rl") #{val.columnName}
+                                  
                               tbody
-                                tr
-                                  td 1
-                                  td አብረሀም ጌታቸው
-                                  td ETS0084/06
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary2(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary3(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary4(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary5(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                tr
-                                  td 2
-                                  td ሩት ጌታቸው
-                                  td ETS0085/06
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                tr
-                                  td 3
-                                  td ጌታቸው ብሩ
-                                  td ETS0086/06
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                tr
-                                  td 4
-                                  td ሶስና ሰሀሉ
-                                  td ETS0087/06
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                tr
-                                  td 5
-                                  td አብረሀም ጌታቸው
-                                  td ETS0088/06
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td 
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                                  td  
-                                    .icheck-primary.d-inline
-                                      input#checkboxPrimary1(type='checkbox' checked='')
-                                      label(for='checkboxPrimary1')
-                          // /.card-body
+                                script.
+                                  var rank = 0
+                                each val in returnedCourse.markList
+                                  tr
+                                    td                                         
+                                      div(id="number_#{val.studentId._id}")
+                                    td #{val.studentId.name}
+                                    td ETS0084/06
+                                    each val1 in returnedCourse.attendance
+                                      if(val.studentId._id == val1.studentId && val1.classRoomId == classRoom._id)
+                                        td 
+                                          .icheck-primary.d-inline
+                                            if(val1.abscent == 1)
+                                              input(id="#{val1._id}" type='checkbox' onclick = "registerAttAbscentChanges('#{val1.studentId}', '#{val1._id}', document.getElementById('#{val1._id}').checked)")
+                                              label(for='#{val1._id}')
+                                            if(val1.abscent == 0)
+                                              input(id="#{val1._id}" type='checkbox' onclick = "registerAttAbscentChanges('#{val1.studentId}', '#{val1._id}', document.getElementById('#{val1._id}').checked)" checked='true')
+                                              label(for='#{val1._id}')
+                                          
+                                          //- if(#{val1.abscent} = false)
+                                          //-   input#checkboxPrimary1(type='checkbox')
+                                          //-   label(for='checkboxPrimary1')
+                                    script.
+                                      rank = 1 + rank
+                                      document.getElementById('number_#{val.studentId._id}').innerText =  rank
+ 
+                         // /.card-body
                       #detail.tab-pane
                         .row
                           .col-md-3

@@ -309,6 +309,161 @@ const removeAttendanceByClass = (courseId, classRoomId, callback) => {
 // Write a function that accepts student's mark as an array and register it on the database.
 
 // function registerChanges(userId, coulumnNumber, value, gubayeId, courseId)
+const upadteAttenance = (changes, gubayeId, courseId, callback) => {
+    var index = 0;
+    course.findById(courseId).then((singleCourse)=>{
+        changes.forEach((change)=>{
+            index=0
+            singleCourse.attendance.forEach((update)=>{
+                console.log(update)
+                console.log(update._id, change.att_id,"update._id == change.att_id > ",update._id == change.att_id,"change.abscent",change.abscent)
+                if(update._id == change.att_id)
+                {
+                    console.log("detected")
+                    if(change.abscent == true)
+                    {
+                        singleCourse.attendance[index].abscent = 1
+                    }
+                    else if(change.abscent == false)
+                    {
+                        singleCourse.attendance[index].abscent = 0                        
+                    }
+                }
+                index += 1;
+            })
+        })
+        singleCourse.save().then((notification)=>{
+            callback(null, notification)
+        })
+    })
+}
+const populateAttendance = (callback) => {
+    var attendanceObj = 
+        [{
+          date:"2020-10-13T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f73319b790b6f11e86ea032",
+          studentTelephone:"0923276856",
+          abscent:0,
+          late:false,
+          permission:0,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-14T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f73319b790b6f11e86ea032",
+          studentTelephone:"0923276856",
+          abscent:0,
+          late:false,
+          permission:1,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-15T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f73319b790b6f11e86ea032",
+          studentTelephone:"0923276856",
+          abscent:true,
+          late:false,
+          permission:0,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-16T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f73319b790b6f11e86ea032",
+          studentTelephone:"0923276856",
+          abscent:0,
+          late:false,
+          permission:false,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-17T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f73319b790b6f11e86ea032",
+          studentTelephone:"0923276856",
+          abscent:0,
+          late:false,
+          permission:false,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-18T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f73319b790b6f11e86ea032",
+          studentTelephone:"0923276856",
+          abscent:0,
+          late:false,
+          permission:false,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-13T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f7330cbd5b3622e84071f08",
+          studentTelephone:"0923276844",
+          abscent:false,
+          late:false,
+          permission:0,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-14T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f7330cbd5b3622e84071f08",
+          studentTelephone:"0923276844",
+          abscent:true,
+          late:false,
+          permission:1,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-15T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f7330cbd5b3622e84071f08",
+          studentTelephone:"0923276844",
+          abscent:true,
+          late:false,
+          permission:0,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-16T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f7330cbd5b3622e84071f08",
+          studentTelephone:"0923276844",
+          abscent:0,
+          late:false,
+          permission:false,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-17T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f7330cbd5b3622e84071f08",
+          studentTelephone:"0923276844",
+          abscent:1,
+          late:false,
+          permission:false,
+          remark:"No remark",
+          lateTime:""
+        },{
+          date:"2020-10-18T17:23:09.850Z",
+          classRoomId:"5f74b6c8166e951ec4cc9351",
+          studentId:"5f7330cbd5b3622e84071f08",
+          studentTelephone:"0923276844",
+          abscent:1,
+          late:false,
+          permission:false,
+          remark:"No remark",
+          lateTime:""
+        }]
+        course.update({_id:"5f733239790b6f11e86ea043"},{$set:{attendance:attendanceObj}}).then((response)=>{
+            callback(null,response)
+        },(error)=>{callback(error)})
+}
 const UpdateMarkList = (changes, gubayeId, courseId, callback) => {
     course.findById(courseId).then((singleCourse)=>{
         changes.forEach((change)=>{
@@ -386,7 +541,7 @@ exports.upadteAttenanceElement = upadteAttenanceElement;
 exports.addAttenanceElement = addAttenanceElement;
 exports.removeAttendanceElement = removeAttendanceElement;
 exports.removeAttendanceByClass = removeAttendanceByClass;
-
+exports.upadteAttenance = upadteAttenance;
 
 exports.createCourse = createCourse;
 // exports.courseDetailPR = courseDetailPR;
@@ -401,3 +556,4 @@ exports.editCourse = editCourse;
 exports.addBook = addBook;
 exports.booksByCourse = booksByCourse;
 exports.deleteBook = deleteBook;
+exports.populateAttendance = populateAttendance

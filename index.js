@@ -152,13 +152,21 @@ app.use(passport.session());
           console.log(notification)
           socket.emit('updateCourse',"Created")
         })
-
+      });
+      socket.on('updateAttendance', function(registeredChanges, courseId, gubayeId){
+        Course_ModelAccessor.upadteAttenance(registeredChanges, gubayeId, courseId, function(error,notification){
+          console.log(notification)
+          socket.emit('updateAttendance',notification)
+        })
       });
     })
 
     // var socket = io.of('/course');
     // socket.emit('updateCourse',registeredChanges, courseId, gubayeId);
-
+    // populate course with sample data
+    // Course_ModelAccessor.populateAttendance(function(error,not){
+    //   console.log("Sample data populated!")
+    // }) 
 
     // Parse to JSON
   app.use(express.json());

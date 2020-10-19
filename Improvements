@@ -10,8 +10,6 @@ Notification
 
 Profile System
     Enable users to set up their profile image
-    The System shall start with default male pic for male users and defaut female pic for female users
-        use pre save middle ware to achieve this
     Add Sex
 User Navigation
     When gubaye is opened the gubaye menue should be active

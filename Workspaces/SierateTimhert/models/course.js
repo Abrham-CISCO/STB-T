@@ -4,12 +4,16 @@ var attendanceSchema = new mongoose.Schema({
   classRoomId:{type:String},
   studentId:{type:String},
   studentTelephone:{type:String},
-  abscent:{type:Boolean},
+  abscent:{type:Number},
   late:{type:Boolean},
   permission:{type:Boolean},
   remark:{type:String},
   lateTime:{type:String}
 },{timestamps:true})
+var attendanceColumnNameSchema = new mongoose.Schema({
+    columnName:{type:String},
+    remark:{type:String}
+})
 var markListSchema = new mongoose.Schema({
     studentId:{type:mongoose.Schema.Types.ObjectId, ref:'User'},
     // use mongoose populate
@@ -69,7 +73,8 @@ var courseSchema = new mongoose.Schema({
     attendance:[attendanceSchema],
     markListColumnName:[markListColumnNameSchema],
     books:[booksSchema],
-    markList:[markListSchema]
+    markList:[markListSchema],
+    attendanceColumnName:[attendanceColumnNameSchema]
 },{timestamps:true})
 
 

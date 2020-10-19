@@ -132,38 +132,10 @@ html
                                     span(style="writing-mode: vertical-rl") ተራ.ቁጥር
                                   th(style="width:'30%'") ስም
                                   th ID
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
-                                  th
-                                    span(style="writing-mode: vertical-rl") 01/01/2012
+                                  each val in returnedCourse.attendanceColumnName
+                                    th
+                                      span(style="writing-mode: vertical-rl") #{val.columnName}
+                                  
                               tbody
                                 script.
                                   var rank = 0
@@ -173,70 +145,20 @@ html
                                       div(id="number_#{val.studentId._id}")
                                     td #{val.studentId.name}
                                     td ETS0084/06
-                                    td 
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td 
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary2(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary3(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td 
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary4(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary5(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
-                                    td  
-                                      .icheck-primary.d-inline
-                                        input#checkboxPrimary1(type='checkbox' checked='')
-                                        label(for='checkboxPrimary1')
+                                    each val1 in returnedCourse.attendance
+                                      if(val.studentId._id == val1.studentId)
+                                        td 
+                                          .icheck-primary.d-inline
+                                            if(val1.abscent == 1)
+                                              input#checkboxPrimary1(type='checkbox')
+                                              label(for='checkboxPrimary1')
+                                            if(val1.abscent == 0)
+                                              input#checkboxPrimary1(type='checkbox' checked='')
+                                              label(for='checkboxPrimary1')
+                                          
+                                          //- if(#{val1.abscent} = false)
+                                          //-   input#checkboxPrimary1(type='checkbox')
+                                          //-   label(for='checkboxPrimary1')
                                     script.
                                       rank = 1 + rank
                                       document.getElementById('number_#{val.studentId._id}').innerText =  rank
