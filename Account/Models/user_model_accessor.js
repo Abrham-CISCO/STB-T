@@ -42,27 +42,20 @@ const AddMemberToG = (telephoneArray, GubayeID, callback) =>
         tel.push(telephoneArray[i].telephone)
     }
     console.log(tel)
-    Gubaye_ModelAccessor.gubayeDetail(GubayeID,function(error,Gubaye){
+    console.log("before addARRYMemberToGroup")
+    GubayeInd_ModelAccessor.addARRYMemberToGroup(tel,GubayeID,function(error,response){
+        console.log("inside addARRYMemberToGroup")
         if(error)
         {
             callback(error)
         }
         else
         {
-            GubayeInd_ModelAccessor.addARRYMemberToGroup(tel,GubayeID,function(error,response){
-                if(error)
-                {
-                    callback(error)
-                }
-                else
-                {
-                    console.log(response)
-                    callback(null,response);
-                }   
-    
-            })
-        }       
-    })
+            console.log(response)
+
+        }   
+        callback(null,"Added");    
+    })       
 }
 
 const userData = (userId, callback) => {

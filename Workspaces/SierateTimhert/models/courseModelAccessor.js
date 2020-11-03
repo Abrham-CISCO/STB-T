@@ -1,6 +1,9 @@
 const ClassRoomInd = require('./classRoomInd');
 var course = require('./course');
-
+var mOngoose = require('mongoose')
+var user_ModelAccessor = require('../../../Account/Models/user_model_accessor')
+var classRoom_modelAccessor = require('./classRoom_ModelAcessor');
+const { add } = require('mongoose-auto-number/lib/counterSchema');
 const createCourse = function(name, description, createdBy, callback)
 {
     var courseObject = {
@@ -96,8 +99,7 @@ const courseIds = (nameArray, callback) => {
         searchObj.$or.push({name:nameArray[i]})
     }
 
-    
-    console.log(nameArray,searchObj)
+
 
     course.find(searchObj).then((courses)=>{
         var idOnly = []; 
@@ -315,19 +317,19 @@ const upadteAttenance = (changes, gubayeId, courseId, callback) => {
         changes.forEach((change)=>{
             index=0
             singleCourse.attendance.forEach((update)=>{
-                console.log(update)
                 console.log(update._id, change.att_id,"update._id == change.att_id > ",update._id == change.att_id,"change.abscent",change.abscent)
                 if(update._id == change.att_id)
                 {
                     console.log("detected")
                     if(change.abscent == true)
                     {
-                        singleCourse.attendance[index].abscent = 1
+                        singleCourse.attendance[index].abscent = 0
                     }
                     else if(change.abscent == false)
                     {
-                        singleCourse.attendance[index].abscent = 0                        
+                        singleCourse.attendance[index].abscent = 1                       
                     }
+                    console.log(update)
                 }
                 index += 1;
             })
@@ -460,7 +462,33 @@ const populateAttendance = (callback) => {
           remark:"No remark",
           lateTime:""
         }]
-        course.update({_id:"5f733239790b6f11e86ea043"},{$set:{attendance:attendanceObj}}).then((response)=>{
+
+        var attendanceColumnName = [
+            {
+            columnName: "2020-10-13",
+            remark: "No remark"
+            },
+            {
+            columnName: "2020-10-14",
+            remark: "Fasika"
+            },
+            {
+            columnName: "2020-10-15",
+            remark: "Timket"
+            },
+            {
+            columnName: "2020-10-16",
+            remark: "No Remark"
+            },
+            {
+            columnName: "2020-10-17",
+            remark: "Nothing"
+            },
+            {
+            columnName: "2020-10-18",
+            remark: "Nothing"
+            }]
+        course.update({_id:"5f733239790b6f11e86ea043"},{$set:{attendance:attendanceObj, attendanceColumnName:attendanceColumnName}}).then((response)=>{
             callback(null,response)
         },(error)=>{callback(error)})
 }
@@ -521,6 +549,183 @@ const UpdateMarkList = (changes, gubayeId, courseId, callback) => {
     })
 }
 
+const addStudentToAttendanceList = (studentsArray, gubayeId, callback) =>{
+    classRoom_modelAccessor.gubayeDetail(gubayeId,function(err,gubaye){
+        gubaye.addedCourses.forEach((addedCourse)=> {
+            course.findById(addedCourse.course_id).then((singleCourse)=>{
+                studentsArray.forEach((student)=> {
+                    singleCourse.attendanceColumnName.forEach((column)=>{
+                        if(column.classRoomId == gubayeId)
+                        {
+                            singleCourse.attendance.push(
+                                {   
+                                    date:column.columnName,
+                                    classRoomId:gubayeId,
+                                    studentId:student._id,
+                                    studentTelephone:student.telephone,
+                                    abscent:1,
+                                    late:false,
+                                    permission:false,
+                                    remark:"",
+                                    lateTime:""
+                                })
+                        }
+                    })
+                })
+                console.log(singleCourse)
+                singleCourse.save().then((notification)=>{
+                    callback(null, notification)
+                }).catch((error)=>{callback(error, false)})
+            })
+        })
+})
+}
+const addStudent = (studentsArray, gubayeId, callback) => {
+        console.log("addStudent Excuted!")
+        var markList = []
+        markList.pop();
+
+        studentsArray.forEach((student)=> {
+            markList.push(
+            {    
+            studentId:student._id,
+            classRoomId:gubayeId,
+            studentTelephone:student.telephone,
+            column_1_value:"0",
+            column_2_value:"0",
+            column_3_value:"0",
+            column_4_value:"0",
+            column_5_value:"0",
+            column_6_value:"0",
+            column_7_value:"0",
+            column_8_value:"0",
+            column_9_value:"0",
+            column_10_value:"0"}
+            )
+        })
+
+        classRoom_modelAccessor.gubayeDetail(gubayeId,function(err,gubaye){
+            console.log("gubaye")
+            addStudentToAttendanceList(studentsArray,gubayeId,function(err, notifi){
+                console.log(notifi) 
+            })
+            gubaye.addedCourses.forEach((addedCourse)=> {
+                console.log("gubaye.addedCourses",gubaye.addedCourses)
+                course.findById(addedCourse.course_id).then((singleCourse)=>{
+                    singleCourse.markList = markList;
+                    console.log("singleCourse.markList", singleCourse.markList)
+                    singleCourse.save().then((notification)=>{
+                        callback(null, notification)
+                    }).catch((error)=>{callback(error, false)})
+                    // .then((savedData)=>{callback(null,savedData)}).catch((err)=>{callback(err)})
+                })
+            })
+})}
+
+const addstudentsToCourse= (courses, gubayeId, callback) => {
+    // determine students of the gubaye
+    console.log(courses, gubayeId)
+    classRoom_modelAccessor.gubayeDetail(gubayeId,function(err,gubaye){
+        if(err)
+        {
+            callback(err)
+        }
+        else
+        {
+
+            var students=[]
+            students.pop();
+            gubaye.members.map((member)=>{
+                students.push(member.memberId)
+            })
+            user_ModelAccessor.userObjectByTel(students,function(err,studentsProfile){
+                var stu = [{_id:mOngoose.Schema.Types.ObjectId,  telephone:String}]
+                stu.pop();
+                studentsProfile.map((student)=>{
+                    stu.push({_id:student._id.toString() ,telephone:student.telephone})
+                })
+                addStudentToMarkList(stu,courses,gubayeId,function(err,confirmation){
+                    if(err)
+                    {
+                        callback(err)
+                    }
+                    else
+                    {
+                        addStudentToAttendanceList(stu,gubayeId,function(error,confirmation){
+                    
+                            callback(null,confirmation)
+                        })
+                    }
+                })
+    
+            })
+        }
+    })
+}
+
+const addStudentToMarkList=(students,courses,gubayeId,callback)=>{
+    // students should be an array of objects that contain student telephone and student Id
+    courses.map((courseId)=>{
+        var markList = []
+        markList.pop();
+        students.map((student)=>{
+            markList.push(
+                {    
+                studentId:student._id,
+                classRoomId:gubayeId,
+                studentTelephone:student.telephone,
+                column_1_value:"0",
+                column_2_value:"0",
+                column_3_value:"0",
+                column_4_value:"0",
+                column_5_value:"0",
+                column_6_value:"0",
+                column_7_value:"0",
+                column_8_value:"0",
+                column_9_value:"0",
+                column_10_value:"0"}
+                )
+        })
+        course.findById(courseId).then((singleCourse)=>{
+            markList.map((ml)=>{
+                singleCourse.markList.push(ml);
+            })
+            singleCourse.save().then((confirmation)=>{callback(null,confirmation)}).catch((err)=>{callback(err)});
+        })
+    })
+}
+// what happens when a new date is added to the system
+// 1st  columnName and remark are added to attendanceColumnName object
+// 2nd the added date is registered on each members of the class as anscent
+
+addStudentToAttendanceList
+const addAttendanceColumn = function(new_date, remark, classRoomId, courseId, callback)
+{
+    course.findById(courseId).then((singleCourse)=>{
+        singleCourse.attendanceColumnName.push({columnName:new_date, remark:remark, classRoomId:classRoomId})
+        var index = 0;
+        singleCourse.markList.forEach((student) => {
+            if(student.classRoomId == classRoomId)
+            {
+               newData = {
+                    date:new_date,
+                    classRoomId:classRoomId,
+                    studentId:student.studentId,
+                    studentTelephone:student.studentTelephone,
+                    abscent:1,
+                    late:false,
+                    permission:false,
+                    remark:"No remark",
+                    lateTime:""
+                  }
+                  singleCourse.attendance.push(newData)
+            }
+            index = 1 + index;
+        })
+        singleCourse.save().then((savedData)=> {callback(null,savedData)}).catch((err)=>{callback(err)})
+        
+    }).catch((err)=>{callback(err)})
+}
 // Marklist Sub-docuement - create, edit, remove, read
 exports.MarkListByClassRoom = MarkListByClassRoom;
 exports.MarkListByStudent = MarkListByStudent;
@@ -542,7 +747,9 @@ exports.addAttenanceElement = addAttenanceElement;
 exports.removeAttendanceElement = removeAttendanceElement;
 exports.removeAttendanceByClass = removeAttendanceByClass;
 exports.upadteAttenance = upadteAttenance;
+exports.addAttendanceColumn = addAttendanceColumn;
 
+exports.addstudentsToCourse = addstudentsToCourse;
 exports.createCourse = createCourse;
 // exports.courseDetailPR = courseDetailPR;
 exports.courseDetail = courseDetail;
@@ -552,7 +759,8 @@ exports.addCourse = addCourse;
 exports.allCourses = allCourses;
 exports.courseIds = courseIds;
 exports.editCourse = editCourse;
-
+exports.addStudent = addStudent;
+exports.addStudentToAttendanceList = addStudentToAttendanceList
 exports.addBook = addBook;
 exports.booksByCourse = booksByCourse;
 exports.deleteBook = deleteBook;

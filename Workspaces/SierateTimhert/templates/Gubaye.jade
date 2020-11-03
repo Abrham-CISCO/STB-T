@@ -44,146 +44,52 @@ html
                   .card-header.p-2
                     ul.nav.nav-pills
                       li.nav-item
-                        a.nav-link.active(href='#wall', data-toggle='tab') ግድግዳ
+                        a.nav-link.active(href='#home', data-toggle='tab') መግቢያ
                       li.nav-item
                         a.nav-link(href='#member', data-toggle='tab') አባላት
                       li.nav-item
                         a.nav-link(href='#education', data-toggle='tab') ትምህርት
-                      li.nav-item
-                        a.nav-link(href='#attendance', data-toggle='tab') አቴንዳንስ
                   // /.card-header
                   .card-body
                     .tab-content
-                      #wall.active.tab-pane
-                        // Post
-                        .post
-                          .user-block
-                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user1-128x128.jpg', alt='user image')
-                            |                         
-                            span.username
-                              a(href='#') Jonathan Burke Jr.
-                              |                           
-                              a.float-right.btn-tool(href='#')
-                                i.fas.fa-times
-                            |                         
-                            span.description Shared publicly - 7:30 PM today
-                          // /.user-block
-                          p
-                            | Lorem ipsum represents a long-held tradition for designers,
-                            | typographers and the like. Some people hate it and argue for
-                            | its demise, but others ignore the hate as they create awesome
-                            | tools to help create filler text for everyone from bacon lovers
-                            | to Charlie Sheen fans.
-                          |                       
-                          p
-                            a.link-black.text-sm.mr-2(href='#')
-                              i.fas.fa-share.mr-1
-                              |  Share
-                            |                         
-                            a.link-black.text-sm(href='#')
-                              i.far.fa-thumbs-up.mr-1
-                              |  Like
-                            |                         
-                            span.float-right
-                              a.link-black.text-sm(href='#')
-                                i.far.fa-comments.mr-1
-                                |  Comments (5)
-                          |                       
-                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
-                        // /.post
-                        // Post
-                        .post.clearfix
-                          .user-block
-                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user7-128x128.jpg', alt='User Image')
-                            |                         
-                            span.username
-                              a(href='#') Sarah Ross
-                              |                           
-                              a.float-right.btn-tool(href='#')
-                                i.fas.fa-times
-                            |                         
-                            span.description Sent you a message - 3 days ago
-                          // /.user-block
-                          p
-                            | Lorem ipsum represents a long-held tradition for designers,
-                            | typographers and the like. Some people hate it and argue for
-                            | its demise, but others ignore the hate as they create awesome
-                            | tools to help create filler text for everyone from bacon lovers
-                            | to Charlie Sheen fans.
-                          |                       
-                          form.form-horizontal
-                            .input-group.input-group-sm.mb-0
-                              input.form-control.form-control-sm(placeholder='Response')
-                              |                           
-                              .input-group-append
-                                button.btn.btn-danger(type='submit') Send
-                        // /.post
-                        // Post
-                        .post
-                          .user-block
-                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user6-128x128.jpg', alt='User Image')
-                            |                         
-                            span.username
-                              a(href='#') Adam Jones
-                              |                           
-                              a.float-right.btn-tool(href='#')
-                                i.fas.fa-times
-                            |                         
-                            span.description Posted 5 photos - 5 days ago
-                          // /.user-block
-                          .row.mb-3
-                            .col-sm-6
-                              img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
-                            // /.col
-                            .col-sm-6
-                              .row
-                                .col-sm-6
-                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo2.png', alt='Photo')
-                                  |                               
-                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo3.jpg', alt='Photo')
-                                // /.col
-                                .col-sm-6
-                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo4.jpg', alt='Photo')
-                                  |                               
-                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
-                                // /.col
-                              // /.row
-                            // /.col
-                          // /.row
-                          p
-                            a.link-black.text-sm.mr-2(href='#')
-                              i.fas.fa-share.mr-1
-                              |  Share
-                            |                         
-                            a.link-black.text-sm(href='#')
-                              i.far.fa-thumbs-up.mr-1
-                              |  Like
-                            |                         
-                            span.float-right
-                              a.link-black.text-sm(href='#')
-                                i.far.fa-comments.mr-1
-                                |  Comments (5)
-                          |                       
-                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
-                        // /.post
-                      
+                      #home.active.tab-pane
+                        .text-center
+                          .row
+                            .col-4
+                            .col-4
+                              .text-center
+                                img(src="http://localhost:3000/SharedComponents/static/logo.jpg" alt="User Image" style="opacity: .8" class="brand-image img-circle elevation-3" width="100%")
+                            .col-4
+                          .row
+                            .col-12
+
+                                br
+                                .h6 እንኳን ደህና መጡ
+                            .col-12
+                              p #{user.gubaye.description}
+                            .col-12
+                              p ይህን ገጽ በመጠቀም በጉባኤ ውስጥ ትምህርታቸውን የሚከታተሉ ተማሪዎችን፣ በየኮርሱ የተያዘሎትን ማርክ እና አቴንዳንስ ማየት ይችላሉ።
                       #member.tab-pane
                         .row
-                          .col-6  
-                            ul.users-list.clearfix
-                              each val in user.gubayemembers
-                                li
+                          each val in user.gubayemembers
+                            .col-12.col-sm-6.col-md-3
+                              .info-box.mb-3
+                                span.info-box-icon.bg-success.elevation-1
                                   img(src="../../#{val.pro_img}" alt="User Image")
+                                .info-box-content
                                   a.users-list-name(href="http://localhost:3000/accounts/public/profile/#{val.telephone}") #{val.name}
-                      #attendance.tab-pane
+                                                                      
+
                       #education.tab-pane
                         .row
-                          .col-6  
-                            ul.users-list.clearfix
-                              each val in JoinedClass
-                                li
-                                  img(src="http://localhost:3000/SharedComponents/static/logo.jpg" alt="User Image")
-                                  a.users-list-name(href="http://localhost:3000/accounts/public/profile/") #{val.name}
+                          each val in JoinedClass
+                            .col-12.col-sm-6.col-md-4
+                              .info-box.mb-3
+                                span.info-box-icon.bg-success.elevation-1
+                                  i.fas.fa-book
+                                .info-box-content
+                                  a(href="http://localhost:3000/SirateTimhert/course/public/#{val.id}/#{user.gubaye.id}") #{val.name}
+
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom

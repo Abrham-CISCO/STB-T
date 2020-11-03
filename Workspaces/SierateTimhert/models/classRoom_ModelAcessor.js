@@ -3,9 +3,7 @@ var UserAccModelAcc = require('../../../Account/Models/user_model_accessor');
 var course_modelAccessor = require('./courseModelAccessor');
 const course = require('./course');
 const gubayeDetail = (GubayeID, callback) => {
-    classRoom.gubayeDetails(GubayeID, function(error,gubaye){
-        callback(null,gubaye);
-    });
+    classRoom.findById(GubayeID).then((gubaye) => {callback(null,gubaye);}).catch((error)=>{callback(error)})
 }
 
 // you need to create a function that converts an array of gubayeId to an array of gubaye name
@@ -35,12 +33,24 @@ const gubayeIdArrayToNameArray = (gubayeIdArray, callback) =>
     }).catch((error)=>{callback(error, false)})
 }
 const memberAdder = (gubayeID, Members, callback) => {
+    console.log("member Adder")
     classRoom.addMember(gubayeID,Members,function(error,response){
+        console.log("add member")
         if(!error){
             UserAccModelAcc.AddMemberToG(Members,gubayeID,function(error,response){
+                console.log("add member to G")
                 if(!error)
                 {
-                    callback(null,response);
+                    course_modelAccessor.addStudent(Members,gubayeID,function(err, notification){
+                        if(!err)
+                        {
+                            callback(null,response)
+                        }
+                        else
+                        {
+
+                        }
+                    })
                 }
             })
         }
@@ -154,6 +164,7 @@ const notAddedCourses = (gubayeId, callback) =>
                 else
                 {
                     AddedC.push({name:course.name, id:course._id})
+                    addedFlag = false
                 }
             })
             callback(null, notAdded, AddedC)

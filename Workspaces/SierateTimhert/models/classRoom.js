@@ -25,11 +25,14 @@ classRoomSchema.statics.removeMember = (GubayeID,telephone,callback) => {
                 }
                 else
                 {
-                    gubaye.members.forEach(function(member, index, ar){
+                    var index = 0;
+                    gubaye.members.forEach(function(member){
                         if(member.memberId == telephone)
                         {
+                            gubaye.members.splice(index,1)
                             gubaye.save();
                         }
+                        index = index + 1
                     })
                     callback(null,gubaye)
                 }

@@ -87,6 +87,6 @@ function saveAttAbscent(courseId, gubayeId)
     socket.on('updateAttendance',function(Confirmation){
         console.log(Confirmation);
         var url = "http://localhost:3000/SirateTimhert/course/Gubaye_Nius_Sebsabi/"+courseId+"/"+gubayeId;
-        // window.location.href = url
+        window.location.href = url
       });
 }

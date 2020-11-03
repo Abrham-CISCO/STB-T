@@ -63,12 +63,10 @@ const addARRYMemberToGroup = (userTelArray, groupID, callback) => {
             {
                 callback(error)
             }
-            else
-            {
-                callback(null,user)
-            }
         })        
     }
+    
+    callback(null,"Added")
 }
 
 const joinedClass = (userTelephone, callback) => {

@@ -40,9 +40,34 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
     })
     router.get('/Gubaye/public/:GubayeID',function(req,res,next){
         var GubayeID = req.params.GubayeID;
+        var membersTel = []
+        membersTel.pop();
         req.session.user.GubayeID = GubayeID;
-        
-        return res.render(GubayeLink,req.session)
+            // Using classRoom_ModelAcessor pull class info of the requested gubaye
+                classRoom_ModelAccessor.gubayeDetail(GubayeID,function(error,gubaye){
+                    if(error)
+                    {
+                        return next(error);                
+                    }
+                    for(var i = 0; i<gubaye.members.length;i++){
+                        membersTel.push(gubaye.members[i].memberId)
+                    }
+                    UserModelAccessor.userObjectByTel(membersTel,function(error,contacts){
+                        req.session.user.gubaye = gubaye; 
+                        req.session.user.gubayemembers = contacts;
+                        
+                        UserModelAccessor.allUsers(function(error,users){
+                            classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedClass){
+                                req.session.unjoinedCourses = unjoinedCourses
+                                req.session.JoinedClass = JoinedClass;
+                                req.session.user.allusers = users;
+                                return res.render("Workspaces/SierateTimhert/templates/Gubaye.jade",req.session)
+                            })
+                        })
+
+                    })
+
+                })
     });
     router.post('/Gubaye/New', function(req,res,next){
         classRoom_ModelAccessor.createGubaye(req.body.gname,"No Description.", function(error,gubaye){
@@ -53,7 +78,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             res.end("Gubaye Created");
         })
     });
-    router.get('/Gubaye_Sebsabi/:GubayeID', mid.requiresToBeLeader, function(req,res,next){
+    router.get('/Gubaye_Sebsabi/:GubayeID', mid.requiresToBeLeader, mid.updateUserData, function(req,res,next){
         var GubayeID = req.params.GubayeID;
         var membersTel = []
         membersTel.pop();
@@ -84,7 +109,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
 
                 })
     });
-    router.get('/Gubaye_Nius_Sebsabi/:GubayeID/Remove/:telephone', mid.requiresToBeSTKNS, function(req,res,next){
+    router.get('/Gubaye_Nius_Sebsabi/:GubayeID/Remove/:telephone', mid.requiresToBeSTKNS,mid.updateUserData, function(req,res,next){
         var GubayeID = req.params.GubayeID;
         var telephone = req.params.telephone;
         classRoomInd_ModelAccessor.leaveGroup(telephone,GubayeID, function(error,user){
@@ -111,7 +136,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
         })
     });
-    router.get('/Gubaye_Nius_Sebsabi/:GubayeID/MRemove/:telephone', mid.requiresToBeSTKNA, function(req,res,next){
+    router.get('/Gubaye_Nius_Abal/:GubayeID/MRemove/:telephone', mid.requiresToBeSTKNA,mid.updateUserData, function(req,res,next){
         var GubayeID = req.params.GubayeID;
         var telephone = req.params.telephone;
         classRoomInd_ModelAccessor.leaveGroup(telephone,GubayeID, function(error,user){
@@ -138,7 +163,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
         })
     });
-    router.get('/Gubaye_Nius_Sebsabi/:GubayeID', mid.requiresToBeSTKNS, function(req,res,next){
+    router.get('/Gubaye_Nius_Sebsabi/:GubayeID', mid.requiresToBeSTKNS,mid.updateUserData, function(req,res,next){
         var GubayeID = req.params.GubayeID;
         var membersTel = []
         membersTel.pop();
@@ -172,9 +197,9 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                     course_ModelAccessor.allCourses((error,courses)=>{
                                         req.session.courses = courses
                                         // return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)
-                                        classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedClass){
+                                        classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedCourses){
                                             req.session.unjoinedCourses = unjoinedCourses
-                                            req.session.JoinedClass = JoinedClass;
+                                            req.session.JoinedCourses = JoinedCourses;
                                             return res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
                                         })
                                     })
@@ -183,7 +208,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     })
                 })
     });
-    router.post('/Gubaye_Nius_Sebsabi/upload/:courseId/courseoutline', mid.requiresToBeSTKNS,
+    router.post('/Gubaye_Nius_Sebsabi/upload/:courseId/courseoutline', mid.requiresToBeSTKNS,mid.updateUserData,
      upload.single('courseOutlineFile'), function(req,res,next){
          var courseId = req.params.courseId;
         course_ModelAccessor.courseDetail(courseId,function(error, singleCourse){
@@ -202,7 +227,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
         })
 
     });
-    router.post('/Gubaye_Nius_Sebsabi/upload/:courseId/book', mid.requiresToBeSTKNS,
+    router.post('/Gubaye_Nius_Sebsabi/upload/:courseId/book', mid.requiresToBeSTKNS,mid.updateUserData,
     upload.single('bookFile'), function(req,res,next){
         var courseId = req.params.courseId;
         course_ModelAccessor.courseDetail(courseId,function(error,singleCourse){
@@ -238,7 +263,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
           
         })
     });
-    router.get('/Gubaye_Nius_Abal/:GubayeID', mid.requiresToBeSTKNA, function(req,res,next){
+    router.get('/Gubaye_Nius_Abal/:GubayeID', mid.requiresToBeSTKNA,mid.updateUserData, function(req,res,next){
         var GubayeID = req.params.GubayeID;
         var membersTel = []
         membersTel.pop();
@@ -287,7 +312,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
     router.get('/course/public/:courseId', function(req,res,next){
         return res.render("Workspaces/SierateTimhert/templates/course.jade",req.session)
     })
-    router.get('/course/sebsabi/:courseId',mid.requiresToBeLeader, function(req,res,next){
+    router.get('/course/sebsabi/:courseId',mid.requiresToBeLeader,mid.updateUserData, function(req,res,next){
         course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
         {
             if(error)
@@ -326,7 +351,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
         });
     })
-    router.get('/course/sebsabi/:courseId/:gubayeId',mid.requiresToBeLeader, function(req,res,next){
+    router.get('/course/sebsabi/:courseId/:gubayeId',mid.requiresToBeLeader,mid.updateUserData, function(req,res,next){
         course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
         { 
             if(error)
@@ -365,7 +390,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
         });
     })
-    router.get('/course/Gubaye_Nius_Sebsabi/:courseId/:gubayeId',mid.requiresToBeSTKNS, function(req,res,next){
+    router.get('/course/Gubaye_Nius_Sebsabi/:courseId/:gubayeId',mid.requiresToBeSTKNS,mid.updateUserData, function(req,res,next){
         course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
         { 
             if(error)
@@ -403,7 +428,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
         });
     })
-    router.get('/course/Gubaye_Nius_Abal/:courseId/:gubayeId',mid.requiresToBeSTKNA, function(req,res,next){
+    router.get('/course/Gubaye_Nius_Abal/:courseId/:gubayeId',mid.requiresToBeSTKNA,mid.updateUserData, function(req,res,next){
         course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
         { 
             if(error)
@@ -471,7 +496,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
         });
     })
-    router.get('/course/nius_sebsabi/:courseId',mid.requiresToBeSTKNS, function(req,res,next){
+    router.get('/course/nius_sebsabi/:courseId',mid.requiresToBeSTKNS,mid.updateUserData, function(req,res,next){
         course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
         {
             if(error)
@@ -510,7 +535,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
         });
     })
-    router.get('/course/remove/:courseID/:gubayeId',mid.requiresToBeSTKNS, function(req,res,next){
+    router.get('/course/remove/:courseID/:gubayeId',mid.requiresToBeSTKNS,mid.updateUserData, function(req,res,next){
         var courseId = req.params.courseID;
         var gubayeId = req.params.gubayeId;
         classRoom_ModelAccessor.removeCourse(courseId,gubayeId,function(error,notification)
@@ -527,11 +552,25 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
         })
 
     })
+    router.post('/course/:courseId/:gubayeId/attendance', function(req,res,next){
+        var courseId = req.params.courseId;
+        var gubayeId = req.params.gubayeId;
+        course_ModelAccessor.addAttendanceColumn(req.body.newDate,req.body.remark,gubayeId, courseId, function(err, course){
+            if(err)
+            {
+                next(err)
+            }
+            else
+            {
+                res.json(course)
+            }
+        })
+    })    
     //for removing course : Deleting Course
         // What should happen when a course is removed or deleted?
          
     // For Department Admins
-router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader, function(req,res,next){
+router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader,mid.updateUserData, function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
         course_ModelAccessor.allCourses((error,courses)=>{
@@ -542,7 +581,7 @@ router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader, functi
 });
 
 // For Sub Department Admins
-router.get('/SubDepartmentAdmin', mid.requireSignIn,  function(req,res,next){
+router.get('/SubDepartmentAdmin', mid.requireSignIn,mid.updateUserData,  function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
         course_ModelAccessor.allCourses((error,courses)=>{
@@ -553,7 +592,7 @@ router.get('/SubDepartmentAdmin', mid.requireSignIn,  function(req,res,next){
 });
 
 // For Sub Department Members
-router.get('/SubDepartmentMember', mid.requireSignIn, function(req,res,next){
+router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
         course_ModelAccessor.allCourses((error,courses)=>{

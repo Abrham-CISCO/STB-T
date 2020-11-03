@@ -10,13 +10,12 @@ Notification
 
 Profile System
     Enable users to set up their profile image
-    Add Sex
 User Navigation
     When gubaye is opened the gubaye menue should be active
 Session
     Register Users socket when the server refreshes
     Do not send password to the client
-    use middlewares to forbid unauthenticated users from accessing certain pages
+    use middlewares to forbid unauthenticated users from accessing restricted pages
 
 Gubaieyat
     Prepare gubayie page

@@ -13,7 +13,7 @@
 // Local Imports
   var authenticate = require('./Account/authenticate')
   var config = require('./Account/config');
-  
+  var mid = require('./SharedComponents/Middlewares/index')
  // Model Accessors
   var MessagingModel_Acc = require('./SharedComponents/Messaging/model_Accessor')
   var UserModel_Acc = require('./Account/Models/user_model_accessor')
@@ -102,7 +102,6 @@ app.use(passport.session());
       socket.on('AddGubayeMembers', function(gubayeId, gubayeMembersArray)
       { 
         UserModel_Acc.NameArrayToTelArray(gubayeMembersArray,function(error,userTelArray){
-          console.log(userTelArray);
           classRoom_ModelAccessor.memberAdder(gubayeId,userTelArray,function(error,response){
             socket.emit('AddGubayeMembers','Done')
           })
@@ -124,7 +123,10 @@ app.use(passport.session());
                 console.error(error)
               }
               else{
-                socket.emit('AddGubayeCourses',CoursesArray)
+                Course_ModelAccessor.addstudentsToCourse(course_ids,gubayeId,function(err,confirmation){
+                  console.log(course_ids)
+                  socket.emit('AddGubayeCourses',confirmation)
+                })
               }
   
             })
@@ -174,15 +176,17 @@ app.use(passport.session());
   
 
   // Route Definations
+  app.use('/Accounts',Accounts);
+  app.use('/Messaging',Messaging);
+  app.use('/Notifications',Notification);
+
   app.use('/AbinetTimehert',AbinetTimehert);
   app.use('/MemihranMideba',MemihranMideba);
   app.use('/RiketTimhert',RiketTimhert);
   app.use('/Sebsabi',Sebsabi);
   app.use('/SirateTimhert',SirateTimhert);
   app.use('/Tsehafi',Tsehafi);
-  app.use('/Accounts',Accounts);
-  app.use('/Messaging',Messaging);
-  app.use('/Notifications',Notification);
+
 
 // Setting up Jade
 var JadeFolderPath = __dirname ;

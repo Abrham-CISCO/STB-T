@@ -261,25 +261,19 @@ UserSchema.statics.editProfile = function(userID, UserGeneral, callback){
 }
 
 UserSchema.statics.updatePassword = function(userID, Password, callback){
-    bcrypt.hash(Password, 10, function(err, hash){
-        if (err){
-            return next(err);
-        }
-        Hpassword = hash;
-    User.updateOne({_id:userID}, {$set:{password:Hpassword}})
-        .exec(function(error,user){
-            if(error){
-                next(error);
+    User.findById((userID)).then((user)=>{
+        user.setPassword(Password,function(err, user){
+            if(err)
+            {
+                console.log(err)
             }
-            else if(!user){
-                var err = new Error("User Not Found");
-                err.status = 401;
-                return callback(err);
+            else
+            {
+                user.save();
+                callback(null,user)
             }
-            return callback(null,user);
-
-        });
-    });
+        })
+    }).catch((err)=>callback(err,false))
 }
 
 UserSchema.statics.AssignRole = function(UserTelephone, UserWorkObject,  callback){

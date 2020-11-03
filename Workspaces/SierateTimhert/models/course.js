@@ -12,6 +12,7 @@ var attendanceSchema = new mongoose.Schema({
 },{timestamps:true})
 var attendanceColumnNameSchema = new mongoose.Schema({
     columnName:{type:String},
+    classRoomId:{type:String},
     remark:{type:String}
 })
 var markListSchema = new mongoose.Schema({

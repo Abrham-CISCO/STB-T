@@ -1,0 +1,119 @@
+doctype html
+include ../../SharedComponents/Layouts/header.jade
+html
+  head
+    meta(charset='utf-8')
+    |   
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    |   
+    title AdminLTE 3 | User Profile
+    // Tell the browser to be responsive to screen width
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Font Awesome
+    link(rel='stylesheet', href='static/plugins/fontawesome-free/css/all.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+    // Theme style
+    link(rel='stylesheet', href='static/dist/css/adminlte.min.css')
+    // Google Font: Source Sans Pro
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
+  body.hold-transition.sidebar-mini
+    .wrapper
+      // Navbar
+      include ../../SharedComponents/Layouts/navigation.jade
+      // Main Sidebar Container
+      include ../../SharedComponents/Layouts/sidebarNU.jade
+      // Content Wrapper. Contains page content
+      .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+          .container-fluid
+            .row.mb-2
+              .col-sm-6
+                h1 ጤና ይስጥልኝ #{user.name} 
+                br
+              |           
+              .col-sm-6
+                ol.breadcrumb.float-sm-right
+                  li.breadcrumb-item.active Home
+              .col-12
+                h5.m-0.text-dark ክፍላት
+              each val in user.work   
+                if val.subDepartment.length > 1
+                  each val2 in val.subDepartment
+                    if val2.sd_id == 1 & val2.active == true
+                      each val3 in val.subDepartment
+                        if val3.parent == 1
+                          .col-12.col-sm-6.col-md-3
+                            .info-box
+                              span.info-box-icon.bg-success.elevation-1
+                                i.far.fa-circle.nav-icon
+                              .info-box-content
+                                a(href=val3.DA_link, id=val3.sd_id).nav-link
+                                  span.info-box-text=val3.name
+                              // /.info-box-content
+                              // /.info-box
+                              // /.col
+
+                    if val2.sd_id == 1 & val2.active == false
+                      each val3 in val.subDepartment
+                        if val3.active == true
+                          .col-12.col-sm-6.col-md-3
+                            .info-box
+                              span.info-box-icon.bg-success.elevation-1
+                                i.far.fa-circle.nav-icon
+                              .info-box-content
+                                a(href=val3.SD_link, id=val3.sd_id).nav-link
+                                  span.info-box-text=val3.name
+                              // /.info-box-content
+                              // /.info-box
+                              // /.col
+
+
+
+              .col-12
+                h5.m-0.text-dark ጉባኤያት
+              if(JoinedclassRooms)
+                each classes in JoinedclassRooms 
+                  .col-12.col-sm-6.col-md-3
+                    .info-box
+                      span.info-box-icon.bg-info.elevation-1
+                        i.fas.fa-users
+                      .info-box-content
+                        a(href="http://localhost:3000/SirateTimhert/Gubaye/public/#{classes.id}", id=classes.id).nav-link
+                          span.info-box-text #{classes.name}
+              
+                  // /.info-box-content
+                  // /.info-box
+                  // /.col
+
+        // /.container-fluid
+        // Main content
+        section.content
+          .container-fluid
+        // /.content
+      // /.content-wrapper
+      footer.main-footer
+        .float-right.d-none.d-sm-block
+          b Version
+          |  3.0.2-pre
+        |     
+        strong
+          | Copyright &copy; 2014-2019 
+          a(href='http://adminlte.io') AdminLTE.io
+          | .
+        |  All rights
+        |     reserved.
+      // Control Sidebar
+      aside.control-sidebar.control-sidebar-dark
+        // Control sidebar content goes here
+      // /.control-sidebar
+    // ./wrapper
+    // jQuery
+    script(src='../ADMINLITE/plugins/jquery/jquery.min.js')
+    // Bootstrap 4
+    script(src='../ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    // AdminLTE App
+    script(src='../ADMINLITE/dist/js/adminlte.min.js')
+    // AdminLTE for demo purposes
+    script(src='../ADMINLITE/dist/js/demo.js')

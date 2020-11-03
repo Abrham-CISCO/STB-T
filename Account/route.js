@@ -134,7 +134,7 @@ router.post('/register', function(req,res,next){
                     req.session.userId = user._id;
                     req.session.name = req.body.name;
                     req.session.user = user;
-                    return res.render('Account/templates/profile',req.session);
+                    return res.render('Account/templates/home',req.session);
                 })
             }
         });
@@ -171,12 +171,9 @@ router.post('/login', mid.ValidateSigninForm, mid.loggedOut, passport.authentica
             for(var i = 0; i<gubaeats.length; i++)
             {
                 gubaeat.push(gubaeats[i].classID);
-                console.log("ClassRooms", gubaeat)
             }
             classRoom_ModelAccessor.IDArrayToNameArray(gubaeat,function(error,gubaeatName){
-                
-                    console.log("gubaeats", gubaeats)
-                var gubayeSmall = []; 
+                    var gubayeSmall = []; 
                     gubayeSmall.pop();
                     for(var j=0; j<gubaeats.length; j++){
                         if(gubaeatName[j])
@@ -184,20 +181,17 @@ router.post('/login', mid.ValidateSigninForm, mid.loggedOut, passport.authentica
                         gubayeSmall.push({name:gubaeatName[j].name, id:gubaeats[j].classID});
                         }
                     }
-                    console.log("gubayeSmall ", gubayeSmall)
                     if(!error && gubaeatName)
                     {
-                        console.log("gubaeatName ",gubaeatName)
                         req.session.user.classRoom.pop();
                         req.session.JoinedclassRooms = (gubayeSmall);
-                        console.log("After Gubaye name added ", req.session)
-                        return res.render('Account/templates/profile',req.session);    
+                        return res.render('Account/templates/home',req.session);    
                     }
                 
             })
         }
         else{
-            return res.render('Account/templates/profile',req.session);    
+            return res.render('Account/templates/home',req.session);    
         }
     })
 });
@@ -218,6 +212,23 @@ UserModelAccessor.userData(req.session.userId, function(error,user){
     }
 });
 });
+
+router.get('/home', mid.requireSignIn, function(req,res,next){
+    if(!req.session.userId){
+        var err = new Error('You are not authorized to view this page');
+        err.status = 403;
+        return next(err);  
+    }
+    
+    UserModelAccessor.userData(req.session.userId, function(error,user){
+        if (error){
+            return next(error);
+        } else {
+            req.session.user  = (user);
+            return res.render('Account/templates/home',req.session);
+        }
+    });
+    });
 
 router.get('/public/profile/:telephone', function(req,res,next){
     var Tel = req.params.telephone;    

@@ -47,10 +47,7 @@ html
                   .card-header.p-2
                     ul.nav.nav-pills
                       li.nav-item
-                        a.nav-link.active(href='#wall', data-toggle='tab') ግድግዳ
-                      |                   
-                      li.nav-item
-                        a.nav-link(href='#member', data-toggle='tab') አባላት
+                        a.nav-link.active(href='#member', data-toggle='tab') አባላት
                       |                   
                       li.nav-item
                         a.nav-link(href='#education', data-toggle='tab') ትምህርት
@@ -60,122 +57,9 @@ html
                   // /.card-header
                   .card-body
                     .tab-content
-                      #wall.active.tab-pane
-                        // Post
-                        .post
-                          .user-block
-                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user1-128x128.jpg', alt='user image')
-                            |                         
-                            span.username
-                              a(href='#') Jonathan Burke Jr.
-                              |                           
-                              a.float-right.btn-tool(href='#')
-                                i.fas.fa-times
-                            |                         
-                            span.description Shared publicly - 7:30 PM today
-                          // /.user-block
-                          p
-                            | Lorem ipsum represents a long-held tradition for designers,
-                            | typographers and the like. Some people hate it and argue for
-                            | its demise, but others ignore the hate as they create awesome
-                            | tools to help create filler text for everyone from bacon lovers
-                            | to Charlie Sheen fans.
-                          |                       
-                          p
-                            a.link-black.text-sm.mr-2(href='#')
-                              i.fas.fa-share.mr-1
-                              |  Share
-                            |                         
-                            a.link-black.text-sm(href='#')
-                              i.far.fa-thumbs-up.mr-1
-                              |  Like
-                            |                         
-                            span.float-right
-                              a.link-black.text-sm(href='#')
-                                i.far.fa-comments.mr-1
-                                |  Comments (5)
-                          |                       
-                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
-                        // /.post
-                        // Post
-                        .post.clearfix
-                          .user-block
-                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user7-128x128.jpg', alt='User Image')
-                            |                         
-                            span.username
-                              a(href='#') Sarah Ross
-                              |                           
-                              a.float-right.btn-tool(href='#')
-                                i.fas.fa-times
-                            |                         
-                            span.description Sent you a message - 3 days ago
-                          // /.user-block
-                          p
-                            | Lorem ipsum represents a long-held tradition for designers,
-                            | typographers and the like. Some people hate it and argue for
-                            | its demise, but others ignore the hate as they create awesome
-                            | tools to help create filler text for everyone from bacon lovers
-                            | to Charlie Sheen fans.
-                          |                       
-                          form.form-horizontal
-                            .input-group.input-group-sm.mb-0
-                              input.form-control.form-control-sm(placeholder='Response')
-                              |                           
-                              .input-group-append
-                                button.btn.btn-danger(type='submit') Send
-                        // /.post
-                        // Post
-                        .post
-                          .user-block
-                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user6-128x128.jpg', alt='User Image')
-                            |                         
-                            span.username
-                              a(href='#') Adam Jones
-                              |                           
-                              a.float-right.btn-tool(href='#')
-                                i.fas.fa-times
-                            |                         
-                            span.description Posted 5 photos - 5 days ago
-                          // /.user-block
-                          .row.mb-3
-                            .col-sm-6
-                              img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
-                            // /.col
-                            .col-sm-6
-                              .row
-                                .col-sm-6
-                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo2.png', alt='Photo')
-                                  |                               
-                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo3.jpg', alt='Photo')
-                                // /.col
-                                .col-sm-6
-                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo4.jpg', alt='Photo')
-                                  |                               
-                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
-                                // /.col
-                              // /.row
-                            // /.col
-                          // /.row
-                          p
-                            a.link-black.text-sm.mr-2(href='#')
-                              i.fas.fa-share.mr-1
-                              |  Share
-                            |                         
-                            a.link-black.text-sm(href='#')
-                              i.far.fa-thumbs-up.mr-1
-                              |  Like
-                            |                         
-                            span.float-right
-                              a.link-black.text-sm(href='#')
-                                i.far.fa-comments.mr-1
-                                |  Comments (5)
-                          |                       
-                          input.form-control.form-control-sm(type='text', placeholder='Type a comment')
-                        // /.post
-                      
-                      #member.tab-pane
+                      #member.active.tab-pane
                         .row
-                          .col-6  
+                          .col-12.col-sm-12.col-md-12
                             ul.users-list.clearfix
                               if(user.gubayemembers)
                                 each val in user.gubayemembers
@@ -322,9 +206,8 @@ html
 
 
                             .modal-footer.justify-content-between
-                              button.btn.btn-default(type='button', data-dismiss='modal') Close
-                              button.btn.btn-primary(type='button' onclick="addmembers('#{user.gubaye._id}');") Save changes
-                          // /.modal-content
+                              button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
+                              button.btn.btn-primary(type='button' onclick="addmembers('#{user.gubaye._id}');") ጨምር                          // /.modal-content
                           // /.modal-dialog
 
 
@@ -333,7 +216,7 @@ html
                         .row
                           .col-9  
                             ul.users-list.clearfix
-                              each val in JoinedClass
+                              each val in JoinedCourses
                                 li
                                   img(src="http://localhost:3000/SharedComponents/static/logo.jpg" alt="User Image")
                                   a.users-list-name(href="http://localhost:3000/SirateTimhert/course/Gubaye_Nius_Sebsabi/#{val.id}/#{user.gubaye._id}") #{val.name}
@@ -376,7 +259,7 @@ html
                               link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
                               .form-group(data-select2-id='39')
                                 label ወደ ጉባኤው ለማስገባት የሚፈልጉትን ኮርስ ይምረጡና ሲጨርስሱ Save የሚለውን በተን ይጫኑ 
-                                select.select2.select2-hidden-accessible(multiple='', data-placeholder='አባል ይምረጡ', style='width: 100%;', data-select2-id='7', tabindex='-1', aria-hidden='true')
+                                select.select2.select2-hidden-accessible(multiple='', data-placeholder='ኮርስ ይምረጡ', style='width: 100%;', data-select2-id='7', tabindex='-1', aria-hidden='true')
                                   each course in unjoinedCourses
                                     option(data-select2-id='#{course._id}' value='#{course._id}') #{course.name}
                                // Bootstrap 4
