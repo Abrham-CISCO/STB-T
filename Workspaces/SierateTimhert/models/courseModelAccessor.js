@@ -553,29 +553,34 @@ const addStudentToAttendanceList = (studentsArray, gubayeId, callback) =>{
     classRoom_modelAccessor.gubayeDetail(gubayeId,function(err,gubaye){
         gubaye.addedCourses.forEach((addedCourse)=> {
             course.findById(addedCourse.course_id).then((singleCourse)=>{
-                studentsArray.forEach((student)=> {
-                    singleCourse.attendanceColumnName.forEach((column)=>{
-                        if(column.classRoomId == gubayeId)
-                        {
-                            singleCourse.attendance.push(
-                                {   
-                                    date:column.columnName,
-                                    classRoomId:gubayeId,
-                                    studentId:student._id,
-                                    studentTelephone:student.telephone,
-                                    abscent:1,
-                                    late:false,
-                                    permission:false,
-                                    remark:"",
-                                    lateTime:""
-                                })
-                        }
-                    })
+                singleCourse.attendance.findOne({studentId:student._id}).then((attendance)=>{
+                    if(!attendance)
+                    {
+                        studentsArray.forEach((student)=> {
+                            singleCourse.attendanceColumnName.forEach((column)=>{
+                                if(column.classRoomId == gubayeId)
+                                {
+                                    singleCourse.attendance.push(
+                                        {   
+                                            date:column.columnName,
+                                            classRoomId:gubayeId,
+                                            studentId:student._id,
+                                            studentTelephone:student.telephone,
+                                            abscent:1,
+                                            late:false,
+                                            permission:false,
+                                            remark:"",
+                                            lateTime:""
+                                        })
+                                }
+                            })
+                        })
+                        console.log(singleCourse)
+                        singleCourse.save().then((notification)=>{
+                            callback(null, notification)
+                        }).catch((error)=>{callback(error, false)})
+                    }
                 })
-                console.log(singleCourse)
-                singleCourse.save().then((notification)=>{
-                    callback(null, notification)
-                }).catch((error)=>{callback(error, false)})
             })
         })
 })
@@ -606,13 +611,14 @@ const addStudent = (studentsArray, gubayeId, callback) => {
 
         classRoom_modelAccessor.gubayeDetail(gubayeId,function(err,gubaye){
             console.log("gubaye")
+            // Add the student to the database if the student does not exist in the database
             addStudentToAttendanceList(studentsArray,gubayeId,function(err, notifi){
                 console.log(notifi) 
             })
             gubaye.addedCourses.forEach((addedCourse)=> {
                 console.log("gubaye.addedCourses",gubaye.addedCourses)
                 course.findById(addedCourse.course_id).then((singleCourse)=>{
-                    singleCourse.markList = markList;
+                    singleCourse.markList.push(markList);
                     console.log("singleCourse.markList", singleCourse.markList)
                     singleCourse.save().then((notification)=>{
                         callback(null, notification)

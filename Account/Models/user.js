@@ -46,7 +46,7 @@ var UserSchema = new mongoose.Schema({
                     // Connect the departments with the link using s_id and parent relation
                     department:"ትምህርት ክፍል",
                     subDepartment:[
-                        {name:"ሰብሳቢ",DA_link:"/Sebsabi",role:"ሰብሳቢ",active:false, sd_id:1, parent : 1},
+                        {name:"ሰብሳቢ",DA_link:"/Sebsabi",role:"ሰብሳቢ",active:true, sd_id:1, parent : 1},
                         {name:"ጸሐፊ",DA_link:"/Tsehafi/DepartmentAdmin",role:"ጸሐፊ",active:false, sd_id:2, parent : 1, SD_link:"/Tsehafi/SubDepartmentAdmin"},
                         {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"ሰብሳቢ",active:false, sd_id:3,  parent : 1,SD_link:"/SirateTimhert/SubDepartmentAdmin",},
                         {name:"ስርዓተ ትምህርት",DA_link:"/SirateTimhert/DepartmentAdmin",role:"አባል",active:false, sd_id:3,  parent : 3,SD_link:"/SirateTimhert/SubDepartmentMember"},

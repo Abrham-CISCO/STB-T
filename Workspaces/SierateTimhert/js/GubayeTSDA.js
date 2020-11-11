@@ -12,7 +12,7 @@ function addmembers(gubayeID)
     socket.emit('AddGubayeMembers',gubayeID,members);
     console.log(members)
   socket.on('AddGubayeMembers',function(Confirmation){
-    window.location.href = "http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeID;
+    window.location.href = "/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeID;
   });
 }
 
@@ -31,7 +31,7 @@ function addCourse(gubayeID)
     socket.emit('AddGubayeCourses',gubayeID,courses);
   socket.on('AddGubayeCourses',function(Confirmation){
     console.log(Confirmation);
-    window.location.href = "http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeID;
+    window.location.href = "/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeID;
   });
 }
 
@@ -44,7 +44,7 @@ function updateGubaye()
   var classId = document.getElementById("_id").value
   socket.emit('UpdateGubaye',classId, GubayeName, description, admin)
   socket.on('UpdateGubaye',function(Confirmation){
-    window.location.href = "http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/"+classId;
+    window.location.href = "/SirateTimhert/Gubaye_Nius_Sebsabi/"+classId;
   });
 }
 function deleteGubaye()
@@ -54,6 +54,6 @@ function deleteGubaye()
   var classId = document.getElementById("_id").value
   socket.emit('deleteGubaye',classId)
   socket.on('deleteGubaye',function(Confirmation){
-    window.location.href = "http://localhost:3000/SirateTimhert/SubDepartmentAdmin"
+    window.location.href = "/SirateTimhert/SubDepartmentAdmin"
   });
 }

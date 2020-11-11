@@ -2,7 +2,7 @@ courseCoutLineIframe = document.getElementById('courseOutlineIFrame')
 fileUpload = document.getElementById("Cfile_upload")
 removeBtn = document.getElementById("btnRemoveCourseOutline")
 console.log(courseCoutLineIframe.src)
-if(courseCoutLineIframe.src == "http://localhost:3000/null/")
+if(courseCoutLineIframe.src == "/null/")
 {
 fileUpload.style.display = "block";
 courseCoutLineIframe.style.display = "none"

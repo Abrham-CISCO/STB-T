@@ -44,9 +44,9 @@ xhr.onreadystatechange = function(){
                 Output += "</b></h2><ul class='ml-4 mb-0 fa-ul text-muted'>"
                 Output += "<li class='small'><span class='fa-li'><i class='fas fa-lg fa-envelope'></i></span> Email: "+users.response[i].email+"</li>"
                 Output += "<li class='small'><span class='fa-li'><i class='fas fa-lg fa-phone'></i></span> Phone #: " + users.response[i].telephone +"</li>"
-                Output += "</ul></div><div class='col-5 text-center'><img src='http://localhost:3000/" + users.response[i].pro_img +"' alt='' class='img-circle img-fluid'>"
+                Output += "</ul></div><div class='col-5 text-center'><img src='/" + users.response[i].pro_img +"' alt='' class='img-circle img-fluid'>"
                 Output += "</div></div></div><div class='card-footer'><div class='text-right'><button onclick = LoadChatBox('"+ users.response[i].telephone +"') class='btn btn-sm bg-teal'><i class='fas fa-comments' ></i>"
-                Output += "</button>&nbsp;<a href='http://localhost:3000/accounts/public/profile/"+users.response[i].telephone+"' class='btn btn-sm btn-primary')><i class='fas fa-user'></i> View Profile"
+                Output += "</button>&nbsp;<a href='/accounts/public/profile/"+users.response[i].telephone+"' class='btn btn-sm btn-primary')><i class='fas fa-user'></i> View Profile"
                 Output += "</a></div></div></div></div>"
                 }
             }
@@ -63,7 +63,7 @@ document.getElementById("userlist").innerHTML = (Output);
 };
 
 
-xhr.open('GET','http://localhost:3000/accounts/all');
+xhr.open('GET','/accounts/all');
 xhr.send();
 }
 Load();
@@ -98,14 +98,14 @@ function Assign(UserType)
 
   if (UserType == 1)
   {
-    link = "http://localhost:3000/accounts/add/"+DepartmentID+"/Leader/"+UserID;
+    link = "/accounts/add/"+DepartmentID+"/Leader/"+UserID;
     xhr.open('GET',link);
     xhr.send();
   
   }
   if (UserType == 0)  
   {
-  link = "http://localhost:3000/accounts/add/"+DepartmentID+"/Member/"+UserID;
+  link = "/accounts/add/"+DepartmentID+"/Member/"+UserID;
   xhr.open('GET',link);
   xhr.send();
   }

@@ -10,11 +10,11 @@ html
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
-    link(rel='stylesheet', href='http://localhost:3000/adminlite/plugins/fontawesome-free/css/all.min.css')
+    link(rel='stylesheet', href='/adminlite/plugins/fontawesome-free/css/all.min.css')
     // Ionicons
     link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
     // Theme style
-    link(rel='stylesheet', href='http://localhost:3000/adminlite/dist/css/adminlte.min.css')
+    link(rel='stylesheet', href='/adminlite/dist/css/adminlte.min.css')
     // Google Font: Source Sans Pro
     link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
   body.hold-transition.sidebar-mini
@@ -48,7 +48,7 @@ html
                 .card.card-primary.card-outline
                   .card-body.box-profile
                     .text-center
-                      img.profile-user-img.img-fluid.img-circle(src='http://localhost:3000/#{loadeduser.pro_img}', alt='User profile picture')
+                      img.profile-user-img.img-fluid.img-circle(src='/#{loadeduser.pro_img}', alt='User profile picture')
                     |                 
                     h3.profile-username.text-center #{loadeduser.name}
                     |                 
@@ -144,7 +144,7 @@ html
                         // Post
                         .post
                           .user-block
-                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user1-128x128.jpg', alt='user image')
+                            img.img-circle.img-bordered-sm(src='/ADMINLITE/dist/img/user1-128x128.jpg', alt='user image')
                             |                         
                             span.username
                               a(href='#') Jonathan Burke Jr.
@@ -180,7 +180,7 @@ html
                         // Post
                         .post.clearfix
                           .user-block
-                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user7-128x128.jpg', alt='User Image')
+                            img.img-circle.img-bordered-sm(src='/ADMINLITE/dist/img/user7-128x128.jpg', alt='User Image')
                             |                         
                             span.username
                               a(href='#') Sarah Ross
@@ -207,7 +207,7 @@ html
                         // Post
                         .post
                           .user-block
-                            img.img-circle.img-bordered-sm(src='http://localhost:3000/ADMINLITE/dist/img/user6-128x128.jpg', alt='User Image')
+                            img.img-circle.img-bordered-sm(src='/ADMINLITE/dist/img/user6-128x128.jpg', alt='User Image')
                             |                         
                             span.username
                               a(href='#') Adam Jones
@@ -219,19 +219,19 @@ html
                           // /.user-block
                           .row.mb-3
                             .col-sm-6
-                              img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
+                              img.img-fluid(src='/ADMINLITE/dist/img/photo1.png', alt='Photo')
                             // /.col
                             .col-sm-6
                               .row
                                 .col-sm-6
-                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo2.png', alt='Photo')
+                                  img.img-fluid.mb-3(src='/ADMINLITE/dist/img/photo2.png', alt='Photo')
                                   |                               
-                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo3.jpg', alt='Photo')
+                                  img.img-fluid(src='/ADMINLITE/dist/img/photo3.jpg', alt='Photo')
                                 // /.col
                                 .col-sm-6
-                                  img.img-fluid.mb-3(src='http://localhost:3000/ADMINLITE/dist/img/photo4.jpg', alt='Photo')
+                                  img.img-fluid.mb-3(src='/ADMINLITE/dist/img/photo4.jpg', alt='Photo')
                                   |                               
-                                  img.img-fluid(src='http://localhost:3000/ADMINLITE/dist/img/photo1.png', alt='Photo')
+                                  img.img-fluid(src='/ADMINLITE/dist/img/photo1.png', alt='Photo')
                                 // /.col
                               // /.row
                             // /.col
@@ -374,10 +374,10 @@ html
       // /.control-sidebar
     // ./wrapper
     // jQuery
-    script(src='http://localhost:3000/ADMINLITE/plugins/jquery/jquery.min.js')
+    script(src='/ADMINLITE/plugins/jquery/jquery.min.js')
     // Bootstrap 4
-    script(src='http://localhost:3000/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    script(src='/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
     // AdminLTE App
-    script(src='http://localhost:3000/ADMINLITE/dist/js/adminlte.min.js')
+    script(src='/ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
-    script(src='http://localhost:3000/ADMINLITE/dist/js/demo.js')
+    script(src='/ADMINLITE/dist/js/demo.js')

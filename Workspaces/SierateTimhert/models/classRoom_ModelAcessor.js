@@ -41,9 +41,11 @@ const memberAdder = (gubayeID, Members, callback) => {
                 console.log("add member to G")
                 if(!error)
                 {
+                    console.log("Excuting AddMemberToG without error")
                     course_modelAccessor.addStudent(Members,gubayeID,function(err, notification){
                         if(!err)
                         {
+                            console.log("Call back about to be called")
                             callback(null,response)
                         }
                         else
@@ -51,6 +53,10 @@ const memberAdder = (gubayeID, Members, callback) => {
 
                         }
                     })
+                }
+                else
+                {
+
                 }
             })
         }

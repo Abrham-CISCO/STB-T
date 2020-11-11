@@ -102,7 +102,9 @@ app.use(passport.session());
       socket.on('AddGubayeMembers', function(gubayeId, gubayeMembersArray)
       { 
         UserModel_Acc.NameArrayToTelArray(gubayeMembersArray,function(error,userTelArray){
+          console.log("Socket shall be emitted by now")
           classRoom_ModelAccessor.memberAdder(gubayeId,userTelArray,function(error,response){
+            console.log("Socket shall be emitted by now 2")
             socket.emit('AddGubayeMembers','Done')
           })
         })

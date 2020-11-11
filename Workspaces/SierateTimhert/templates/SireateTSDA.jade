@@ -54,7 +54,7 @@ html
                     .tab-content
                       #activity.active.tab-pane  
                         div(id="userlist").memberslist
-                        script(src="http://localhost:3000/workspaces/SierateTimhert/js/DMembersST_S.js")
+                        script(src="/workspaces/SierateTimhert/js/DMembersST_S.js")
                       #classRooms.tab-pane
                         .row.d-flex.align-items-stretch
                           each classes in user.gubaeat       
@@ -63,7 +63,7 @@ html
                                 .info-box-icon.bg-info
                                   .fas.fa-users
                                 .info-box-content
-                                  a(href="http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/#{classes.id}")
+                                  a(href="/SirateTimhert/Gubaye_Nius_Sebsabi/#{classes.id}")
                                     span.info-box-text ጉባኤ #{classes.name}
                                   span.info-box-text የአባላት ብዛት ፡ #{classes.members.length}
                                   span.info-box-text አስተባባሪ ፡ #{classes.leader}
@@ -84,7 +84,7 @@ html
                                 .info-box-icon.bg-warning
                                   .fas.fa-book
                                 .info-box-content 
-                                  a(href="http://localhost:3000/SirateTimhert/course/nius_sebsabi/#{val._id}")
+                                  a(href="/SirateTimhert/course/nius_sebsabi/#{val._id}")
                                     span.info-box-text #{val.name}
                                   span.info-box-text 0 ተማሪዎች ተምረውታል።
                                     span.info-box-text 0 ተማሪዎች በመማር ላይ ይገኛሉ።
