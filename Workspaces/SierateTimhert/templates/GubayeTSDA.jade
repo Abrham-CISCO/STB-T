@@ -60,20 +60,19 @@ html
                       #member.active.tab-pane
                         .row
                           .col-12.col-sm-12.col-md-12
-                            ul.users-list.clearfix
-                              if(user.gubayemembers)
-                                each val in user.gubayemembers
-                                  li
-                                    img(src="../#{val.pro_img}" alt="User Image")
-                                    a.users-list-name(href="/accounts/public/profile/#{val.telephone}") #{val.name}
-                                    a(href="/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/Remove/#{val.telephone}")
-                                      button(type='button', class="btn btn-block btn-danger btn-xs") Remove
-                              li 
-                                span(class="users-list-date") 
-                                span(class="users-list-date") 
-                                button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-sm')
-                                  div(class="fas fa-plus nav-plus")
-                                a(href="#" class="users-list-name") አባል ጨምር
+                            if(user.gubayemembers)
+                              each val in user.gubayemembers
+                                .col-12.col-sm-6.col-md-3
+                                  .info-box.mb-3
+                                    span.info-box-icon.bg-success.elevation-1
+                                      img(src="../../#{val.pro_img}" alt="User Image")
+                                    .info-box-content
+                                      a.users-list-name(href="/accounts/public/profile/#{val.telephone}") #{val.name}
+                                      a(href="/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/Remove/#{val.telephone}")
+                                        button(type='button', class="btn btn-block btn-danger btn-xs") Remove
+                              button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-sm')
+                                div(class="fas fa-plus nav-plus")
+                              a(href="#" class="users-list-name") አባል ጨምር
                                 
                                   // jQuery
 
@@ -215,19 +214,18 @@ html
                       #education.tab-pane
                         .row
                           .col-9  
-                            ul.users-list.clearfix
-                              each val in JoinedCourses
-                                li
-                                  img(src="/SharedComponents/static/logo.jpg" alt="User Image")
-                                  a.users-list-name(href="/SirateTimhert/course/Gubaye_Nius_Sebsabi/#{val.id}/#{user.gubaye._id}") #{val.name}
-                                  a(href="/SirateTimhert/course/remove/#{val.id}/#{user.gubaye._id}")                                  
-                                    button(type='button', class="btn btn-block btn-danger btn-xs") Remove
-                              li 
-                                span(class="users-list-date") 
-                                span(class="users-list-date") 
-                                button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
-                                  .fas.fa-plus.nav-plus
-                                a(href="#" class="users-list-name") አዲስ ኮርስ ጨምር
+                            each val in JoinedClass
+                             .col-12.col-sm-6.col-md-4
+                               .info-box.mb-3
+                                 span.info-box-icon.bg-success.elevation-1
+                                   i.fas.fa-book
+                                 .info-box-content
+                                   a(href="/SirateTimhert/course/Gubaye_Nius_Sebsabi/#{val.id}/#{user.gubaye._id}") #{val.name}
+                                   a(href="/SirateTimhert/course/remove/#{val.id}/#{user.gubaye._id}")                                  
+                                     button(type='button', class="btn btn-block btn-danger btn-xs") Remove
+                            button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
+                              .fas.fa-plus.nav-plus
+                            a(href="#" class="users-list-name") አዲስ ኮርስ ጨምር
                       #modal-course.modal.fade(style='display: none;', aria-hidden='true')
                         .modal-dialog.modal-course
                           .modal-content
