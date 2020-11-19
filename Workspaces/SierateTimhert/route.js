@@ -562,6 +562,9 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
+                res.end();
+                url = "http://localhost:3000/SirateTimhert/course/Gubaye_Nius_Sebsabi/"+courseId+"/"+gubayeId
+                res.redirect(url)
                 res.json(course)
             }
         })
