@@ -80,7 +80,7 @@ xhr.onreadystatechange = function(){
                 Output += "<li class='small'><span class='fa-li'><i class='fas fa-lg fa-phone'></i></span> Phone #: " + users.response[i].telephone +"</li>"
                 Output += "</ul></div><div class='col-5 text-center'><img src='" + users.response[i].pro_img +"' alt='' class='img-circle img-fluid'>"
                 Output += "</div></div></div><div class='card-footer'><div class='text-right'><button onclick = LoadChatBox('"+ users.response[i].telephone +"') class='btn btn-sm bg-teal'><i class='fas fa-comments' ></i>"
-                Output += "</button>&nbsp;<a href='http://localhost:3000/accounts/public/profile/"+users.response[i].telephone+"' class='btn btn-sm btn-primary')><i class='fas fa-user'></i> View Profile"
+                Output += "</button>&nbsp;<a href='/accounts/public/profile/"+users.response[i].telephone+"' class='btn btn-sm btn-primary')><i class='fas fa-user'></i> View Profile"
                 Output += "</a></div></div></div></div>"
                 }
             }
@@ -97,7 +97,7 @@ document.getElementById("userlist").innerHTML = (Output);
 };
 
 
-xhr.open('GET','http://localhost:3000/accounts/all');
+xhr.open('GET','/accounts/all');
 xhr.send();
 }
 Load();
@@ -132,14 +132,14 @@ function Assign(UserType)
 
   if (UserType == 1)
   {
-    link = "http://localhost:3000/accounts/add/"+DepartmentID+"/Leader/"+UserID;
+    link = "/accounts/add/"+DepartmentID+"/Leader/"+UserID;
     xhr.open('GET',link);
     xhr.send();
   
   }
   if (UserType == 0)  
   {
-  link = "http://localhost:3000/accounts/add/"+DepartmentID+"/Member/"+UserID;
+  link = "/accounts/add/"+DepartmentID+"/Member/"+UserID;
   xhr.open('GET',link);
   xhr.send();
   }
@@ -166,20 +166,20 @@ function RemoveMember(ID, UserType)
   
   if (UserType == 1)
   {
-    link = "http://localhost:3000/accounts/remove/"+DepartmentID+"/Leader/"+UserID;
+    link = "/accounts/remove/"+DepartmentID+"/Leader/"+UserID;
     console.log(link);
     xhr.open('GET',link);
     xhr.send();
     console.log(link)
-    window.location.href = "http://localhost:3000/SirateTimhert/DepartmentAdmin";
+    window.location.href = "/SirateTimhert/DepartmentAdmin";
   }
   if (UserType == 0)  
   {
-    link = "http://localhost:3000/accounts/remove/"+DepartmentID+"/Member/"+UserID;
+    link = "/accounts/remove/"+DepartmentID+"/Member/"+UserID;
     console.log(link);
     xhr.open('GET',link);
     xhr.send();
-    window.location.href = "http://localhost:3000/SirateTimhert/DepartmentAdmin";  
+    window.location.href = "/SirateTimhert/DepartmentAdmin";  
   }
 }
 function ViewProfile(ID)
