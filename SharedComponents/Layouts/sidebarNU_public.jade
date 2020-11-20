@@ -47,6 +47,18 @@ html
                                 a(href=val3.SD_link, id=val3.sd_id).nav-link
                                   i.far.fa-circle.nav-icon
                                   p=val3.name     
+              li.nav-item.has-treeview.menu.open 
+                a(href="#").nav-link
+                  i.nav-icon.fas.fa-tachometer-alt
+                  p ጉባኤያት
+                    i.right.fas.fa-angle-left
+                ul(style="display: block;").nav.nav-treeview#pr 
+                  if(loaderuser.JoinedclassRooms)
+                    each classes in loaderuser.JoinedclassRooms   
+                      li.nav-item                                  
+                        a(href="/SirateTimhert/Gubaye/public/#{classes.id}", id=classes.id).nav-link
+                          i.far.fa-circle.nav-icon
+                          p #{classes.name}            
             li.nav-item
               a.nav-link(href='../Accounts/logout')
                 i.fas.fa-circle.nav-icon
