@@ -10,7 +10,7 @@ html
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
-    link(rel='stylesheet', href='https://localhost:3000/adminlite/plugins/fontawesome-free/css/all.min.css')
+    link(rel='stylesheet', href='/adminlite/plugins/fontawesome-free/css/all.min.css')
     // Ionicons
     link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
     // Theme style
@@ -69,10 +69,10 @@ html
                                     a.users-list-name(href="/accounts/public/profile/#{val.telephone}") #{val.name}
                                     a(href="/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/Remove/#{val.telephone}")
                                       button(type='button', class="btn btn-block btn-danger btn-xs") Remove
-                            .col-12.col-sm-6.col-md-3
-                              button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-sm')
-                                div(class="fas fa-plus nav-plus")
-                              a(href="#" class="users-list-name") አባል ጨምር
+                          .col-12.col-sm-6.col-md-3
+                            button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-sm')
+                              div(class="fas fa-plus nav-plus")
+                            a(href="#" class="users-list-name") አባል ጨምር
                                 
                                   // jQuery
 
@@ -452,6 +452,9 @@ html
   script(src='/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
   // DataTables
   link(rel='stylesheet', href='/ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
+  
+  script(src='/ADMINLITE/dist/js/adminlte.min.js')
+
   script.
     document.getElementById('3').className = "nav-link active"
     document.getElementById('#{user.GubayeID}').className = "nav-link active"

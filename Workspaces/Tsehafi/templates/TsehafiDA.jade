@@ -37,7 +37,7 @@ html
                   li.breadcrumb-item
                     a(href='#') Home
                   |               
-                  li.breadcrumb-item.active User Profile
+                  li.breadcrumb-item.active ጸሐፊ ፡ አመራር
             .row
               .col-md-12
                 .card
@@ -45,9 +45,6 @@ html
                     ul.nav.nav-pills
                       li.nav-item
                         a.nav-link.active(href='#activity', data-toggle='tab') አባላት
-                      |                   
-                      li.nav-item
-                        a.nav-link(href='#timeline', data-toggle='tab') Timeline
                   // /.card-header
                   .card-body
                     .tab-content
@@ -59,140 +56,6 @@ html
                       //- script(src="static/viewsOld/jquery.min.js")  
                       //- script(src="static/viewsOld/AJAX/S_D_Leader/DMembersST_S.js")
                       //- script(src="static/viewsOld/AJAX/Apps/Messaging.js")
-                      #timeline.tab-pane
-                        // The timeline
-                        .timeline.timeline-inverse
-                          // timeline time label
-                          .time-label
-                            span.bg-danger
-                              | 10 Feb. 2014
-                          // /.timeline-label
-                          // timeline item
-                          div
-                            i.fas.fa-envelope.bg-primary
-                            |                         
-                            .timeline-item
-                              span.time
-                                i.far.fa-clock
-                                |  12:05
-                              |                           
-                              h3.timeline-header
-                                a(href='#') Support Team
-                                |  sent you an email
-                              |                           
-                              .timeline-body
-                                | Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                | weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                | jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                | quora plaxo ideeli hulu weebly balihoo...
-                              |                           
-                              .timeline-footer
-                                a.btn.btn-primary.btn-sm(href='#') Read more
-                                |                             
-                                a.btn.btn-danger.btn-sm(href='#') Delete
-                          // END timeline item
-                          // timeline item
-                          div
-                            i.fas.fa-user.bg-info
-                            |                         
-                            .timeline-item
-                              span.time
-                                i.far.fa-clock
-                                |  5 mins ago
-                              |                           
-                              h3.timeline-header.border-0
-                                a(href='#') Sarah Young
-                                |  accepted your friend request
-                          // END timeline item
-                          // timeline item
-                          div
-                            i.fas.fa-comments.bg-warning
-                            |                         
-                            .timeline-item
-                              span.time
-                                i.far.fa-clock
-                                |  27 mins ago
-                              |                           
-                              h3.timeline-header
-                                a(href='#') Jay White
-                                |  commented on your post
-                              |                           
-                              .timeline-body
-                                | Take me to your leader!
-                                | Switzerland is small and neutral!
-                                | We are more like Germany, ambitious and misunderstood!
-                              |                           
-                              .timeline-footer
-                                a.btn.btn-warning.btn-flat.btn-sm(href='#') View comment
-                          // END timeline item
-                          // timeline time label
-                          .time-label
-                            span.bg-success
-                              | 3 Jan. 2014
-                          // /.timeline-label
-                          // timeline item
-                          div
-                            i.fas.fa-camera.bg-purple
-                            |                         
-                            .timeline-item
-                              span.time
-                                i.far.fa-clock
-                                |  2 days ago
-                              |                           
-                              h3.timeline-header
-                                a(href='#') Mina Lee
-                                |  uploaded new photos
-                              |                           
-                              .timeline-body
-                                img(src='http://placehold.it/150x100', alt='...')
-                                |                             
-                                img(src='http://placehold.it/150x100', alt='...')
-                                |                             
-                                img(src='http://placehold.it/150x100', alt='...')
-                                |                             
-                                img(src='http://placehold.it/150x100', alt='...')
-                          // END timeline item
-                          div
-                            i.far.fa-clock.bg-gray
-                      // /.tab-pane
-                      #settings.tab-pane
-                        form(method="post", action="/updateProfile").form-horizontal
-                          .form-group.row
-                            label.col-sm-2.col-form-label(for='inputName') ሙሉ ስም
-                            |                         
-                            .col-sm-10
-                              input#inputName.form-control(type='text', placeholder='ሙሉ ስም', value="#{user.name}", name='name')
-                          |                       
-                          .form-group.row
-                            label.col-sm-2.col-form-label(for='inputEmail') ኢ-ሜል
-                            |                         
-                            .col-sm-10
-                              input#inputEmail.form-control(type='email', placeholder='ኢ-ሜል', value="#{user.email}", name='email')
-                          |                      
-                          .form-group.row
-                            label.col-sm-2.col-form-label(for='inputTel') ስልክ ቁጥር
-                            |                         
-                            .col-sm-10
-                              input#inputTel.form-control(type='text', placeholder='ስልክ ቁጥር', value="#{user.telephone}", name='telephone') 
-                          |                          
-                          .form-group.row
-                            label.col-sm-2.col-form-label(for='inputSkills') Skills
-                            |                         
-                            .col-sm-10
-                              input#inputSkills.form-control(type='text', placeholder='Skills')
-                          |                       
-                          .form-group.row
-                            .offset-sm-2.col-sm-10
-                              .checkbox
-                                label
-                                  input(type='checkbox')
-                                  |  I agree to the 
-                                  a(href='#') terms and conditions
-                          |                       
-                          .form-group.row
-                            .offset-sm-2.col-sm-10
-                              button.btn.btn-danger(type='submit') Submit
-                      // /.tab-pane
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom

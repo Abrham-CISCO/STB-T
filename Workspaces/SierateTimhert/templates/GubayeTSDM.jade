@@ -69,10 +69,10 @@ html
                                     a.users-list-name(href="/accounts/public/profile/#{val.telephone}") #{val.name}
                                     a(href="/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/Remove/#{val.telephone}")
                                       button(type='button', class="btn btn-block btn-danger btn-xs") Remove
-                            .col-12.col-sm-6.col-md-3
-                              button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-sm')
-                                div(class="fas fa-plus nav-plus")
-                              a(href="#" class="users-list-name") አባል ጨምር
+                        .col-12.col-sm-6.col-md-3
+                          button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-sm')
+                            div(class="fas fa-plus nav-plus")
+                          a(href="#" class="users-list-name") አባል ጨምር
                                 
                                   // jQuery
 
@@ -321,6 +321,7 @@ html
   script(src='/ADMINLITE/plugins/datatables/jquery.dataTables.js')
   script(src='/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')
   script(src='/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+  script(src='/ADMINLITE/dist/js/adminlte.min.js')
   // DataTables
   link(rel='stylesheet', href='/ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
   script.

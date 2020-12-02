@@ -4,9 +4,14 @@ nav.main-header.navbar.navbar-expand.navbar-white.navbar-light
     li.nav-item
       a.nav-link(data-widget='pushmenu', href='#')
         i.fas.fa-bars
+
+      
   // SEARCH FORM
   // Right navbar links
   ul.navbar-nav.ml-auto
+    li.nav-item
+      a(href="../../../Accounts/home" class="nav-link") 
+        i.fas.fa-home
     // Messages Dropdown Menu
     li.nav-item.dropdown
       a.nav-link(data-toggle='dropdown', href='#', onClick = "LoadMessagingNotification();")
@@ -31,9 +36,4 @@ nav.main-header.navbar.navbar-expand.navbar-white.navbar-light
         | 
         span.dropdown-item.dropdown-header 15 Notifications         
         .dropdown-divider
-        | 
-    |       
-    li.nav-item
-      a.nav-link(data-widget='control-sidebar', data-slide='true', href='#')
-        i.fas.fa-th-large
 // /.navbar
