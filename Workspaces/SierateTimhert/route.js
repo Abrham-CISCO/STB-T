@@ -584,7 +584,7 @@ router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader,mid.upd
 });
 
 // For Sub Department Admins
-router.get('/SubDepartmentAdmin', mid.requireSignIn,mid.updateUserData,  function(req,res,next){
+router.get('/SubDepartmentAdmin', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS,  function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
         course_ModelAccessor.allCourses((error,courses)=>{
@@ -595,7 +595,7 @@ router.get('/SubDepartmentAdmin', mid.requireSignIn,mid.updateUserData,  functio
 });
 
 // For Sub Department Members
-router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, function(req,res,next){
+router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNA, function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
         course_ModelAccessor.allCourses((error,courses)=>{
