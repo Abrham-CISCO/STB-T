@@ -1,4 +1,21 @@
-PWD = require('../Models/PSDrecovery')
+const PWD = require('../Models/PSDrecovery')
+const nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'timhertkifilportal@gmail.com',
+    pass: 'TK-Meskel-2013'
+  }
+});
+
+var mailOptions = {
+  from: 'timhertkifilportal@gmail.com',
+  to: 'myfriend@yahoo.com',
+  subject: 'አምደ ተዋህዶ ሰ/ቤት ትምህርት ክፍል Portal : Password recovery Number,
+  text: '123456789'
+};
+
 
 const register = (PWDData,callback) => 
 {
@@ -9,6 +26,14 @@ const register = (PWDData,callback) =>
         else
         {
             callback(null,pwd)
+//             Write here an instruction that sends the secret string to the user
+            transporter.sendMail(mailOptions, function(error, info){
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+              }
+            });
         }
     });
 }
