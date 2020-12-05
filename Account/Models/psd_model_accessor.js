@@ -1,6 +1,6 @@
 const PWD = require('../Models/PSDrecovery')
 const nodemailer = require('nodemailer');
-
+const user_ModelAccessor = require('./user_model_accessor')
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -19,7 +19,16 @@ var mailOptions = {
 
 const register = (PWDData,callback) => 
 {
-    PWD.create(PWDData, function(error, pwd){
+
+
+  user_ModelAccessor.userData(PWDData.TUI, function(error,user){
+      var mailOptions = {
+                        from: 'timhertkifilportal@gmail.com',
+                        to: user.email,
+                        subject: 'አምደ ተዋህዶ ሰ/ቤት ትምህርት ክፍል Portal : Password recovery Number,
+                        text: '123456789'
+                        };
+        PWD.create(PWDData, function(error, pwd){
         if(error){
             callback(error,null)
         }
@@ -36,6 +45,7 @@ const register = (PWDData,callback) =>
             });
         }
     });
+  })
 }
 
 const verify = (TUI,vcode,callback) => 
