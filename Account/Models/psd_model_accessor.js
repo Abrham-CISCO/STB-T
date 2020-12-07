@@ -9,23 +9,17 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-var mailOptions = {
-  from: 'timhertkifilportal@gmail.com',
-  to: 'myfriend@yahoo.com',
-  subject: 'አምደ ተዋህዶ ሰ/ቤት ትምህርት ክፍል Portal : Password recovery Number,
-  text: '123456789'
-};
-
 
 const register = (PWDData,callback) => 
 {
 
 
-  user_ModelAccessor.userData(PWDData.TUI, function(error,user){
+  user_ModelAccessor.userData(PWDData.uID, function(error,user){
+    
       var mailOptions = {
                         from: 'timhertkifilportal@gmail.com',
                         to: user.email,
-                        subject: 'አምደ ተዋህዶ ሰ/ቤት ትምህርት ክፍል Portal : Password recovery Number,
+                        subject: 'አምደ ተዋህዶ ሰ/ቤት ትምህርት ክፍል Portal : Password recovery Number',
                         text: '123456789'
                         };
         PWD.create(PWDData, function(error, pwd){
