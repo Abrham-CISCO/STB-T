@@ -53,7 +53,6 @@ html
                   .card-body
                     input(type="hidden", value="#{returnedCourse}", id="courseData")
                     input(type="hidden", value="#{classRoom}", id="classRoomData")
-
                     script.
                       var data = #{returnedCourse.markListColumnName}
                       console.log(data)
@@ -61,7 +60,7 @@ html
                       #points.active.tab-pane
                         .card
                           .card-header
-                            h3.card-title DataTable with default features
+                            h3.card-title #{returnedCourse.name} ኮርስ ነጥብ ሰንጠረዥ
                           // /.card-header
                           .card-body
                             table#example1.table.table-bordered.table-striped
@@ -121,8 +120,9 @@ html
 
                       #attendance.tab-pane
                         .card
-                          .card-header
-                            h3.card-title DataTable with default features
+                          .card-header                            
+                            h3.card-title #{returnedCourse.name} ኮርስ አቴንዳንስ
+
                           // /.card-header
                           .card-body(style="overflow-x:auto")
                             table#example3.table.table-bordered.table-striped

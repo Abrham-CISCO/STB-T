@@ -94,6 +94,14 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     }
                     UserModelAccessor.userObjectByTel(membersTel,function(error,contacts){
                         req.session.user.gubaye = gubaye; 
+                        if(contacts)
+                        {
+                            req.session.user.gubayemembers = contacts;                            
+                        }
+                        else
+                        {
+                            req.session.user.gubayemembers = [];
+                        }
                         req.session.user.gubayemembers = contacts;
                         
                         UserModelAccessor.allUsers(function(error,users){
@@ -571,16 +579,57 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
     })    
     //for removing course : Deleting Course
         // What should happen when a course is removed or deleted?
-         
+        function sleep(milliseconds) {
+            const date = Date.now();
+            let currentDate = null;
+            do {
+              currentDate = Date.now();
+            } while (currentDate - date < milliseconds);
+          }    
     // For Department Admins
 router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader,mid.updateUserData, function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
-        course_ModelAccessor.allCourses((error,courses)=>{
-            req.session.courses = courses;
-                    return res.render("Workspaces/SierateTimhert/templates/SireateTDA.jade",req.session);
-        });
+            // // Invalid Logic
+                        // courses.map((miniSingleCourse) => {
+            //     index = index + 1;
+            //     course_ModelAccessor.courseDetail(miniSingleCourse._id, function(error, singleCourse){
+            //         coursesWithStuCount.push({_id:miniSingleCourse._id, name:miniSingleCourse.name, students:singleCourse.attendance.length})
+            //         req.session.courses = coursesWithStuCount;                    
+            //     })
+            // })
+            // console.log(req.session)
+            // sleep(1000)
+            
+            course_ModelAccessor.allCourses((error,courses)=>{
+                if(!error)
+                {
+                    console.log("courses1 : ", courses);
+                    var courseIds = [];
+                    courseIds.pop();
+                    courses.map(singleCourse => {
+                        courseIds.push(singleCourse._id);
+                    });
+                    console.log("courseIds", courseIds)
+                    course_ModelAccessor.courseDetailArray(courseIds,function(error,coursesArray){
+                        if(error)
+                        {
+                            console.log(error)
+                        }
+                        else
+                        {
+                            req.session.courses = coursesArray
+                            console.log("coursesArray", coursesArray)
+                            return res.render("Workspaces/SierateTimhert/templates/SireateTDA.jade",req.session);
+                        }
+                    });
+                }
+
+            });
+
     });
+
+
 });
 
 // For Sub Department Admins
@@ -604,5 +653,8 @@ router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, mid.req
         })
     });
 });
+
+
+// http://localhost:3000/SirateTimhert/course/nius_sebsabi/5fc926e213464d1c2cb71d70
 
 module.exports = router;

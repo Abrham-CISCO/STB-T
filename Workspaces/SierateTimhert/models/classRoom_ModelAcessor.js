@@ -10,27 +10,33 @@ const gubayeDetail = (GubayeID, callback) => {
 
 const gubayeIdArrayToNameArray = (gubayeIdArray, callback) =>
 {
-    var searchObject = {
-        $or: [
-        ]
-    }
-
-    gubayeIdArray.forEach((gubayeId) => {
-        searchObject.$or.push({_id:gubayeId});
-    })
-        console.log(searchObject)
-    var gNames = [
-        {name:String,_id:String,membersCount:Number,leader:String}
-    ]
-    gNames.pop();
-    classRoom.find(searchObject).then((gubayeat)=>
+    if(gubayeIdArray.length != 0)
     {
-        gubayeat.forEach((gubaye)=>
-        {
-            gNames.push({name:gubaye.name,_id:gubaye._id,membersCount:gubaye.members.length,leader:gubaye.leader})
+        var searchObject = {
+            $or: [
+            ]
+        }
+    
+        gubayeIdArray.forEach((gubayeId) => {
+            searchObject.$or.push({_id:gubayeId});
         })
-        callback(null,gNames)
-    }).catch((error)=>{callback(error, false)})
+            console.log(searchObject)
+        var gNames = [
+            {name:String,_id:String,membersCount:Number,leader:String}
+        ]
+        gNames.pop();
+        classRoom.find(searchObject).then((gubayeat)=>
+        {
+            gubayeat.forEach((gubaye)=>
+            {
+                gNames.push({name:gubaye.name,_id:gubaye._id,membersCount:gubaye.members.length,leader:gubaye.leader})
+            })
+            callback(null,gNames)
+        }).catch((error)=>{callback(error, false)})
+    }
+    else{
+        callback(null,{})
+    }
 }
 const memberAdder = (gubayeID, Members, callback) => {
     console.log("member Adder")
@@ -50,7 +56,7 @@ const memberAdder = (gubayeID, Members, callback) => {
                         }
                         else
                         {
-
+                            
                         }
                     })
                 }

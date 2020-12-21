@@ -66,8 +66,8 @@ html
                                 .info-box-content 
                                   a(href="/SirateTimhert/Gubaye_Sebsabi/#{classes.id}")
                                     span.info-box-text #{classes.name}
-                                  span.info-box-text የአባላት ብዛት ፡ #{classes.members.count}
-                                  span.info-box-text አስተባባሪ ፡ አብረሀም ጌታቸው 
+                                  span.info-box-text የአባላት ብዛት ፡ #{classes.members.length}
+                                  span.info-box-text አስተባባሪ ፡ #{classes.leader}
                       #courses.tab-pane
                         .row.d-flex.align-items-stretch
                           each val in courses
@@ -78,8 +78,7 @@ html
                                 .info-box-content 
                                   a(href="/SirateTimhert/course/sebsabi/#{val._id}")
                                     span.info-box-text #{val.name}
-                                  span.info-box-text 0 ተማሪዎች ተምረውታል።
-                                    span.info-box-text 0 ተማሪዎች በመማር ላይ ይገኛሉ።
+                                  span.info-box-text #{val.markList.length} ተማሪዎች
 
                     // /.tab-content
                   // /.card-body

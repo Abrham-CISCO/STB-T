@@ -10,7 +10,6 @@ function addmembers(gubayeID)
         
     }
     socket.emit('AddGubayeMembers',gubayeID,members);
-    console.log(members)
   socket.on('AddGubayeMembers',function(Confirmation){
     window.location.href = "/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeID;
   });
