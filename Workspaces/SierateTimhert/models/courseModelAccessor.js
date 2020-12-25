@@ -618,9 +618,7 @@ const addStudent = (studentsArray, gubayeId, callback) => {
             column_10_value:"0"}
             )
         })
-        console.log(markList)
-
-
+        var marklistSaved = false;
         classRoom_modelAccessor.gubayeDetail(gubayeId,function(err,gubaye){
             if(gubaye)
             {
@@ -629,13 +627,25 @@ const addStudent = (studentsArray, gubayeId, callback) => {
                 addStudentToAttendanceList(studentsArray,gubayeId,function(err, notifi){
                     console.log(notifi) 
                 })
-                gubaye.addedCourses.forEach((addedCourse)=> {
-                    console.log("gubaye.addedCourses",addedCourse)
+                gubaye.addedCourses.map((addedCourse)=> {
+                    
                     course.findById(addedCourse.course_id).then((singleCourse)=>{
-                        console.log("markList",markList)
-                        markList.map(mark=>{
-                            singleCourse.markList.push(mark);
+                        marklistSaved = false;
+                        markList.map(localMarklist => {
+                            singleCourse.markList.map(mark=>{
+                                console.log("mark.studentId == localMarklist.studentId > ",mark.studentId.toString() == localMarklist.studentId.toString(),mark.studentId, localMarklist.studentId)
+                                if((mark.studentId.toString()) == (localMarklist.studentId.toString()) && 
+                                mark.classRoomId.toString() == gubayeId.toString())
+                                {
+                                    marklistSaved = true
+                                }
+                            })
+                            if(!marklistSaved)
+                            {
+                                singleCourse.markList.push(localMarklist);
+                            }
                         })
+
                         console.log("marklist",markList)
                         console.log("singleCourse.markList", singleCourse.markList)
                         singleCourse.save().then((notification)=>{

@@ -96,7 +96,7 @@ html
                             ul.nav.nav-pills
                               each book in returnedCourse.books
                                 li.nav-item
-                                  a.nav-link(href='##{book._id}', data-toggle='tab') #{book._id}
+                                  a.nav-link(href='#f#{book._id}', data-toggle='tab') #{book.bookName}
                               li.nav-item
                                 a.active.nav-link(href='#newBook', data-toggle='tab') 
                                   div(class="fas fa-plus nav-plus") መጽሐፍ አካት
@@ -105,16 +105,20 @@ html
                         .card-body
                           .tab-content
                             each book in returnedCourse.books
-                              div(id="#{book._id}").tab-pane
-                                iframe(src = "/Workspaces/SierateTimhert/static/kerestosyehulugetanew.pdf" style="width:100%" height=420)
+                              div(id="f#{book._id}").tab-pane
+                                iframe(src = "/Workspaces/SierateTimhert/static/#{book.filePath}" style="width:100%" height=420)
                             #newBook.active.tab-pane
+                              p የተፈቀዱ ፋይሎች pdf jpg jpeg png gif ብቻ ናቸው። 
                               form(method="post", action="/SirateTimhert/Gubaye_Nius_Sebsabi/upload/#{returnedCourse._id}/book", 
                               enctype="multipart/form-data")
                                 .form-group
-                                  label(for='exampleInputFile') File input
+                                  label(for='exampleInputFile') መጽሐፉን ይምረጡ
                                   .input-group
-                                      input(type='file' name = "bookFile")
-                                      input(type="submit")
+                                      input(type='file' name = "bookFile" id="exampleInputFile")
+                                  label(for='exampleInputFile') የመጽሐፉ ስም 
+                                  .input-group
+                                      input(type='text' name = "bookname")
+                                  input(type="submit" value="ጫን")
                       #classRooms.tab-pane
                         .row
                           each gubaye in classRooms

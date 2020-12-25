@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
 })
 
 var documentFileFilter = (req, file, cb) => {
-    if(!file.originalname.match(/\.(pdf|doc|docx|xls|jpg|jpeg|png|gif)$/))
+    if(!file.originalname.match(/\.(pdf|jpg|jpeg|png|gif)$/))
     {
         return cb(new Error('You can upload word, excel and image files only!'))
     }
@@ -239,21 +239,16 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
     upload.single('bookFile'), function(req,res,next){
         var courseId = req.params.courseId;
         course_ModelAccessor.courseDetail(courseId,function(error,singleCourse){
-            singleCourse.books.push({bookName:"NONE",filePath:req.file.originalname})
+            singleCourse.books.push({bookName:req.body.bookname,filePath:req.file.originalname})
             course_ModelAccessor.editCourse(courseId,{books:singleCourse.books},function(error,confirmation){
                 if(error)
                 {
-                    
-                    // res.json(books)
                     next(error)
                 }
                 else
                 {
-                    var url="http://localhost:3000/SirateTimhert/course/nius_sebsabi/"+courseId
-                    console.log(confirmation)
-                    
-                    res.json(confirmation)
-                    // res.redirect(url) 
+                    var url="../../../../SirateTimhert/course/nius_sebsabi/"+courseId
+                    res.redirect(url) 
                 }
             })
         })
@@ -590,17 +585,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
 router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader,mid.updateUserData, function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
-            // // Invalid Logic
-                        // courses.map((miniSingleCourse) => {
-            //     index = index + 1;
-            //     course_ModelAccessor.courseDetail(miniSingleCourse._id, function(error, singleCourse){
-            //         coursesWithStuCount.push({_id:miniSingleCourse._id, name:miniSingleCourse.name, students:singleCourse.attendance.length})
-            //         req.session.courses = coursesWithStuCount;                    
-            //     })
-            // })
-            // console.log(req.session)
-            // sleep(1000)
-            
             course_ModelAccessor.allCourses((error,courses)=>{
                 if(!error)
                 {
@@ -628,18 +612,38 @@ router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader,mid.upd
             });
 
     });
-
-
 });
 
 // For Sub Department Admins
 router.get('/SubDepartmentAdmin', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS,  function(req,res,next){
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
-        course_ModelAccessor.allCourses((error,courses)=>{
-            req.session.courses = courses;
-            return res.render("Workspaces/SierateTimhert/templates/SireateTSDA.jade",req.session);
-        });
+            course_ModelAccessor.allCourses((error,courses)=>{
+                if(!error)
+                {
+                    console.log("courses1 : ", courses);
+                    var courseIds = [];
+                    courseIds.pop();
+                    courses.map(singleCourse => {
+                        courseIds.push(singleCourse._id);
+                    });
+                    console.log("courseIds", courseIds)
+                    course_ModelAccessor.courseDetailArray(courseIds,function(error,coursesArray){
+                        if(error)
+                        {
+                            console.log(error)
+                        }
+                        else
+                        {
+                            req.session.courses = coursesArray
+                            console.log("coursesArray", coursesArray)
+                            return res.render("Workspaces/SierateTimhert/templates/SireateTSDA.jade",req.session);
+                        }
+                    });
+                }
+
+            });
+
     });
 });
 

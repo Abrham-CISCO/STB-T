@@ -166,24 +166,25 @@ html
                                 script.
                                   var rank = 0
                                 each val in returnedCourse.markList
-                                  tr
-                                    td                                         
-                                      div(id="number_#{val.studentId._id}")
-                                    td #{val.studentId.name} 
-                                    td #{val.studentId._id.toString().slice(18,24)}  
-                                    each val1 in returnedCourse.attendance                                 
-                                      if(val.studentId._id == val1.studentId && val1.classRoomId == classRoom._id)
-                                        td 
-                                          .icheck-primary.d-inline
-                                            if(val1.abscent == 1)
-                                              input(id="#{val1._id}" type='checkbox' onclick = "registerAttAbscentChanges('#{val1.studentId}', '#{val1._id}', document.getElementById('#{val1._id}').checked)")
-                                              label(for='#{val1._id}')
-                                            if(val1.abscent == 0)
-                                              input(id="#{val1._id}" type='checkbox' onclick = "registerAttAbscentChanges('#{val1.studentId}', '#{val1._id}', document.getElementById('#{val1._id}').checked)" checked='true')
-                                              label(for='#{val1._id}')
-                                    script.
-                                      rank = 1 + rank
-                                      document.getElementById('number_#{val.studentId._id}').innerText =  rank
+                                  if(val.classRoomId == classRoom._id)  
+                                    tr
+                                      td                                         
+                                        div(id="number_#{val.studentId._id}")
+                                      td #{val.studentId.name} 
+                                      td #{val.studentId._id.toString().slice(18,24)}  
+                                      each val1 in returnedCourse.attendance                                 
+                                        if(val.studentId._id == val1.studentId && val1.classRoomId == classRoom._id)
+                                          td 
+                                            .icheck-primary.d-inline
+                                              if(val1.abscent == 1)
+                                                input(id="#{val1._id}" type='checkbox' onclick = "registerAttAbscentChanges('#{val1.studentId}', '#{val1._id}', document.getElementById('#{val1._id}').checked)")
+                                                label(for='#{val1._id}')
+                                              if(val1.abscent == 0)
+                                                input(id="#{val1._id}" type='checkbox' onclick = "registerAttAbscentChanges('#{val1.studentId}', '#{val1._id}', document.getElementById('#{val1._id}').checked)" checked='true')
+                                                label(for='#{val1._id}')
+                                      script.
+                                        rank = 1 + rank
+                                        document.getElementById('number_#{val.studentId._id}').innerText =  rank
  
 
                                 
