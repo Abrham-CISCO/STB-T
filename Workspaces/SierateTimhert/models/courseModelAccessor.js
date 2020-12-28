@@ -317,10 +317,8 @@ const upadteAttenance = (changes, gubayeId, courseId, callback) => {
         changes.forEach((change)=>{
             index=0
             singleCourse.attendance.forEach((update)=>{
-                console.log(update._id, change.att_id,"update._id == change.att_id > ",update._id == change.att_id,"change.abscent",change.abscent)
                 if(update._id == change.att_id)
                 {
-                    console.log("detected")
                     if(change.abscent == true)
                     {
                         singleCourse.attendance[index].abscent = 0
@@ -329,7 +327,6 @@ const upadteAttenance = (changes, gubayeId, courseId, callback) => {
                     {
                         singleCourse.attendance[index].abscent = 1                       
                     }
-                    console.log(update)
                 }
                 index += 1;
             })
@@ -498,7 +495,6 @@ const UpdateMarkList = (changes, gubayeId, courseId, callback) => {
             singleCourse.markList.forEach((student)=>{
                 if(student.studentId == change.userId && student.classRoomId == gubayeId)
                 {
-                    console.log(change.columnNumber)
                     if(change.columnNumber == 1)
                     {
                         student.column_1_value = change.value
@@ -580,11 +576,9 @@ const addStudentToAttendanceList = (studentsArray, gubayeId, callback) =>{
                             }
                         })
                     })
-                    console.log(singleCourse)
                     singleCourse.save().then((notification)=>{
                         callback(null, notification)
                     }).catch((error)=>{callback(error, false)})
-                    console.log("The student is not registered on the attendance database")
                   }
                   })})
                 })})
@@ -596,66 +590,68 @@ const addStudentToAttendanceList = (studentsArray, gubayeId, callback) =>{
  
 }
 const addStudent = (studentsArray, gubayeId, callback) => {
-        console.log("addStudent Excuted!")
         var markList = []
         markList.pop();
-
-        studentsArray.forEach((student)=> {
-            markList.push(
-            {    
-            studentId:student._id,
-            classRoomId:gubayeId,
-            studentTelephone:student.telephone,
-            column_1_value:"0",
-            column_2_value:"0",
-            column_3_value:"0",
-            column_4_value:"0",
-            column_5_value:"0",
-            column_6_value:"0",
-            column_7_value:"0",
-            column_8_value:"0",
-            column_9_value:"0",
-            column_10_value:"0"}
-            )
-        })
-        var marklistSaved = false;
-        classRoom_modelAccessor.gubayeDetail(gubayeId,function(err,gubaye){
+    if(!(studentsArray.length == 0))
+    {
+            studentsArray.forEach((student)=> {
+                markList.push(
+                {    
+                studentId:student._id,
+                classRoomId:gubayeId,
+                studentTelephone:student.telephone,
+                column_1_value:"0",
+                column_2_value:"0",
+                column_3_value:"0",
+                column_4_value:"0",
+                column_5_value:"0",
+                column_6_value:"0",
+                column_7_value:"0",
+                column_8_value:"0",
+                column_9_value:"0",
+                column_10_value:"0"}
+                )
+            })
+            var marklistSaved = false;
+            classRoom_modelAccessor.gubayeDetail(gubayeId,function(err,gubaye){
             if(gubaye)
             {
-                console.log("gubaye",gubayeId,gubaye,err)
                 // Add the student to the database if the student does not exist in the database
                 addStudentToAttendanceList(studentsArray,gubayeId,function(err, notifi){
-                    console.log(notifi) 
                 })
-                gubaye.addedCourses.map((addedCourse)=> {
-                    
-                    course.findById(addedCourse.course_id).then((singleCourse)=>{
-                        marklistSaved = false;
-                        markList.map(localMarklist => {
-                            singleCourse.markList.map(mark=>{
-                                console.log("mark.studentId == localMarklist.studentId > ",mark.studentId.toString() == localMarklist.studentId.toString(),mark.studentId, localMarklist.studentId)
-                                if((mark.studentId.toString()) == (localMarklist.studentId.toString()) && 
-                                mark.classRoomId.toString() == gubayeId.toString())
+                if(!(gubaye.addedCourses.length == 0))
+                {
+                    gubaye.addedCourses.map((addedCourse)=> {
+                        
+                        course.findById(addedCourse.course_id).then((singleCourse)=>{
+                            marklistSaved = false;
+                            markList.map(localMarklist => {
+                                singleCourse.markList.map(mark=>{
+                                    if((mark.studentId.toString()) == (localMarklist.studentId.toString()) && 
+                                    mark.classRoomId.toString() == gubayeId.toString())
+                                    {
+                                        marklistSaved = true
+                                    }
+                                })
+                                if(!marklistSaved)
                                 {
-                                    marklistSaved = true
+                                    singleCourse.markList.push(localMarklist);
                                 }
                             })
-                            if(!marklistSaved)
-                            {
-                                singleCourse.markList.push(localMarklist);
-                            }
+                            singleCourse.save().then((notification)=>{
+                                callback(null, notification)
+                            }).catch((error)=>{callback(error, false)})
+                            // .then((savedData)=>{callback(null,savedData)}).catch((err)=>{callback(err)})
                         })
-
-                        console.log("marklist",markList)
-                        console.log("singleCourse.markList", singleCourse.markList)
-                        singleCourse.save().then((notification)=>{
-                            callback(null, notification)
-                        }).catch((error)=>{callback(error, false)})
-                        // .then((savedData)=>{callback(null,savedData)}).catch((err)=>{callback(err)})
-                    })
-                })                
+                    })                
+                }
+                else
+                {
+                    callback(null, false)
+                }
             }
-})}
+    })}
+}
 
 
 const courseDetailArray = (courseIds,callback) => {
@@ -666,7 +662,6 @@ const courseDetailArray = (courseIds,callback) => {
     courseIds.forEach((courseId) => {
         searchObject.$or.push({_id:courseId});
     }) 
-    console.log(searchObject)
     course.find(searchObject).then((courses)=>{
         callback(null,courses)
     }).catch((error)=>{callback(error,false)})
@@ -674,8 +669,7 @@ const courseDetailArray = (courseIds,callback) => {
 
 
 const addstudentsToCourse= (courses, gubayeId, callback) => {
-    // determine students of the gubaye
-    console.log(courses, gubayeId)
+
     classRoom_modelAccessor.gubayeDetail(gubayeId,function(err,gubaye){
         if(err)
         {
@@ -689,27 +683,34 @@ const addstudentsToCourse= (courses, gubayeId, callback) => {
             gubaye.members.map((member)=>{
                 students.push(member.memberId)
             })
-            user_ModelAccessor.userObjectByTel(students,function(err,studentsProfile){
-                var stu = [{_id:mOngoose.Schema.Types.ObjectId,  telephone:String}]
-                stu.pop();
-                studentsProfile.map((student)=>{
-                    stu.push({_id:student._id.toString() ,telephone:student.telephone})
+            if(students.length != 0)
+            {
+                user_ModelAccessor.userObjectByTel(students,function(err,studentsProfile){
+                    var stu = [{_id:mOngoose.Schema.Types.ObjectId,  telephone:String}]
+                    stu.pop();
+                    studentsProfile.map((student)=>{
+                        stu.push({_id:student._id.toString() ,telephone:student.telephone})
+                    })
+                    addStudentToMarkList(stu,courses,gubayeId,function(err,confirmation){
+                        if(err)
+                        {
+                            callback(err)
+                        }
+                        else
+                        {
+                            addStudentToAttendanceList(stu,gubayeId,function(error,confirmation){
+                        
+                                callback(null,confirmation)
+                            })
+                        }
+                    })
+        
                 })
-                addStudentToMarkList(stu,courses,gubayeId,function(err,confirmation){
-                    if(err)
-                    {
-                        callback(err)
-                    }
-                    else
-                    {
-                        addStudentToAttendanceList(stu,gubayeId,function(error,confirmation){
-                    
-                            callback(null,confirmation)
-                        })
-                    }
-                })
-    
-            })
+            }
+            else
+            {
+                callback(null,false)
+            }
         }
     })
 }

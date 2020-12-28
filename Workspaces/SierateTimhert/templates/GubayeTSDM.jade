@@ -25,7 +25,7 @@ html
       include ../../../SharedComponents/Layouts/navigation.jade
       // Main Sidebar Container
       include ../../../SharedComponents/Layouts/sidebarNU.jade
-      script(src="/workspaces/SierateTimhert/js/GubayeTSDA.js") 
+      script(src="/workspaces/SierateTimhert/js/GubayeTSDM.js") 
 
       // Content Wrapper. Contains page content
       .content-wrapper
@@ -68,7 +68,7 @@ html
                                   .info-box-content
                                     a.users-list-name(href="/accounts/public/profile/#{val.telephone}") #{val.name}
                                     a(href="/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/Remove/#{val.telephone}")
-                                      button(type='button', class="btn btn-block btn-danger btn-xs") Remove
+                                      button(type='button', class="btn btn-block btn-danger btn-xs") አስወጣ
                         .col-12.col-sm-6.col-md-3
                           button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-sm')
                             div(class="fas fa-plus nav-plus")
@@ -221,7 +221,6 @@ html
                                 .info-box-content
                                   a(href="/SirateTimhert/course/Gubaye_Nius_Abal/#{val.id}/#{user.gubaye._id}") #{val.name}
                       #management.tab-pane
-                        p የጉባኤ ስም መሰየም እና መቀየር ፣ ጉባኤ ማጥፋት ፣ Description መሙላት
                         .row
                           .col-md-3
                             // Profile Image
@@ -238,8 +237,6 @@ html
                                   li.list-group-item
                                     b ዝርዝር
                                     p #{user.gubaye.description}
-                                a.btn.btn-danger.btn-block(href='#' onclick="deleteGubaye()")
-                                  b ጉባኤውን ሰርዝ
                               // /.card-body
                             // /.card
                             // About Me Box
@@ -248,7 +245,7 @@ html
                               .card-header.p-2
                                 ul.nav.nav-pills                 
                                   li.nav-item
-                                    a.nav-link.active(href='#settings', data-toggle='tab') Settings
+                                    a.nav-link.active(href='#settings', data-toggle='tab') አስተካክል
                               // /.card-header
                               .card-body
                                 .tab-content
@@ -266,16 +263,13 @@ html
                                         .col-sm-10
                                           input.form-control(type='text', placeholder='ዝርዝር', value="#{user.gubaye.description}", id="description", name='description')
                                       |                      
-                                      .form-group.row
-                                        label.col-sm-2.col-form-label(for='inputTel') ጉባኤ አስተዳዳሪ
-                                        |                         
+                                      .form-group.row                
                                         .col-sm-10
-                                          input.form-control(type='text', placeholder='ጉብኤ አስተዳዳሪ', value="#{user.gubaye.leader}", id="admin", name='admin') 
                                           input(type='hidden', placeholder='የጋባኤው ስም', value="#{user.gubaye._id}", name='_id', id='_id')
                                       |                       
                                       .form-group.row
                                         .offset-sm-2.col-sm-10
-                                          button.btn.btn-primary(type='button' onclick="updateGubaye()") Submit
+                                          button.btn.btn-primary(type='button' onclick="updateGubaye()") መዝግብ
                                   // /.tab-pane
                                 // /.tab-content
                               // /.card-body
@@ -313,16 +307,16 @@ html
     // jQuery
     // Bootstrap 4
     script(src='/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
-    // AdminLTE App
-    script(src='/ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
     script(src='/ADMINLITE/dist/js/demo.js')
     // DataTables
   script(src='/ADMINLITE/plugins/datatables/jquery.dataTables.js')
   script(src='/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')
   script(src='/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
-  script(src='/ADMINLITE/dist/js/adminlte.min.js')
   // DataTables
+  link(rel='stylesheet', href='/ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
+  
+  script(src='/ADMINLITE/dist/js/adminlte.min.js')
   link(rel='stylesheet', href='/ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
   script.
     document.getElementById('3').className = "nav-link active"

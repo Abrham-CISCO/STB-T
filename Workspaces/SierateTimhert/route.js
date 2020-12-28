@@ -300,7 +300,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                     req.session.user.allusers = users;
                                     classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedClass){
                                         req.session.unjoinedCourses = unjoinedCourses
-                                        console.log("JoinedClass ",JoinedClass)
                                         req.session.JoinedClass = JoinedClass;
                                     return res.render("Workspaces/SierateTimhert/templates/GubayeTSDM.jade",req.session)
                                     })
@@ -324,7 +323,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                console.log("returnedCourse",returnedCourse)
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
@@ -344,7 +342,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                 req.session.classRooms = gubayeNameArr;
                                 UserModelAccessor.userData(returnedCourse.createdBy,function(error,user){
                                     req.session.returnedCourse.createdBy = user.name;
-                                    console.log(gubayeNameArr)
                                     return res.render("Workspaces/SierateTimhert/templates/courseTDA.jade",req.session)                    
                                 })
                             }
@@ -363,14 +360,14 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                console.log("returnedCourse",returnedCourse.markList.sort((b,a)=> {
+                returnedCourse.markList.sort((b,a)=> {
                     var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
                         + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
                     var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
                         + b.column_6_value + b.column_7_value + b.column_8_value + b.column_9_value + b.column_10_value);
 
                     return aColumn - bColumn
-                }))
+                })
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
@@ -381,11 +378,9 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     })
                                 UserModelAccessor.userData(returnedCourse.createdBy,function(error,user)
                                 {
-                                    console.log(returnedCourse)
                                     req.session.returnedCourse.createdBy = user.name;
                                     classRoom_ModelAccessor.gubayeDetail(req.params.gubayeId, function(error,classRoom){
                                         req.session.classRoom = classRoom;
-                                        console.log("returnedCourse.attendance",returnedCourse.attendance)
                                         return res.render("Workspaces/SierateTimhert/templates/courseClassRoomTDA.jade",req.session)                    
                                     })
                                 })                          
@@ -402,14 +397,14 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                console.log("returnedCourse",returnedCourse.markList.sort((b,a)=> {
+                returnedCourse.markList.sort((b,a)=> {
                     var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
                         + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
                     var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
                         + b.column_6_value + b.column_7_value + b.column_8_value + b.column_9_value + b.column_10_value);
 
                     return aColumn - bColumn
-                }))
+                })
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
@@ -420,7 +415,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     })
                                 UserModelAccessor.userData(returnedCourse.createdBy,function(error,user)
                                 {
-                                    console.log(returnedCourse)
                                     req.session.returnedCourse.createdBy = user.name;
                                     classRoom_ModelAccessor.gubayeDetail(req.params.gubayeId, function(error,classRoom){
                                         req.session.classRoom = classRoom;
@@ -440,14 +434,14 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                console.log("returnedCourse",returnedCourse.markList.sort((b,a)=> {
+                returnedCourse.markList.sort((b,a)=> {
                     var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
                         + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
                     var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
                         + b.column_6_value + b.column_7_value + b.column_8_value + b.column_9_value + b.column_10_value);
 
                     return aColumn - bColumn
-                }))
+                })
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
@@ -458,7 +452,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     })
                                 UserModelAccessor.userData(returnedCourse.createdBy,function(error,user)
                                 {
-                                    console.log(returnedCourse)
                                     req.session.returnedCourse.createdBy = user.name;
                                     classRoom_ModelAccessor.gubayeDetail(req.params.gubayeId, function(error,classRoom){
                                         req.session.classRoom = classRoom;
@@ -478,7 +471,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                console.log("returnedCourse",returnedCourse)
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
@@ -508,7 +500,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                console.log("returnedCourse",returnedCourse)
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
@@ -528,7 +519,6 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                 req.session.classRooms = gubayeNameArr;
                                 UserModelAccessor.userData(returnedCourse.createdBy,function(error,user){
                                     req.session.returnedCourse.createdBy = user.name;
-                                    console.log(gubayeNameArr)
                                     return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)                    
                                 })
                             }
@@ -545,7 +535,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
         {
             if(error)
             {
-                console.log(error);
+                next(error)
             }
             else
             {
@@ -588,22 +578,19 @@ router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader,mid.upd
             course_ModelAccessor.allCourses((error,courses)=>{
                 if(!error)
                 {
-                    console.log("courses1 : ", courses);
                     var courseIds = [];
                     courseIds.pop();
                     courses.map(singleCourse => {
                         courseIds.push(singleCourse._id);
                     });
-                    console.log("courseIds", courseIds)
                     course_ModelAccessor.courseDetailArray(courseIds,function(error,coursesArray){
                         if(error)
                         {
-                            console.log(error)
+                            next(error)
                         }
                         else
                         {
                             req.session.courses = coursesArray
-                            console.log("coursesArray", coursesArray)
                             return res.render("Workspaces/SierateTimhert/templates/SireateTDA.jade",req.session);
                         }
                     });
@@ -621,22 +608,19 @@ router.get('/SubDepartmentAdmin', mid.requireSignIn,mid.updateUserData, mid.requ
             course_ModelAccessor.allCourses((error,courses)=>{
                 if(!error)
                 {
-                    console.log("courses1 : ", courses);
                     var courseIds = [];
                     courseIds.pop();
                     courses.map(singleCourse => {
                         courseIds.push(singleCourse._id);
                     });
-                    console.log("courseIds", courseIds)
                     course_ModelAccessor.courseDetailArray(courseIds,function(error,coursesArray){
                         if(error)
                         {
-                            console.log(error)
+                            next(error)
                         }
                         else
                         {
                             req.session.courses = coursesArray
-                            console.log("coursesArray", coursesArray)
                             return res.render("Workspaces/SierateTimhert/templates/SireateTSDA.jade",req.session);
                         }
                     });

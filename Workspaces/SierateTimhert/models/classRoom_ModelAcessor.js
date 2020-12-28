@@ -20,7 +20,6 @@ const gubayeIdArrayToNameArray = (gubayeIdArray, callback) =>
         gubayeIdArray.forEach((gubayeId) => {
             searchObject.$or.push({_id:gubayeId});
         })
-            console.log(searchObject)
         var gNames = [
             {name:String,_id:String,membersCount:Number,leader:String}
         ]
@@ -39,20 +38,23 @@ const gubayeIdArrayToNameArray = (gubayeIdArray, callback) =>
     }
 }
 const memberAdder = (gubayeID, Members, callback) => {
-    console.log("member Adder")
     classRoom.addMember(gubayeID,Members,function(error,response){
-        console.log("add member")
         if(!error){
             UserAccModelAcc.AddMemberToG(Members,gubayeID,function(error,response){
-                console.log("add member to G")
                 if(!error)
                 {
-                    console.log("Excuting AddMemberToG without error")
                     course_modelAccessor.addStudent(Members,gubayeID,function(err, notification){
                         if(!err)
                         {
-                            console.log("Call back about to be called")
-                            callback(null,response)
+                            if(notification == false)
+                            {
+                                callback(null,false)
+                            }
+                            else
+                            {
+                                callback(null,response)
+                            }
+
                         }
                         else
                         {
@@ -102,6 +104,19 @@ const updateGubaye = (ClassRoomID, gubayeName, Description, leader, callback) =>
         }
     })
 }
+
+const UpdateGubaye_ForMember = (ClassRoomID, gubayeName, Description,  callback) => {
+    classRoom.UpdateInfo_ForMember(ClassRoomID, gubayeName, Description, function(error, result){
+        if(error)
+        {
+            console.log(error)
+            callback(error)
+        }
+        else{
+            callback(null,result)
+        }
+    })
+}
 const removeMem = (GubayeID,telephone,callback) =>
 {
     classRoom.removeMember(GubayeID,telephone,function(error, gubaye){
@@ -139,10 +154,8 @@ const IDArrayToNameArray = (IDArray,callback) => {
 
 const addCourse = (gubayeId,coursesArray,callback) => 
 {
-    console.log(coursesArray)
     classRoom.findById(gubayeId).then((gubaye)=>
     {
-        console.log(coursesArray)
         coursesArray.forEach((courseId) => {
             gubaye.addedCourses.push({course_id:courseId})
         })
@@ -196,7 +209,6 @@ const removeCourse = (courseID, GubayeId, callback) =>
             }
             index += 1;
         });
-        console.log(gub.addedCourses)
         classRoom.findByIdAndUpdate(GubayeId,{$set:gub}).then((resp)=>
         {
             callback(null,resp);
@@ -226,3 +238,4 @@ exports.updateGubaye = updateGubaye;
 exports.removeMem = removeMem;
 exports.addCourse = addCourse;
 exports.gubayeIdArrayToNameArray = gubayeIdArrayToNameArray;
+exports.UpdateGubaye_ForMember = UpdateGubaye_ForMember;

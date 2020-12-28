@@ -29,6 +29,17 @@ else
         }
     }
     
+    function updateCourse()
+    {
+        var socket = io('/course');
+        var courseName = document.getElementById("name").value;
+        var description = document.getElementById("description").value
+        var courseId = document.getElementById("_id").value
+        socket.emit('updateCourseDetail',courseId, courseName, description)
+        socket.on('updateCourseDetail',function(Confirmation){
+            window.location.href = "/SirateTimhert/course/nius_sebsabi/"+courseId;
+        });
+    }
     // // Front end design using object Oriented programming and closure
     // class sampleClass
     // {

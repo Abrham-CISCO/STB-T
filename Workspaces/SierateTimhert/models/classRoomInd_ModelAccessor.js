@@ -77,7 +77,9 @@ const joinedClass = (userTelephone, callback) => {
         }
         else
         {
+            console.log("user[0]",user[0])
             callback(null,user[0].joinedClasses)
+
         }
     })
 }

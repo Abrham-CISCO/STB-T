@@ -26,10 +26,8 @@ function addCourse(gubayeID)
         courses.push(document.getElementsByClassName("select2-selection__rendered")[1].childNodes[i].title)
         
     }
-    console.log(courses);
     socket.emit('AddGubayeCourses',gubayeID,courses);
   socket.on('AddGubayeCourses',function(Confirmation){
-    console.log(Confirmation);
     window.location.href = "/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeID;
   });
 }

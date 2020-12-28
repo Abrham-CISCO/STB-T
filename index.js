@@ -102,9 +102,7 @@ app.use(passport.session());
       socket.on('AddGubayeMembers', function(gubayeId, gubayeMembersArray)
       { 
         UserModel_Acc.NameArrayToTelArray(gubayeMembersArray,function(error,userTelArray){
-          console.log("Socket shall be emitted by now")
           classRoom_ModelAccessor.memberAdder(gubayeId,userTelArray,function(error,response){
-            console.log("Socket shall be emitted by now 2")
             socket.emit('AddGubayeMembers','Done')
           })
         })
@@ -114,9 +112,8 @@ app.use(passport.session());
         // What does happen when a course is added to a classroom
         // An instance of (MarkList, MarklistColumnName, Book and Attendance) for that newly added gubaye is added to the course. 
         Course_ModelAccessor.courseIds(CoursesArray,function(error, course_ids){
-          console.log("course_ids",course_ids)
           Course_ModelAccessor.addCourse(course_ids,gubayeId, function(error, updatedCourse){
-            console.log("course_ids",course_ids)
+
           })
             classRoom_ModelAccessor.addCourse(gubayeId, course_ids, function(error, gubaye)
             {
@@ -140,6 +137,12 @@ app.use(passport.session());
           socket.emit('UpdateGubaye',"Updated")
         })
       });
+      socket.on('UpdateGubaye_ForMember',function(ClassRoomID, gubayeName, Description){
+        classRoom_ModelAccessor.UpdateGubaye_ForMember(ClassRoomID,gubayeName,Description,function(error, result){
+          socket.emit('UpdateGubaye_ForMember',"Updated")
+        })
+      });
+      
       socket.on('deleteGubaye',function(ClassRoomID){
         classRoom_ModelAccessor.deleteGubaye(ClassRoomID, function(error,result){
           console.log(result);
@@ -157,6 +160,13 @@ app.use(passport.session());
           socket.emit('updateCourse',"Created")
         })
       });
+      socket.on('updateCourseDetail', function(courseId, courseName, description){
+        Course_ModelAccessor.editCourse(courseId,{description:description,name:courseName},function(error, notification){
+          socket.emit('updateCourseDetail','up to date')
+        })
+        
+      });
+      
       socket.on('updateAttendance', function(registeredChanges, courseId, gubayeId){
         Course_ModelAccessor.upadteAttenance(registeredChanges, gubayeId, courseId, function(error,notification){
           console.log(notification)

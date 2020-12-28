@@ -58,7 +58,6 @@ classRoomSchema.statics.addMember = (ClassRoomID,membersArray,callback) => {
                     })
                 }
             })
-
 }
 classRoomSchema.statics.gubayeDetails =  (ClassRoomID, callback) => {
     classRoom.findOne({_id:ClassRoomID})
@@ -97,6 +96,21 @@ classRoomSchema.statics.UpdateInfo = (ClassRoomID, gubayeName, Description, lead
                 }
             })
 }
+
+classRoomSchema.statics.UpdateInfo_ForMember = (ClassRoomID, gubayeName, Description, callback) => {
+    classRoom.updateOne({_id:ClassRoomID},{$set:{name:gubayeName,description:Description}})
+            .exec((error,result)=>{
+                if(error)
+                {
+                    callback(error)
+                }
+                else
+                {
+                    callback(null,result);
+                }
+            })
+}
+
 classRoomSchema.statics.DeleteGubaye = (ClassRoomID,callback) => {
     classRoom.findByIdAndRemove(ClassRoomID,function(error,result) {
         if(error)

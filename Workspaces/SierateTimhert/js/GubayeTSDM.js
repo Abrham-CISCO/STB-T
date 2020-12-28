@@ -20,22 +20,10 @@ function updateGubaye()
   var socket = io('/gubaye');
   var GubayeName = document.getElementById("name").value;
   var description = document.getElementById("description").value
-  var admin = document.getElementById("admin").value
   var classId = document.getElementById("_id").value
-  socket.emit('UpdateGubaye',classId, GubayeName, description, admin)
-  socket.on('UpdateGubaye',function(Confirmation){
+  socket.emit('UpdateGubaye_ForMember',classId, GubayeName, description)
+  socket.on('UpdateGubaye_ForMember',function(Confirmation){
     alert(Confirmation);
-    window.location.href = "/SirateTimhert/Gubaye_Nius_Sebsabi/"+classId;
-  });
-}
-function deleteGubaye()
-{
-  // Before Deleting the group, prompt the user to make sure they know what they do
-  var socket = io('/gubaye');
-  var classId = document.getElementById("_id").value
-  socket.emit('deleteGubaye',classId)
-  socket.on('deleteGubaye',function(Confirmation){
-    alert(Confirmation);
-    window.location.href = "/SirateTimhert/SubDepartmentAdmin"
+    window.location.href = "/SirateTimhert/Gubaye_Nius_Abal/"+classId;
   });
 }

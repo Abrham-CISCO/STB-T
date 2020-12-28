@@ -65,7 +65,7 @@ var courseSchema = new mongoose.Schema({
     },
     description:{
         type:String,
-        default:"No description!"
+        default:"ምንም ማብራሪያ የለውም"
     },
     courseOutline:{
         type:String,

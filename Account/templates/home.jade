@@ -32,56 +32,114 @@ html
               .col-sm-6
                 h1 ጤና ይስጥልኝ #{user.name} 
                 br
-              |           
+        
               .col-sm-6
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item.active ቤት
-              .col-12
-                h5.m-0.text-dark ክፍላት
-              each val in user.work   
-                if val.subDepartment.length > 1
-                  each val2 in val.subDepartment
-                    if val2.sd_id == 1 & val2.active == true
-                      each val3 in val.subDepartment
-                        if val3.parent == 1
-                          .col-12.col-sm-6.col-md-3
-                            .info-box
-                              span.info-box-icon.bg-success.elevation-1
-                                i.far.fa-circle.nav-icon
-                              .info-box-content
-                                a(href=val3.DA_link, id=val3.sd_id).nav-link
-                                  span.info-box-text=val3.name
-                               
-                                
-                              // /.info-box-content
-                              // /.info-box
-                              // /.col
+              .col-sm-12
+                .row
+                  .col-12
+                    .card
+                      .card-header.p-2
+                        ul.nav.nav-pills
+                          li.nav-item
+                            a.nav-link.active(href='#menu' data-toggle='tab') ቅድመ ገጽ
+                          if(user.work[0].subDepartment[0].active == true)
+                            li.nav-item
+                              a.nav-link(href='#dashboard' data-toggle='tab') ዳሽ ቦርድ
+      
+                      .card-body
+                        .tab-content
+                          #menu.active.tab-pane
+                            
+                              h5.m-0.text-dark ክፍላት
+                              .row
+                                .col-12
+                                  .row
+                                    each val in user.work   
+                                      if val.subDepartment.length > 1
+                                        each val2 in val.subDepartment
+                                          if val2.sd_id == 1 & val2.active == true
+                                            each val3 in val.subDepartment
+                                              if val3.parent == 1
+                                                .col-3.col-sm-6.col-md-3
+                                                  .info-box
+                                                    span.info-box-icon.bg-success.elevation-1
+                                                      i.far.fa-circle.nav-icon
+                                                    .info-box-content
+                                                      a(href=val3.DA_link, id=val3.sd_id).nav-link
+                                                        span.info-box-text=val3.name
+                                          if val2.sd_id == 1 & val2.active == false
+                                            each val3 in val.subDepartment
+                                              if val3.active == true
+                                                .col-3.col-sm-6.col-md-3
+                                                  .info-box
+                                                    span.info-box-icon.bg-success.elevation-1
+                                                      i.far.fa-circle.nav-icon
+                                                    .info-box-content
+                                                      a(href=val3.SD_link, id=val3.sd_id).nav-link
+                                                        span.info-box-text=val3.name
+                                                        span.info-box-text=val3.role
+                                                    // /.info-box-content
+                                                    // /.info-box
+                                                    // /.col
+                                .col-12
+                                  h5.m-0.text-dark ጉባኤያት
+                                if(JoinedclassRooms)
+                                  each classes in JoinedclassRooms 
+                                    .col-12.col-sm-6.col-md-3
+                                      .info-box
+                                        span.info-box-icon.bg-info.elevation-1
+                                          i.fas.fa-users
+                                        .info-box-content
+                                          a(href="/SirateTimhert/Gubaye/public/#{classes.id}", id=classes.id).nav-link
+                                            span.info-box-text #{classes.name}
+                          if(user.work[0].subDepartment[0].active == true)
+                            #dashboard.tab-pane
+                              .row
+                                .col-lg-3.col-6
+                                  // small box
+                                  .small-box.bg-info
+                                    .inner
+                                      h3 #{usersCount}
+                                      p ተማሪዎች
+                                    .icon
+                                      i.ion.ion-bag
+                                // ./col
+                                .col-lg-3.col-6
+                                  // small box
+                                  .small-box.bg-success
+                                    .inner
+                                      h3 #{coursesCount}
+                                      p ኮርሶች
+                                    .icon
+                                      i.ion.ion-stats-bars
+                                // ./col
+                                .col-lg-3.col-6
+                                  // small box
+                                  .small-box.bg-warning
+                                    .inner
+                                      h3 #{classRoomCount}
+                                      p ጉባኤያት
+                                    .icon
+                                      i.ion.ion-person-add
+                                // ./col
+                                .col-lg-3.col-6
+                                  // small box
+                                  .small-box.bg-danger
+                                    .inner
+                                      h3 #{countOfTKMembers}
+                                      p የትምህርት ክፍል አባላት
+                                    .icon
+                                      i.ion.ion-pie-graph
+                              // ./col
+                        // /.tab-content
+                        // /.card-body
 
-                    if val2.sd_id == 1 & val2.active == false
-                      each val3 in val.subDepartment
-                        if val3.active == true
-                          .col-12.col-sm-6.col-md-3
-                            .info-box
-                              span.info-box-icon.bg-success.elevation-1
-                                i.far.fa-circle.nav-icon
-                              .info-box-content
-                                a(href=val3.SD_link, id=val3.sd_id).nav-link
-                                  span.info-box-text=val3.name
-                                  span.info-box-text=val3.role
-                              // /.info-box-content
-                              // /.info-box
-                              // /.col
-              .col-12
-                h5.m-0.text-dark ጉባኤያት
-              if(JoinedclassRooms)
-                each classes in JoinedclassRooms 
-                  .col-12.col-sm-6.col-md-3
-                    .info-box
-                      span.info-box-icon.bg-info.elevation-1
-                        i.fas.fa-users
-                      .info-box-content
-                        a(href="/SirateTimhert/Gubaye/public/#{classes.id}", id=classes.id).nav-link
-                          span.info-box-text #{classes.name}
+
+
+
+
               
                   // /.info-box-content
                   // /.info-box

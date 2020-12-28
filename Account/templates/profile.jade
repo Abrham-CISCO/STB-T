@@ -6,7 +6,7 @@ html
     |   
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     |   
-    title AdminLTE 3 | User Profile
+    title #{user.name}
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
@@ -30,14 +30,7 @@ html
           .container-fluid
             .row.mb-2
               .col-sm-6
-                h1 Profile
-              |           
-              .col-sm-6
-                ol.breadcrumb.float-sm-right
-                  li.breadcrumb-item
-                    a(href='#') Home
-                  |               
-                  li.breadcrumb-item.active User Profile
+                h1 መገለጫ
           // /.container-fluid
         // Main content
         section.content
@@ -73,7 +66,7 @@ html
                   .card-header.p-2
                     ul.nav.nav-pills              
                       li.nav-item
-                        a.nav-link.active(href='#settings', data-toggle='tab') Settings
+                        a.nav-link.active(href='#settings', data-toggle='tab') አስተካክል
                   // /.card-header
                   .card-body
                     .tab-content
@@ -86,28 +79,13 @@ html
                               input#inputName.form-control(type='text', placeholder='ሙሉ ስም', value="#{user.name}", name='name')
                           |                       
                           .form-group.row
-                            label.col-sm-2.col-form-label(for='inputEmail') ኢ-ሜል
+                            label.col-sm-2.col-form-label(for='inputEmail') 
                             |                         
                             .col-sm-10
-                              input#inputEmail.form-control(type='email', placeholder='ኢ-ሜል', value="#{user.email}", name='email') 
-                          |                          
-                          .form-group.row
-                            label.col-sm-2.col-form-label(for='inputSkills') Skills
-                            |                         
-                            .col-sm-10
-                              input#inputSkills.form-control(type='text', placeholder='Skills')
-                          |                       
+                              input#inputEmail.form-control(type='hidden', placeholder='ክርስትና ስም', value="#{user.email}", name='email')             
                           .form-group.row
                             .offset-sm-2.col-sm-10
-                              .checkbox
-                                label
-                                  input(type='checkbox')
-                                  |  I agree to the 
-                                  a(href='#') terms and conditions
-                          |                       
-                          .form-group.row
-                            .offset-sm-2.col-sm-10
-                              button.btn.btn-danger(type='submit') Submit
+                              button.btn.btn-danger(type='submit') መዝግብ
                       // /.tab-pane
                     // /.tab-content
                   // /.card-body

@@ -3,7 +3,8 @@ var User = require('./user');
 var Messaging_ModelAccessor = require('../../SharedComponents/Messaging/model_Accessor');
 var Notificaton_ModelAccessor = require('../../SharedComponents/Notification/model_Accessor')
 var Gubaye_ModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoom_ModelAcessor')
-var GubayeInd_ModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoomInd_ModelAccessor')
+var GubayeInd_ModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoomInd_ModelAccessor');
+// const { all } = require('../../Workspaces/Sebsabi/route');
 
 
 // Write a function which accepts an array of telephone numbers and returns an array of objects that
@@ -127,6 +128,12 @@ const profileLoaderByTel = (userTel, askerObject, callback) => {
     });
 }
 
+const usersCount = (callback) => {
+    User.find().then((users) => {
+        callback(error, users)
+    }).catch((err) => {callback(err, null)})
+}
+
 const updateProfile =  (userId, changeObject,callback) =>{
     User.editProfile(userId, changeObject, function(error, user){
         if(error){
@@ -241,6 +248,26 @@ const allUsers = (callback) => {
         else{
             callback(null,users)
         }
+    })
+}
+
+const countOfTKMembers = (callback) => {
+    var membersCount = 0;
+    var count = false;
+    allUsers(function(err,users){
+        users.map((singleUser)=> {
+            singleUser.work[0].subDepartment.map(singleSubDepartment => {
+                if(singleSubDepartment.active){
+                    count = true;
+                }
+            })
+            if(count)
+            {
+                membersCount += 1;
+                count = false
+            }
+        })
+        callback(false,membersCount)
     })
 }
 const NonMemberUsers = (groupID, callback) => {
@@ -394,3 +421,5 @@ exports.NameArrayToTelArray = NameArrayToTelArray;
 exports.AddMemberToG = AddMemberToG;
 exports.nonMembers = nonMembers;
 exports.NonMemberUsers = NonMemberUsers;
+exports.usersCount = usersCount;
+exports.countOfTKMembers = countOfTKMembers; 

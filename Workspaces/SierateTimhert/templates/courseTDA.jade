@@ -63,42 +63,14 @@ html
                         #books.tab-pane
                           .card-header.p-2
                             ul.nav.nav-pills
-                              if(returnedCourse.books[0])
+                              each book in returnedCourse.books
                                 li.nav-item
-                                  a.nav-link.active(href='#book1', data-toggle='tab') #{returnedCourse.books[0].bookName}
-                                | 
-                              if(returnedCourse.books[1])
-                                li.nav-item
-                                  a.nav-link(href='#book2', data-toggle='tab') #{returnedCourse.books[1].bookName}
-                                |                   
-                              if(returnedCourse.books[2])
-                                li.nav-item
-                                  a.nav-link(href='#book3', data-toggle='tab') #{returnedCourse.books[2].bookName}
-                                |                   
-                              if(returnedCourse.books[3])
-                                li.nav-item
-                                  a.nav-link(href='#book4', data-toggle='tab')  #{returnedCourse.books[3].bookName}
-                              if(returnedCourse.books[4])
-                                li.nav-item
-                                  a.nav-link(href='#book5', data-toggle='tab')  #{returnedCourse.books[5].bookName}
-                          // /.card-header
+                                  a.nav-link(href='#f#{book._id}', data-toggle='tab') #{book.bookName}
                           .card-body
                             .tab-content
-                              if(returnedCourse.books[0])
-                                #book1.active.tab-pane
-                                  iframe(src = "#{returnedCourse.books[0].filePath}" style="width:100%" height=420)
-                              if(returnedCourse.books[1])
-                                #book2.tab-pane
-                                  iframe(src = "#{returnedCourse.books[1].filePath}" style="width:100%" height=420)
-                              if(returnedCourse.books[2])
-                                #book3.tab-pane
-                                  iframe(src = "#{returnedCourse.books[2].filePath}" style="width:100%" height=420)
-                              if(returnedCourse.books[3])
-                                #book4.tab-pane
-                                  iframe(src = "#{returnedCourse.books[3].filePath}" style="width:100%" height=420)
-                              if(returnedCourse.books[4])
-                                #book5.tab-pane
-                                  iframe(src = "#{returnedCourse.books[4].filePath}" style="width:100%" height=420)
+                              each book in returnedCourse.books
+                                div(id="f#{book._id}").tab-pane
+                                  iframe(src = "/Workspaces/SierateTimhert/static/#{book.filePath}" style="width:100%" height=420)
                       #classRooms.tab-pane
                         .row
                           each gubaye in classRooms
@@ -139,15 +111,11 @@ html
                               .card-header.p-2
                                 ul.nav.nav-pills                 
                                   li.nav-item
-                                    a.nav-link.active(href='#settings', data-toggle='tab') Settings
+                                    a.nav-link.active(href='#settings', data-toggle='tab') አስተካክል
                               // /.card-header
                               .card-body
                                 .tab-content
                                   #settings.active.tab-pane
-                                    ul.list-group.list-group-unbordered.mb-3
-                                      li.list-group-item
-                                        b ዝርዝር
-                                        p #{returnedCourse.description}
                                     form(method="post", action="../Gubaye/Update").form-horizontal
                                       .form-group.row
                                         label.col-sm-2.col-form-label(for='inputName') የጉባኤው ስም
@@ -166,7 +134,7 @@ html
                                         |                         
                                         .col-sm-10
                                           input.form-control(type='text', placeholder='ጉብኤ አስተዳዳሪ', value="#{returnedCourse.createdBy}", id="admin", name='admin') 
-                                          input(type='hidden', placeholder='የጋባኤው ስም', value="#{returnedCourse.createdAt}", name='_id', id='_id')
+                                          input(type='hidden', placeholder='የጉባኤው ስም', value="#{returnedCourse.createdAt}", name='_id', id='_id')
                                   // /.tab-pane
                                 // /.tab-content
                               // /.card-body

@@ -244,7 +244,7 @@ UserSchema.statics.NameArrayToTelephoneArray = function(nameArray, callback){
 }
 
 UserSchema.statics.editProfile = function(userID, UserGeneral, callback){
-    User.updateOne({_id:userID}, {$set:{name:UserGeneral.name,email:UserGeneral.email,telephone:UserGeneral.telephone}})
+    User.updateOne({_id:userID}, {$set:{name:UserGeneral.name,email:UserGeneral.email}})
         .exec(function(error,user){
             if(error){
                 next(error);

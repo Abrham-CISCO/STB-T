@@ -7,6 +7,7 @@ var mid = require('../SharedComponents/Middlewares/index');
 var messaging = require('../SharedComponents/Messaging/route');
 var classRoomInd_ModelAccessor = require('../Workspaces/SierateTimhert/models/classRoomInd_ModelAccessor')
 var ModelAccessor = require('../SharedComponents/Messaging/model_Accessor');
+var Course_ModelAccessor = require('../Workspaces/SierateTimhert/models/courseModelAccessor')
 var classRoom_ModelAccessor = require('../Workspaces/SierateTimhert/models/classRoom_ModelAcessor')
 var UserModelAccessor = require('./Models/user_model_accessor')
 var PWDModelAccessor = require('./Models/psd_model_accessor');
@@ -219,13 +220,25 @@ router.get('/home', mid.requireSignIn, function(req,res,next){
         err.status = 403;
         return next(err);  
     }
-    
     UserModelAccessor.userData(req.session.userId, function(error,user){
         if (error){
             return next(error);
         } else {
-            req.session.user  = (user);
-            return res.render('Account/templates/home',req.session);
+            UserModelAccessor.allUsers(function(error,usersCount){                
+                req.session.user  = (user);
+                req.session.usersCount = usersCount.length
+                Course_ModelAccessor.allCourses(function(err,courses){
+                    req.session.coursesCount = courses.length
+                    classRoom_ModelAccessor.Gubaeyat(function(err,gubayeats){
+                        req.session.classRoomCount = gubayeats.length
+                        UserModelAccessor.countOfTKMembers(function(err,countOfTKMembers){                            req.session.classRoomCount = gubayeats.length
+                            req.session.countOfTKMembers = countOfTKMembers
+                            return res.render('Account/templates/home',req.session);
+                        })
+                    })
+                })
+            })
+
         }
     });
     });

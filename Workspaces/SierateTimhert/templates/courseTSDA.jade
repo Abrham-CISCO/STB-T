@@ -156,7 +156,7 @@ html
                                 .card-header.p-2
                                   ul.nav.nav-pills                 
                                     li.nav-item
-                                      a.nav-link.active(href='#settings', data-toggle='tab') Settings
+                                      a.nav-link.active(href='#settings', data-toggle='tab') አስተካክል
                                 // /.card-header
                                 .card-body
                                   .tab-content
@@ -173,9 +173,11 @@ html
                                           |                         
                                           .col-sm-10
                                             input.form-control(type='text', placeholder='ዝርዝር', value="#{returnedCourse.description}", id="description", name='description')
+                                            input(type='hidden', value="#{returnedCourse._id}", name='_id', id='_id')
+
                                         .form-group.row
                                           .offset-sm-2.col-sm-10
-                                            button.btn.btn-primary(type='button' onclick="updateGubaye()") መዝግብ
+                                            button.btn.btn-primary(type='button' onclick="updateCourse()") መዝግብ
                                     // /.tab-pane
                                   // /.tab-content
                                 // /.card-body
