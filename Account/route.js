@@ -249,6 +249,7 @@ router.get('/public/profile/:telephone', function(req,res,next){
     UserModelAccessor.profileLoaderByTel(Tel,req.session.user, function(error,user, askerObject){
         var resultObject = {}
         resultObject.loaderuser = askerObject
+        resultObject.loaderuser.JoinedclassRooms = req.session.JoinedclassRooms
         resultObject.loadeduser = user
         console.log(resultObject)
         if (error){

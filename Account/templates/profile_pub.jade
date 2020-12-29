@@ -65,19 +65,21 @@ html
                   .card-header.p-2
                     ul.nav.nav-pills
                       li.nav-item
-                        a.nav-link.active(href='#activity', data-toggle='tab') Activity
-                      |                   
-                      li.nav-item
-                        a.nav-link(href='#timeline', data-toggle='tab') Timeline
-                      |                   
+                        a.nav-link.active(href='#activity', data-toggle='tab') ማንነት    
                   // /.card-header
                   .card-body
                     .tab-content
                       #activity.active.tab-pane
-                        p email : #{loadeduser.email}
-                        p telephone : #{loadeduser.telephone}
-                      #timeline.tab-pane
-
+                        table
+                          tr
+                            td ክርስትና ስም :
+                            td #{loadeduser.cname}
+                          tr
+                            td ኢሜል :
+                            td #{loadeduser.email}
+                          tr
+                            td ስልክ ቁጥር :
+                            td #{loadeduser.telephone}
       footer.main-footer
         .float-right.d-none.d-sm-block
           b Version
