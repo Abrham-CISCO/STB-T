@@ -20,10 +20,6 @@
 var courseData = (document.getElementById('courseData').value);
 var classRoomData = (document.getElementById('classRoomData').value);
 
-alert(classRoomData._id);
 console.log(courseData);
 console.log(classRoomData);
 
-var test  = [9,1,8,7];
-test.sort((a,b)=> a-b)
-console.log(test)

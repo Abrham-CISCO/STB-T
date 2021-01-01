@@ -90,8 +90,39 @@ router.get('/register', mid.loggedOut, function(req,res,next){
     return res.render('Account/templates/register');
 });
 
+router.get('/dashboard_detail/:tab', mid.requireSignIn, function(req,res,next){
+    var tab = req.params.tab;
+    // for students
+    UserModelAccessor.allUsers(function(err,users){
+        Course_ModelAccessor.allCoursesWithDetails(function(err,courses){
+            classRoom_ModelAccessor.Gubaeyat(function(err,classRooms){
+                UserModelAccessor.listOfTKMembers(function(err,members){
+                    if(tab == "students" || tab == "courses" || tab == "groups" || tab == "members")
+                    {
+                        req.session.tab = tab
+                        req.session.dashUsers = users
+                        req.session.dashCourses = courses
+                        req.session.dashClassRooms = classRooms
+                        req.session.dashMembers = members
+                        return res.render('Account/templates/dashBoard',req.session);
+                    }
+                    else
+                    {
+                        req.session.tab = "students"
+                        req.session.dashUsers = users
+                        req.session.dashCourses = courses
+                        req.session.dashClassRooms = classRooms
+                        req.session.dashMembers = members
+                        return res.render('Account/templates/dashBoard',req.session);
+                    }
+                })
+            })
+        })
+    })
+
+});
+
 router.post('/register', function(req,res,next){
-    console.log(req.body)
     // Check All fields
     if(req.body.telephone && req.body.password && 
         req.body.rpassword && req.body.name
@@ -122,16 +153,13 @@ router.post('/register', function(req,res,next){
         };
         
         UserModelAccessor.registerNewUser(userData,messageData,function(error,user){
-            console.log("Accessing UserModelAccessor.registerNewUser")
             if(error)
             {
                 return next(err);  
             }
             else
             {  
-                console.log(user)
                 passport.authenticate('local',{failureRedirect: "/accounts/login"})(req, res, () => {
-                    console.log("Accessing UserModelAccessor.registerNewUser Authenticating")
                     req.session.userId = user._id;
                     req.session.name = req.body.name;
                     req.session.user = user;
@@ -251,7 +279,6 @@ router.get('/public/profile/:telephone', function(req,res,next){
         resultObject.loaderuser = askerObject
         resultObject.loaderuser.JoinedclassRooms = req.session.JoinedclassRooms
         resultObject.loadeduser = user
-        console.log(resultObject)
         if (error){
             return next(error);
         } else {
@@ -314,12 +341,10 @@ router.post('/forgotPassword', function(req,res,next){
                     };
                     PWDModelAccessor.register(PWDData,function(error,user){
                         if(error){
-                            console.log("Error at register")
                             return next(error);
                         }
                         else
                         {
-                            console.log(user);
                             return res.render('Account/templates/EmailVerification', user);
                         }
                     });

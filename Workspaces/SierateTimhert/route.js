@@ -182,12 +182,47 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     {
                         return next(error);                
                     }
-                    for(var i = 0; i<gubaye.members.length;i++){
-                        membersTel.push(gubaye.members[i].memberId)
+                    if(gubaye.members.length>0)
+                    {
+                        for(var i = 0; i<gubaye.members.length;i++){
+                            membersTel.push(gubaye.members[i].memberId)
+                        }
+                        UserModelAccessor.userObjectByTel(membersTel,function(error,contacts){
+                            req.session.user.gubaye = gubaye; 
+                            req.session.user.gubayemembers = contacts;
+                            classRoomInd_ModelAccessor.NonMemberUsers(GubayeID,function(error,users){
+                                var tela = []
+                                tela.pop();
+                                    for(var i = 0; i<users.length; i++)
+                                    {
+                                        tela.push(users[i].userTel)
+                                    }
+                                    UserModelAccessor.userObjectByTel(tela,function(error, userWithName){
+                                        for(var i = 0; i<users.length; i++)
+                                        {
+
+                                            users[i].name = userWithName[i].name
+                                        }
+                                        req.session.user.allusers = users;
+                                        course_ModelAccessor.allCourses((error,courses)=>{
+                                            req.session.courses = courses
+                                            // return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)
+                                            classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedCourses){
+                                                req.session.unjoinedCourses = unjoinedCourses
+                                                req.session.JoinedCourses = JoinedCourses;
+                                                console.log("req.session", req.session)
+                                                res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
+                                                
+                                            })
+                                        })
+                                    })
+                            })
+                        })
                     }
-                    UserModelAccessor.userObjectByTel(membersTel,function(error,contacts){
+                    else
+                    {
                         req.session.user.gubaye = gubaye; 
-                        req.session.user.gubayemembers = contacts;
+                        req.session.user.gubayemembers =[];
                         classRoomInd_ModelAccessor.NonMemberUsers(GubayeID,function(error,users){
                             var tela = []
                             tela.pop();
@@ -208,12 +243,14 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                         classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedCourses){
                                             req.session.unjoinedCourses = unjoinedCourses
                                             req.session.JoinedCourses = JoinedCourses;
-                                            return res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
+                                            console.log("req.session", req.session)
+                                            res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
+                                            
                                         })
                                     })
                                 })
                         })
-                    })
+                    }
                 })
     });
     router.post('/Gubaye_Nius_Sebsabi/upload/:courseId/courseoutline', mid.requiresToBeSTKNS,mid.updateUserData,
@@ -397,14 +434,14 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                returnedCourse.markList.sort((b,a)=> {
+                console.log("returnedCourse.markList.",returnedCourse.markList.sort((b,a)=> {
                     var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
                         + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
                     var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
                         + b.column_6_value + b.column_7_value + b.column_8_value + b.column_9_value + b.column_10_value);
 
                     return aColumn - bColumn
-                })
+                }))
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses

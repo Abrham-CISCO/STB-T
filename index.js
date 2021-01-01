@@ -154,8 +154,8 @@ app.use(passport.session());
     var course = io.of('/course')
     course.on('connection', (socket)=>
     {
-      socket.on('updateCourse', function(registeredChanges, courseId, gubayeId){
-        Course_ModelAccessor.UpdateMarkList(registeredChanges, gubayeId, courseId, function(error,notification){
+    socket.on('updateCourse', function(registeredChanges, registeredColumnNameChanges, courseId, gubayeId){
+        Course_ModelAccessor.UpdateMarkList(registeredChanges, registeredColumnNameChanges, gubayeId, courseId, function(error,notification){
           console.log(notification)
           socket.emit('updateCourse',"Created")
         })

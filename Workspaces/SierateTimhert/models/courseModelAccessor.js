@@ -52,6 +52,15 @@ const allCourses = function(callback)
         callback(null, courses)
     }).catch((error) => {callback(error)});
 }
+const allCoursesWithDetails = function(callback)
+{
+    course.find({}).then((courses)=>
+    {
+        callback(null, courses)
+    }).catch((error) => {callback(error)});
+}
+
+
 const addCourse = function(courseIdArray, gubayeId, callback)
 {
         // What does happen when a course is added to a classroom
@@ -489,8 +498,30 @@ const populateAttendance = (callback) => {
             callback(null,response)
         },(error)=>{callback(error)})
 }
-const UpdateMarkList = (changes, gubayeId, courseId, callback) => {
+const UpdateMarkList = (changes, registeredColumnNameChanges, gubayeId, courseId, callback) => {
+    var mkIndex = 0, index = 0;
     course.findById(courseId).then((singleCourse)=>{
+        singleCourse.markListColumnName.map(mkList=>{
+            if(mkList.classRoomId == gubayeId){
+                mkIndex = index;
+            }
+            index += 1
+        })
+        registeredColumnNameChanges.map(columnChanges => {
+            singleCourse.markListColumnName.classRoomId = gubayeId;
+            if(columnChanges.columnNumber == 1) singleCourse.markListColumnName[mkIndex].MarkListColumn_1_name = columnChanges.value
+            if(columnChanges.columnNumber == 2) singleCourse.markListColumnName[mkIndex].MarkListColumn_2_name = columnChanges.value
+            if(columnChanges.columnNumber == 3) singleCourse.markListColumnName[mkIndex].MarkListColumn_3_name = columnChanges.value
+            if(columnChanges.columnNumber == 4) singleCourse.markListColumnName[mkIndex].MarkListColumn_4_name = columnChanges.value
+            if(columnChanges.columnNumber == 5) singleCourse.markListColumnName[mkIndex].MarkListColumn_5_name = columnChanges.value
+            if(columnChanges.columnNumber == 6) singleCourse.markListColumnName[mkIndex].MarkListColumn_6_name = columnChanges.value
+            if(columnChanges.columnNumber == 7) singleCourse.markListColumnName[mkIndex].MarkListColumn_7_name = columnChanges.value
+            if(columnChanges.columnNumber == 8) singleCourse.markListColumnName[mkIndex].MarkListColumn_8_name = columnChanges.value
+            if(columnChanges.columnNumber == 9) singleCourse.markListColumnName[mkIndex].MarkListColumn_9_name = columnChanges.value
+            if(columnChanges.columnNumber == 10) singleCourse.markListColumnName[mkIndex].MarkListColumn_10_name = columnChanges.value
+        })
+
+
         changes.forEach((change)=>{
             singleCourse.markList.forEach((student)=>{
                 if(student.studentId == change.userId && student.classRoomId == gubayeId)
@@ -809,6 +840,7 @@ exports.deleteCourse = deleteCourse;
 exports.updateCourseDetail = updateCourseDetail;
 exports.addCourse = addCourse;
 exports.allCourses = allCourses;
+exports.allCoursesWithDetails= allCoursesWithDetails;
 exports.courseIds = courseIds;
 exports.editCourse = editCourse;
 exports.addStudent = addStudent;

@@ -20,8 +20,6 @@ var PWDSchema = new mongoose.Schema({
 
 PWDSchema.statics.verifyIdentity = function(userID, verCode, callback){
 // Check if the verification code is right if it is reply true
-    console.log(userID);
-    console.log(verCode);
     PWD.findOne({uID:userID, verificationCode:verCode})
            .exec(function(error,PSDrecovery){
                if(error){

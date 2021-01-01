@@ -23,11 +23,10 @@ const NameArrayToTelArray = (nameArray,callback) =>
         User.NameArrayToTelephoneArray(nameArray,function(error,user){
             if(error)
             {
-                console.log(error)
+                callback(error)
             }
             else
             {
-                console.log(user)
             callback(null,user)         
             }   
         })
@@ -35,27 +34,22 @@ const NameArrayToTelArray = (nameArray,callback) =>
 
 const AddMemberToG = (telephoneArray, GubayeID, callback) =>
 {
-    console.log("UMA ",telephoneArray)
     var tel = []
     tel.pop();
     for(var i = 0; i<telephoneArray.length; i++)
     {
         tel.push(telephoneArray[i].telephone)
     }
-    console.log(tel)
-    console.log("before addARRYMemberToGroup")
     GubayeInd_ModelAccessor.addARRYMemberToGroup(tel,GubayeID,function(error,response){
-        console.log("inside addARRYMemberToGroup")
         if(error)
         {
             callback(error)
         }
         else
         {
-            console.log(response)
+            callback(null,"Added");    
 
         }   
-        callback(null,"Added");    
     })       
 }
 
@@ -161,7 +155,6 @@ const registerNewUser = (userData,messageData,callback) =>{
                 Messaging_ModelAccessor.createAccount(messageData,function(err,msg){
                     Notificaton_ModelAccessor.createNotification(userData.telephone,function(error,notification){
                         callback(null,user);
-                        console.log(user)
                     });
                 });                
             })
@@ -270,6 +263,26 @@ const countOfTKMembers = (callback) => {
         callback(false,membersCount)
     })
 }
+const listOfTKMembers = (callback) => {
+    var members = [];
+    var count = false;
+    allUsers(function(err,users){
+        users.map((singleUser)=> {
+            singleUser.work[0].subDepartment.map(singleSubDepartment => {
+                if(singleSubDepartment.active){
+                    count = true;
+                }
+            })
+            if(count)
+            {
+                members.push(singleUser);
+                count = false
+            }
+        })
+        callback(false,members)
+    })
+}
+
 const NonMemberUsers = (groupID, callback) => {
     var nonMembers = []
     nonMembers.pop();
@@ -356,7 +369,6 @@ const addMemberToSubDepartment = (userTelephone, subDepartment, role, callback) 
                     err.status = 401;
                     return next(err);                
                 } 
-                    console.log("Finished")
                     return callback(null);
              });
         }
@@ -423,3 +435,4 @@ exports.nonMembers = nonMembers;
 exports.NonMemberUsers = NonMemberUsers;
 exports.usersCount = usersCount;
 exports.countOfTKMembers = countOfTKMembers; 
+exports.listOfTKMembers = listOfTKMembers;

@@ -1,7 +1,26 @@
+$(function () {
+    $("#example3").DataTable();
+    $('#example1').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+
 var registeredChanges = [
     {
         userId:String,
         columnNumber:Number,
+        value:String
+    }
+]
+
+var registeredColumnNameChanges = [
+    {
+        columnNumber: Number,
         value:String
     }
 ]
@@ -13,8 +32,31 @@ var registeredAttAbscentChange = [{
 }]
 
 registeredAttAbscentChange.pop();
-
+registeredColumnNameChanges.pop();
 registeredChanges.pop()
+
+function registeredColumnNameChange(columnNumber, value){
+    var registerBool = true;
+    var index=0, excIndex=0;
+    registeredColumnNameChanges.map((change)=>{
+        if(change.columnNumber == columnNumber)
+        {
+            registerBool = false;
+            excIndex = index;
+        }
+        index += 1;
+    })
+    if(registerBool)
+    {
+        registeredColumnNameChanges.push({columnNumber:columnNumber,value:value})
+    }
+    else
+    {
+        // the same user the same column should not be added but edited
+        registeredColumnNameChanges[excIndex]= {columnNumber:columnNumber,value:value}
+    }
+    console.log(registeredColumnNameChanges);
+}
 function registerChanges(userId, coulumnNumber, value)
 {
 var registerBool = true;
@@ -23,7 +65,6 @@ var index=0, excIndex=0;
     registeredChanges.forEach((myRegistry)=>{
         if(myRegistry.userId == userId & myRegistry.columnNumber == coulumnNumber)
         {
-
             // registeredChanges.slice(index,1)
             registerBool = false
             excIndex = index
@@ -45,7 +86,7 @@ var index=0, excIndex=0;
 function save(courseId, gubayeId)
 {
     var socket = io('/course');
-    socket.emit('updateCourse',registeredChanges, courseId, gubayeId);
+    socket.emit('updateCourse',registeredChanges, registeredColumnNameChanges, courseId, gubayeId);
 
     socket.on('updateCourse',function(Confirmation){
         alert(Confirmation);

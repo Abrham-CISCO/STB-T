@@ -65,7 +65,7 @@ html
                               .col-11
                                 h3.card-title #{returnedCourse.name} ኮርስ የነጥብ ሰንጠረዥ
                               .col-1
-                                button(type="button" class="btn btn-block btn-primary" onclick = "save('#{returnedCourse._id}', '#{classRoom._id}')") Save
+                                button(type="button" class="btn btn-block btn-primary" onclick = "save('#{returnedCourse._id}', '#{classRoom._id}')") መዝግብ
                             
                           // /.card-header
                           .card-body(style="overflow-x:auto")
@@ -75,21 +75,61 @@ html
                                   each val in returnedCourse.markListColumnName
                                     if(classRoom._id == val.classRoomId )
                                       th ተራ. ቁጥር
-                                      th ስም
-                                        font(style="color:white")
-                                          ስምስምስምስምስምስም
+                                      th 
+                                        div(style="width:180px")
+                                          ስም
                                       th ID
-                                      th ከ#{val.MarkListColumn_1_name}
-                                      th ከ#{val.MarkListColumn_2_name}
-                                      th ከ#{val.MarkListColumn_3_name}
-                                      th ከ#{val.MarkListColumn_4_name}
-                                      th ከ#{val.MarkListColumn_5_name}
-                                      th ከ#{val.MarkListColumn_6_name}
-                                      th ከ#{val.MarkListColumn_7_name}
-                                      th ከከከ#{val.MarkListColumn_8_name}
-                                      th ከከከ#{val.MarkListColumn_9_name}
-                                      th ከከከ#{val.MarkListColumn_10_name}
-                                      th ከ100
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_1" 
+                                          onChange="registeredColumnNameChange(1,document.getElementById('column_1').value)"
+                                          type = "text" value = "#{val.MarkListColumn_1_name}" )
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_2"  
+                                          onChange="registeredColumnNameChange(2,document.getElementById('column_2').value)"
+                                          type = "text" value = "#{val.MarkListColumn_2_name}" )
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_3"  
+                                          onChange="registeredColumnNameChange(3,document.getElementById('column_3').value)"
+                                          type = "text" value = "#{val.MarkListColumn_3_name}" )
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_4"  
+                                          onChange="registeredColumnNameChange(4,document.getElementById('column_4').value)"
+                                          type = "text" value = "#{val.MarkListColumn_4_name}" )
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_5"  
+                                          onChange="registeredColumnNameChange(5,document.getElementById('column_5').value)"
+                                          type = "text" value = "#{val.MarkListColumn_5_name}" )
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_6"  
+                                          onChange="registeredColumnNameChange(6,document.getElementById('column_6').value)"
+                                          type = "text" value = "#{val.MarkListColumn_6_name}" )
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_7"  
+                                          onChange="registeredColumnNameChange(7,document.getElementById('column_7').value)"
+                                          type = "text" value = "#{val.MarkListColumn_7_name}" )
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_8"  
+                                          onChange="registeredColumnNameChange(8,document.getElementById('column_8').value)"
+                                          type = "text" value = "#{val.MarkListColumn_8_name}" )
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_9"  
+                                          onChange="registeredColumnNameChange(9,document.getElementById('column_9').value)"
+                                          type = "text" value = "#{val.MarkListColumn_9_name}" )
+                                      th
+                                        div(style="width:40px")
+                                          input(class="form-control" length=10 style= "padding: 0rem 0rem;" id="column_10"  
+                                          onChange="registeredColumnNameChange(10,document.getElementById('column_10').value)"
+                                          type = "text" value = "#{val.MarkListColumn_10_name}" )
+                                      th 100
                                       th ደረጃ  
                               tbody
                                 script.
@@ -143,7 +183,7 @@ html
                               .col-11
                                 h3.card-title #{returnedCourse.name} Attendance
                               .col-1
-                                button(type="button" class="btn btn-block btn-primary" onclick = "saveAttAbscent('#{returnedCourse._id}', '#{classRoom._id}')") Save
+                                button(type="button" class="btn btn-block btn-primary" onclick = "saveAttAbscent('#{returnedCourse._id}', '#{classRoom._id}')") መዝግብ
                           // /.card-header
                           .card-body(style="overflow-x:auto")
                             table#example3.table.table-bordered.table-striped

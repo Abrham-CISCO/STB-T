@@ -201,11 +201,10 @@ UserSchema.statics.UserObjByTelephone = function(telephoneArray, callback){
     {
         searchObj.$or.push({telephone:telephoneArray[i]})
     }
-    console.log(searchObj)
     User.find(searchObj,{name:true,telephone:true,pro_img:true})
         .exec(function(error, user){
             if(error){
-                console.log(error)
+                callback(error)
             }
             else if(!user){
                 var err = new Error("User Not Found");
@@ -231,7 +230,7 @@ UserSchema.statics.NameArrayToTelephoneArray = function(nameArray, callback){
     User.find(searchObj,{telephone:true})
         .exec(function(error, user){
             if(error){
-                console.error(error)
+                callback(error)
             }
             else if(!user){
                 var err = new Error("User Not Found");
@@ -265,7 +264,7 @@ UserSchema.statics.updatePassword = function(userID, Password, callback){
         user.setPassword(Password,function(err, user){
             if(err)
             {
-                console.log(err)
+                callback(err)
             }
             else
             {
@@ -305,7 +304,7 @@ UserSchema.statics.addMember = function(telephoneArray, groupID, groupName, call
     User.find(searchObj,{classRoom:true,_id:false})
     .exec(function(error, user){
         if(error){
-            console.log(error)
+            callback(error)
         }
         else if(!user){
             var err = new Error("User Not Found");
@@ -316,21 +315,15 @@ UserSchema.statics.addMember = function(telephoneArray, groupID, groupName, call
         for(var i =0; i<user.length;i++)
         {
             user[i].classRoom.push({Class_ID:groupID})
-            console.log("user[i].classRoom",user[i].classRoom)
-            console.log(user[i].classRoom);
         }
-        console.log("After Addition ",user)
         for(var i =0; i<user.length;i++)
         {
-            console.log(telephoneArray[i])
             User.findOne({telephone:telephoneArray[i]})
             .exec(function(error,user){
-                console.log("Group Id ",groupID)
                 user.classRoom.push({class_ID:groupID})
                 // skip the password do not save it.
                 user.skipPassword = true;
                 user.save();
-                console.log("After user addition ",user)
             })
         }
         callback(null,"notification")
