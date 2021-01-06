@@ -50,6 +50,8 @@ html
                         a.nav-link(href='#classrooms', data-toggle='tab') ጉባኤያት
                       li.nav-item
                         a.nav-link(href='#courses', data-toggle='tab') ኮርሶች
+                      li.nav-item
+                        a.nav-link(href='#curriculum', data-toggle='tab') ስርዓተ ትምህርት 
                   // /.card-header
                   .card-body
                     .tab-content
@@ -79,7 +81,8 @@ html
                                   a(href="/SirateTimhert/course/sebsabi/#{val._id}")
                                     span.info-box-text #{val.name}
                                   span.info-box-text #{val.markList.length} ተማሪዎች
-
+                      #curriculum.tab-pane
+                        
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom
