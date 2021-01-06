@@ -678,7 +678,23 @@ router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, mid.req
         })
     });
 });
+// Curriculum Routes
 
+router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, function(req,res,next){
+
+});
+
+router.put('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
+
+});
+
+router.post('/curriculum', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
+
+});
+
+router.delete('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
+
+});
 
 // http://localhost:3000/SirateTimhert/course/nius_sebsabi/5fc926e213464d1c2cb71d70
 
