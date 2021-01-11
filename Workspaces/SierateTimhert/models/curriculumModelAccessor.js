@@ -8,6 +8,14 @@ const allCurriculums = (callback) => {
     })
 }
 
+const createCurriculum = (created_By,curriculumName, description, callback) => {
+    curriculum.create({
+        created_By:created_By,
+        name:curriculumName,
+        description:description
+    }).then(response => callback(null, response)).catch((err)=>callback(err,false));
+}
+
 const curriculumDetail = (curriculumId, callback) => {
     curriculum.findById(curriculumId).then((singleCurriculum)=>{
         callback(null,singleCurriculum)
@@ -39,3 +47,4 @@ const gradeDetail = (curriculumId, gradeId, callback) => {
 exports.gradeDetail = gradeDetail;
 exports.curriculumDetail = curriculumDetail;
 exports.allCurriculums = allCurriculums;
+exports.createCurriculum = createCurriculum;

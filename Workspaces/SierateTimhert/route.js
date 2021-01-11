@@ -5,7 +5,8 @@ var classRoom_ModelAccessor = require('./models/classRoom_ModelAcessor');
 var GubayeLink = "Workspaces/SierateTimhert/templates/Gubaye.jade"
 var UserModelAccessor = require('../../Account/Models/user_model_accessor');
 var classRoomInd_ModelAccessor = require('./models/classRoomInd_ModelAccessor');
-var multer = require('multer')
+var multer = require('multer');
+var curriculum_ModelAccessor = require('./models/curriculumModelAccessor');
 var course_ModelAccessor = require('./models/courseModelAccessor');
 const course = require('./models/course');
 
@@ -688,8 +689,10 @@ router.put('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mi
 
 });
 
-router.post('/curriculum', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
-
+router.post('/curriculum',mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS function(req,res,next){
+    curriculum_ModelAccessor.createCurriculum(req.session.userId,req.body.name, req.body.description,function(err, curriculum){
+        res.json(curriculum);
+    })
 });
 
 router.delete('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
