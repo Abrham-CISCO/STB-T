@@ -44,6 +44,13 @@ const gradeDetail = (curriculumId, gradeId, callback) => {
     })
 }
 
+const curriculumsSmallDetail = (callback) => {
+    curriculum.find({}, {_id:true, name:true}).then((curriculums)=>{
+        callback(null,curriculums)
+    }).catch((err)=>{callback(err,false)});
+}
+
+exports.curriculumsSmallDetail = curriculumsSmallDetail;
 exports.gradeDetail = gradeDetail;
 exports.curriculumDetail = curriculumDetail;
 exports.allCurriculums = allCurriculums;

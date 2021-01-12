@@ -82,7 +82,15 @@ html
                                     span.info-box-text #{val.name}
                                   span.info-box-text #{val.markList.length} ተማሪዎች
                       #curriculum.tab-pane
-                        
+                        .row.d-flex.align-items-stretch
+                          each val in curriculums
+                            .col-12.col-sm-6.col-md-4               
+                              .info-box
+                                .info-box-icon.bg-warning
+                                  .fas.fa-book
+                                .info-box-content 
+                                  a(href="/SirateTimhert/course/sebsabi/#{val._id}")
+                                    span.info-box-text #{val.name}                    
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom

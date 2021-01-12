@@ -69,6 +69,15 @@ html
                                   span.info-box-text የአባላት ብዛት ፡ #{classes.members.length}
                                   span.info-box-text አስተባባሪ ፡ #{classes.leader}
                       #curriculum.tab-pane
+                        .row.d-flex.align-items-stretch
+                          each val in curriculums
+                            .col-12.col-sm-6.col-md-4               
+                              .info-box
+                                .info-box-icon.bg-warning
+                                  .fas.fa-book
+                                .info-box-content 
+                                  a(href="/SirateTimhert/course/sebsabi/#{val._id}")
+                                    span.info-box-text #{val.name}    
                       // /.tab-pane
                     // /.tab-pane
                     // /.tab-content

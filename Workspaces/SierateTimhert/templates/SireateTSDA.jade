@@ -100,6 +100,25 @@ html
                                     input(type="text"  id="courseName" placeholder="የኮርሱ ስም" class="form-control" name = "name")
                                     button(type="submit" name="btn_add" class="btn btn-warning btn-flat") ፍጠር
                       #curriculum.tab-pane
+                        .row.d-flex.align-items-stretch
+                          each val in curriculums
+                            .col-12.col-sm-6.col-md-4               
+                              .info-box
+                                .info-box-icon.bg-success
+                                  .fas.fa-book
+                                .info-box-content 
+                                  a(href="/SirateTimhert/course/sebsabi/#{val._id}")
+                                    span.info-box-text #{val.name}    
+                          .col-12.col-sm-6.col-md-4               
+                            .info-box
+                              .info-box-icon.bg-success
+                                .fas.fa-plus
+                              .info-box-content
+                                span.info-box-text 
+                                  form(method="post", action="../SirateTimhert/curriculum")
+                                    input(type="text"  id="courseName" placeholder="የስርዓተ ትምህርቱ ስም" class="form-control" name = "name")
+                                    input(type="text"  id="courseName" placeholder="ማብራሪያ" class="form-control" name = "description")
+                                    button(type="submit" name="btn_add" class="btn btn-success btn-flat") ፍጠር
                       // /.tab-pane
                     // /.tab-pane
                     // /.tab-content

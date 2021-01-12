@@ -628,8 +628,11 @@ router.get('/DepartmentAdmin', mid.requireSignIn, mid.requiresToBeLeader,mid.upd
                         }
                         else
                         {
-                            req.session.courses = coursesArray
-                            return res.render("Workspaces/SierateTimhert/templates/SireateTDA.jade",req.session);
+                            curriculum_ModelAccessor.curriculumsSmallDetail(function(err,curriculums){
+                                req.session.courses = coursesArray;
+                                req.session.curriculums = curriculums;
+                                return res.render("Workspaces/SierateTimhert/templates/SireateTDA.jade",req.session);    
+                            })
                         }
                     });
                 }
@@ -658,8 +661,11 @@ router.get('/SubDepartmentAdmin', mid.requireSignIn,mid.updateUserData, mid.requ
                         }
                         else
                         {
-                            req.session.courses = coursesArray
-                            return res.render("Workspaces/SierateTimhert/templates/SireateTSDA.jade",req.session);
+                            curriculum_ModelAccessor.curriculumsSmallDetail(function(err,curriculums){
+                                req.session.courses = coursesArray;
+                                req.session.curriculums = curriculums;
+                                return res.render("Workspaces/SierateTimhert/templates/SireateTSDA.jade",req.session);
+                            });
                         }
                     });
                 }
@@ -674,9 +680,12 @@ router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, mid.req
     classRoom_ModelAccessor.Gubaeyat(function(error,gubaeat){
         req.session.user.gubaeat= gubaeat;
         course_ModelAccessor.allCourses((error,courses)=>{
-            req.session.courses = courses;
-            return res.render("Workspaces/SierateTimhert/templates/SireateTSDM.jade",req.session);
-        })
+            curriculum_ModelAccessor.curriculumsSmallDetail(function(err,curriculums){                         
+                req.session.curriculums = curriculums;
+                req.session.courses = courses;
+                return res.render("Workspaces/SierateTimhert/templates/SireateTSDM.jade",req.session);
+            });
+            })
     });
 });
 // Curriculum Routes
@@ -689,9 +698,10 @@ router.put('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mi
 
 });
 
-router.post('/curriculum',mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS function(req,res,next){
+router.post('/curriculum',mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
     curriculum_ModelAccessor.createCurriculum(req.session.userId,req.body.name, req.body.description,function(err, curriculum){
-        res.json(curriculum);
+        url = "../SirateTimhert/SubDepartmentAdmin";
+        res.redirect(url)
     })
 });
 
