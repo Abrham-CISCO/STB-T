@@ -35,7 +35,7 @@ html
               .col-sm-12
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
-                    a(href='/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
+                    a(href='/STB/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
                   li.breadcrumb-item.active #{returnedCourse.name}
             .row
               .col-md-12
@@ -70,7 +70,7 @@ html
                             .tab-content
                               each book in returnedCourse.books
                                 div(id="f#{book._id}").tab-pane
-                                  iframe(src = "/Workspaces/SierateTimhert/static/#{book.filePath}" style="width:100%" height=420)
+                                  iframe(src = "/STB/Workspaces/SierateTimhert/static/#{book.filePath}" style="width:100%" height=420)
                       #classRooms.tab-pane
                         .row
                           each gubaye in classRooms
@@ -79,7 +79,7 @@ html
                                 .info-box-icon.bg-info
                                   .fas.fa-users
                                 .info-box-content 
-                                  a(href="/SirateTimhert/course/sebsabi/#{returnedCourse._id}/#{gubaye._id}")
+                                  a(href="/STB/SirateTimhert/course/sebsabi/#{returnedCourse._id}/#{gubaye._id}")
                                     span.info-box-text #{gubaye.name}
                                   span.info-box-text የአባላት ብዛት ፡ #{gubaye.membersCount}
                                   span.info-box-text አስተባባሪ ፡ #{gubaye.leader} 
@@ -116,7 +116,7 @@ html
                               .card-body
                                 .tab-content
                                   #settings.active.tab-pane
-                                    form(method="post", action="../Gubaye/Update").form-horizontal
+                                    form(method="post", action="../STB/Gubaye/Update").form-horizontal
                                       .form-group.row
                                         label.col-sm-2.col-form-label(for='inputName') የጉባኤው ስም
                                         |                         
