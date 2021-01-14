@@ -58,7 +58,7 @@ html
                             .col-4
                             .col-4
                               .text-center
-                                img(src="/SharedComponents/static/logo.jpg" alt="User Image" style="opacity: .8" class="brand-image img-circle elevation-3" width="100%")
+                                img(src="/WWW/SharedComponents/static/logo.jpg" alt="User Image" style="opacity: .8" class="brand-image img-circle elevation-3" width="100%")
                             .col-4
                           .row
                             .col-12
@@ -75,9 +75,9 @@ html
                             .col-12.col-sm-6.col-md-3
                               .info-box.mb-3
                                 span.info-box-icon.bg-success.elevation-1
-                                  img(src="../../#{val.pro_img}" alt="User Image")
+                                  img(src="../../STB/#{val.pro_img}" alt="User Image")
                                 .info-box-content
-                                  a.users-list-name(href="/accounts/public/profile/#{val.telephone}") #{val.name}
+                                  a.users-list-name(href="/STB/accounts/public/profile/#{val.telephone}") #{val.name}
                                                                       
 
                       #education.tab-pane
@@ -88,7 +88,7 @@ html
                                 span.info-box-icon.bg-success.elevation-1
                                   i.fas.fa-book
                                 .info-box-content
-                                  a(href="/SirateTimhert/course/public/#{val.id}/#{user.gubaye.id}") #{val.name}
+                                  a(href="/STB/SirateTimhert/course/public/#{val.id}/#{user.gubaye.id}") #{val.name}
 
                     // /.tab-content
                   // /.card-body
@@ -119,13 +119,13 @@ html
       // /.control-sidebar
     // ./wrapper
     // jQuery
-    script(src='/ADMINLITE/plugins/jquery/jquery.min.js')
+    script(src='/STB/ADMINLITE/plugins/jquery/jquery.min.js')
     // Bootstrap 4
-    script(src='/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    script(src='/STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
     // AdminLTE App
-    script(src='/ADMINLITE/dist/js/adminlte.min.js')
+    script(src='/STB/ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
-    script(src='/ADMINLITE/dist/js/demo.js')
+    script(src='/STB/ADMINLITE/dist/js/demo.js')
     script.
       document.getElementById('3').className = "nav-link active"
       document.getElementById('#{user.GubayeID}').className = "nav-link active"
