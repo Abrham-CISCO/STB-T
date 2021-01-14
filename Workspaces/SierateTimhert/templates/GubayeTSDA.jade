@@ -39,7 +39,7 @@ html
               .col-sm-12
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
-                    a(href='/SirateTimhert/SubDepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
+                    a(href='/STB/SirateTimhert/SubDepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
                   li.breadcrumb-item.active ጉባኤ #{user.gubaye.name}
             .row
               .col-md-12
@@ -64,10 +64,10 @@ html
                               .col-12.col-sm-6.col-md-3
                                 .info-box.mb-3
                                   span.info-box-icon.bg-success.elevation-1
-                                    img(src="../../#{val.pro_img}" alt="User Image")
+                                    img(src="../../STB/#{val.pro_img}" alt="User Image")
                                   .info-box-content
-                                    a.users-list-name(href="/accounts/public/profile/#{val.telephone}") #{val.name}
-                                    a(href="/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/Remove/#{val.telephone}")
+                                    a.users-list-name(href="/STB/accounts/public/profile/#{val.telephone}") #{val.name}
+                                    a(href="/STB/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/Remove/#{val.telephone}")
                                       button(type='button', class="btn btn-block btn-danger btn-xs") አስወጣ
                           .col-12.col-sm-6.col-md-3
                             button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-sm')
@@ -219,8 +219,8 @@ html
                                 span.info-box-icon.bg-success.elevation-1
                                   i.fas.fa-book
                                 .info-box-content
-                                  a(href="/SirateTimhert/course/Gubaye_Nius_Sebsabi/#{val.id}/#{user.gubaye._id}") #{val.name}
-                                  a(href="/SirateTimhert/course/remove/#{val.id}/#{user.gubaye._id}")                                  
+                                  a(href="/STB/SirateTimhert/course/Gubaye_Nius_Sebsabi/#{val.id}/#{user.gubaye._id}") #{val.name}
+                                  a(href="/STB/SirateTimhert/course/remove/#{val.id}/#{user.gubaye._id}")                                  
                                     button(type='button', class="btn btn-block btn-danger btn-xs") አስወጣ
                           .col-12.col-sm-6.col-md-3
                             button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
@@ -381,7 +381,7 @@ html
                               .card-body
                                 .tab-content
                                   #settings.active.tab-pane
-                                    form(method="post", action="../Gubaye/Update").form-horizontal
+                                    form(method="post", action="../STB/Gubaye/Update").form-horizontal
                                       .form-group.row
                                         label.col-sm-2.col-form-label(for='inputName') የጉባኤው ስም
                                         |                         
