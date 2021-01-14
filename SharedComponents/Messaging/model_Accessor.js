@@ -1,5 +1,5 @@
 'use strict';
-var MessagesM = require('../models/Message_model');
+var MessagesM = require('../Models/Message_model');
 var userModelAccessor = require('../../Account/Models/user_model_accessor')
 
 
