@@ -35,7 +35,7 @@ html
               .col-sm-12
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
-                    a(href='/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
+                    a(href='/STB/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
                   li.breadcrumb-item.active ጉባኤ #{user.gubaye.name}
             .row
               .col-md-12
@@ -56,9 +56,9 @@ html
                               .col-12.col-sm-6.col-md-3
                                 .info-box.mb-3
                                   span.info-box-icon.bg-success.elevation-1
-                                    img(src="../../#{val.pro_img}" alt="User Image")
+                                    img(src="../../STB/#{val.pro_img}" alt="User Image")
                                   .info-box-content
-                                    a.users-list-name(href="/accounts/public/profile/#{val.telephone}") #{val.name}
+                                    a.users-list-name(href="/STB/accounts/public/profile/#{val.telephone}") #{val.name}
                                   
                       #education.tab-pane
                         .row
@@ -69,7 +69,7 @@ html
                                   span.info-box-icon.bg-success.elevation-1
                                     i.fas.fa-book
                                   .info-box-content
-                                    a(href="/SirateTimhert/course/sebsabi/#{val.id}/#{user.gubaye._id}") #{val.name}
+                                    a(href="/STB/SirateTimhert/course/sebsabi/#{val.id}/#{user.gubaye._id}") #{val.name}
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom
