@@ -26,7 +26,7 @@ router.get('/logout', function(req,res,next){
                 return next(err);
             } else{
                 res.clearCookie('session-id');
-                res.redirect('/');
+                res.redirect('/STB');
             }
         });
     }

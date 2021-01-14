@@ -4,8 +4,8 @@ html
   body
     aside.main-sidebar.sidebar-dark-primary.elevation-4
       // Brand Logo
-      a.brand-link(href='/adminlite/index3.html')
-        img.brand-image.img-circle.elevation-3(src='/SharedComponents/static/logo.jpg', alt='AdminLTE Logo', style='opacity: .8')
+      a.brand-link(href='/STB/adminlite/index3.html')
+        img.brand-image.img-circle.elevation-3(src='/STB/SharedComponents/static/logo.jpg', alt='አምደ ተዋህዶ Logo', style='opacity: .8')
         |       
         span.brand-text.font-weight-light አምደ ተዋሕዶ
       // Sidebar
@@ -13,7 +13,7 @@ html
         // Sidebar user (optional)
         .user-panel.mt-3.pb-3.mb-3.d-flex
           .image
-            img.img-circle.elevation-2(src='/#{user.pro_img}', alt='User Image')
+            img.img-circle.elevation-2(src='/STB/STB/#{user.pro_img}', alt='User Image')
           |         
           .info
             a.d-block(href='/accounts/profile') #{user.name}
@@ -36,14 +36,14 @@ html
                         each val3 in val.subDepartment
                           if val3.parent == 1
                             li.nav-item
-                              a(href=val3.DA_link, id=val3.sd_id).nav-link
+                              a(href="..#{val3.DA_link}", id=val3.sd_id).nav-link
                                 i.far.fa-circle.nav-icon
                                 p=val3.name
                       if val2.sd_id == 1 & val2.active == false
                         each val3 in val.subDepartment
                           if val3.active == true
                               li.nav-item
-                                a(href=val3.SD_link, id=val3.sd_id).nav-link
+                                a(href="..#{val3.SD_link}", id=val3.sd_id).nav-link
                                   i.far.fa-circle.nav-icon
                                   p=val3.name     
               li.nav-item.has-treeview.menu.open 
@@ -59,7 +59,7 @@ html
                           i.far.fa-circle.nav-icon
                           p #{classes.name}
             li.nav-item
-              a.nav-link(href='/Accounts/logout')
+              a.nav-link(href='/STB/Accounts/logout')
                 i.fas.fa-circle.nav-icon
                 |               
                 p ውጣ

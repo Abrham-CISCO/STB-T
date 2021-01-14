@@ -64,7 +64,7 @@ document.getElementById("userlist").innerHTML = (Output);
 };
 
 
-xhr.open('GET','/accounts/all');
+xhr.open('GET','/STB/accounts/all');
 xhr.send();
 }
 Load();
@@ -78,7 +78,6 @@ function Assign(UserType)
     if (CandidatesList.options[m].selected == true)
     {
       UserID = (CandidatesList.options[m].id);
-      console.log(UserType);
     }
   }
   
@@ -99,26 +98,18 @@ function Assign(UserType)
 
   if (UserType == 1)
   {
-    link = "/accounts/add/"+DepartmentID+"/Leader/"+UserID;
+    link = "/STB/accounts/add/"+DepartmentID+"/Leader/"+UserID;
     xhr.open('GET',link);
     xhr.send();
   
   }
   if (UserType == 0)  
   {
-  link = "/accounts/add/"+DepartmentID+"/Member/"+UserID;
+  link = "/STB/accounts/add/"+DepartmentID+"/Member/"+UserID;
   xhr.open('GET',link);
   xhr.send();
   }
 };
-
-
-
-function ViewProfile(ID)
-{
-  console.log(ID);
-  
-}
 function SendMessage(ID)
 {
 for(var i = 0; i<MembersID.length; i++)

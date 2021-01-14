@@ -12,7 +12,6 @@ xhr.onreadystatechange = function(){
     if(xhr.status === 200 )
     {
       var users = JSON.parse(xhr.responseText);
-      console.log(users);
       var Output ="<div class='row d-flex align-items-stretch'>";
       MembersName = [];
       MembersID = [];
@@ -64,7 +63,7 @@ document.getElementById("userlist").innerHTML = (Output);
 };
 
 
-xhr.open('GET','/accounts/all');
+xhr.open('GET','/STB/accounts/all');
 xhr.send();
 }
 Load();
@@ -78,7 +77,6 @@ function Assign(UserType)
     if (CandidatesList.options[m].selected == true)
     {
       UserID = (CandidatesList.options[m].id);
-      console.log(UserType);
     }
   }
   
@@ -99,14 +97,14 @@ function Assign(UserType)
 
   if (UserType == 1)
   {
-    link = "/accounts/add/"+DepartmentID+"/Leader/"+UserID;
+    link = "/STB/accounts/add/"+DepartmentID+"/Leader/"+UserID;
     xhr.open('GET',link);
     xhr.send();
   
   }
   if (UserType == 0)  
   {
-  link = "/accounts/add/"+DepartmentID+"/Member/"+UserID;
+  link = "/STB/accounts/add/"+DepartmentID+"/Member/"+UserID;
   xhr.open('GET',link);
   xhr.send();
   }
@@ -133,27 +131,20 @@ function RemoveMember(ID, UserType)
   
   if (UserType == 1)
   {
-    link = "/accounts/remove/"+DepartmentID+"/Leader/"+UserID;
-    console.log(link);
+    link = "/STB/accounts/remove/"+DepartmentID+"/Leader/"+UserID;
     xhr.open('GET',link);
     xhr.send();
-    console.log(link)
-    window.location.href = "/SirateTimhert/DepartmentAdmin";
+    window.location.href = "/STB/AbinetTimehert/DepartmentAdmin";
   }
   if (UserType == 0)  
   {
-    link = "/accounts/remove/"+DepartmentID+"/Member/"+UserID;
-    console.log(link);
+    link = "/STB/accounts/remove/"+DepartmentID+"/Member/"+UserID;
     xhr.open('GET',link);
     xhr.send();
-    window.location.href = "/SirateTimhert/DepartmentAdmin";  
+    window.location.href = "/STB/AbinetTimehert/DepartmentAdmin";  
   }
 }
-function ViewProfile(ID)
-{
-  console.log(ID);
-  
-}
+
 function SendMessage(ID)
 {
 for(var i = 0; i<MembersID.length; i++)

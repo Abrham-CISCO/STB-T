@@ -12,7 +12,6 @@ xhr.onreadystatechange = function(){
     if(xhr.status === 200 )
     {
       var users = JSON.parse(xhr.responseText);
-      console.log(users);
       var Output = "<div class='form-group' data-select2-id='29'><label>አዲስ አባል ይጨምሩ</label>"
       Output += "<table style='width: 100%'><tr><td><select id='OPT' class='form-control select2 select2-hidden-accessible' style='width: 100%;' data-select2-id='1' tabindex='-1' aria-hidden='true'>"
       NotLeader = [];
@@ -98,7 +97,7 @@ document.getElementById("userlist").innerHTML = (Output);
 };
 
 
-xhr.open('GET','/accounts/all');
+xhr.open('GET','/STB/accounts/all');
 xhr.send();
 }
 Load();
@@ -112,7 +111,6 @@ function Assign(UserType)
     if (CandidatesList.options[m].selected == true)
     {
       UserID = (CandidatesList.options[m].id);
-      console.log(UserType);
     }
   }
   
@@ -133,14 +131,14 @@ function Assign(UserType)
 
   if (UserType == 1)
   {
-    link = "/accounts/add/"+DepartmentID+"/Leader/"+UserID;
+    link = "/STB/accounts/add/"+DepartmentID+"/Leader/"+UserID;
     xhr.open('GET',link);
     xhr.send();
   
   }
   if (UserType == 0)  
   {
-  link = "/accounts/add/"+DepartmentID+"/Member/"+UserID;
+  link = "/STB/accounts/add/"+DepartmentID+"/Member/"+UserID;
   xhr.open('GET',link);
   xhr.send();
   }
@@ -167,26 +165,18 @@ function RemoveMember(ID, UserType)
   
   if (UserType == 1)
   {
-    link = "/accounts/remove/"+DepartmentID+"/Leader/"+UserID;
-    console.log(link);
+    link = "/STB/accounts/remove/"+DepartmentID+"/Leader/"+UserID;
     xhr.open('GET',link);
     xhr.send();
-    console.log(link)
-    window.location.href = "/SirateTimhert/DepartmentAdmin";
+    window.location.href = "/STB/AbinetTimehert/DepartmentAdmin";
   }
   if (UserType == 0)  
   {
-    link = "/accounts/remove/"+DepartmentID+"/Member/"+UserID;
-    console.log(link);
+    link = "/STB/accounts/remove/"+DepartmentID+"/Member/"+UserID;
     xhr.open('GET',link);
     xhr.send();
-    window.location.href = "/SirateTimhert/DepartmentAdmin";  
+    window.location.href = "/STB/AbinetTimehert/DepartmentAdmin";  
   }
-}
-function ViewProfile(ID)
-{
-  console.log(ID);
-  
 }
 function SendMessage(ID)
 {

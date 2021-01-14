@@ -58,8 +58,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Defining Static File Path
-  var StaticFilePath = 'C:\\wamp64\\www\\TK';
-  app.use('',express.static(StaticFilePath))
+  // var StaticFilePath = 'C:\\wamp64\\www\\TK';
+  var StaticFilePath = __dirname;
+  app.use('/STB',express.static(StaticFilePath))
 
     // Socket.io setup for messaging
     var chat = io.of('/chat')
@@ -188,16 +189,16 @@ app.use(passport.session());
   
 
   // Route Definations
-  app.use('/Accounts',Accounts);
-  app.use('/Messaging',Messaging);
-  app.use('/Notifications',Notification);
+  app.use('/STB/Accounts',Accounts);
+  app.use('/STB/Messaging',Messaging);
+  app.use('/STB/Notifications',Notification);
 
-  app.use('/AbinetTimehert',AbinetTimehert);
-  app.use('/MemihranMideba',MemihranMideba);
-  app.use('/RiketTimhert',RiketTimhert);
-  app.use('/Sebsabi',Sebsabi);
-  app.use('/SirateTimhert',SirateTimhert);
-  app.use('/Tsehafi',Tsehafi);
+  app.use('/STB/AbinetTimehert',AbinetTimehert);
+  app.use('/STB/MemihranMideba',MemihranMideba);
+  app.use('/STB/RiketTimhert',RiketTimhert);
+  app.use('/STB/Sebsabi',Sebsabi);
+  app.use('/STB/SirateTimhert',SirateTimhert);
+  app.use('/STB/Tsehafi',Tsehafi);
 
 
 // Setting up Jade
@@ -219,10 +220,6 @@ http.listen(3000, () => {
   console.log('listening on port:3000');
 });
 
-app.get('/', function(req,res){
+app.get('/STB', function(req,res){
   res.render('Account/templates/menu.jade');
 });
-
-// Display Homepage
-
-

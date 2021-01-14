@@ -10,7 +10,7 @@ html
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
-    link(rel='stylesheet', href='static/plugins/fontawesome-free/css/all.min.css')
+    link(rel='stylesheet', href='/STB/static/plugins/fontawesome-free/css/all.min.css')
     // Ionicons
     link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
     // Theme style
@@ -67,7 +67,7 @@ html
                                                     span.info-box-icon.bg-success.elevation-1
                                                       i.far.fa-circle.nav-icon
                                                     .info-box-content
-                                                      a(href=val3.DA_link, id=val3.sd_id).nav-link
+                                                      a(href="..#{val3.DA_link}", id=val3.sd_id).nav-link
                                                         span.info-box-text=val3.name
                                           if val2.sd_id == 1 & val2.active == false
                                             each val3 in val.subDepartment
@@ -77,7 +77,7 @@ html
                                                     span.info-box-icon.bg-success.elevation-1
                                                       i.far.fa-circle.nav-icon
                                                     .info-box-content
-                                                      a(href=val3.SD_link, id=val3.sd_id).nav-link
+                                                      a(href="..#{val3.SD_link}", id=val3.sd_id).nav-link
                                                         span.info-box-text=val3.name
                                                         span.info-box-text=val3.role
                                                     // /.info-box-content
@@ -105,7 +105,7 @@ html
                                       p ተማሪዎች
                                     .icon
                                       i.ion.ion-bag
-                                    a.small-box-footer(href='../../Accounts/dashboard_detail/students')
+                                    a.small-box-footer(href='../../STB/Accounts/dashboard_detail/students')
                                       | ተጨማሪ 
                                       i.fas.fa-arrow-circle-right
 
@@ -118,7 +118,7 @@ html
                                       p ኮርሶች
                                     .icon
                                       i.ion.ion-stats-bars
-                                    a.small-box-footer(href='../../Accounts/dashboard_detail/courses')
+                                    a.small-box-footer(href='../../STB/Accounts/dashboard_detail/courses')
                                       | ተጨማሪ 
                                       i.fas.fa-arrow-circle-right
                                 // ./col
@@ -130,7 +130,7 @@ html
                                       p ጉባኤያት
                                     .icon
                                       i.ion.ion-person-add
-                                    a.small-box-footer(href='../../Accounts/dashboard_detail/groups')
+                                    a.small-box-footer(href='../../STB/Accounts/dashboard_detail/groups')
                                       | ተጨማሪ 
                                       i.fas.fa-arrow-circle-right
                                 // ./col
@@ -142,7 +142,7 @@ html
                                       p የትምህርት ክፍል አባላት
                                     .icon
                                       i.ion.ion-pie-graph
-                                    a.small-box-footer(href='../../Accounts/dashboard_detail/members')
+                                    a.small-box-footer(href='../../STB/Accounts/dashboard_detail/members')
                                       | ተጨማሪ 
                                       i.fas.fa-arrow-circle-right
                               // ./col
