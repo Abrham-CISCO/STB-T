@@ -34,9 +34,9 @@ html
               .col-sm-12
                 ol.breadcrumb.float-sm-right
                   li.breadcrumb-item
-                    a(href='/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
+                    a(href='/STB/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
                   li.breadcrumb-item
-                    a(href='/SirateTimhert/Gubaye_Sebsabi/#{classRoom._id}') ጉባኤ #{classRoom.name}
+                    a(href='/STB/SirateTimhert/Gubaye_Sebsabi/#{classRoom._id}') ጉባኤ #{classRoom.name}
                   li.breadcrumb-item.active #{returnedCourse.name} ኮርስ
             .row
               .col-md-12
@@ -405,7 +405,7 @@ html
                                       li.list-group-item
                                         b ዝርዝር
                                         p #{returnedCourse.description}
-                                    form(method="post", action="../Gubaye/Update").form-horizontal
+                                    form(method="post", action="../STB/Gubaye/Update").form-horizontal
                                       .form-group.row
                                         label.col-sm-2.col-form-label(for='inputName') የጉባኤው ስም
                                         |                         
