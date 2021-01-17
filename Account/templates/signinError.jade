@@ -19,17 +19,17 @@ html
     link(rel='stylesheet', href='static/dist/css/adminlte.min.css')
     // Google Font: Source Sans Pro
     link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
-  body.hold-transition.login-page(style="background-image: url('../../STB/Account/static/bkgrnd.jpg');")
+  body.hold-transition.login-page(style="background-image: url('../../../STB/Account/static/bkgrnd.jpg');")
     .login-box
       // /.login-logo
       .card
         .card-body.login-card-body
           p.login-box-msg
-            img.brand-image.img-circle.elevation-3(src='../../STB/Account/static/logo.jpg', alt='አምደ ተዋሕዶ Logo', style='opacity: .8', width='100')
+            img.brand-image.img-circle.elevation-3(src='../../../STB/Account/static/logo.jpg', alt='አምደ ተዋሕዶ Logo', style='opacity: .8', width='100')
             br
             h6.headline.text-danger.text-center የተሳሳተ ስልክ ቁጥር ወይንም የይለፍ ቃል ነው ያስገቡት እባኮትን በድጋሜ ይሞክሩ።
           |       
-          form(action='../../STB/Accounts/login', method='post')
+          form(action='../../../STB/Accounts/login', method='post')
             .input-group.mb-3
               input.form-control(type='text', placeholder='ስልክ ቁጥር' name = "telephone")
               |           
@@ -53,10 +53,10 @@ html
               // /.col
           |       
           p.mb-1
-            a(href='../../STB/Accounts/forgotPassword') የይለፍ ቃሌን አላስተውሰውም
+            a(href='../../../STB/Accounts/forgotPassword') የይለፍ ቃሌን አላስተውሰውም
           |       
           p.mb-0
-            a.text-center(href='../../STB/Accounts/register') አዲስ አባል ነኝ እንደ አዲስ መዝግቡኝ
+            a.text-center(href='../../../STB/Accounts/register') አዲስ አባል ነኝ እንደ አዲስ መዝግቡኝ
         // /.login-card-body
     // /.login-box
     // jQuery

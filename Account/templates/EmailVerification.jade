@@ -19,21 +19,21 @@ html
     link(rel='stylesheet', href='static/dist/css/adminlte.min.css')
     // Google Font: Source Sans Pro
     link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
-  body.hold-transition.login-page(style="background-image: url('../STB/Account/static/bkgrnd.jpg');")
+  body.hold-transition.login-page(style="background-image: url('../../STB/Account/static/bkgrnd.jpg');")
     .login-box
       .login-logo
       // /.login-logo
       .card
         .card-body.login-card-body
           p.login-box-msg
-            img.brand-image.img-circle.elevation-3(src='../STB/Account/static/logo.jpg', alt='AdminLTE Logo', style='opacity: .8', width='100')
+            img.brand-image.img-circle.elevation-3(src='../../STB/Account/static/logo.jpg', alt='አምደ ተዋሕዶ Logo', style='opacity: .8', width='100')
             | &nbsp;&nbsp;&nbsp; 
             br
             br
             ሰላም #{name} 
             br
             በኢሜል አድራሻዎ የምስጢር ቁጥር ተልኮሎታል። ይህን የምስጢር ቁጥር እዚህ ያስገቡ       
-          form(action='../Accounts/Iverify', method='post')
+          form(action='../../STB/Accounts/Iverify', method='post')
             .input-group.mb-3
               input.form-control(type='text', placeholder='የምስጢር ቁጥሩን እዚህ ያስገቡ', name = 'vcode')
               |           

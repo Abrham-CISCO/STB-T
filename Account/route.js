@@ -302,7 +302,8 @@ router.post('/CHPWD', function(req,res,next){
             return next(err);
         }
         else{
-            res.json(notification);
+            // res.json(notification);
+            res.redirect('/STB/Accounts/login')
         }
     });
     }

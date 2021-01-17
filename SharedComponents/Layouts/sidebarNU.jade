@@ -16,7 +16,7 @@ html
             img.img-circle.elevation-2(src='/STB/STB/#{user.pro_img}', alt='User Image')
           |         
           .info
-            a.d-block(href='/accounts/profile') #{user.name}
+            a.d-block(href='/STB/accounts/profile') #{user.name}
         // Sidebar Menu
         nav.mt-2
           ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview', role='menu', data-accordion='false')
@@ -55,7 +55,7 @@ html
                   if(JoinedclassRooms)
                     each classes in JoinedclassRooms   
                       li.nav-item                                  
-                        a(href="/SirateTimhert/Gubaye/public/#{classes.id}", id=classes.id).nav-link
+                        a(href="/STB/SirateTimhert/Gubaye/public/#{classes.id}", id=classes.id).nav-link
                           i.far.fa-circle.nav-icon
                           p #{classes.name}
             li.nav-item
