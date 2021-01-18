@@ -37,14 +37,14 @@ html
                         each val3 in val.subDepartment
                           if val3.parent == 1
                             li.nav-item
-                              a(href="../../..#{val3.DA_link}", id=val3.sd_id).nav-link
+                              a(href="../../../../../../..#{val3.DA_link}", id=val3.sd_id).nav-link
                                 i.far.fa-circle.nav-icon
                                 p=val3.name
                       if val2.sd_id == 1 & val2.active == false
                         each val3 in val.subDepartment
                           if val3.active == true
                               li.nav-item
-                                a(href="../../..#{val3.SD_link}", id=val3.sd_id).nav-link
+                                a(href="../../../../../../..#{val3.SD_link}", id=val3.sd_id).nav-link
                                   i.far.fa-circle.nav-icon
                                   p=val3.name     
               li.nav-item.has-treeview.menu.open 
