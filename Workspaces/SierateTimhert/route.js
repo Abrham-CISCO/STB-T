@@ -258,7 +258,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
      upload.single('courseOutlineFile'), function(req,res,next){
          var courseId = req.params.courseId;
         course_ModelAccessor.courseDetail(courseId,function(error, singleCourse){
-            singleCourse.courseOutline = "http://localhost:3000/Workspaces/SierateTimhert/static/" + req.file.originalname
+            singleCourse.courseOutline = "/STB/Workspaces/SierateTimhert/static/" + req.file.originalname
             course_ModelAccessor.editCourse(courseId,{courseOutline:singleCourse.courseOutline},function(error,confirmation){
                 if(error)
                 {
