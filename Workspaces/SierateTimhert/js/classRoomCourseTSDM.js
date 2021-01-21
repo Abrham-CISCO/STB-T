@@ -182,7 +182,7 @@ function save(courseId, gubayeId)
     socket.emit('updateCourse',registeredChanges, registeredColumnNameChanges, courseId, gubayeId);
 
     socket.on('updateCourse',function(Confirmation){
-        var url = "/SirateTimhert/course/Gubaye_Nius_Abal/"+courseId+"/"+gubayeId;
+        var url = "/STB/SirateTimhert/course/Gubaye_Nius_Abal/"+courseId+"/"+gubayeId;
         window.location.href = url
       });
 }
@@ -219,7 +219,7 @@ function saveAttAbscent(courseId, gubayeId)
 
     socket.on('updateAttendance',function(Confirmation){
         console.log(Confirmation);
-        var url = "/SirateTimhert/course/Gubaye_Nius_Abal/"+courseId+"/"+gubayeId;
+        var url = "/STB/SirateTimhert/course/Gubaye_Nius_Abal/"+courseId+"/"+gubayeId;
         window.location.href = url
       });
 }

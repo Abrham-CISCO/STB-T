@@ -50,7 +50,7 @@ const allCourses = function(callback)
     course.find({},{name:true, _id:true}).then((courses)=>
     {
         callback(null, courses)
-    }).catch((error) => {callback(error)});
+    }).catch((error) => {callback(error,false)});
 }
 const allCoursesWithDetails = function(callback)
 {

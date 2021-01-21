@@ -6,13 +6,11 @@ function addmembers(gubayeID)
     var selectionConut = document.getElementsByClassName("select2-selection__rendered")[0].childNodes.length - 1;
     for(var i = 0; (i<selectionConut); i++)
     {
-        members.push(document.getElementsByClassName("select2-selection__rendered")[0].childNodes[i].title)
-        
+        members.push(document.getElementsByClassName("select2-selection__rendered")[0].childNodes[i].title)        
     }
     socket.emit('AddGubayeMembers',gubayeID,members);
   socket.on('AddGubayeMembers',function(Confirmation){
-    alert(Confirmation);
-    window.location.href = "/SirateTimhert/Gubaye_Nius_Abal/"+gubayeID;
+    window.location.href = "/STB/SirateTimhert/Gubaye_Nius_Abal/"+gubayeID;
   });
 }
 function updateGubaye()
@@ -23,7 +21,6 @@ function updateGubaye()
   var classId = document.getElementById("_id").value
   socket.emit('UpdateGubaye_ForMember',classId, GubayeName, description)
   socket.on('UpdateGubaye_ForMember',function(Confirmation){
-    alert(Confirmation);
-    window.location.href = "/SirateTimhert/Gubaye_Nius_Abal/"+classId;
+    window.location.href = "/STB/SirateTimhert/Gubaye_Nius_Abal/"+classId;
   });
 }
