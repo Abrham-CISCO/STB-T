@@ -30,7 +30,7 @@
     "passport-local-mongoose": "^6.0.1",
     "pdfkit": "^0.11.0",
     "pug": "^2.0.0-beta2",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "devDependencies": {
     "gulp-concat": "^2.6.1",
