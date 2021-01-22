@@ -153,8 +153,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                     }
                     else
                     {
-                        res.end();
-                        url = "http://localhost:3000/SirateTimhert/Gubaye_Nius_Sebsabi/"+Gubaye._id
+                        url = "/STB/SirateTimhert/Gubaye_Nius_Sebsabi/"+Gubaye._id
                         res.redirect(url)
                         
                         // res.json(Gubaye);
@@ -229,9 +228,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                             classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedCourses){
                                                 req.session.unjoinedCourses = unjoinedCourses
                                                 req.session.JoinedCourses = JoinedCourses;
-                                                console.log("req.session", req.session)
-                                                res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
-                                                
+                                                res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)                                                
                                             })
                                         })
                                     })
@@ -630,7 +627,7 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
             else
             {
-                var url = '/SirateTimhert/Gubaye_Nius_Sebsabi/'+gubayeId;
+                var url = '/STB/SirateTimhert/Gubaye_Nius_Sebsabi/'+gubayeId;
                 res.redirect(url);
             }
         })

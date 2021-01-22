@@ -37,7 +37,7 @@ else
         var courseId = document.getElementById("_id").value
         socket.emit('updateCourseDetail',courseId, courseName, description)
         socket.on('updateCourseDetail',function(Confirmation){
-            window.location.href = "/SirateTimhert/course/nius_sebsabi/"+courseId;
+            window.location.href = "/STB/SirateTimhert/course/nius_sebsabi/"+courseId;
         });
     }
     // // Front end design using object Oriented programming and closure

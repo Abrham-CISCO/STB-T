@@ -90,7 +90,7 @@ function save(courseId, gubayeId)
 
     socket.on('updateCourse',function(Confirmation){
         alert(Confirmation);
-        var url = "/SirateTimhert/course/Gubaye_Nius_Sebsabi/"+courseId+"/"+gubayeId;
+        var url = "/STB/SirateTimhert/course/Gubaye_Nius_Sebsabi/"+courseId+"/"+gubayeId;
         window.location.href = url
       });
 }
@@ -127,7 +127,7 @@ function saveAttAbscent(courseId, gubayeId)
 
     socket.on('updateAttendance',function(Confirmation){
         console.log(Confirmation);
-        var url = "/SirateTimhert/course/Gubaye_Nius_Sebsabi/"+courseId+"/"+gubayeId;
+        var url = "/STB/SirateTimhert/course/Gubaye_Nius_Sebsabi/"+courseId+"/"+gubayeId;
         window.location.href = url
       });
 }

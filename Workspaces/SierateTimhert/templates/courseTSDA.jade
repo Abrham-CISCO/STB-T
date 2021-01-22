@@ -1,6 +1,6 @@
 doctype html
 include ../../../SharedComponents/Layouts/header.jade
-script(src="/ADMINLITE/plugins/bs-custom-file-input/bs-custom-file-input.min.js")
+script(src="/STB/ADMINLITE/plugins/bs-custom-file-input/bs-custom-file-input.min.js")
 html
   head
     meta(charset='utf-8')
@@ -11,7 +11,7 @@ html
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
-    link(rel='stylesheet', href='https://localhost:3000/adminlite/plugins/fontawesome-free/css/all.min.css')
+    link(rel='stylesheet', href='/STB/ADMINLITE/plugins/fontawesome-free/css/all.min.css')
     // Ionicons
     link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
     // Theme style
@@ -138,7 +138,7 @@ html
                               .card.card-primary.card-outline
                                 .card-body.box-profile
                                   .text-center
-                                    img.profile-user-img.img-fluid.img-circle(src='/SharedComponents/static/logo.jpg', alt='User profile picture')
+                                    img.profile-user-img.img-fluid.img-circle(src='/STB/SharedComponents/static/logo.jpg', alt='User profile picture')
                                   |                 
                                   h3.profile-username.text-center #{returnedCourse.name}
                                   |                 
@@ -214,14 +214,14 @@ html
       // /.control-sidebar
     // ./wrapper
     // jQuery
-    script(src='/ADMINLITE/plugins/jquery/jquery.min.js')
+    script(src='/STB/ADMINLITE/plugins/jquery/jquery.min.js')
     // Bootstrap 4
-    script(src='/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    script(src='/STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
     // AdminLTE App
-    script(src='/ADMINLITE/dist/js/adminlte.min.js')
+    script(src='/STB/ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
-    script(src='/ADMINLITE/dist/js/demo.js')
-    script(src="/Workspaces/SierateTimhert/js/courseTSDA.js")
+    script(src='/STB/ADMINLITE/dist/js/demo.js')
+    script(src="/STB/Workspaces/SierateTimhert/js/courseTSDA.js")
     script.
       document.getElementById('3').className = "nav-link active"
       document.getElementById('#{user.GubayeID}').className = "nav-link active"
