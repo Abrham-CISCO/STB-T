@@ -818,7 +818,23 @@ router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, mid.req
 });
 // Curriculum Routes
 
+// Public users
 router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, function(req,res,next){
+    return res.render("Workspaces/SierateTimhert/templates/SierateTimhertTDA.jade",req.session)
+});
+
+// Department Admin
+router.get('/DepartmentAdmin/curriculum/:curriculumId', mid.requireSignIn, mid.requiresToBeLeader, mid.updateUserData, function(req,res,next){
+
+});
+
+// Sub Department Admin
+router.get('/SubDepartmentAdmin/curriculum/:curriculumId', mid.requireSignIn, mid.requiresToBeSTKNS, mid.updateUserData, function(req,res,next){
+
+});
+
+// Sub Department Member
+router.get('/SubDepartmentMember/curriculum/:curriculumId', mid.requireSignIn,mid.requiresToBeSTKNA, mid.updateUserData, function(req,res,next){
 
 });
 
