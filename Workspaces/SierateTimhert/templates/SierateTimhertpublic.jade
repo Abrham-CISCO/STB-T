@@ -1,0 +1,181 @@
+doctype html
+include ../../../SharedComponents/Layouts/header.jade
+html
+  head
+    meta(charset='utf-8')
+    |   
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    |   
+    title እገሌ ስርዓት ትምህርት
+    // Tell the browser to be responsive to screen width
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Font Awesome
+    link(rel='stylesheet', href='https://localhost:3000/adminlite/plugins/fontawesome-free/css/all.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+    // Theme style
+    link(rel='stylesheet', href='static/dist/css/adminlte.min.css')
+    // Google Font: Source Sans Pro
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
+  body.hold-transition.sidebar-mini
+    .wrapper
+      // Navbar
+      include ../../../SharedComponents/Layouts/navigation.jade
+      // Main Sidebar Container
+      include ../../../SharedComponents/Layouts/sidebarNU.jade
+      // Content Wrapper. Contains page content
+      .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+          .container-fluid
+            .row.mb-2
+              .col-sm-12
+                h1 እገሌ ስርዓተ ትምህርት
+              |           
+              .col-sm-12
+                ol.breadcrumb.float-sm-right
+                  li.breadcrumb-item
+                    a(href='/STB/SirateTimhert/DepartmentAdmin') ስዕራተ ትምህርት ንኡስ ክፍል
+                  li.breadcrumb-item.active እገሌ ስርዓተ ትምህርት
+            .row
+              .col-md-12
+                .card
+                  .card-header.p-2
+                    ul.nav.nav-pills
+                      li.nav-item
+                        a.nav-link.active(href='#home', data-toggle='tab') መግቢያ
+                      li.nav-item
+                        a.nav-link(href='#grades', data-toggle='tab') ክፍላት
+                  // /.card-header
+                  .card-body
+                    .tab-content    
+                      #home.active.tab-pane
+                        .row
+                          .col-8
+                            h6 ስለ ስርዓተ ትምህርቱ
+                            p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                            p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                          .col-4
+                            .card
+                              .card-header.border-0
+                                h3.card-title ዝርዝር
+                              .card-body
+                                .d-flex.justify-content-between.align-items-center.border-bottom.mb-3
+                                  p
+                                    span የተመሰረተበት ቀን
+                                // /.d-flex
+                                .d-flex.justify-content-between.align-items-center.border-bottom.mb-3
+                                  p.d-flex.flex-column.text-left
+                                    span መስራች
+                                // /.d-flex
+                                .d-flex.justify-content-between.align-items-center.mb-0
+                                  p.d-flex.flex-column
+                                    span 19 ክፍላት፣  120 ኮርሶች፣ 159 ተማሪዎች
+                                // /.d-flex
+                        .row
+                          .col-12
+                            h5 ጉባኤያቶች
+                            .col-12.col-sm-6.col-md-4
+                              .info-box
+                                .info-box-icon.bg-info
+                                  .fas.fa-users
+                                .info-box-content
+                                  a(href='/STB/SirateTimhert/Gubaye_Sebsabi/5fc51d3d51af0102985e0c8c')
+                                    span.info-box-text ቀዳማይ ቅዱስ ማቴዎስ
+                                  span.info-box-text የአባላት ብዛት ፡ 4
+                                  span.info-box-text አስተባባሪ ፡ No One
+
+                      #grades.tab-pane
+                        .row
+                          .col-5.col-sm-3
+                            #vert-tabs-tab.nav.flex-column.nav-tabs.h-100(role='tablist' aria-orientation='vertical')
+                              a#vert-tabs-home-tab.nav-link.active(data-toggle='pill' href='#vert-tabs-home' role='tab' aria-controls='vert-tabs-home' aria-selected='true') 1ኛ ክፍል
+                              a#vert-tabs-profile-tab.nav-link(data-toggle='pill' href='#vert-tabs-profile' role='tab' aria-controls='vert-tabs-profile' aria-selected='false') 2ኛ ክፍል
+                              a#vert-tabs-messages-tab.nav-link(data-toggle='pill' href='#vert-tabs-messages' role='tab' aria-controls='vert-tabs-messages' aria-selected='false') 3ኛ ክፍል
+                              a#vert-tabs-settings-tab.nav-link(data-toggle='pill' href='#vert-tabs-settings' role='tab' aria-controls='vert-tabs-settings' aria-selected='false') ክፍል ጨምር
+                          .col-7.col-sm-9
+                            #vert-tabs-tabContent.tab-content
+                              #vert-tabs-home.tab-pane.text-left.fade.active.show(role='tabpanel' aria-labelledby='vert-tabs-home-tab')
+                                h6 የተመደቡ ኮርሶች
+                                .row
+                                  .col-12.col-sm-6.col-md-4
+                                    .info-box.mb-3
+                                      span.info-box-icon.bg-success.elevation-1
+                                        i.fas.fa-book
+                                      .info-box-content
+                                        a(href='/STB/SirateTimhert/course/sebsabi/5fc51d0951af0102985e0c88/5fe86773912e3d1f649bfbdb') ትምህርተ ሀይማኖት
+                                  .col-12.col-sm-6.col-md-4
+                                    .info-box.mb-3
+                                      span.info-box-icon.bg-success.elevation-1
+                                        i.fas.fa-book
+                                      .info-box-content
+                                        a(href='/STB/SirateTimhert/course/sebsabi/5fc51d1151af0102985e0c89/5fe86773912e3d1f649bfbdb') ክርስቲያናዊ ስነ-ምግባር
+                                  .col-12.col-sm-6.col-md-4
+                                    .info-box.mb-3
+                                      span.info-box-icon.bg-success.elevation-1
+                                        i.fas.fa-book
+                                      .info-box-content
+                                        a(href='/STB/SirateTimhert/course/sebsabi/5fe2bb5c7088b934e8d28c00/5fe86773912e3d1f649bfbdb') ሚሥጥራተ ቤተክርስቲያን
+                                  .col-12.col-sm-6.col-md-4
+                                    .info-box.mb-3
+                                      span.info-box-icon.bg-success.elevation-1
+                                        i.fas.fa-book
+                                      .info-box-content
+                                        a(href='/STB/SirateTimhert/course/sebsabi/5fe867e2912e3d1f649bfc1e/5fe86773912e3d1f649bfbdb') የቤተክርስቲያን ታሪክ በአለም መድረክ
+                                  .col-12.col-sm-6.col-md-3
+                                    button.btn.btn-block.btn-primary.btn-lg(type='button' data-toggle='modal' data-target='#modal-course')
+                                      .fas.fa-plus.nav-plus
+                                    a.users-list-name(href='#') አዲስ ኮርስ ጨምር
+                                h6 የክፍሉ አላማ
+                                p
+                                  | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                              #vert-tabs-profile.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-profile-tab')
+                                | Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                              #vert-tabs-messages.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-messages-tab')
+                                | Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                              #vert-tabs-settings.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-settings-tab')
+                                | Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+
+
+                    // /.tab-content
+                  // /.card-body
+                // /.nav-tabs-custom
+              // /.col
+            // /.row
+          // /.container-fluid
+        // Main content
+        section.content
+          .container-fluid
+          // /.container-fluid
+        // /.content
+      // /.content-wrapper
+      footer.main-footer
+        .float-right.d-none.d-sm-block
+          b Version
+          |  3.0.2-pre
+        |     
+        strong
+          | Copyright &copy; 2014-2019 
+          a(href='http://adminlte.io') AdminLTE.io
+          | .
+        |  All rights
+        |     reserved.
+      // Control Sidebar
+      aside.control-sidebar.control-sidebar-dark
+        // Control sidebar content goes here
+      // /.control-sidebar
+    // ./wrapper
+    // jQuery
+    // Bootstrap 4
+    script(src='/STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    // AdminLTE App
+    script(src='/STB/ADMINLITE/dist/js/adminlte.min.js')
+    // AdminLTE for demo purposes
+    script(src='/STB/ADMINLITE/dist/js/demo.js')
+    script(src="/STB/ADMINLITE/plugins/datatables/jquery.dataTables.js")
+    script(src="/STB/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js")
+    
+
+    script.
+      document.getElementById('3').className = "nav-link active"
+      document.getElementById('#{user.GubayeID}').className = "nav-link active"

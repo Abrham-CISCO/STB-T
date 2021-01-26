@@ -820,7 +820,7 @@ router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, mid.req
 
 // Public users
 router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, function(req,res,next){
-    return res.render("Workspaces/SierateTimhert/templates/SierateTimhertTDA.jade",req.session)
+    return res.render("Workspaces/SierateTimhert/templates/SierateTimhertpublic.jade",req.session)
 });
 
 // Department Admin
