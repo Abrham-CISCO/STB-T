@@ -777,12 +777,12 @@ router.get('/SubDepartmentAdmin', mid.requireSignIn,mid.updateUserData, mid.requ
                           if(curriculums.length != 0)
                           {
                               req.session.curriculums = curriculums;
-                              return res.render("Workspaces/SierateTimhert/templates/SireateTDA.jade",req.session);    
+                              return res.render("Workspaces/SierateTimhert/templates/SireateTSDA.jade",req.session);    
                           }
                           else
                           {
                               req.session.curriculums = {};
-                              return res.render("Workspaces/SierateTimhert/templates/SireateTDA.jade",req.session);    
+                              return res.render("Workspaces/SierateTimhert/templates/SireateTSDA.jade",req.session);    
                           }
                       })
                   }
