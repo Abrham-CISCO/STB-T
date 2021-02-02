@@ -1,7 +1,8 @@
 var curriculum = require("./curriculum")
 
 const allCurriculums = (callback) => {
-    curriculum.find({}).then((curriculums)=>{
+    curriculum.find({})
+    .populate('curriculum.created_By').then((curriculums)=>{
         callback(null,curriculums);
     }).catch((err)=>{
         callback(err,false);
@@ -17,7 +18,9 @@ const createCurriculum = (created_By,curriculumName, description, callback) => {
 }
 
 const curriculumDetail = (curriculumId, callback) => {
-    curriculum.findById(curriculumId).then((singleCurriculum)=>{
+    curriculum.findById(curriculumId)
+    .populate('curriculums.created_By').then((singleCurriculum)=>{
+        console.log("singleCurriculum",singleCurriculum)
         callback(null,singleCurriculum)
     }).catch((err)=>{
         callback(err,false);
@@ -25,7 +28,8 @@ const curriculumDetail = (curriculumId, callback) => {
 }
 
 const gradeDetail = (curriculumId, gradeId, callback) => {
-    curriculum.findById(curriculumId).then((singleCurriculum)=>{
+    curriculum
+    .findById(curriculumId).then((singleCurriculum)=>{
         var searchedGrade = singleCurriculum.grades.filter((grade)=>{
             return grade._id == gradeId
         })

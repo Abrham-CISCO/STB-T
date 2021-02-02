@@ -8,6 +8,7 @@ var classRoomInd_ModelAccessor = require('./models/classRoomInd_ModelAccessor');
 var multer = require('multer');
 var curriculum_ModelAccessor = require('./models/curriculumModelAccessor');
 var course_ModelAccessor = require('./models/courseModelAccessor');
+
 const course = require('./models/course');
 
 var storage = multer.diskStorage({
@@ -820,7 +821,21 @@ router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, mid.req
 
 // Public users
 router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, function(req,res,next){
-    return res.render("Workspaces/SierateTimhert/templates/SierateTimhertpublic.jade",req.session)
+    curriculum_ModelAccessor.curriculumDetail(req.params.curriculumId,function(err, curriculum){
+        if(err)
+        {
+            next(err)
+        }
+        else
+        {
+            UserModelAccessor.userData(curriculum.created_By,function(err,user){
+                req.session.curriculum = curriculum;
+                req.session.curriculum.created_By = user.name;
+                // count courses
+                return res.render("Workspaces/SierateTimhert/templates/SierateTimhertpublic.jade",req.session)    
+            });
+        }
+    })
 });
 
 // Department Admin
@@ -844,8 +859,9 @@ router.put('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mi
 
 router.post('/curriculum',mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
     curriculum_ModelAccessor.createCurriculum(req.session.userId,req.body.name, req.body.description,function(err, curriculum){
-        url = "../SirateTimhert/SubDepartmentAdmin";
-        res.redirect(url)
+
+            url = "../SirateTimhert/SubDepartmentAdmin";
+            res.redirect(url)
     })
 });
 

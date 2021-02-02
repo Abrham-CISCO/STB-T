@@ -6,7 +6,7 @@ html
     |   
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     |   
-    title እገሌ ስርዓት ትምህርት
+    title #{curriculum.name} ስርዓት ትምህርት
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
@@ -30,7 +30,7 @@ html
           .container-fluid
             .row.mb-2
               .col-sm-12
-                h1 እገሌ ስርዓተ ትምህርት
+                h1 #{curriculum.name} ስርዓተ ትምህርት
               |           
               .col-sm-12
                 ol.breadcrumb.float-sm-right
@@ -52,9 +52,8 @@ html
                       #home.active.tab-pane
                         .row
                           .col-8
-                            h6 ስለ ስርዓተ ትምህርቱ
-                            p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                            p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                            h6 #{curriculum.name}
+                            p #{curriculum.description}
                           .col-4
                             .card
                               .card-header.border-0
@@ -62,29 +61,31 @@ html
                               .card-body
                                 .d-flex.justify-content-between.align-items-center.border-bottom.mb-3
                                   p
-                                    span የተመሰረተበት ቀን
+                                    span የተመሰረተበት ቀን : #{curriculum.createdAt}
                                 // /.d-flex
                                 .d-flex.justify-content-between.align-items-center.border-bottom.mb-3
                                   p.d-flex.flex-column.text-left
-                                    span መስራች
+                                    span መስራች : #{curriculum.created_By}
                                 // /.d-flex
                                 .d-flex.justify-content-between.align-items-center.mb-0
                                   p.d-flex.flex-column
-                                    span 19 ክፍላት፣  120 ኮርሶች፣ 159 ተማሪዎች
+                                    span #{curriculum.grades.length} ክፍላት
                                 // /.d-flex
+                                
                         .row
                           .col-12
                             h5 ጉባኤያቶች
-                            .col-12.col-sm-6.col-md-4
-                              .info-box
-                                .info-box-icon.bg-info
-                                  .fas.fa-users
-                                .info-box-content
-                                  a(href='/STB/SirateTimhert/Gubaye_Sebsabi/5fc51d3d51af0102985e0c8c')
-                                    span.info-box-text ቀዳማይ ቅዱስ ማቴዎስ
-                                  span.info-box-text የአባላት ብዛት ፡ 4
-                                  span.info-box-text አስተባባሪ ፡ No One
-
+                            if(curriculum.gubayeat.length > 0)  
+                              for each gubaye in curriculum.gubayeat
+                                .col-12.col-sm-6.col-md-4
+                                  .info-box
+                                    .info-box-icon.bg-info
+                                      .fas.fa-users
+                                    .info-box-content
+                                      a(href='/STB/SirateTimhert/Gubaye_Sebsabi/#{gubaye.id}')
+                                        span.info-box-text #{gubaye.name}
+                            else
+                              p ምንም ጉባኤ አልተጨመረም።
                       #grades.tab-pane
                         .row
                           .col-5.col-sm-3

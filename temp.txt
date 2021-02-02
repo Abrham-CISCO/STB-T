@@ -1,0 +1,32 @@
+
+db.curriculums.update({_id:ObjectId("60183fac5541031b04eef866")},{$set:{
+    grades : [{
+        created_By:"Abrham Getachew",
+        name: "Grade 1",
+        courses:[{    
+          course_id:"5fea12083be50008fceea216",
+          order:"1",
+          activated:true
+        }],
+        description:"This is grade 1 course"},
+{
+        created_By:"Abrham Getachew",
+        name: "Grade 1",
+        courses:[{    
+          course_id:"5fea12083be50008fceea216",
+          order:"1",
+          activated:true
+        }],
+        description:"This is grade 1 course"},
+{
+        created_By:"Abrham Getachew",
+        name: "Grade 2",
+        courses:[{    
+          course_id:"5fea12083be50008fceea216",
+          order:"1",
+          activated:true
+        }],
+        description:"This is grade 2 course"}
+
+    ]
+    }})

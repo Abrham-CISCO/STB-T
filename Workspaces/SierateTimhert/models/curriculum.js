@@ -10,11 +10,16 @@ var gradeSchema = new mongoose.Schema({
     courses:[courseSchema],
     description:{type:String},
 },{timestamps:true});
+var gubayeSchema = new mongoose.Schema({
+    id:{type:mongoose.Types.ObjectId},
+    name:{type:String}
+},{timestamps:true})
 var curriculumSchema = new mongoose.Schema({
     created_By:{type:String},
     name:{type:String},
     grades:[gradeSchema],
-    description:{type:String}
+    description:{type:String},
+    gubayeat:[gubayeSchema]
 },{timestamps:true})
 
 var curriculum = mongoose.model('curriculum',curriculumSchema);
