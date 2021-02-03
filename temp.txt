@@ -1,6 +1,7 @@
 
 db.curriculums.update({_id:ObjectId("60183fac5541031b04eef866")},{$set:{
     grades : [{
+	u_id:"1",
         created_By:"Abrham Getachew",
         name: "Grade 1",
         courses:[{    
@@ -10,20 +11,22 @@ db.curriculums.update({_id:ObjectId("60183fac5541031b04eef866")},{$set:{
         }],
         description:"This is grade 1 course"},
 {
-        created_By:"Abrham Getachew",
-        name: "Grade 1",
-        courses:[{    
-          course_id:"5fea12083be50008fceea216",
-          order:"1",
-          activated:true
-        }],
-        description:"This is grade 1 course"},
-{
+	u_id:"2",
         created_By:"Abrham Getachew",
         name: "Grade 2",
         courses:[{    
           course_id:"5fea12083be50008fceea216",
-          order:"1",
+          order:"2",
+          activated:true
+        }],
+        description:"This is grade 1 course"},
+{
+	u_id:"3",
+        created_By:"Abrham Getachew",
+        name: "Grade 3",
+        courses:[{    
+          course_id:"5fea12083be50008fceea216",
+          order:"3",
           activated:true
         }],
         description:"This is grade 2 course"}

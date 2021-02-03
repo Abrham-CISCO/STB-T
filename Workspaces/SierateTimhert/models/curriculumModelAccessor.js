@@ -54,6 +54,18 @@ const curriculumsSmallDetail = (callback) => {
     }).catch((err)=>{callback(err,false)});
 }
 
+const createGrade = (curriculum_id, created_By, gradeName, description, callback) => {
+    curriculum.findById(curriculum_id).then(curriculum => {
+        curriculum.grades.push({
+            created_By:created_By,
+            name:gradeName,
+            description:description,
+        })
+        curriculum.save().then((resp)=>callback(false,resp)).catch((err)=>callback(err));
+    })
+}
+
+exports.createGrade = createGrade;
 exports.curriculumsSmallDetail = curriculumsSmallDetail;
 exports.gradeDetail = gradeDetail;
 exports.curriculumDetail = curriculumDetail;

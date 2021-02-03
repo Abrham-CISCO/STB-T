@@ -865,6 +865,19 @@ router.post('/curriculum',mid.requireSignIn,mid.updateUserData, mid.requiresToBe
     })
 });
 
+router.post('/curriculum/:curriculum_id/grade/', mid.requireSignIn, mid.updateUserData,mid.requiresToBeSTKNS, function(req,res,next){
+    curriculum_ModelAccessor.createGrade(curriculum_id,req.body.created_By,req.body.gradeName, req.body.description,function(err,resp){
+        if(err)
+        {
+            next(err);
+        }
+        else
+        {
+            res.json(resp)
+        }
+    })
+})
+
 router.delete('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
 
 });

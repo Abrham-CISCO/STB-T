@@ -90,10 +90,13 @@ html
                         .row
                           .col-5.col-sm-3
                             #vert-tabs-tab.nav.flex-column.nav-tabs.h-100(role='tablist' aria-orientation='vertical')
-                              a#vert-tabs-home-tab.nav-link.active(data-toggle='pill' href='#vert-tabs-home' role='tab' aria-controls='vert-tabs-home' aria-selected='true') 1ኛ ክፍል
-                              a#vert-tabs-profile-tab.nav-link(data-toggle='pill' href='#vert-tabs-profile' role='tab' aria-controls='vert-tabs-profile' aria-selected='false') 2ኛ ክፍል
-                              a#vert-tabs-messages-tab.nav-link(data-toggle='pill' href='#vert-tabs-messages' role='tab' aria-controls='vert-tabs-messages' aria-selected='false') 3ኛ ክፍል
-                              a#vert-tabs-settings-tab.nav-link(data-toggle='pill' href='#vert-tabs-settings' role='tab' aria-controls='vert-tabs-settings' aria-selected='false') ክፍል ጨምር
+                              each grade in curriculum.grades
+                                a#vert-tabs-home-tab.nav-link.active(data-toggle='pill' href='#G#{grade.u_id}' role='tab' aria-controls='G#{grade.u_id}' aria-selected='true') #{grade.u_id}
+
+                                a#vert-tabs-home-tab.nav-link.active(data-toggle='pill' href='#vert-tabs-home' role='tab' aria-controls='vert-tabs-home' aria-selected='true') 1ኛ ክፍል
+                                a#vert-tabs-profile-tab.nav-link(data-toggle='pill' href='#vert-tabs-profile' role='tab' aria-controls='vert-tabs-profile' aria-selected='false') 2ኛ ክፍል
+                                a#vert-tabs-messages-tab.nav-link(data-toggle='pill' href='#vert-tabs-messages' role='tab' aria-controls='vert-tabs-messages' aria-selected='false') 3ኛ ክፍል
+                                a#vert-tabs-settings-tab.nav-link(data-toggle='pill' href='#vert-tabs-settings' role='tab' aria-controls='vert-tabs-settings' aria-selected='false') ክፍል ጨምር
                           .col-7.col-sm-9
                             #vert-tabs-tabContent.tab-content
                               #vert-tabs-home.tab-pane.text-left.fade.active.show(role='tabpanel' aria-labelledby='vert-tabs-home-tab')
@@ -167,14 +170,15 @@ html
       // /.control-sidebar
     // ./wrapper
     // jQuery
+    script(src='../../../../../../STB/ADMINLITE/plugins/jquery/jquery.min.js')
     // Bootstrap 4
-    script(src='/STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    script(src='../../../../../../STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
     // AdminLTE App
-    script(src='/STB/ADMINLITE/dist/js/adminlte.min.js')
+    script(src='../../../../../../STB/ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
-    script(src='/STB/ADMINLITE/dist/js/demo.js')
-    script(src="/STB/ADMINLITE/plugins/datatables/jquery.dataTables.js")
-    script(src="/STB/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js")
+    script(src='../../../../../../STB/ADMINLITE/dist/js/demo.js')
+    script(src="../../../../../../STB/ADMINLITE/plugins/datatables/jquery.dataTables.js")
+    script(src="../../../../../../STB/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js")
     
 
     script.
