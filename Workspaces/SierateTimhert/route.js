@@ -859,14 +859,14 @@ router.put('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mi
 
 router.post('/curriculum',mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
     curriculum_ModelAccessor.createCurriculum(req.session.userId,req.body.name, req.body.description,function(err, curriculum){
-
             url = "../SirateTimhert/SubDepartmentAdmin";
             res.redirect(url)
     })
 });
 
-router.post('/curriculum/:curriculum_id/grade/', mid.requireSignIn, mid.updateUserData,mid.requiresToBeSTKNS, function(req,res,next){
-    curriculum_ModelAccessor.createGrade(curriculum_id,req.body.created_By,req.body.gradeName, req.body.description,function(err,resp){
+//  mid.requireSignIn, mid.updateUserData,mid.requiresToBeSTKNS,
+router.post('/curriculum/:curriculum_id/grade/', function(req,res,next){
+    curriculum_ModelAccessor.createGrade(req.params.curriculum_id,req.body.created_By,req.body.gradeName, req.body.description,function(err,resp){
         if(err)
         {
             next(err);

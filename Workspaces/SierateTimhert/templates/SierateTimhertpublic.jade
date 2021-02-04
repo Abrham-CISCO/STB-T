@@ -90,55 +90,59 @@ html
                         .row
                           .col-5.col-sm-3
                             #vert-tabs-tab.nav.flex-column.nav-tabs.h-100(role='tablist' aria-orientation='vertical')
+                              
                               each grade in curriculum.grades
-                                a#vert-tabs-home-tab.nav-link.active(data-toggle='pill' href='#G#{grade.u_id}' role='tab' aria-controls='G#{grade.u_id}' aria-selected='true') #{grade.u_id}
+                                a.nav-link(id = "G#{grade._id}-tab" data-toggle='pill' href='#G#{grade._id}' role='tab' aria-controls='G#{grade._id}' aria-selected='false') #{grade.name}
 
-                                a#vert-tabs-home-tab.nav-link.active(data-toggle='pill' href='#vert-tabs-home' role='tab' aria-controls='vert-tabs-home' aria-selected='true') 1ኛ ክፍል
-                                a#vert-tabs-profile-tab.nav-link(data-toggle='pill' href='#vert-tabs-profile' role='tab' aria-controls='vert-tabs-profile' aria-selected='false') 2ኛ ክፍል
-                                a#vert-tabs-messages-tab.nav-link(data-toggle='pill' href='#vert-tabs-messages' role='tab' aria-controls='vert-tabs-messages' aria-selected='false') 3ኛ ክፍል
-                                a#vert-tabs-settings-tab.nav-link(data-toggle='pill' href='#vert-tabs-settings' role='tab' aria-controls='vert-tabs-settings' aria-selected='false') ክፍል ጨምር
+                              //- a#vert-tabs-home-tab.nav-link.active(data-toggle='pill' href='#vert-tabs-home' role='tab' aria-controls='vert-tabs-home' aria-selected='true') 1ኛ ክፍል
+                              //- a#vert-tabs-profile-tab.nav-link(data-toggle='pill' href='#vert-tabs-profile' role='tab' aria-controls='vert-tabs-profile' aria-selected='false') 2ኛ ክፍል
+                              //- a#vert-tabs-messages-tab.nav-link(data-toggle='pill' href='#vert-tabs-messages' role='tab' aria-controls='vert-tabs-messages' aria-selected='false') 3ኛ ክፍል
+                                //- a#vert-tabs-settings-tab.nav-link(data-toggle='pill' href='#vert-tabs-settings' role='tab' aria-controls='vert-tabs-settings' aria-selected='false') ክፍል ጨምር
                           .col-7.col-sm-9
                             #vert-tabs-tabContent.tab-content
-                              #vert-tabs-home.tab-pane.text-left.fade.active.show(role='tabpanel' aria-labelledby='vert-tabs-home-tab')
-                                h6 የተመደቡ ኮርሶች
-                                .row
-                                  .col-12.col-sm-6.col-md-4
-                                    .info-box.mb-3
-                                      span.info-box-icon.bg-success.elevation-1
-                                        i.fas.fa-book
-                                      .info-box-content
-                                        a(href='/STB/SirateTimhert/course/sebsabi/5fc51d0951af0102985e0c88/5fe86773912e3d1f649bfbdb') ትምህርተ ሀይማኖት
-                                  .col-12.col-sm-6.col-md-4
-                                    .info-box.mb-3
-                                      span.info-box-icon.bg-success.elevation-1
-                                        i.fas.fa-book
-                                      .info-box-content
-                                        a(href='/STB/SirateTimhert/course/sebsabi/5fc51d1151af0102985e0c89/5fe86773912e3d1f649bfbdb') ክርስቲያናዊ ስነ-ምግባር
-                                  .col-12.col-sm-6.col-md-4
-                                    .info-box.mb-3
-                                      span.info-box-icon.bg-success.elevation-1
-                                        i.fas.fa-book
-                                      .info-box-content
-                                        a(href='/STB/SirateTimhert/course/sebsabi/5fe2bb5c7088b934e8d28c00/5fe86773912e3d1f649bfbdb') ሚሥጥራተ ቤተክርስቲያን
-                                  .col-12.col-sm-6.col-md-4
-                                    .info-box.mb-3
-                                      span.info-box-icon.bg-success.elevation-1
-                                        i.fas.fa-book
-                                      .info-box-content
-                                        a(href='/STB/SirateTimhert/course/sebsabi/5fe867e2912e3d1f649bfc1e/5fe86773912e3d1f649bfbdb') የቤተክርስቲያን ታሪክ በአለም መድረክ
-                                  .col-12.col-sm-6.col-md-3
-                                    button.btn.btn-block.btn-primary.btn-lg(type='button' data-toggle='modal' data-target='#modal-course')
-                                      .fas.fa-plus.nav-plus
-                                    a.users-list-name(href='#') አዲስ ኮርስ ጨምር
-                                h6 የክፍሉ አላማ
-                                p
-                                  | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                              #vert-tabs-profile.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-profile-tab')
-                                | Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
-                              #vert-tabs-messages.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-messages-tab')
-                                | Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
-                              #vert-tabs-settings.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-settings-tab')
-                                | Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                              
+                              each grade in curriculum.grades
+                                div(id="G#{grade._id}" class="tab-pane fade" role='tabpanel' aria-labelledby='G#{grade._id}-tab')
+                                  h1 #{grade.name}
+                                  h6 የተመደቡ ኮርሶች 
+                                  .row
+                                    .col-12.col-sm-6.col-md-4
+                                      .info-box.mb-3
+                                        span.info-box-icon.bg-success.elevation-1
+                                          i.fas.fa-book
+                                        .info-box-content
+                                          a(href='/STB/SirateTimhert/course/sebsabi/5fc51d0951af0102985e0c88/5fe86773912e3d1f649bfbdb') ትምህርተ ሀይማኖት
+                                    .col-12.col-sm-6.col-md-4
+                                      .info-box.mb-3
+                                        span.info-box-icon.bg-success.elevation-1
+                                          i.fas.fa-book
+                                        .info-box-content
+                                          a(href='/STB/SirateTimhert/course/sebsabi/5fc51d1151af0102985e0c89/5fe86773912e3d1f649bfbdb') ክርስቲያናዊ ስነ-ምግባር
+                                    .col-12.col-sm-6.col-md-4
+                                      .info-box.mb-3
+                                        span.info-box-icon.bg-success.elevation-1
+                                          i.fas.fa-book
+                                        .info-box-content
+                                          a(href='/STB/SirateTimhert/course/sebsabi/5fe2bb5c7088b934e8d28c00/5fe86773912e3d1f649bfbdb') ሚሥጥራተ ቤተክርስቲያን
+                                    .col-12.col-sm-6.col-md-4
+                                      .info-box.mb-3
+                                        span.info-box-icon.bg-success.elevation-1
+                                          i.fas.fa-book
+                                        .info-box-content
+                                          a(href='/STB/SirateTimhert/course/sebsabi/5fe867e2912e3d1f649bfc1e/5fe86773912e3d1f649bfbdb') የቤተክርስቲያን ታሪክ በአለም መድረክ
+                                    .col-12.col-sm-6.col-md-3
+                                      button.btn.btn-block.btn-primary.btn-lg(type='button' data-toggle='modal' data-target='#modal-course')
+                                        .fas.fa-plus.nav-plus
+                                      a.users-list-name(href='#') አዲስ ኮርስ ጨምር
+                                  h6 የክፍሉ አላማ
+                                  p #{grade.description}
+                              
+                              //- #vert-tabs-profile.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-profile-tab')
+                              //-   | Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                              //- #vert-tabs-messages.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-messages-tab')
+                              //-   | Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                              //- #vert-tabs-settings.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-settings-tab')
+                              //-   | Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
 
 
                     // /.tab-content
