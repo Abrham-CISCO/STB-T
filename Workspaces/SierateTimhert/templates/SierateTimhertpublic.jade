@@ -104,36 +104,20 @@ html
                               each grade in curriculum.grades
                                 div(id="G#{grade._id}" class="tab-pane fade" role='tabpanel' aria-labelledby='G#{grade._id}-tab')
                                   h1 #{grade.name}
-                                  h6 የተመደቡ ኮርሶች 
+                                  h6 የተመደቡ ኮርሶች
                                   .row
+                                  each course in grade.courses 
                                     .col-12.col-sm-6.col-md-4
                                       .info-box.mb-3
                                         span.info-box-icon.bg-success.elevation-1
                                           i.fas.fa-book
                                         .info-box-content
                                           a(href='/STB/SirateTimhert/course/sebsabi/5fc51d0951af0102985e0c88/5fe86773912e3d1f649bfbdb') ትምህርተ ሀይማኖት
-                                    .col-12.col-sm-6.col-md-4
-                                      .info-box.mb-3
-                                        span.info-box-icon.bg-success.elevation-1
-                                          i.fas.fa-book
-                                        .info-box-content
-                                          a(href='/STB/SirateTimhert/course/sebsabi/5fc51d1151af0102985e0c89/5fe86773912e3d1f649bfbdb') ክርስቲያናዊ ስነ-ምግባር
-                                    .col-12.col-sm-6.col-md-4
-                                      .info-box.mb-3
-                                        span.info-box-icon.bg-success.elevation-1
-                                          i.fas.fa-book
-                                        .info-box-content
-                                          a(href='/STB/SirateTimhert/course/sebsabi/5fe2bb5c7088b934e8d28c00/5fe86773912e3d1f649bfbdb') ሚሥጥራተ ቤተክርስቲያን
-                                    .col-12.col-sm-6.col-md-4
-                                      .info-box.mb-3
-                                        span.info-box-icon.bg-success.elevation-1
-                                          i.fas.fa-book
-                                        .info-box-content
-                                          a(href='/STB/SirateTimhert/course/sebsabi/5fe867e2912e3d1f649bfc1e/5fe86773912e3d1f649bfbdb') የቤተክርስቲያን ታሪክ በአለም መድረክ
-                                    .col-12.col-sm-6.col-md-3
-                                      button.btn.btn-block.btn-primary.btn-lg(type='button' data-toggle='modal' data-target='#modal-course')
-                                        .fas.fa-plus.nav-plus
-                                      a.users-list-name(href='#') አዲስ ኮርስ ጨምር
+                                  .col-12.col-sm-6.col-md-3
+                                    button.btn.btn-block.btn-primary.btn-lg(type='button' data-toggle='modal' data-target='#modal-course')
+                                      .fas.fa-plus.nav-plus
+                                    a.users-list-name(href='#') አዲስ ኮርስ ጨምር
+                                  br
                                   h6 የክፍሉ አላማ
                                   p #{grade.description}
                               

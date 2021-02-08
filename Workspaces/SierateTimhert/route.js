@@ -878,6 +878,18 @@ router.post('/curriculum/:curriculum_id/grade/', function(req,res,next){
     })
 })
 
+router.post('/curriculum/:curriculum_id/:grade_id', function(req,res,next){
+    curriculum_ModelAccessor.addCourse(req.params.curriculum_id,req.params.grade_id, req.body.course_id,function(err,response){
+        if(err)
+        {
+            next(err);
+        }
+        else
+        {
+            res.json(response)
+        }
+    })
+})
 router.delete('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
 
 });
