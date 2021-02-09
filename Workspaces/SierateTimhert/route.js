@@ -873,7 +873,8 @@ router.post('/curriculum/:curriculum_id/grade/', function(req,res,next){
         }
         else
         {
-            res.json(resp)
+            var url="/STB/SirateTimhert/curriculum/" + req.params.curriculum_id;
+            res.redirect(url);
         }
     })
 })
