@@ -1,3 +1,4 @@
+const course_ModelAccessor = require('./courseModelAccessor');
 var curriculum = require("./curriculum")
 
 const allCurriculums = (callback) => {
@@ -81,6 +82,68 @@ const addCourse = (curriculum_id, grade_id,course_id, callback) => {
     })
 }
 
+const notAddedCoursesPerCurriculum = (curriculumId, callback) => {
+    var courseAdded = false;
+    var NAcourses = []; NAcourses.pop(), counter=0;
+        curriculum.findById(curriculumId).then(singleCurriculum => {
+            singleCurriculum.grades.forEach(grade => {
+                    course_ModelAccessor.allCourses(function(err, allCourses){
+                        console.log(allCourses);
+                        for(var i =0; i<allCourses.length;i++)
+                        {
+                            singleCourse = allCourses[i];
+                                grade.courses.forEach(gradeCourse => {
+                                    if(singleCourse._id == gradeCourse.course_id)
+                                    {
+                                        courseAdded = true;
+                                    }
+                                });    
+                                if(!courseAdded)
+                                {
+                                    NAcourses.push({grade_Id:grade._id,course_id:singleCourse._id, name:singleCourse.name})
+                                }
+                                courseAdded = false;
+                                counter++;
+                                if(singleCurriculum.grades.length * allCourses.length  == counter) 
+                                {callback(null,NAcourses); break;};
+                        }
+                    })   
+            });
+        }).catch((err)=>callback(err))    
+} 
+
+// create a function that displays a course that is not added to a grade
+// const notAddedCourses = (curriculumId, gradeId, callback) => {
+//     var courseAdded = false;
+//     var NAcourses = []; NAcourses.pop();
+//         curriculum.findById(curriculumId).then(singleCurriculum => {
+//             singleCurriculum.grades.forEach(grade => {
+//                 // if(grade._id == gradeId)
+//                 // {
+//                     course_ModelAccessor.allCourses(function(err, allCourses){
+//                         console.log("allCourses",allCourses)
+//                         allCourses.forEach(singleCourse=>{
+//                             grade.courses.forEach(gradeCourse => {
+//                                 if(singleCourse._id == gradeCourse.course_id)
+//                                 {
+//                                     courseAdded = true;
+//                                 }
+//                             });    
+//                             if(!courseAdded)
+//                             {
+//                                 NAcourses.push({grade_Id:"grade._id",course_id:singleCourse._id, name:singleCourse.name})
+//                             }
+//                             courseAdded = false;
+//                         })
+//                         callback(null,NAcourses);
+//                     })   
+//                 // }
+//             });
+//         }).catch((err)=>callback(err))
+// }
+
+exports.notAddedCoursesPerCurriculum = notAddedCoursesPerCurriculum;
+// exports.notAddedCourses = notAddedCourses;
 exports.addCourse = addCourse;
 exports.createGrade = createGrade;
 exports.curriculumsSmallDetail = curriculumsSmallDetail;
@@ -88,3 +151,4 @@ exports.gradeDetail = gradeDetail;
 exports.curriculumDetail = curriculumDetail;
 exports.allCurriculums = allCurriculums;
 exports.createCurriculum = createCurriculum;
+

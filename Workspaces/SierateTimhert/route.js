@@ -10,6 +10,7 @@ var curriculum_ModelAccessor = require('./models/curriculumModelAccessor');
 var course_ModelAccessor = require('./models/courseModelAccessor');
 
 const course = require('./models/course');
+const curriculum = require('./models/curriculum');
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -821,7 +822,8 @@ router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, mid.req
 
 // Public users
 router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, function(req,res,next){
-    curriculum_ModelAccessor.curriculumDetail(req.params.curriculumId,function(err, curriculum){
+    var curriculumId = req.params.curriculumId;
+    curriculum_ModelAccessor.curriculumDetail(curriculumId,function(err, curriculum){
         if(err)
         {
             next(err)
@@ -832,7 +834,18 @@ router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, fu
                 req.session.curriculum = curriculum;
                 req.session.curriculum.created_By = user.name;
                 // count courses
-                return res.render("Workspaces/SierateTimhert/templates/SierateTimhertpublic.jade",req.session)    
+                curriculum_ModelAccessor.notAddedCoursesPerCurriculum(curriculumId, function(err, unregisteredCoursesPerGrade){
+                    if(err)
+                    {
+                        next(err);
+                    }
+                    else
+                    {
+                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;
+                        console.log("req.session.unregisteredCoursesPerGrade", req.session.unregisteredCoursesPerGrade);
+                        return res.render("Workspaces/SierateTimhert/templates/SierateTimhertpublic.jade",req.session)  
+                    }
+                })   
             });
         }
     })
@@ -873,10 +886,28 @@ router.post('/curriculum/:curriculum_id/grade/', function(req,res,next){
         }
         else
         {
-            var url="/STB/SirateTimhert/curriculum/" + req.params.curriculum_id;
-            res.redirect(url);
+            curriculum_ModelAccessor.notAddedCourses("60217b11fc167410cc020a99", "6027f3b670efbc1c6451bd6d", function(err, response){
+                var url="/STB/SirateTimhert/curriculum/" + req.params.curriculum_id;
+                req.session.NAcourses = response;
+                res.redirect(url);
+                // res.json(response);
+            }) 
         }
     })
+})
+
+router.get('/test/', function(req,res,next){
+    // res.send("Hi")
+    curriculum_ModelAccessor.notAddedCoursesPerCurriculum("60183fac5541031b04eef866", function(err, response){
+        if(err)
+        {
+            next(err);
+        }
+        else
+        {
+            res.json(response)
+        }
+    }) 
 })
 
 router.post('/curriculum/:curriculum_id/:grade_id', function(req,res,next){
