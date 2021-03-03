@@ -100,7 +100,8 @@ const notAddedCoursesPerCurriculum = (curriculumId, callback) => {
                                 });    
                                 if(!courseAdded)
                                 {
-                                    NAcourses.push({grade_Id:grade._id,course_id:singleCourse._id, name:singleCourse.name})
+                                    if(grade._id == null) grade._id = "";
+                                    NAcourses.push({grade_id:grade._id,course_id:singleCourse._id, name:singleCourse.name})
                                 }
                                 courseAdded = false;
                                 counter++;
