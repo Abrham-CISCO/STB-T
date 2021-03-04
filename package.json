@@ -29,7 +29,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "pdfkit": "^0.11.0",
-    "pug": "^2.0.0-beta2",
+    "pug": "^3.0.1",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
