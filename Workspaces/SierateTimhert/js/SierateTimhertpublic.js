@@ -1,38 +1,43 @@
 function addCourseToGrade(curriculumId, gradeId)
 {
-// The function of this function is to construct an array that contain list of selected 
-// courses (identified by course_Id), and send it to the server along with the curriculum Id, control_ID 
-// and grade ID. the back end logic will then add the courses and redirect the front end to display 
-// the newly added courses.
+  // The function of this function is to construct an array that contain list of selected 
+  // courses (identified by course_Id), and send it to the server along with the curriculum Id, control_ID 
+  // and grade ID. the back end logic will then add the courses and redirect the front end to display 
+  // the newly added courses.
 
-//The control ID is used to identify the source of the data
-//The control ID can be gradeId + "_CTRL"
+  //The control ID is used to identify the source of the data
+  //The control ID can be gradeId + "_CTRL"
 
-var socket = io('/curriculum');
-var courses = [];
-courses.pop();
-var selectionConut;
-var gradeCount = document.getElementsByClassName("select2-selection__rendered").length;
-for(var i = 0; i < gradeCount; i++)
-{
-  selectionConut = document.getElementsByClassName("select2-selection__rendered")[i].childNodes.length;
-  if(selectionConut > 1)
+  var socket = io('/curriculum');
+  var courses = [];
+  var fullString, gradeName, courseName, splitted;
+  courses.pop();
+  var selectionConut;
+  var gradeCount = document.getElementsByClassName("select2-selection__rendered").length;
+  for(var i = 0; i < gradeCount; i++)
   {
-    for(var j = 0; (j<selectionConut); j++)
+    selectionConut = document.getElementsByClassName("select2-selection__rendered")[i].childNodes.length;
+    if(selectionConut > 1)
     {
-        courses.push(document.getElementsByClassName("select2-selection__rendered")[i].childNodes[j].title)
+      for(var j = 0; (j<selectionConut); j++)
+      {
+        fullString = document.getElementsByClassName("select2-selection__rendered")[i].childNodes[j].title.toString();
+        if(fullString != "")
+        {
+          splitted = fullString.split(":");
+          gradeName = splitted[0]; 
+          courseName = splitted[1];
+          courses.push(
+            {
+              gradeName:gradeName,
+              courseName:courseName
+            })
+        }
+      }
     }
-    console.log(courses);
   }
 }
-// .forEach(node => {
-//   selectionConut = node.childNodes.length - 1;
-//   console.log(selectionConut);
-// });
 
-// [0].childNodes.length - 1;
-//   alert("You have selected " + control_ID + " " + selectionConut + " items");
-}
 // function addCourse(curriculumId, gradeId)
 // {
 //     var socket = io('/gubaye');
