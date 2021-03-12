@@ -19,6 +19,7 @@
   var UserModel_Acc = require('./Account/Models/user_model_accessor')
   var classRoom_ModelAccessor = require('./Workspaces/SierateTimhert/models/classRoom_ModelAcessor');
   var Course_ModelAccessor = require('./Workspaces/SierateTimhert/models/courseModelAccessor');
+  var curriculum_ModelAccessor = require('./Workspaces/SierateTimhert/models/curriculumModelAccessor');
   // Routes
   // Accounts
     var Accounts = require('./Account/route')
@@ -151,7 +152,17 @@ app.use(passport.session());
         });
       });
     });
-  
+    var curriculum = io.of('/curriculum')
+    curriculum.on('connection', (socket)=>{
+      socket.on('addCourse',function(curriculumId, gradeId, courses){
+        curriculum_ModelAccessor.addCourseToGrade(curriculumId,gradeId,courses,function(err, response){
+          if(response)
+          {          
+            socket.emit('addCourse',"Successful")
+          }
+        })
+      })
+    })
     var course = io.of('/course')
     course.on('connection', (socket)=>
     {

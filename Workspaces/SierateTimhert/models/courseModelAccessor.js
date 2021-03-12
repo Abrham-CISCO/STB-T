@@ -101,15 +101,10 @@ const courseIds = (nameArray, callback) => {
         $or: [
             ]
         }
-    
-
     for(var i = 0; i<nameArray.length; i++)
     {
         searchObj.$or.push({name:nameArray[i]})
     }
-
-
-
     course.find(searchObj).then((courses)=>{
         var idOnly = []; 
         idOnly.pop();

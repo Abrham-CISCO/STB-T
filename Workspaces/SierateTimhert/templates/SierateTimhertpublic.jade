@@ -106,13 +106,19 @@ html
                                   h1 #{grade.name}
                                   h6 የተመደቡ ኮርሶች
                                   .row
-                                  each course in grade.courses 
-                                    .col-12.col-sm-6.col-md-4
-                                      .info-box.mb-3
-                                        span.info-box-icon.bg-success.elevation-1
-                                          i.fas.fa-book
-                                        .info-box-content
-                                          a(href='/STB/SirateTimhert/course/sebsabi/5fc51d0951af0102985e0c88/5fe86773912e3d1f649bfbdb') ትምህርተ ሀይማኖት
+                                    each course in grade.courses 
+                                      .col-12.col-sm-6.col-md-4
+                                        .info-box.mb-3
+                                          span.info-box-icon.bg-success.elevation-1
+                                            i.fas.fa-book
+                                          .info-box-content
+                                            a(href='/STB/SirateTimhert/course/sebsabi/5fc51d0951af0102985e0c88/5fe86773912e3d1f649bfbdb') #{course.course_name}
+                                            if(course.activated)
+                                              a(href="/STB/SirateTimhert/curriculum/#{curriculum._id}/#{grade._id}/#{course.course_id}")                                  
+                                                button(type='button', class="btn btn-block btn-danger btn-xs") Dectivate
+                                            if(!course.activated)
+                                              a(href="/STB/SirateTimhert/curriculum/#{curriculum._id}/#{grade._id}/#{course.course_id}")                                  
+                                                button(type='button', class="btn btn-block btn-success btn-xs") Activate
                                   .col-12.col-sm-6.col-md-3
                                     button.btn.btn-block.btn-primary.btn-lg(type='button' data-toggle='modal' data-target='#modal-#{grade._id}')
                                       .fas.fa-plus.nav-plus

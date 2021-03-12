@@ -1,10 +1,12 @@
-function addCourseToGrade(curriculumId, gradeId)
+const { countOfTKMembers } = require("../../../Account/Models/user_model_accessor");
+const curriculum = require("../models/curriculum");
+
+function addCourseToGrade(curriculumId,gradeId)
 {
   // The function of this function is to construct an array that contain list of selected 
   // courses (identified by course_Id), and send it to the server along with the curriculum Id, control_ID 
   // and grade ID. the back end logic will then add the courses and redirect the front end to display 
   // the newly added courses.
-
   //The control ID is used to identify the source of the data
   //The control ID can be gradeId + "_CTRL"
 
@@ -24,7 +26,7 @@ function addCourseToGrade(curriculumId, gradeId)
         fullString = document.getElementsByClassName("select2-selection__rendered")[i].childNodes[j].title.toString();
         if(fullString != "")
         {
-          splitted = fullString.split(":");
+          splitted = fullString.split(" : ");
           gradeName = splitted[0]; 
           courseName = splitted[1];
           courses.push(
@@ -36,6 +38,10 @@ function addCourseToGrade(curriculumId, gradeId)
       }
     }
   }
+  socket.emit('addCourse',curriculumId,gradeId,courses);
+  socket.on('addCourse',function(Confirmation){
+    window.location.href = "/STB/SirateTimhert/curriculum/"+curriculumId;
+  });
 }
 
 // function addCourse(curriculumId, gradeId)
@@ -50,7 +56,4 @@ function addCourseToGrade(curriculumId, gradeId)
         
 //     }
 //     socket.emit('AddGubayeCourses',gubayeID,courses);
-//   socket.on('AddGubayeCourses',function(Confirmation){
-//     window.location.href = "/STB/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeID;
-//   });
 // }

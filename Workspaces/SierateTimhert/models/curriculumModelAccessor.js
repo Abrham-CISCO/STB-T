@@ -1,3 +1,4 @@
+const { response } = require('express');
 const course_ModelAccessor = require('./courseModelAccessor');
 var curriculum = require("./curriculum")
 
@@ -20,11 +21,34 @@ const createCurriculum = (created_By,curriculumName, description, callback) => {
 
 const curriculumDetail = (curriculumId, callback) => {
     curriculum.findById(curriculumId)
-    .populate('curriculums.created_By').then((singleCurriculum)=>{
-        console.log("singleCurriculum",singleCurriculum)
+    .then((singleCurriculum)=>{
         callback(null,singleCurriculum)
     }).catch((err)=>{
         callback(err,false);
+    })
+}
+
+const detailedCurriculumDetail = (curriculumId, callback) => {
+    course_ModelAccessor.allCourses(function(err,allCourses){
+        if(!err && allCourses)
+        {
+            curriculum.findById(curriculumId)
+            .then((singleCurriculum)=>{
+                singleCurriculum.grades.forEach(grade=>{
+                    grade.courses.forEach(course => {
+                        allCourses.forEach(courseWithDetail=>{
+                            if(course.course_id == courseWithDetail._id)
+                            {
+                                course.course_name=courseWithDetail.name;
+                            }
+                        })
+                    })
+                })
+                callback(null,singleCurriculum);
+            }).catch((err)=>{
+                callback(err,false);
+            })
+        }
     })
 }
 
@@ -113,38 +137,56 @@ const notAddedCoursesPerCurriculum = (curriculumId, callback) => {
         }).catch((err)=>callback(err))    
 } 
 
-// create a function that displays a course that is not added to a grade
-// const notAddedCourses = (curriculumId, gradeId, callback) => {
-//     var courseAdded = false;
-//     var NAcourses = []; NAcourses.pop();
-//         curriculum.findById(curriculumId).then(singleCurriculum => {
-//             singleCurriculum.grades.forEach(grade => {
-//                 // if(grade._id == gradeId)
-//                 // {
-//                     course_ModelAccessor.allCourses(function(err, allCourses){
-//                         console.log("allCourses",allCourses)
-//                         allCourses.forEach(singleCourse=>{
-//                             grade.courses.forEach(gradeCourse => {
-//                                 if(singleCourse._id == gradeCourse.course_id)
-//                                 {
-//                                     courseAdded = true;
-//                                 }
-//                             });    
-//                             if(!courseAdded)
-//                             {
-//                                 NAcourses.push({grade_Id:"grade._id",course_id:singleCourse._id, name:singleCourse.name})
-//                             }
-//                             courseAdded = false;
-//                         })
-//                         callback(null,NAcourses);
-//                     })   
-//                 // }
-//             });
-//         }).catch((err)=>callback(err))
-// }
+//create a function that adds a course to a grade of a specific curriculum
+const addCourseToGrade = (curriculumId, gradeId, courses, callback) => {
+    //Extract the id only from the courses array
+    var courses_name = [];
+    courses_name.pop();
+    courses.forEach(course=>{
+        courses_name.push(course.courseName)
+    })
+    curriculum.findById(curriculumId).then(singleCurriculum => {
+        singleCurriculum.grades.forEach(grade=>{
+            // Convert course name to id
+            if(grade._id == gradeId)
+            {
+                course_ModelAccessor.courseIds(courses_name,function(err, detail)
+                {
+                    detail.forEach(courseId=>{
+                        grade.courses.push({
+                            course_id:courseId,
+                            order:0,
+                        });    
+                    })
+                    singleCurriculum.save().then(resp => {
+                        callback(null,singleCurriculum)
+                    })
+                })
+            }
+        })
+    }).catch(err=>callback(err,false))
+} 
+const changeCourseStatus = (curriculumId, gradeId, course_id, callback) => {
+    curriculum.findById(curriculumId).then(singleCurriculum=>{
+        singleCurriculum.grades.forEach(grade=>{
+            if(grade._id == gradeId)
+            {
+                grade.courses.forEach(course=>{
+                    if(course.course_id = course_id)
+                    {
+                        course.activated = !course.activated;
+                        singleCurriculum.save();
+                        callback(null, singleCurriculum);
+                    }
+                })
+            }
+        })
+    })
+}
 
+exports.changeCourseStatus = changeCourseStatus;
+exports.addCourseToGrade = addCourseToGrade;
 exports.notAddedCoursesPerCurriculum = notAddedCoursesPerCurriculum;
-// exports.notAddedCourses = notAddedCourses;
 exports.addCourse = addCourse;
 exports.createGrade = createGrade;
 exports.curriculumsSmallDetail = curriculumsSmallDetail;
@@ -152,4 +194,4 @@ exports.gradeDetail = gradeDetail;
 exports.curriculumDetail = curriculumDetail;
 exports.allCurriculums = allCurriculums;
 exports.createCurriculum = createCurriculum;
-
+exports.detailedCurriculumDetail = detailedCurriculumDetail;

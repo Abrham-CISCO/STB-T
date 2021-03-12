@@ -823,7 +823,7 @@ router.get('/SubDepartmentMember', mid.requireSignIn,mid.updateUserData, mid.req
 // Public users
 router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, function(req,res,next){
     var curriculumId = req.params.curriculumId;
-    curriculum_ModelAccessor.curriculumDetail(curriculumId,function(err, curriculum){
+    curriculum_ModelAccessor.detailedCurriculumDetail(curriculumId,function(err, curriculum){
         if(err)
         {
             next(err)
@@ -841,7 +841,9 @@ router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, fu
                     }
                     else
                     {
-                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;
+                        //use mongoose populate to pupulate course details on to each courses before sending it to 
+                        //the front end
+                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                        
                         console.log("req.session.unregisteredCoursesPerGrade", req.session.unregisteredCoursesPerGrade);
                         return res.render("Workspaces/SierateTimhert/templates/SierateTimhertpublic.jade",req.session)  
                     }
@@ -898,16 +900,9 @@ router.post('/curriculum/:curriculum_id/grade/', function(req,res,next){
 
 router.get('/test/', function(req,res,next){
     // res.send("Hi")
-    curriculum_ModelAccessor.notAddedCoursesPerCurriculum("60183fac5541031b04eef866", function(err, response){
-        if(err)
-        {
-            next(err);
-        }
-        else
-        {
-            res.json(response)
-        }
-    }) 
+    curriculum_ModelAccessor.detailedCurriculumDetail("60217b11fc167410cc020a99",function(err,response){
+        res.json(response);
+    })
 })
 
 router.post('/curriculum/:curriculum_id/:grade_id', function(req,res,next){
@@ -922,6 +917,13 @@ router.post('/curriculum/:curriculum_id/:grade_id', function(req,res,next){
         }
     })
 })
+
+router.get('/curriculum/:curriculumId/:grade_id/:course_id',mid.requireSignIn,mid.updateUserData, function(req,res,next){
+    curriculum_ModelAccessor.changeCourseStatus(req.params.curriculumId,req.params.grade_id,req.params.course_id,function(err,response){
+        res.json(response);     
+    })
+});
+
 router.delete('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
 
 });
