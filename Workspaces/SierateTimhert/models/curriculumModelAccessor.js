@@ -184,6 +184,19 @@ const changeCourseStatus = (curriculumId, gradeId, course_id, callback) => {
     })
 }
 
+const editGrade = (curriculumId, gradeId, gName, gDescription, callback) => {
+    curriculum.findById(curriculumId).then(singleCurriculum=>{
+        singleCurriculum.grades.forEach(grade=>{
+            if(grade._id == gradeId)
+            {
+                grade.name = gName
+                grade.description = gDescription;
+                singleCurriculum.save().then(resp=>callback(null,resp),err=>callback(err,false));
+            }
+    })
+})}
+
+exports.editGrade = editGrade;
 exports.changeCourseStatus = changeCourseStatus;
 exports.addCourseToGrade = addCourseToGrade;
 exports.notAddedCoursesPerCurriculum = notAddedCoursesPerCurriculum;

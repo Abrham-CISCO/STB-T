@@ -855,17 +855,101 @@ router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, fu
 
 // Department Admin
 router.get('/DepartmentAdmin/curriculum/:curriculumId', mid.requireSignIn, mid.requiresToBeLeader, mid.updateUserData, function(req,res,next){
-
+    var curriculumId = req.params.curriculumId;
+    curriculum_ModelAccessor.detailedCurriculumDetail(curriculumId,function(err, curriculum){
+        if(err)
+        {
+            next(err)
+        }
+        else
+        {
+            UserModelAccessor.userData(curriculum.created_By,function(err,user){
+                req.session.curriculum = curriculum;
+                req.session.curriculum.created_By = user.name;
+                // count courses
+                curriculum_ModelAccessor.notAddedCoursesPerCurriculum(curriculumId, function(err, unregisteredCoursesPerGrade){
+                    if(err)
+                    {
+                        next(err);
+                    }
+                    else
+                    {
+                        //use mongoose populate to pupulate course details on to each courses before sending it to 
+                        //the front end
+                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                        
+                        console.log("req.session.unregisteredCoursesPerGrade", req.session.unregisteredCoursesPerGrade);
+                        return res.render("Workspaces/SierateTimhert/templates/SierateTimhertTDA.jade",req.session)  
+                    }
+                })   
+            });
+        }
+    })
 });
 
 // Sub Department Admin
 router.get('/SubDepartmentAdmin/curriculum/:curriculumId', mid.requireSignIn, mid.requiresToBeSTKNS, mid.updateUserData, function(req,res,next){
-
+    var curriculumId = req.params.curriculumId;
+    curriculum_ModelAccessor.detailedCurriculumDetail(curriculumId,function(err, curriculum){
+        if(err)
+        {
+            next(err)
+        }
+        else
+        {
+            UserModelAccessor.userData(curriculum.created_By,function(err,user){
+                req.session.curriculum = curriculum;
+                req.session.curriculum.created_By = user.name;
+                // count courses
+                curriculum_ModelAccessor.notAddedCoursesPerCurriculum(curriculumId, function(err, unregisteredCoursesPerGrade){
+                    if(err)
+                    {
+                        next(err);
+                    }
+                    else
+                    {
+                        //use mongoose populate to pupulate course details on to each courses before sending it to 
+                        //the front end
+                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                        
+                        console.log("req.session.unregisteredCoursesPerGrade", req.session.unregisteredCoursesPerGrade);
+                        return res.render("Workspaces/SierateTimhert/templates/SierateTimhertTSDA.jade",req.session)  
+                    }
+                })   
+            });
+        }
+    })
 });
 
 // Sub Department Member
 router.get('/SubDepartmentMember/curriculum/:curriculumId', mid.requireSignIn,mid.requiresToBeSTKNA, mid.updateUserData, function(req,res,next){
-
+    var curriculumId = req.params.curriculumId;
+    curriculum_ModelAccessor.detailedCurriculumDetail(curriculumId,function(err, curriculum){
+        if(err)
+        {
+            next(err)
+        }
+        else
+        {
+            UserModelAccessor.userData(curriculum.created_By,function(err,user){
+                req.session.curriculum = curriculum;
+                req.session.curriculum.created_By = user.name;
+                // count courses
+                curriculum_ModelAccessor.notAddedCoursesPerCurriculum(curriculumId, function(err, unregisteredCoursesPerGrade){
+                    if(err)
+                    {
+                        next(err);
+                    }
+                    else
+                    {
+                        //use mongoose populate to pupulate course details on to each courses before sending it to 
+                        //the front end
+                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                        
+                        console.log("req.session.unregisteredCoursesPerGrade", req.session.unregisteredCoursesPerGrade);
+                        return res.render("Workspaces/SierateTimhert/templates/SierateTimhertTSDM.jade",req.session)  
+                    }
+                })   
+            });
+        }
+    })
 });
 
 router.put('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, mid.requiresToBeSTKNS, function(req,res,next){
@@ -894,6 +978,19 @@ router.post('/curriculum/:curriculum_id/grade/', function(req,res,next){
                 res.redirect(url);
                 // res.json(response);
             }) 
+        }
+    })
+})
+
+router.post('/curriculum/:curriculum_id/edit_grade/', function(req,res,next){
+    curriculum_ModelAccessor.editGrade(req.params.curriculum_id, req.body.grade_id, req.body.gname, req.body.gdescription,function(err,resp){
+        if(err)
+        {
+            next(err);
+        }
+        else
+        {
+            res.json(resp);
         }
     })
 })
