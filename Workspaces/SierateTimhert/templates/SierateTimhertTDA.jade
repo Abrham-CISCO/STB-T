@@ -94,19 +94,16 @@ html
                               each grade in curriculum.grades
                                 a.nav-link(id = "G#{grade._id}-tab" data-toggle='pill' href='#G#{grade._id}' role='tab' aria-controls='G#{grade._id}' aria-selected='false') #{grade.name}
 
-                              //- a#vert-tabs-home-tab.nav-link.active(data-toggle='pill' href='#vert-tabs-home' role='tab' aria-controls='vert-tabs-home' aria-selected='true') 1ኛ ክፍል
-                              a#vert-tabs-profile-tab.nav-link(data-toggle='pill' href='#vert-tabs-profile' role='tab' aria-controls='vert-tabs-profile' aria-selected='false') + ክፍል ጨምር
-                              //- a#vert-tabs-messages-tab.nav-link(data-toggle='pill' href='#vert-tabs-messages' role='tab' aria-controls='vert-tabs-messages' aria-selected='false') 3ኛ ክፍል
-                                //- a#vert-tabs-settings-tab.nav-link(data-toggle='pill' href='#vert-tabs-settings' role='tab' aria-controls='vert-tabs-settings' aria-selected='false') ክፍል ጨምር
-                          .col-7.col-sm-9
+                           .col-7.col-sm-9
                             #vert-tabs-tabContent.tab-content
                               
                               each grade in curriculum.grades
                                 div(id="G#{grade._id}" class="tab-pane fade" role='tabpanel' aria-labelledby='G#{grade._id}-tab')
                                   h1 #{grade.name}                                  
-                                  button(type='button', class="btn btn-block btn-primary btn-xs" style = "width:12%" data-toggle='modal' data-target='#modal-Edit-#{grade._id}') Edit grade
                                   h6 የተመደቡ ኮርሶች
                                   .row
+                                    if(!grade.courses.length > 0)
+                                        h6 ምንም የተመደቡ ኮርሶች የሉም።
                                     each course in grade.courses 
                                       .col-12.col-sm-6.col-md-4
                                         .info-box.mb-3
@@ -114,82 +111,11 @@ html
                                             i.fas.fa-book
                                           .info-box-content
                                             a(href='/STB/SirateTimhert/course/sebsabi/5fc51d0951af0102985e0c88/5fe86773912e3d1f649bfbdb') #{course.course_name}
-                                            if(course.activated)
-                                              a(href="/STB/SirateTimhert/curriculum/#{curriculum._id}/#{grade._id}/#{course.course_id}")                                  
-                                                button(type='button', class="btn btn-block btn-danger btn-xs") Dectivate
-                                            if(!course.activated)
-                                              a(href="/STB/SirateTimhert/curriculum/#{curriculum._id}/#{grade._id}/#{course.course_id}")                                  
-                                                button(type='button', class="btn btn-block btn-success btn-xs") Activate
-                                  .col-12.col-sm-6.col-md-3
-                                    button.btn.btn-block.btn-primary.btn-lg(type='button' data-toggle='modal' data-target='#modal-#{grade._id}')
-                                      .fas.fa-plus.nav-plus
-                                    a.users-list-name(href='#') አዲስ ኮርስ ጨምር
                                   br
                                   h6 የክፍሉ አላማ
                                   p #{grade.description}
                               
-                              #vert-tabs-profile.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-profile-tab')
-                                form(action="/STB/SirateTimhert/curriculum/#{curriculum._id}/grade" method="post")
-                                  .card-body
-                                    .form-group
-                                      label(for='exampleInputEmail1') የክፍሉ ስም
-                                      input.form-control(type='text' placeholder='የክፍሉን ስም እዚህ ይጻፉ።' name="gradeName")
-                                    .form-group
-                                      label ዝርዝር
-                                      textarea.form-control(rows='3' placeholder='ትንሽ ማብራሪያ ስለ ክፍሉ እዚህ ይጻፉ።' name="description")
-                                    button.btn.btn-primary(type='submit') ፍጠር
-                                  //- /curriculum/:curriculum_id/:grade_id
-                              //- #vert-tabs-messages.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-messages-tab')
-                              //-   | Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
-                              //- #vert-tabs-settings.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-settings-tab')
-                              //-   | Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
-                              //-                 -Edit-
-                      each grade in curriculum.grades
-                        .modal.fade(style='display: none;', aria-hidden='true' id="modal-#{grade._id}")
-                          .modal-dialog(class="modal-#{grade._id}")
-                            .modal-content
-                              .modal-header
-                                h4.modal-title አዲስ ኮርስ ለመጨመር ይምረጡ
-                                button.close(type='button', data-dismiss='modal', aria-label='Close')
-                                  span(aria-hidden='true') ×
-                              .modal-body
-                                .form-group(data-select2-id='39')
-                                  label ወደ ክፍሉ ለማስገባት የሚፈልጉትን ኮርስ ይምረጡና ሲጨርስሱ ጨምር የሚለውን በተን ይጫኑ                                
-                                  select.select2.select2-hidden-accessible(multiple='', data-placeholder='ኮርስ ይምረጡ', style='width: 100%;', data-select2-id='#{grade._id}', class='C_#{grade._id}', tabindex='-1', aria-hidden='true')
-                                    each gradeCoursePair in unregisteredCoursesPerGrade 
-                                      if(gradeCoursePair.grade_id.toString() == grade._id.toString())
-                                        option(data-select2-id='#{gradeCoursePair.course_id}_#{grade._id}') #{grade.name} : #{gradeCoursePair.name}
-                              .modal-footer.justify-content-between
-                                button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ 
-                                button.btn.btn-primary(type='button' onclick="addCourseToGrade('#{curriculum._id}','#{grade._id}');") ጨምር
-                      each grade in curriculum.grades
-                        .modal.fade(style='display: none;', aria-hidden='true' id="modal-Edit-#{grade._id}")
-                          .modal-dialog(class="modal-Edit-#{grade._id}")
-                            .modal-content
-                              .modal-header
-                                h4.modal-title Edit Course
-                                button.close(type='button', data-dismiss='modal', aria-label='Close')
-                                  span(aria-hidden='true') ×
-                              .modal-body
-                                form(action="/STB/SirateTimhert/curriculum/#{curriculum._id}/edit_grade" method="post")
-                                  .card-body
-                                    .form-group
-                                      label(for='exampleInputEmail1') የክፍሉ ስም
-                                      input.form-control(type='text' value='#{grade.name}' name="gname")
-                                      input(type="hidden" name="grade_id" value="#{grade._id}")
-                                    .form-group
-                                      label ዝርዝር
-                                      textarea.form-control(rows='3' name="gdescription") #{grade.description}
-                                      button.btn.btn-primary(type='submit') መዝግብ
-                       // /.modal-dialog
-                    // /.tab-content
-                  // /.card-body
-                // /.nav-tabs-custom
-              // /.col
-            // /.row
-          // /.container-fluid
-        // Main content
-        section.content
+          section.content
           .container-fluid
           // /.container-fluid
         // /.content

@@ -43,17 +43,3 @@ function addCourseToGrade(curriculumId,gradeId)
     window.location.href = "/STB/SirateTimhert/curriculum/"+curriculumId;
   });
 }
-
-// function addCourse(curriculumId, gradeId)
-// {
-//     var socket = io('/gubaye');
-//     var courses = [];
-//     courses.pop();
-//     var selectionConut = document.getElementsByClassName("select2-selection__rendered")[1].childNodes.length - 1;
-//     for(var i = 0; (i<selectionConut); i++)
-//     {
-//         courses.push(document.getElementsByClassName("select2-selection__rendered")[1].childNodes[i].title)
-        
-//     }
-//     socket.emit('AddGubayeCourses',gubayeID,courses);
-// }
