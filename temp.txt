@@ -33,3 +33,5 @@ db.curriculums.update({_id:ObjectId("60183fac5541031b04eef866")},{$set:{
 
     ]
     }})
+
+db.curriculums.update({_id:ObjectId("60183fac5541031b04eef866")},{$set:{grades : []}})

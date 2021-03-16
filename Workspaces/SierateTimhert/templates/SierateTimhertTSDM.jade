@@ -102,7 +102,7 @@ html
                                   h1 #{grade.name}                                  
                                   h6 የተመደቡ ኮርሶች
                                   .row
-                                    if(!grade.courses.length > 0)
+                                    if(grade.courses.length == 0)
                                         h6 ምንም የተመደቡ ኮርሶች የሉም።
                                     each course in grade.courses 
                                       .col-12.col-sm-6.col-md-4
@@ -110,7 +110,11 @@ html
                                           span.info-box-icon.bg-success.elevation-1
                                             i.fas.fa-book
                                           .info-box-content
-                                            a(href='/STB/SirateTimhert/course/sebsabi/5fc51d0951af0102985e0c88/5fe86773912e3d1f649bfbdb') #{course.course_name}
+                                            a(href='/STB/SirateTimhert/course/sebsabi/#{course.course_id}') #{course.course_name}
+                                          if(course.activated)
+                                            p Active
+                                          if(!course.activated)
+                                            p Non active
                                   br
                                   h6 የክፍሉ አላማ
                                   p #{grade.description}

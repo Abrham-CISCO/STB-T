@@ -113,7 +113,7 @@ html
                                           span.info-box-icon.bg-success.elevation-1
                                             i.fas.fa-book
                                           .info-box-content
-                                            a(href='/STB/SirateTimhert/course/sebsabi/5fc51d0951af0102985e0c88/5fe86773912e3d1f649bfbdb') #{course.course_name}
+                                            a(href='/STB/SirateTimhert/course/nius_sebsabi/#{course.course_id}') #{course.course_name}
                                             if(course.activated)
                                               a(href="/STB/SirateTimhert/curriculum/#{curriculum._id}/#{grade._id}/#{course.course_id}")                                  
                                                 button(type='button', class="btn btn-block btn-danger btn-xs") Dectivate
@@ -167,7 +167,7 @@ html
                           .modal-dialog(class="modal-Edit-#{grade._id}")
                             .modal-content
                               .modal-header
-                                h4.modal-title Edit Course
+                                h4.modal-title Edit Grade
                                 button.close(type='button', data-dismiss='modal', aria-label='Close')
                                   span(aria-hidden='true') ×
                               .modal-body
