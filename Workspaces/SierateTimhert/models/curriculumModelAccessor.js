@@ -1,6 +1,8 @@
 const { response } = require('express');
 const course_ModelAccessor = require('./courseModelAccessor');
-var curriculum = require("./curriculum")
+const classRoom_ModelAccessor = require('./classRoom_ModelAcessor');
+var curriculum = require("./curriculum");
+const e = require('express');
 
 const allCurriculums = (callback) => {
     curriculum.find({})
@@ -196,6 +198,47 @@ const editGrade = (curriculumId, gradeId, gName, gDescription, callback) => {
     })
 })}
 
+const addCurriculumToCourse = (curriculumId, gubayeId, callback) => {
+//Check if there already curriculum is assigned.
+    classRoom_ModelAccessor.gubayeDetail(gubayeId,function(err,gubayeDetail){
+        if(gubayeDetail.curriculum == "none")
+        {
+            curriculum.findById(curriculumId).then(singleCurriculum=>{
+                var course_ids = []; course_ids.pop();
+                singleCurriculum.courses.forEach(course=>{
+                    course_ids.push(course.course_id)
+                })
+                classRoom_ModelAccessor.addCourse(gubayeId, course_ids, function(error, gubaye)
+                {
+                    if(error)
+                    {
+                    console.error(error)
+                    }
+                    else{
+                    Course_ModelAccessor.addstudentsToCourse(course_ids,gubayeId,function(err,confirmation){
+                        classRoom_ModelAccessor.assignCurriculumToGubaye(curriculumId,gubayeId, function(erro, reponse){
+                            singleCurriculum.gubayeat.push({id:gubayeId});
+                            singleCurriculum.save();
+                            callback(null, confirmation)
+                        })
+                    })
+                    }
+                })
+            })
+        }
+        else
+        {
+            var err = new Error("Alerady assigned!");
+            err.message = "Alerady assigned!";
+            callback(err,false);
+        }
+    })
+
+}
+
+
+
+exports.addCurriculumToCourse = addCurriculumToCourse;
 exports.editGrade = editGrade;
 exports.changeCourseStatus = changeCourseStatus;
 exports.addCourseToGrade = addCourseToGrade;

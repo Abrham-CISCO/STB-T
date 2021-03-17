@@ -2,6 +2,7 @@ var classRoom = require('./classRoom')
 var UserAccModelAcc = require('../../../Account/Models/user_model_accessor');
 var course_modelAccessor = require('./courseModelAccessor');
 const course = require('./course');
+const curriculum = require('./curriculum');
 const gubayeDetail = (GubayeID, callback) => {
     classRoom.findById(GubayeID).then((gubaye) => {callback(null,gubaye);}).catch((error)=>{callback(error)})
 }
@@ -226,6 +227,15 @@ const removeCourse = (courseID, GubayeId, callback) =>
     }).catch((error) => {callback(error,false)})
 }
 
+const assignCurriculumToGubaye = (curriculumId, gubayeId, callback) => {
+    classRoom.findById(gubayeId).then(gubayeF => {
+        gubayeF.curriculum = curriculumId;
+        gubayeF.save().then(confirmation => {
+            callback(null, confirmation);
+        }).catch(err=>callback(err,false))
+    })
+}
+exports.assignCurriculumToGubaye = assignCurriculumToGubaye;
 exports.removeCourse = removeCourse;
 exports.notAddedCourses = notAddedCourses;
 exports.IDArrayToNameArray = IDArrayToNameArray;

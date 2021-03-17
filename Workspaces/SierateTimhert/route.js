@@ -230,7 +230,12 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
                                             classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedCourses){
                                                 req.session.unjoinedCourses = unjoinedCourses
                                                 req.session.JoinedCourses = JoinedCourses;
-                                                res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)                                                
+                                                //All curriculums
+                                                curriculum_ModelAccessor.allCurriculums(function(err,curriculums){
+                                                    req.session.curriculums = curriculums;
+                                                    console.log(req.session);
+                                                    res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)                                                                                                
+                                                }) 
                                             })
                                         })
                                     })

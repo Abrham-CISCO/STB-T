@@ -1,0 +1,7 @@
+curriculum Namespace 
+    Event Handlers
+        curriculum:addCourse
+            Parameters : curriculumId, gradeId, Courses(Defined by name)
+        curriculum:removeCourse
+        curriculum:addGubaye
+        curriculum:removeGubaye

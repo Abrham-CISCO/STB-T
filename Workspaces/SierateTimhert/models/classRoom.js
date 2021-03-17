@@ -13,6 +13,7 @@ var classRoomSchema = new mongoose.Schema({
             }
         }
     ]
+    ,curriculum:{type:String,default:"none"}
     ,addedCourses:[courseSchema]
 },{timestamps:true});
 

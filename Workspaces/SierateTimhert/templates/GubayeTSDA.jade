@@ -225,12 +225,12 @@ html
                           .col-12.col-sm-6.col-md-3
                             button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
                               .fas.fa-plus.nav-plus
-                            a(href="#" class="users-list-name") አዲስ ኮርስ ጨምር
+                            a(href="#" class="users-list-name") ስርዓተ ትምህርት መድብ
                       #modal-course.modal.fade(style='display: none;', aria-hidden='true')
                         .modal-dialog.modal-course
                           .modal-content
                             .modal-header
-                              h4.modal-title ጉባኤ #{user.gubaye.name} : አዲስ ኮርስ ለመጨመር ይምረጡ
+                              h4.modal-title ስርዓተ ትምርህት መምረጫ
                               button.close(type='button', data-dismiss='modal', aria-label='Close')
                                 span(aria-hidden='true') ×
                             .modal-body
@@ -256,8 +256,9 @@ html
                               // Google Font: Source Sans Pro
                               link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
                               .form-group(data-select2-id='39')
-                                label ወደ ጉባኤው ለማስገባት የሚፈልጉትን ኮርስ ይምረጡና ሲጨርስሱ Save የሚለውን በተን ይጫኑ 
-                                select.select2.select2-hidden-accessible(multiple='', data-placeholder='ኮርስ ይምረጡ', style='width: 100%;', data-select2-id='7', tabindex='-1', aria-hidden='true')
+                                label ወደ ጉባኤው ለማስገባት የሚፈልጉትን ስዕራተ ትምህርት ይምረጡና ሲጨርስሱ Save የሚለውን በተን ይጫኑ። 
+                                p ማሳሳቢያ! አንዴ ስርዓተ ትምህርት አሁን ከመረጡ በውሀላ ወደፊት ማስተካከል አይችሉም። 
+                                select.select2.select2-hidden-accessible(multiple='', data-placeholder='ስርዓተ ትምህርት ይምረጡ', style='width: 100%;', data-select2-id='7', tabindex='-1', aria-hidden='true')
                                   each course in unjoinedCourses
                                     option(data-select2-id='#{course._id}' value='#{course._id}') #{course.name}
                                // Bootstrap 4
