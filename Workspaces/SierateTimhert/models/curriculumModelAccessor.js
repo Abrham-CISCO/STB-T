@@ -198,7 +198,7 @@ const editGrade = (curriculumId, gradeId, gName, gDescription, callback) => {
     })
 })}
 
-const addCurriculumToCourse = (curriculumId, gubayeId, callback) => {
+const addCurriculumToGubaye = (curriculumId, gubayeId, callback) => {
 //Check if there already curriculum is assigned.
     classRoom_ModelAccessor.gubayeDetail(gubayeId,function(err,gubayeDetail){
         if(gubayeDetail.curriculum == "none")
@@ -236,9 +236,24 @@ const addCurriculumToCourse = (curriculumId, gubayeId, callback) => {
 
 }
 
+const curriculumByName = (curriculumName,callback) => {
+    // curriculum.findOne({name:curriculumName}).then((singleCurriculum)=> {
+    //     console.log(curriculumName);
+    //     callback(null, singleCurriculum);
+    // }).catch((err)=>callback(err,false));
+    allCurriculums(function(err,currs){
+        currs.forEach(singleCurriculum=>{
+            console.log(singleCurriculum.name,"==", "'",curriculumName.trim(),"'",">",singleCurriculum.name == curriculumName);
+            if(singleCurriculum.name == curriculumName){
+                console.log(singleCurriculum.name);
+            callback(null, singleCurriculum);        
+            }
+        })    
+    })
+}
 
-
-exports.addCurriculumToCourse = addCurriculumToCourse;
+exports.curriculumByName = curriculumByName;
+exports.addCurriculumToGubaye = addCurriculumToGubaye;
 exports.editGrade = editGrade;
 exports.changeCourseStatus = changeCourseStatus;
 exports.addCourseToGrade = addCourseToGrade;

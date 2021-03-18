@@ -15,6 +15,16 @@ function addmembers(gubayeID)
   });
 }
 
+function assignCurriculum(gubayeID)
+{
+    var socket = io('/curriculum');
+    var curriculumName;
+    curriculumName = document.getElementsByClassName("select2-selection__rendered")[1].innerText.trim();
+    console.log("'",curriculumName,"'");
+    socket.emit('addCurriculum',curriculumName.trim(), gubayeID);
+    
+}
+
 function addCourse(gubayeID)
 {
     var socket = io('/gubaye');
@@ -23,8 +33,7 @@ function addCourse(gubayeID)
     var selectionConut = document.getElementsByClassName("select2-selection__rendered")[1].childNodes.length - 1;
     for(var i = 0; (i<selectionConut); i++)
     {
-        courses.push(document.getElementsByClassName("select2-selection__rendered")[1].childNodes[i].title)
-        
+        courses.push(document.getElementsByClassName("select2-selection__rendered")[1].childNodes[i].title)  
     }
     socket.emit('AddGubayeCourses',gubayeID,courses);
   socket.on('AddGubayeCourses',function(Confirmation){

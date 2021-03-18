@@ -154,6 +154,14 @@ app.use(passport.session());
     });
     var curriculum = io.of('/curriculum')
     curriculum.on('connection', (socket)=>{
+      socket.on('addCurriculum',function(curriculumName,gubayeID){
+        curriculum_ModelAccessor.curriculumByName(curriculumName,function(err,singleCurriculum){
+          console.log("singleCurriculum",singleCurriculum)
+          curriculum_ModelAccessor.addCurriculumToGubaye(singleCurriculum._id,gubayeID,function(err,response){
+            console.log(err,response);
+          })
+        })
+      })
       socket.on('addCourse',function(curriculumId, gradeId, courses){
         curriculum_ModelAccessor.addCourseToGrade(curriculumId,gradeId,courses,function(err, response){
           if(response)
