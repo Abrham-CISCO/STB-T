@@ -74,15 +74,15 @@ html
                                 
                         .row
                           .col-12
-                            h5 ጉባኤያቶች
+                            h5 ስርዓተ ትምህርቱ እየተተገበረባቸው የሚገኙ ጉባኤያት
                             if(curriculum.gubayeat.length > 0)  
-                              for each gubaye in curriculum.gubayeat
+                              each gubaye in curriculum.gubayeat
                                 .col-12.col-sm-6.col-md-4
                                   .info-box
                                     .info-box-icon.bg-info
                                       .fas.fa-users
                                     .info-box-content
-                                      a(href='/STB/SirateTimhert/Gubaye_Sebsabi/#{gubaye.id}')
+                                      a(href='/STB/SirateTimhert/Gubaye_Nius_Sebsabi/#{gubaye.id}')
                                         span.info-box-text #{gubaye.name}
                             else
                               p ምንም ጉባኤ አልተጨመረም።

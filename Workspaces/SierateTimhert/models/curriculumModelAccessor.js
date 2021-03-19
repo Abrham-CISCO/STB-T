@@ -203,10 +203,14 @@ const addCurriculumToGubaye = (curriculumId, gubayeId, callback) => {
     classRoom_ModelAccessor.gubayeDetail(gubayeId,function(err,gubayeDetail){
         if(gubayeDetail.curriculum == "none")
         {
+            console.log("curriculumId inside addCTG", curriculumId)
             curriculum.findById(curriculumId).then(singleCurriculum=>{
+                console.log(singleCurriculum)
                 var course_ids = []; course_ids.pop();
-                singleCurriculum.courses.forEach(course=>{
-                    course_ids.push(course.course_id)
+                singleCurriculum.grades.forEach(grade=>{
+                    grade.courses.forEach(course=>{
+                        course_ids.push(course.course_id)
+                    })  
                 })
                 classRoom_ModelAccessor.addCourse(gubayeId, course_ids, function(error, gubaye)
                 {
@@ -215,7 +219,7 @@ const addCurriculumToGubaye = (curriculumId, gubayeId, callback) => {
                     console.error(error)
                     }
                     else{
-                    Course_ModelAccessor.addstudentsToCourse(course_ids,gubayeId,function(err,confirmation){
+                        course_ModelAccessor.addstudentsToCourse(course_ids,gubayeId,function(err,confirmation){
                         classRoom_ModelAccessor.assignCurriculumToGubaye(curriculumId,gubayeId, function(erro, reponse){
                             singleCurriculum.gubayeat.push({id:gubayeId});
                             singleCurriculum.save();
@@ -243,9 +247,10 @@ const curriculumByName = (curriculumName,callback) => {
     // }).catch((err)=>callback(err,false));
     allCurriculums(function(err,currs){
         currs.forEach(singleCurriculum=>{
-            console.log(singleCurriculum.name,"==", "'",curriculumName.trim(),"'",">",singleCurriculum.name == curriculumName);
+            singleCurriculum.name = singleCurriculum.name.trim()
+            console.log("'",singleCurriculum.name.trim(), "'","==", "'",curriculumName.trim(),"'",">",singleCurriculum.name == curriculumName);
             if(singleCurriculum.name == curriculumName){
-                console.log(singleCurriculum.name);
+                console.log(singleCurriculum._id);
             callback(null, singleCurriculum);        
             }
         })    

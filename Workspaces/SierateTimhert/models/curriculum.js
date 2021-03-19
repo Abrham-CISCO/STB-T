@@ -12,7 +12,8 @@ var gradeSchema = new mongoose.Schema({
     description:{type:String},
 },{timestamps:true});
 var gubayeSchema = new mongoose.Schema({
-    id:{type:mongoose.Types.ObjectId}
+    id:{type:mongoose.Types.ObjectId},
+    name:{type:String}
 },{timestamps:true})
 var curriculumSchema = new mongoose.Schema({
     created_By:{type:String},

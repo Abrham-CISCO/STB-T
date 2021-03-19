@@ -20,8 +20,11 @@ function assignCurriculum(gubayeID)
     var socket = io('/curriculum');
     var curriculumName;
     curriculumName = document.getElementsByClassName("select2-selection__rendered")[1].innerText.trim();
-    console.log("'",curriculumName,"'");
+    console.log("'",curriculumName,"'","This is another string");
     socket.emit('addCurriculum',curriculumName.trim(), gubayeID);
+    socket.on('addCurriculum',function(Confirmation){
+      window.location.href = "/STB/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeID;
+    });
     
 }
 

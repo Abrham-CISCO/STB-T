@@ -915,8 +915,19 @@ router.get('/SubDepartmentAdmin/curriculum/:curriculumId', mid.requireSignIn, mi
                         //use mongoose populate to pupulate course details on to each courses before sending it to 
                         //the front end
                         req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                        
-                        console.log("req.session.unregisteredCoursesPerGrade", req.session.unregisteredCoursesPerGrade);
-                        return res.render("Workspaces/SierateTimhert/templates/SierateTimhertTSDA.jade",req.session)  
+                        console.log("req.session.unregisteredCoursesPerGrade", req.session.curriculum.gubayeat);
+                        classRoom_ModelAccessor.Gubaeyat(function(err,classRooms){
+                            curriculum.gubayeat.forEach(gubaye=>{
+                                classRooms.forEach(classRoom=>{
+                                    console.log(classRoom._id,gubaye.id)
+                                    if(gubaye.id.toString() == classRoom._id.toString())
+                                    {
+                                        gubaye.name = classRoom.name;
+                                    }
+                                })
+                            })
+                            return res.render("Workspaces/SierateTimhert/templates/SierateTimhertTSDA.jade",req.session)  
+                        })
                     }
                 })   
             });

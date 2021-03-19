@@ -156,9 +156,9 @@ app.use(passport.session());
     curriculum.on('connection', (socket)=>{
       socket.on('addCurriculum',function(curriculumName,gubayeID){
         curriculum_ModelAccessor.curriculumByName(curriculumName,function(err,singleCurriculum){
-          console.log("singleCurriculum",singleCurriculum)
+          console.log("singleCurriculum",singleCurriculum._id)
           curriculum_ModelAccessor.addCurriculumToGubaye(singleCurriculum._id,gubayeID,function(err,response){
-            console.log(err,response);
+            socket.emit('addCurriculum',"Added")
           })
         })
       })
