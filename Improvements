@@ -1,26 +1,39 @@
-Chat 
-    Message Numbering
-    Message Pagination
-    Every message is being sent to the user and the user is made to choose and render the message from sent messaging object.
-        Instead of this make the front end ask the messaging history for certain user only. Make also the front end respond with
-        a conversation of the user and one another user only.
-    The front end is not loading profile picture of the sender. correct this issue.
+Can be Delayed
+    Chat 
+        Message Numbering
+        Message Pagination
+        Every message is being sent to the user and the user is made to choose and render the message from sent messaging object.
+            Instead of this make the front end ask the messaging history for certain user only. Make also the front end respond with
+            a conversation of the user and one another user only.
+        The front end is not loading profile picture of the sender. correct this issue.
 
-Notification
+    Notification
 
-Profile System
-    Enable users to set up their profile image
-User Navigation
-    When gubaye is opened the gubaye menue should be active
-Session
-    Register Users socket when the server refreshes
-    Do not send password to the client
-    use middlewares to forbid unauthenticated users from accessing restricted pages
+    Profile System
+        Enable users to set up their profile image
+Last Items
+    User Navigation
+        When gubaye is opened the gubaye menu should be active
+    User Login LogOut
+        Session Expire
+        Password Meter
+    Session
+        Do not send password to the client
+        use middlewares to forbid unauthenticated users from accessing restricted pages
+    General 
+        Give title to all pages.
+        move all socket codes from index.js to a single file
 
-Gubaieyat
-    Prepare gubayie page
-    Gubaye side bar menu is activated or prepared when the user signs in only this needs to changed
-        the side bar menu shall automatically be updated any time there is a change.
-General 
-    Give title to all pages.
-    move all socket codes from index.js to a single file
+ስዕራተ ትምህርት Sub System
+    Gubaieyat
+        COMPLETED don't let the users delete Gubaye
+        Gubaye page add curriculum detail for each privledge
+            Propagate to gubaye course page directly from gubaye page. 
+        Gubaye public page : Reflect the curriculum. ክፍል፣ ኮርሶች (If activated)
+    curriculum 
+        Sould not allow user to assign course twice in a curriculum.
+        Update Dashboard to show curriculums
+    course 
+        Fix the course Outline Problem : Make it start with an empty file prompting user to add new
+            course out line.
+        Fix the Gubaye List Problem.

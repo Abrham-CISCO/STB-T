@@ -144,13 +144,13 @@ app.use(passport.session());
           socket.emit('UpdateGubaye_ForMember',"Updated")
         })
       });
-      
-      socket.on('deleteGubaye',function(ClassRoomID){
-        classRoom_ModelAccessor.deleteGubaye(ClassRoomID, function(error,result){
-          console.log(result);
-          socket.emit('deleteGubaye',"Deleted")
-        });
-      });
+      //Used to delete Gubaye      
+      // socket.on('deleteGubaye',function(ClassRoomID){
+      //  classRoom_ModelAccessor.deleteGubaye(ClassRoomID, function(error,result){
+      //     console.log(result);
+      //     socket.emit('deleteGubaye',"Deleted")
+      //   });
+      // });
     });
     var curriculum = io.of('/curriculum')
     curriculum.on('connection', (socket)=>{

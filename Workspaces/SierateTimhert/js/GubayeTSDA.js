@@ -56,13 +56,14 @@ function updateGubaye()
     window.location.href = "/STB/SirateTimhert/Gubaye_Nius_Sebsabi/"+classId;
   });
 }
-function deleteGubaye()
-{
-  // Before Deleting the group, prompt the user to make sure they know what they do
-  var socket = io('/gubaye');
-  var classId = document.getElementById("_id").value
-  socket.emit('deleteGubaye',classId)
-  socket.on('deleteGubaye',function(Confirmation){
-    window.location.href = "/STB/SirateTimhert/SubDepartmentAdmin"
-  });
-}
+// used to delete gubaye
+// function deleteGubaye()
+// {
+//   // Before Deleting the group, prompt the user to make sure they know what they do
+//   var socket = io('/gubaye');
+//   var classId = document.getElementById("_id").value
+//   socket.emit('deleteGubaye',classId)
+//   socket.on('deleteGubaye',function(Confirmation){
+//     window.location.href = "/STB/SirateTimhert/SubDepartmentAdmin"
+//   });
+// }
