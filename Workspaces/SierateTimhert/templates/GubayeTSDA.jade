@@ -214,8 +214,6 @@ html
                             if(curriculum._id ==user.gubaye.curriculum)
                               h3 
                                 a(href="/STB/SirateTimhert/SubDepartmentAdmin/curriculum/#{curriculum._id}") #{curriculum.name}
-                              h5 ዝርዝር
-                              p This is where description will be displayed.
                               .row
                                 .col-5.col-sm-3
                                   #vert-tabs-tab.nav.flex-column.nav-tabs.h-100(role='tablist' aria-orientation='vertical')
@@ -228,7 +226,6 @@ html
                                     each grade in curriculum.grades
                                       div(id="G#{grade._id}" class="tab-pane fade" role='tabpanel' aria-labelledby='G#{grade._id}-tab')
                                         h1 #{grade.name}                                  
-                                        button(type='button', class="btn btn-block btn-primary btn-xs" style = "width:12%" data-toggle='modal' data-target='#modal-Edit-#{grade._id}') Edit grade
                                         h6 የተመደቡ ኮርሶች
                                         .row
                                           each course in grade.courses 
@@ -237,26 +234,15 @@ html
                                                 span.info-box-icon.bg-success.elevation-1
                                                   i.fas.fa-book
                                                 .info-box-content
-                                                  a(href='/STB/SirateTimhert/course/nius_sebsabi/#{course.course_id}') #{course.course_name}
+                                                
+                                                  a(href='/STB/SirateTimhert/course/Gubaye_Nius_Sebsabi/#{course.course_id}/#{user.gubaye._id}') #{course.course_name}
                                                   if(course.activated)
-                                                    a(href="/STB/SirateTimhert/curriculum/#{curriculum._id}/#{grade._id}/#{course.course_id}")                                  
-                                                      button(type='button', class="btn btn-block btn-danger btn-xs") Dectivate
+                                                    p Non Active
                                                   if(!course.activated)
-                                                    a(href="/STB/SirateTimhert/curriculum/#{curriculum._id}/#{grade._id}/#{course.course_id}")                                  
-                                                      button(type='button', class="btn btn-block btn-success btn-xs") Activate
-                                        .col-12.col-sm-6.col-md-3
-                                          button.btn.btn-block.btn-primary.btn-lg(type='button' data-toggle='modal' data-target='#modal-#{grade._id}')
-                                            .fas.fa-plus.nav-plus
-                                          a.users-list-name(href='#') አዲስ ኮርስ ጨምር
+                                                    p Active
                                         br
                                         h6 የክፍሉ አላማ
                                         p #{grade.description}
-                                        //- /curriculum/:curriculum_id/:grade_id
-                                    //- #vert-tabs-messages.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-messages-tab')
-                                    //-   | Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
-                                    //- #vert-tabs-settings.tab-pane.fade(role='tabpanel' aria-labelledby='vert-tabs-settings-tab')
-                                    //-   | Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
-                                    //-                 -Edit-
                             // /.modal-dialog
                           // /.tab-content
                         // /.card-body
@@ -265,130 +251,7 @@ html
                                 button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
                                   .fas.fa-plus.nav-plus
                                 a(href="#" class="users-list-name") ስርዓተ ትምህርት መድብ
-                      #modal-course.modal.fade(style='display: none;', aria-hidden='true')
-                        .modal-dialog.modal-course
-                          .modal-content
-                            .modal-header
-                              h4.modal-title ስርዓተ ትምርህት መምረጫ
-                              button.close(type='button', data-dismiss='modal', aria-label='Close')
-                                span(aria-hidden='true') ×
-                            .modal-body
-                              // Font Awesome
-                              link(rel='stylesheet', href='/STB/ADMINLITE/plugins/fontawesome-free/css/all.min.css')
-                              // Ionicons
-                              link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
-                              // daterange picker
-                              link(rel='stylesheet', href='/STB/ADMINLITE/plugins/daterangepicker/daterangepicker.css')
-                              // iCheck for checkboxes and radio inputs
-                              link(rel='stylesheet', href='/STB/ADMINLITE/plugins/icheck-bootstrap/icheck-bootstrap.min.css')
-                              // Bootstrap Color Picker
-                              link(rel='stylesheet', href='/STB/ADMINLITE/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css')
-                              // Tempusdominus Bbootstrap 4
-                              link(rel='stylesheet', href='/STB/ADMINLITE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')
-                              // Select2
-                              link(rel='stylesheet', href='/STB/ADMINLITE/plugins/select2/css/select2.min.css')
-                              link(rel='stylesheet', href='/STB/ADMINLITE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')
-                              // Bootstrap4 Duallistbox
-                              link(rel='stylesheet', href='/STB/ADMINLITE/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')
-                              // Theme style
-                              link(rel='stylesheet', href='/STB/ADMINLITE/dist/css/adminlte.min.css')
-                              // Google Font: Source Sans Pro
-                              link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700', rel='stylesheet')
-                              .form-group(data-select2-id='39')
-                                label ወደ ጉባኤው ለማስገባት የሚፈልጉትን ስዕራተ ትምህርት ይምረጡና ሲጨርስሱ Save የሚለውን በተን ይጫኑ። 
-                                p ማሳሳቢያ! አንዴ ስርዓተ ትምህርት አሁን ከመረጡ በውሀላ ወደፊት ማስተካከል አይችሉም። 
-                                select.select2.select2-hidden-accessible(data-placeholder='ስርዓተ ትምህርት ይምረጡ', style='width: 100%;', data-select2-id='7', tabindex='-1', aria-hidden='true')
-                                  each curriculum in curriculums
-                                    option(data-select2-id='#{curriculum._id}' value='#{curriculum._id}') #{curriculum.name}
-                               // Bootstrap 4
-                              script(src='/STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
-                              // Select2
-                              script(src='/STB/ADMINLITE/plugins/select2/js/select2.full.min.js')
-                              // Bootstrap4 Duallistbox
-                              script(src='/STB/ADMINLITE/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')
-                              // InputMask
-                              script(src='/STB/ADMINLITE/plugins/moment/moment.min.js')
-                              script(src='/STB/ADMINLITE/plugins/inputmask/min/jquery.inputmask.bundle.min.js')
-                              // date-range-picker
-                              script(src='/STB/ADMINLITE/plugins/daterangepicker/daterangepicker.js')
-                              // bootstrap color picker
-                              script(src='/STB/ADMINLITE/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js')
-                              // Tempusdominus Bootstrap 4
-                              script(src='/STB/ADMINLITE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')
-                              // Bootstrap Switch
-                              script(src='/STB/ADMINLITE/plugins/bootstrap-switch/js/bootstrap-switch.min.js')
-                              // AdminLTE App
-                              script(src='/STB/ADMINLITE/dist/js/adminlte.min.js')
-                              // AdminLTE for demo purposes
-                              script(src='/STB/ADMINLITE/dist/js/demo.js')
-                              // Page script
-                              script.
-                                $(function () {
-                                //Initialize Select2 Elements
-                                $('.select2').select2()
-                                //Initialize Select2 Elements
-                                $('.select2bs4').select2({
-                                theme: 'bootstrap4'
-                                })
-                                //Datemask dd/mm/yyyy
-                                $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-                                //Datemask2 mm/dd/yyyy
-                                $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-                                //Money Euro
-                                $('[data-mask]').inputmask()
-                                //Date range picker
-                                $('#reservation').daterangepicker()
-                                //Date range picker with time picker
-                                $('#reservationtime').daterangepicker({
-                                timePicker: true,
-                                timePickerIncrement: 30,
-                                locale: {
-                                format: 'MM/DD/YYYY hh:mm A'
-                                }
-                                })
-                                //Date range as a button
-                                $('#daterange-btn').daterangepicker(
-                                {
-                                ranges   : {
-                                'Today'       : [moment(), moment()],
-                                'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                                },
-                                startDate: moment().subtract(29, 'days'),
-                                endDate  : moment()
-                                },
-                                function (start, end) {
-                                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-                                }
-                                )
-                                //Timepicker
-                                $('#timepicker').datetimepicker({
-                                format: 'LT'
-                                })
-                                //Bootstrap Duallistbox
-                                $('.duallistbox').bootstrapDualListbox()
-                                //Colorpicker
-                                $('.my-colorpicker1').colorpicker()
-                                //color picker with addon
-                                $('.my-colorpicker2').colorpicker()
-                                $('.my-colorpicker2').on('colorpickerChange', function(event) {
-                                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-                                });
-                                $("input[data-bootstrap-switch]").each(function(){
-                                $(this).bootstrapSwitch('state', $(this).prop('checked'));
-                                });
-                                })
-
-
-                            .modal-footer.justify-content-between
-                              button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
-                              button.btn.btn-primary(type='button' onclick="assignCurriculum('#{user.gubaye._id}');") ጨምር
-                          // /.modal-content
-                          // /.modal-dialog
-
+                     
                       #management.tab-pane
                         .row
                           .col-md-3

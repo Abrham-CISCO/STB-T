@@ -61,16 +61,49 @@ html
                                     a.users-list-name(href="/STB/accounts/public/profile/#{val.telephone}") #{val.name}
                                   
                       #education.tab-pane
-                        .row
-                          if(JoinedClass)
-                            each val in JoinedClass
+                        if(user.gubaye.curriculum != "none")
+                          each curriculum in curriculums
+                            if(curriculum._id ==user.gubaye.curriculum)
+                              h3 
+                                a(href="/STB/SirateTimhert/SubDepartmentAdmin/curriculum/#{curriculum._id}") #{curriculum.name}
+                              .row
+                                .col-5.col-sm-3
+                                  #vert-tabs-tab.nav.flex-column.nav-tabs.h-100(role='tablist' aria-orientation='vertical')
+                                    
+                                    each grade in curriculum.grades
+                                      a.nav-link(id = "G#{grade._id}-tab" data-toggle='pill' href='#G#{grade._id}' role='tab' aria-controls='G#{grade._id}' aria-selected='false') #{grade.name}
+                                .col-7.col-sm-9
+                                  #vert-tabs-tabContent.tab-content
+                                    
+                                    each grade in curriculum.grades
+                                      div(id="G#{grade._id}" class="tab-pane fade" role='tabpanel' aria-labelledby='G#{grade._id}-tab')
+                                        h1 #{grade.name}                                  
+                                        h6 የተመደቡ ኮርሶች
+                                        .row
+                                          each course in grade.courses 
+                                            .col-12.col-sm-6.col-md-4
+                                              .info-box.mb-3
+                                                span.info-box-icon.bg-success.elevation-1
+                                                  i.fas.fa-book
+                                                .info-box-content
+                                                
+                                                  a(href='/STB/SirateTimhert/course/sebsabi/#{course.course_id}/#{user.gubaye._id}') #{course.course_name}
+                                                  if(course.activated)
+                                                    p Non Active
+                                                  if(!course.activated)
+                                                    p Active
+                                        br
+                                        h6 የክፍሉ አላማ
+                                        p #{grade.description}
+                            // /.modal-dialog
+                          // /.tab-content
+                        // /.card-body
+                            else
                               .col-12.col-sm-6.col-md-3
-                                .info-box.mb-3
-                                  span.info-box-icon.bg-success.elevation-1
-                                    i.fas.fa-book
-                                  .info-box-content
-                                    a(href="/STB/SirateTimhert/course/sebsabi/#{val.id}/#{user.gubaye._id}") #{val.name}
-                    // /.tab-content
+                                button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
+                                  .fas.fa-plus.nav-plus
+                                a(href="#" class="users-list-name") ስርዓተ ትምህርት መድብ
+                     
                   // /.card-body
                 // /.nav-tabs-custom
               // /.col
