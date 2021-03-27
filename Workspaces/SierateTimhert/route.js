@@ -29,7 +29,16 @@ var documentFileFilter = (req, file, cb) => {
     cb(null, true);
 }
 
+var imageFileFilter = (req, imageFile, cb) => {
+    if(!imageFile.originalname.match(/\.(jpg|jpeg|png|gif)$/))
+    {
+        return cb(new Error('You can upload image file only!'))
+    }
+    cb(null, true);
+}
+
 const upload = multer({storage:storage, fileFilter:documentFileFilter});
+const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
 
 // For Gubayes
     router.post('/Gubaye/Update/', function(req,res,next){
@@ -459,6 +468,17 @@ const upload = multer({storage:storage, fileFilter:documentFileFilter});
             }
         })    
         })
+    });
+
+    router.post('/Gubaye_Nius_Sebsabi/upload/gubaye/:gubayeId/profileImage', mid.requiresToBeSTKNS,mid.updateUserData,
+        uploadImage.single('gubayePicFile'), function(req,res,next){
+             var gubayeId = req.params.gubayeId;
+             console.log(req)
+             var img = "/STB/Workspaces/SierateTimhert/static/" + req.file.originalname;
+             classRoom_ModelAccessor.ussignGubayePic(gubayeId,img,function(err,resp){
+                var url = "/STB/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeId;
+                res.redirect(url);
+            })
     });
     router.post('/Gubaye_Nius_Sebsabi/upload/:courseId/courseoutline', mid.requiresToBeSTKNS,mid.updateUserData,
      upload.single('courseOutlineFile'), function(req,res,next){

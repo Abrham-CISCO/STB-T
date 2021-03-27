@@ -56,6 +56,10 @@ function updateGubaye()
     window.location.href = "/STB/SirateTimhert/Gubaye_Nius_Sebsabi/"+classId;
   });
 }
+
+
+
+
 // used to delete gubaye
 // function deleteGubaye()
 // {

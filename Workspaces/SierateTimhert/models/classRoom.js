@@ -15,6 +15,7 @@ var classRoomSchema = new mongoose.Schema({
     ]//60217b11fc167410cc020a99
     ,curriculum:{type:String,default:"none"}
     ,addedCourses:[courseSchema]
+    ,profilePic:{type:String, default:"/STB/ADMINLITE/dist/img/user4-128x128.jpg"}
 },{timestamps:true});
 
 classRoomSchema.statics.removeMember = (GubayeID,telephone,callback) => {

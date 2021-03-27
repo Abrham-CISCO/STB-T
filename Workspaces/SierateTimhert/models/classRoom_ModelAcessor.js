@@ -166,6 +166,14 @@ const addCourse = (gubayeId,coursesArray,callback) =>
     }).catch((error) => {callback(error,false)})
 }
 
+const ussignGubayePic = (gubayeId, imgUrl, callback) => 
+{
+    classRoom.findById(gubayeId).then(gubaye=> {
+        gubaye.profilePic = imgUrl;
+        gubaye.save().then(resp => callback(null,resp));
+    })
+}
+
 const notAddedCourses = (gubayeId, callback) => 
 {
     var addedFlag = false;
@@ -249,3 +257,4 @@ exports.removeMem = removeMem;
 exports.addCourse = addCourse;
 exports.gubayeIdArrayToNameArray = gubayeIdArrayToNameArray;
 exports.UpdateGubaye_ForMember = UpdateGubaye_ForMember;
+exports.ussignGubayePic = ussignGubayePic;

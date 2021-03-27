@@ -151,6 +151,11 @@ html
                                 $('.select2bs4').select2({
                                 theme: 'bootstrap4'
                                 })
+                                $('.select4').select4()
+                                //Initialize Select2 Elements
+                                $('.select4bs4').select4({
+                                theme: 'bootstrap4'
+                                })
                                 //Datemask dd/mm/yyyy
                                 $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
                                 //Datemask2 mm/dd/yyyy
@@ -259,19 +264,18 @@ html
                             .card.card-primary.card-outline
                               .card-body.box-profile
                                 .text-center
-                                  img.profile-user-img.img-fluid.img-circle(src='/STB/ADMINLITE/dist/img/user4-128x128.jpg', alt='User profile picture')
+                                  img.profile-user-img.img-fluid.img-circle(src='#{user.gubaye.profilePic}', alt='User profile picture')
                                 |                 
                                 h3.profile-username.text-center ጉባኤ #{user.gubaye.name}
                                 |                 
                                 p.text-muted.text-center
-                                |                 
+                                |     
+                                //used to delete group
+                                button(type='button', class="btn btn-block btn-primary", data-toggle='modal', data-target='#modal_pic-sm') ምስል ቀይር
                                 ul.list-group.list-group-unbordered.mb-3
                                   li.list-group-item
                                     b ዝርዝር
                                     p #{user.gubaye.description}
-                                //- used to delete group
-                                //- a.btn.btn-danger.btn-block(href='#' onclick="deleteGubaye()")
-                                //-   b ጉባኤውን ሰርዝ
                               // /.card-body
                             // /.card
                             // About Me Box
@@ -290,7 +294,7 @@ html
                                         label.col-sm-2.col-form-label(for='inputName') የጉባኤው ስም
                                         |                         
                                         .col-sm-10
-                                          input.form-control(type='text', placeholder='የጋባኤው ስም', value="#{user.gubaye.name}", id="name", name='name')
+                                          input.form-control(type='text', placeholder='የጉባኤው ስም', value="#{user.gubaye.name}", id="name", name='name')
                                         |                       
                                       .form-group.row
                                         label.col-sm-2.col-form-label(for='inputEmail') ዝርዝር
@@ -302,7 +306,12 @@ html
                                         label.col-sm-2.col-form-label(for='inputTel') ጉባኤ አስተዳዳሪ
                                         |                         
                                         .col-sm-10
-                                          input.form-control(type='text', placeholder='ጉብኤ አስተዳዳሪ', value="#{user.gubaye.leader}", id="admin", name='admin') 
+                                          select.input.form-control(style='width: 100%;' id="admin", name='admin' data-placeholder="አስተባባሪ")
+                                              option(selected) #{user.gubaye.leader}
+                                              each uuser in user.allusers
+                                                if user.gubaye.leader != uuser.name
+                                                  option #{uuser.name}
+                                          //-input.form-control(type='text', placeholder='ጉብኤ አስተዳዳሪ', value="#{user.gubaye.leader}", id="admin", name='admin') 
                                           input(type='hidden', placeholder='የጋባኤው ስም', value="#{user.gubaye._id}", name='_id', id='_id')
                                       |                       
                                       .form-group.row
@@ -313,7 +322,27 @@ html
                               // /.card-body
                             // /.nav-tabs-custom
                           // /.col
-                    
+                      #modal_pic-sm.modal.fade(style='display: none;', aria-hidden='true')
+                        .modal-dialog.modal_pic-sm
+                          .modal-content
+                            .modal-header
+                              h5.modal-title ጉባኤ #{user.gubaye.name} : የጉባኤ ምስል መቀየሪያ
+                              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                            .modal-body
+                              .text-center
+                                img.profile-user-img.img-fluid.img-circle#gubayeImg(style="width:300px;" src='#{user.gubaye.profilePic}', alt='User profile picture')
+                              .form-group
+                                br
+                                label(for='exampleInputFile') የጉባኤ ምስል ይምረጡ
+                                br
+                                .input-group
+                                  form(method="post" enctype="multipart/form-data" action="/STB/SirateTimhert/Gubaye_Nius_Sebsabi/upload/gubaye/#{user.gubaye._id}/profileImage")
+                                    input(type='file' name="gubayePicFile" accept="image/*")
+                                    button.btn.btn-primary(type="submit") Upload                                  
+                            .modal-footer.justify-content-between
+                              button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
+                          // /.modal-dialog
                     // /.tab-content
                   // /.card-body
                 // /.nav-tabs-custom
@@ -357,8 +386,16 @@ html
   script(src='../../STB/ADMINLITE/dist/js/adminlte.min.js')
 
   script.
+    function handleFiles() {
+      const fileList = this.files; /* now you can work with the file list */
+      alert("This");
+    }  
+    const inputElement = document.getElementById("gubayePic");
+    inputElement.addEventListener("input", handleFiles);
     document.getElementById('3').className = "nav-link active"
     document.getElementById('#{user.GubayeID}').className = "nav-link active"
+
+    
     $(function () {
       $("#example1").DataTable();
       $('#example2').DataTable({
@@ -369,4 +406,4 @@ html
         "info": true,
         "autoWidth": false,
       });
-    });
+    }); 
