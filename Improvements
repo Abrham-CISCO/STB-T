@@ -30,8 +30,8 @@ Last Items
         COMPLETED Gubaye page add curriculum detail for each privledge
             COMPLETED Propagate to gubaye course page directly from gubaye page. 
         COMPLETED Gubaye public page : Reflect the curriculum. ክፍል፣ ኮርሶች (If activated)
-        ጉባኤ አስተዳዳሪን በጉባኤ ላይ የሚመድበው feature አይሰራም ስራው
-        Guabye Pic ይስተካከል assign መደረግ የሚቻልበት feature ገንባ።
+        COMPLETED ጉባኤ አስተዳዳሪን በጉባኤ ላይ የሚመድበው feature አይሰራም ስራው
+        COMPLETED Guabye Pic ይስተካከል assign መደረግ የሚቻልበት feature ገንባ።
     curriculum 
         Sould not allow user to assign course twice in a curriculum.
         Update Dashboard to show curriculums
