@@ -109,35 +109,32 @@ const addCourse = (curriculum_id, grade_id,course_id, callback) => {
 }
 
 const notAddedCoursesPerCurriculum = (curriculumId, callback) => {
-    var courseAdded = false;
-    var NAcourses = []; NAcourses.pop(), counter=0;
-        curriculum.findById(curriculumId).then(singleCurriculum => {
-            singleCurriculum.grades.forEach(grade => {
-                    course_ModelAccessor.allCourses(function(err, allCourses){
-                        console.log(allCourses);
-                        for(var i =0; i<allCourses.length;i++)
-                        {
-                            singleCourse = allCourses[i];
-                                grade.courses.forEach(gradeCourse => {
-                                    if(singleCourse._id == gradeCourse.course_id)
-                                    {
-                                        courseAdded = true;
-                                    }
-                                });    
-                                if(!courseAdded)
-                                {
-                                    if(grade._id == null) grade._id = "";
-                                    NAcourses.push({grade_id:grade._id,course_id:singleCourse._id, name:singleCourse.name})
-                                }
-                                courseAdded = false;
-                                counter++;
-                                if(singleCurriculum.grades.length * allCourses.length  == counter) 
-                                {callback(null,NAcourses); break;};
-                        }
-                    })   
-            });
-        }).catch((err)=>callback(err))    
-} 
+    var assignedCourses = [];
+    var finalResult= [];
+    assignedCourses.pop();
+    finalResult.pop();
+    var DupCourseFound = false;
+    //Determine courses that are added to a curriculum
+    curriculum.findById(curriculumId).then(singleCurriculum=>{
+        singleCurriculum.grades.forEach(grade=>{
+            grade.courses.forEach(course=>{
+                assignedCourses.push(course.course_id);
+            })
+        })
+        let uniqueAcourses = [ ...new Set(assignedCourses)];
+        course_ModelAccessor.allCourses(function(err,allCourses){
+            allCourses.forEach(singleCourse=>{
+                DupCourseFound = false;
+                uniqueAcourses.forEach(assignedCourse=>{
+                    if(singleCourse._id == assignedCourse) DupCourseFound = true;
+                })
+                if(!DupCourseFound) finalResult.push({course_id:singleCourse._id, name:singleCourse.name})
+            })
+            callback(null,finalResult)
+        })
+    })
+    //subtract courses added from all courses and return the result   
+}
 
 //create a function that adds a course to a grade of a specific curriculum
 const addCourseToGrade = (curriculumId, gradeId, courses, callback) => {

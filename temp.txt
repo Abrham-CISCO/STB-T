@@ -35,3 +35,69 @@ db.curriculums.update({_id:ObjectId("60183fac5541031b04eef866")},{$set:{
     }})
 
 db.curriculums.update({_id:ObjectId("60183fac5541031b04eef866")},{$set:{grades : []}})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var NAcourses = []; NAcourses.pop(), counter=0;
+    var NAcourses_noDup = []; NAcourses_noDup.pop();
+        curriculum.findById(curriculumId).then(singleCurriculum => {
+            singleCurriculum.grades.forEach(grade => {
+                    course_ModelAccessor.allCourses(function(err, allCourses){
+                        //Check if the course already is added to the curriculum
+                        for(var i =0; i<allCourses.length;i++)
+                        {
+                            singleCourse = allCourses[i];
+                                grade.courses.forEach(gradeCourse => {
+                                    if(singleCourse._id == gradeCourse.course_id)
+                                    {
+                                        courseAdded = true;
+                                    }
+                                });    
+                                if(!courseAdded)
+                                {
+                                    if(grade._id == null) grade._id = "";
+                                    NAcourses.push({grade_id:grade._id,course_id:singleCourse._id, name:singleCourse.name})
+                                }
+                                courseAdded = false;
+                                counter++;
+                                //if duplicate courses exist inside the curriculum not registered courses remove both
+                                //duplicates
+                                if(singleCurriculum.grades.length * allCourses.length  == counter) 
+                                {   var i=0; var temp;
+                                    console.log("NAcourses",NAcourses);
+                                    NAcourses.forEach(unrigisteredCourse1=>{
+                                        i=0;
+                                        for(var i =0; i<NAcourses.length; i++)
+                                        {
+                                           temp =  NAcourses[i].course_id
+                                           NAcourses.forEach((course)=>{
+                                               if(course.course_id == temp)
+                                               {
+                                                    NAcourses.slice(i)
+                                                    console.log(course.course_id," = ",temp)
+                                                }
+                                           })
+                                        }                                           
+                                    })
+                                    //let uniqueNAcourses = [ ...new Set(NAcourses)];
+                                    console.log("NAcourses",NAcourses);
+                                    callback(null,NAcourses); 
+                                    break;
+                                };
+                        }
+                    })   
+            });
+        }).catch((err)=>callback(err))    

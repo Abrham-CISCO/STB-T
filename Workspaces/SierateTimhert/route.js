@@ -468,8 +468,7 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
             }
         })    
         })
-    });
-
+    }); 
     router.post('/Gubaye_Nius_Sebsabi/upload/gubaye/:gubayeId/profileImage', mid.requiresToBeSTKNS,mid.updateUserData,
         uploadImage.single('gubayePicFile'), function(req,res,next){
              var gubayeId = req.params.gubayeId;
@@ -1164,8 +1163,7 @@ router.get('/SubDepartmentAdmin/curriculum/:curriculumId', mid.requireSignIn, mi
                     {
                         //use mongoose populate to pupulate course details on to each courses before sending it to 
                         //the front end
-                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                        
-                        console.log("req.session.unregisteredCoursesPerGrade", req.session.curriculum.gubayeat);
+                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                  
                         classRoom_ModelAccessor.Gubaeyat(function(err,classRooms){
                             curriculum.gubayeat.forEach(gubaye=>{
                                 classRooms.forEach(classRoom=>{
