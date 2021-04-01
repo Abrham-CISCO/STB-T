@@ -9,6 +9,7 @@ var classRoomInd_ModelAccessor = require('../Workspaces/SierateTimhert/models/cl
 var ModelAccessor = require('../SharedComponents/Messaging/model_Accessor');
 var Course_ModelAccessor = require('../Workspaces/SierateTimhert/models/courseModelAccessor')
 var classRoom_ModelAccessor = require('../Workspaces/SierateTimhert/models/classRoom_ModelAcessor')
+var curriculum_ModelAccessor = require('../Workspaces/SierateTimhert/models/curriculumModelAccessor')
 var UserModelAccessor = require('./Models/user_model_accessor')
 var PWDModelAccessor = require('./Models/psd_model_accessor');
 // var MessagesM = require('../SharedComponents/Models/Message_model');
@@ -97,24 +98,37 @@ router.get('/dashboard_detail/:tab', mid.requireSignIn, function(req,res,next){
         Course_ModelAccessor.allCoursesWithDetails(function(err,courses){
             classRoom_ModelAccessor.Gubaeyat(function(err,classRooms){
                 UserModelAccessor.listOfTKMembers(function(err,members){
-                    if(tab == "students" || tab == "courses" || tab == "groups" || tab == "members")
-                    {
-                        req.session.tab = tab
-                        req.session.dashUsers = users
-                        req.session.dashCourses = courses
-                        req.session.dashClassRooms = classRooms
-                        req.session.dashMembers = members
-                        return res.render('Account/templates/dashBoard',req.session);
-                    }
-                    else
-                    {
-                        req.session.tab = "students"
-                        req.session.dashUsers = users
-                        req.session.dashCourses = courses
-                        req.session.dashClassRooms = classRooms
-                        req.session.dashMembers = members
-                        return res.render('Account/templates/dashBoard',req.session);
-                    }
+                    curriculum_ModelAccessor.allCurriculums(function(err,curriculums){
+                        if(tab == "students" || tab == "courses" || tab == "groups" || tab == "members" || 
+                        tab == "curriculums")
+                        {
+                            req.session.tab = tab
+                            req.session.dashUsers = users
+                            req.session.dashCourses = courses
+                            req.session.dashClassRooms = classRooms
+                            req.session.dashMembers = members
+                                curriculums.forEach(curriculum=>{
+                                    users.forEach(user => {
+                                        if(user._id == curriculum.created_By)
+                                        {
+                                            curriculum.created_By = user.name;
+                                        }
+                                    })
+                                })
+                            req.session.dashCurriculums = curriculums;
+                            return res.render('Account/templates/dashBoard',req.session);
+                        }
+                        else
+                        {
+                            req.session.tab = "students"
+                            req.session.dashUsers = users
+                            req.session.dashCourses = courses
+                            req.session.dashClassRooms = classRooms
+                            req.session.dashMembers = members
+                            req.session.dashCurriculums = curriculums;
+                            return res.render('Account/templates/dashBoard',req.session);
+                        }
+                    })
                 })
             })
         })
@@ -261,7 +275,10 @@ router.get('/home', mid.requireSignIn, function(req,res,next){
                         req.session.classRoomCount = gubayeats.length
                         UserModelAccessor.countOfTKMembers(function(err,countOfTKMembers){                            req.session.classRoomCount = gubayeats.length
                             req.session.countOfTKMembers = countOfTKMembers
-                            return res.render('Account/templates/home',req.session);
+                            curriculum_ModelAccessor.allCurriculums(function(err,curriculums){
+                                req.session.curriculumsCount = curriculums.length;
+                                return res.render('Account/templates/home',req.session);
+                            })
                         })
                     })
                 })

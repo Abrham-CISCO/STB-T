@@ -111,6 +111,13 @@ html
                               a.nav-link.active(href='#members' data-toggle='tab') የትምህርት ክፍል አባላት 
                             else
                               a.nav-link(href='#members' data-toggle='tab') የትምህርት ክፍል አባላት 
+                          li.nav-item
+                            if(tab == "curriculums")
+                              a.nav-link.active(href='#curriculums' data-toggle='tab') ስርዓተ ትምህርት 
+                            else
+                              a.nav-link(href='#curriculums' data-toggle='tab')  ስርዓተ ትምህርት
+      
+
       
                       .card-body(style="overflow-x:auto")
                         .tab-content
@@ -355,6 +362,35 @@ html
                                       script.
                                         rank = 1 + rank
                                         document.getElementById('number_M_#{member._id}').innerText =  rank
+                            if(tab == "curriculums")
+                              #curriculums.active.tab-pane
+                                table#example4.table.table-bordered.table-striped
+                                  thead
+                                    tr
+                                      th ስም
+                                      th መስራች
+                                      th ክፍል
+                                      th ኮርሶች
+                                      th ዝርዝር 
+                                  each curriculum in dashCurriculums
+                                    script. 
+                                      var coursesCount = 0;
+                                    tr 
+                                      td 
+                                        a(href="/STB/SirateTimhert/DepartmentAdmin/curriculum/#{curriculum._id}") #{curriculum.name}
+                                      td #{curriculum.created_By}
+                                      td #{curriculum.grades.length}
+                                      td 
+                                        #courseCount 
+                                      each grade in curriculum.grades
+                                        script.
+                                          coursesCount = coursesCount + #{grade.courses.length};
+                                          document.getElementById("courseCount").innerText = coursesCount; 
+                                      
+                                      td #{curriculum.description}
+                            else
+                              #curriculums.tab-pane
+
 
 
 

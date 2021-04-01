@@ -69,7 +69,7 @@ var courseSchema = new mongoose.Schema({
     },
     courseOutline:{
         type:String,
-        default:"http://localhost:3000/Workspaces/SierateTimhert/static/kerestosyehulugetanew.pdf"
+        default:""
     },
     attendance:[attendanceSchema],
     markListColumnName:[markListColumnNameSchema],

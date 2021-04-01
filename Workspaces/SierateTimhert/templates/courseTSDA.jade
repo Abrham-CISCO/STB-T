@@ -71,7 +71,8 @@ html
                               .col-3
                                 .row 
                                   .col-12
-                                    button.btn.btn-block.btn-outline-danger.btn-sm(type='button' id="btnRemoveCourseOutline" onclick = "btnObj.removeCourseOutline()") አጥፋ
+                                    if(returnedCourse.courseOutline.toString() != "")
+                                      button.btn.btn-block.btn-outline-danger.btn-sm(type='button' id="btnRemoveCourseOutline" onclick = "btnObj.removeCourseOutline()") አጥፋ
                           form(role="form" enctype="multipart/form-data" method = "post" action="/STB/SirateTimhert/Gubaye_Nius_Sebsabi/upload/#{returnedCourse._id}/courseoutline")  
                             .card-body(style='display: block;')
                               .form-group#Cfile_upload
@@ -83,10 +84,10 @@ html
                                   .input-group-append
                                     button.btn.btn-primary(type='submit') Upload
 
-                            if(returnedCourse.courseOutline)
+                            if(returnedCourse.courseOutline.toString() != "")
                               iframe(src="#{returnedCourse.courseOutline}" style='width:100%' height='420' id="courseOutlineIFrame")                            
-                            else
-                              iframe(src="/null/" style='width:100%' height='420' id="courseOutlineIFrame")
+                            //- else
+                            //-   iframe(src="/null/" style='width:100%' height='420' id="courseOutlineIFrame")
                           // /.card-body
                           .card-footer(style='display: block;')
                             | Footer
