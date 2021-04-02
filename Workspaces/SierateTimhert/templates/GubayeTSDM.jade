@@ -34,7 +34,7 @@ html
           .container-fluid
             .row.mb-2
               .col-sm-12
-                h1 ጉባኤ #{user.gubaye.name}
+                h1 ጉባኤያት
               |           
               .col-sm-12
                 ol.breadcrumb.float-sm-right
@@ -42,7 +42,22 @@ html
                     a(href='/STB/SirateTimhert/SubDepartmentMember') ስዕራተ ትምህርት ንኡስ ክፍል
                   li.breadcrumb-item.active ጉባኤ #{user.gubaye.name}
             .row
-              .col-md-12
+              .col-md-3
+                .card.card-primary.card-outline
+                  .card-body.box-profile
+                    .text-center
+                      img.profile-user-img.img-fluid.img-circle(src='#{user.gubaye.profilePic}', alt='User profile picture')
+                    |                 
+                    h3.profile-username.text-center ጉባኤ #{user.gubaye.name}
+                    |                 
+                    p.text-muted.text-center
+                    |     
+                    //used to delete group
+                    ul.list-group.list-group-unbordered.mb-3
+                      li.list-group-item
+                        b ዝርዝር
+                        p #{user.gubaye.description}
+              .col-md-9
                 .card
                   .card-header.p-2
                     ul.nav.nav-pills
@@ -257,25 +272,7 @@ html
                      
                       #management.tab-pane
                         .row
-                          .col-md-3
-                            // Profile Image
-                            .card.card-primary.card-outline
-                              .card-body.box-profile
-                                .text-center
-                                  img.profile-user-img.img-fluid.img-circle(src='/STB/ADMINLITE/dist/img/user4-128x128.jpg', alt='User profile picture')
-                                |                 
-                                h3.profile-username.text-center ጉባኤ #{user.gubaye.name}
-                                |                 
-                                p.text-muted.text-center
-                                |                 
-                                ul.list-group.list-group-unbordered.mb-3
-                                  li.list-group-item
-                                    b ዝርዝር
-                                    p #{user.gubaye.description}
-                              // /.card-body
-                            // /.card
-                            // About Me Box
-                          .col-md-9
+                          .col-md-12
                             .card
                               .card-header.p-2
                                 ul.nav.nav-pills                 

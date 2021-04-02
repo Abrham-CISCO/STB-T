@@ -49,7 +49,7 @@ html
                         li.nav-item
                           a.nav-link(href='#books', data-toggle='tab') መጻህፍት
                         |                   
-                      li.nav-item
+                      //- li.nav-item
                         a.nav-link(href='#classRooms', data-toggle='tab') ጉባኤያት
                       |                   
                       li.nav-item
@@ -71,7 +71,7 @@ html
                               each book in returnedCourse.books
                                 div(id="f#{book._id}").tab-pane
                                   iframe(src = "/STB/Workspaces/SierateTimhert/static/#{book.filePath}" style="width:100%" height=420)
-                      #classRooms.tab-pane
+                      //- #classRooms.tab-pane
                         .row
                           each gubaye in classRooms
                             .col-12.col-sm-6.col-md-4               
