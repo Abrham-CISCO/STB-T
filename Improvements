@@ -9,9 +9,10 @@ Can be Delayed
 
     Notification
 
+
+Last Items
     Profile System
         Enable users to set up their profile image
-Last Items
     User Navigation
         When gubaye is opened the gubaye menu should be active
     User Login LogOut
@@ -21,9 +22,9 @@ Last Items
         Do not send password to the client
         use middlewares to forbid unauthenticated users from accessing restricted pages
     General 
-        Give title to all pages.
+        COMPLETED Give title to all pages.
         move all socket codes from index.js to a single file
-
+        Copyright : Give yourself credit
 ስዕራተ ትምህርት Sub System
     Gubaieyat
         COMPLETED don't let the users delete Gubaye
