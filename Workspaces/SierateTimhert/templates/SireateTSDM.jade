@@ -92,22 +92,8 @@ html
           // /.container-fluid
         // /.content
       // /.content-wrapper
-      footer.main-footer
-        .float-right.d-none.d-sm-block
-          b Version
-          |  3.0.2-pre
-        |     
-        strong
-          | Copyright &copy; 2014-2019 
-          a(href='http://adminlte.io') AdminLTE.io
-          | .
-        |  All rights
-        |     reserved.
-      // Control Sidebar
-      aside.control-sidebar.control-sidebar-dark
-        // Control sidebar content goes here
-      // /.control-sidebar
-    // ./wrapper
+      footer.main-footer 
+        include ../../../SharedComponents/Layouts/footer.jade
     // jQuery
     script(src='../ADMINLITE/plugins/jquery/jquery.min.js')
     // Bootstrap 4

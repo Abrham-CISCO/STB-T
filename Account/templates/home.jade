@@ -47,7 +47,6 @@ html
                           if(user.work[0].subDepartment[0].active == true)
                             li.nav-item
                               a.nav-link(href='#dashboard' data-toggle='tab') ዳሽ ቦርድ
-      
                       .card-body
                         .tab-content
                           #menu.active.tab-pane
@@ -80,9 +79,6 @@ html
                                                       a(href="..#{val3.SD_link}", id=val3.sd_id).nav-link
                                                         span.info-box-text=val3.name
                                                         span.info-box-text=val3.role
-                                                    // /.info-box-content
-                                                    // /.info-box
-                                                    // /.col
                                 .col-12
                                   h5.m-0.text-dark ጉባኤያት
                                 if(JoinedclassRooms)
@@ -98,7 +94,6 @@ html
                             #dashboard.tab-pane
                               .row
                                 .col-lg-3.col-6
-                                  // small box
                                   .small-box.bg-info
                                     .inner
                                       h3 #{usersCount}
@@ -175,19 +170,10 @@ html
           .container-fluid
         // /.content
       // /.content-wrapper
-      footer.main-footer
-        strong
-          | Copyright &copy; 2021 webapp designed and developed by
-          a(href='https://www.linkedin.com/in/abrham-getachew-560887184/')  Abrham Getachew
-          | . All rights reserved.
-          br
-          |     Front end template provided by 
-          a(href='http://adminlte.io') AdminLTE.io
-      // Control Sidebar
-      aside.control-sidebar.control-sidebar-dark
-        // Control sidebar content goes here
-      // /.control-sidebar
-    // ./wrapper
+      
+      footer.main-footer 
+        include ../../SharedComponents/Layouts/footer.jade
+
     // jQuery
     script(src='../ADMINLITE/plugins/jquery/jquery.min.js')
     // Bootstrap 4
