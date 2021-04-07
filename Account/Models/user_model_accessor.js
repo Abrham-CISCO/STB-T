@@ -4,6 +4,7 @@ var Messaging_ModelAccessor = require('../../SharedComponents/Messaging/model_Ac
 var Notificaton_ModelAccessor = require('../../SharedComponents/Notification/model_Accessor')
 var Gubaye_ModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoom_ModelAcessor')
 var GubayeInd_ModelAccessor = require('../../Workspaces/SierateTimhert/models/classRoomInd_ModelAccessor');
+const { response } = require('express');
 // const { all } = require('../../Workspaces/Sebsabi/route');
 
 
@@ -414,8 +415,15 @@ const removeMemberFromSubDepartment = (userTelephone, subDepartment, role, callb
         }
     });
 }
+const uploadProfilePic  = (userId, img,callback) =>
+{
+    User.uploadProfilePic(userId, img,function(err,resp)
+    {
+        callback(err,resp)
+    })
+}
 
-
+exports.uploadProfilePic = uploadProfilePic;
 exports.addMemberToSubDepartment = addMemberToSubDepartment;
 exports.removeMemberFromSubDepartment = removeMemberFromSubDepartment;
 exports.allUsers = allUsers;

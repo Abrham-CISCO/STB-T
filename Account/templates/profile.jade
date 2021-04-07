@@ -45,6 +45,7 @@ html
                     |                 
                     h3.profile-username.text-center #{user.name}
                     h5.profile-username.text-center #{user.cname}
+                    button(type='button', class="btn btn-block btn-primary", data-toggle='modal', data-target='#modal_pic-sm') ምስል ቀይር
                     |                 
                     p.text-muted.text-center
                     |                 
@@ -86,6 +87,28 @@ html
                           .form-group.row
                             .offset-sm-2.col-sm-10
                               button.btn.btn-danger(type='submit') መዝግብ
+                  #modal_pic-sm.modal.fade(style='display: none;', aria-hidden='true')
+                    .modal-dialog.modal_pic-sm
+                      .modal-content
+                        .modal-header
+                          h5.modal-title የመግለጫ ምስል መቀየሪያ
+                          button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') ×
+                        .modal-body
+                          .text-center
+                            img.profile-user-img.img-fluid.img-circle#gubayeImg(style="width:300px;" src='#{user.pro_img}', alt='User profile picture')
+                          .form-group
+                            br
+                            label(for='exampleInputFile') የመግለጫ ምስል ይምረጡ
+                            br
+                            .input-group
+                              form(method="post" enctype="multipart/form-data" action="/STB/accounts/profilePic/#{user._id}")
+                                input(type='file' name="gubayePicFile" accept="image/*")
+                                button.btn.btn-primary(type="submit") Upload                                  
+                        .modal-footer.justify-content-between
+                          button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
+                          // /.modal-dialog
+ 
                       // /.tab-pane
                     // /.tab-content
                   // /.card-body
@@ -104,3 +127,17 @@ html
     script(src='../STB/ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
     script(src='../STB/ADMINLITE/dist/js/demo.js')
+
+
+        // Bootstrap 4
+    script(src='../../STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    // AdminLTE for demo purposes
+    script(src='../../STB/ADMINLITE/dist/js/demo.js')
+    // DataTables
+  script(src='../../STB/ADMINLITE/plugins/datatables/jquery.dataTables.js')
+  script(src='../../STB/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')
+  script(src='../../STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+  // DataTables
+  link(rel='stylesheet', href='/STB/ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
+  
+  script(src='../../STB/ADMINLITE/dist/js/adminlte.min.js')

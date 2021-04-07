@@ -356,14 +356,22 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
         membersTel.pop();
         req.session.user.GubayeID = GubayeID;
         classRoom_ModelAccessor.gubayeDetail(GubayeID,function(err, gubaye){
-            curriculum_ModelAccessor.detailedCurriculumDetail(gubaye.curriculum,function(err, curriculum){
+            
+        console.log("gubaye.curriculum =",gubaye.curriculum)
+            curriculum_ModelAccessor.detailedCurriculumDetail(gubaye.curriculum == "none"?ObjectId(""):gubaye.curriculum,function(err, curriculum){
                 if(err)
                 {
+                    console.log("curriculum",curriculum)
                     next(err)
                 }
                 else
                 {
-                    if(!curriculum) req.session.curriculum = "none";
+                    console.log("curriculum",curriculum)
+                    if(!curriculum || curriculum == "none") 
+                    {
+                        req.session.curriculum = {};
+                        req.session.curriculums = [];
+                    }
                     else
                     {
                         course_ModelAccessor.allCourses(function(err,allCourses){

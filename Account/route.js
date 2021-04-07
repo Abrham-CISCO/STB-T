@@ -12,12 +12,44 @@ var classRoom_ModelAccessor = require('../Workspaces/SierateTimhert/models/class
 var curriculum_ModelAccessor = require('../Workspaces/SierateTimhert/models/curriculumModelAccessor')
 var UserModelAccessor = require('./Models/user_model_accessor')
 var PWDModelAccessor = require('./Models/psd_model_accessor');
+var multer = require('multer');
 // var MessagesM = require('../SharedComponents/Models/Message_model');
 var socketmodel = require('../SharedComponents/Models/socket');
 var passport = require('passport')
 var authenticate = require('./authenticate');
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
+
+var storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, 'C:/wamp64/www/TK/Account/static');
+    },
+    filename: (req,file,cb) => {
+        cb(null, file.originalname)
+    }
+})
+
+var imageFileFilter = (req, imageFile, cb) => {
+    if(!imageFile.originalname.match(/\.(jpg|jpeg|png|gif)$/))
+    {
+        return cb(new Error('You can upload image file only!'))
+    }
+    cb(null, true);
+}
+
+const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
+
+ 
+router.post('/profilePic/:userId', mid.requireSignIn, mid.updateUserData,
+uploadImage.single('gubayePicFile'), function(req,res,next){
+     var userId = req.params.userId;
+     var img = "/STB/Account/static/" + req.file.originalname;
+     // Register the profile pic on the database
+     UserModelAccessor.uploadProfilePic(userId,img,function(err,response){
+        var url = "/STB/Accounts/profile";
+        res.redirect(url);
+     })
+});
 
 router.get('/logout', function(req,res,next){
     if(req.session){

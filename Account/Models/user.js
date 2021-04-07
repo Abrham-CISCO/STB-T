@@ -68,7 +68,7 @@ var UserSchema = new mongoose.Schema({
     ChatSocketID: {
         type: String,
     },
-    pro_img: {
+    pro_img: { 
         type: String,
         default: "../Account/static/maleAvatar.png"
     }
@@ -76,14 +76,21 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.pre('save', function(next){
     var user = this;
-    if(user.sex.male == false)
+    if(user.pro_img == "../Account/static/maleAvatar.png")
     {
-        user.pro_img = "../Account/static/femaleAvatar.png"
-        next();
+        if(user.sex.male == false)
+        {
+            user.pro_img = "../Account/static/femaleAvatar.png"
+            next();
+        }
+        else
+        {
+            next();
+        }
     }
     else
     {
-        next();
+        next()
     }
 });
 
@@ -329,6 +336,17 @@ UserSchema.statics.addMember = function(telephoneArray, groupID, groupName, call
         callback(null,"notification")
 
     })
+}
+
+UserSchema.statics.uploadProfilePic = function(userId, img,callback){
+    User.findById(userId).then(USER=>{
+        USER.pro_img = img;
+        console.log("img", USER.pro_img)
+        USER.save().then(response=>{
+            console.log("img", response.pro_img)
+            callback(null,response)
+        }).catch(err=>callback(err,false))
+    }).catch(err=>callback(err,false))
 }
 
 UserSchema.plugin(passportLocalMongoose);
