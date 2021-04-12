@@ -13,7 +13,7 @@ var classRoomSchema = new mongoose.Schema({
             }
         }
     ]//60217b11fc167410cc020a99
-    ,curriculum:{type:String,default:"none"}
+    ,curriculum:{type:String,default:"60701692b1a1c822e0f45291"}
     ,addedCourses:[courseSchema]
     ,profilePic:{type:String, default:"/STB/ADMINLITE/dist/img/logo.jpg"}
 },{timestamps:true});

@@ -77,10 +77,10 @@ html
                         .row
                           if(user.gubayemembers)
                             each val in user.gubayemembers
-                              .col-12.col-sm-6.col-md-3
+                              .col-12.col-sm-6.col-md-4
                                 .info-box.mb-3
                                   span.info-box-icon.bg-success.elevation-1
-                                    img(src="../../STB/#{val.pro_img}" alt="User Image")
+                                    img(height = 100 style="width:100%" src="#{val.pro_img}" alt="User profile image")
                                   .info-box-content
                                     a.users-list-name(href="/STB/accounts/public/profile/#{val.telephone}") #{val.name}
                                     a(href="/STB/SirateTimhert/Gubaye_Nius_Sebsabi/#{user.gubaye._id}/Remove/#{val.telephone}")
@@ -230,7 +230,7 @@ html
                               button.btn.btn-primary(type='button' onclick="addmembers('#{user.gubaye._id}');") ጨምር
                           // /.modal-dialog
                       #education.tab-pane
-                        if(user.gubaye.curriculum != "none")
+                        if(user.gubaye.curriculum != "60701692b1a1c822e0f45291")
                           each curriculum in curriculums
                             if(curriculum._id ==user.gubaye.curriculum)
                               h3 
@@ -238,12 +238,12 @@ html
                               .row
                                 .col-5.col-sm-3
                                   #vert-tabs-tab.nav.flex-column.nav-tabs.h-100(role='tablist' aria-orientation='vertical')
-                                    
+                                  if(curriculum.grades.length>0)                                    
                                     each grade in curriculum.grades
                                       a.nav-link(id = "G#{grade._id}-tab" data-toggle='pill' href='#G#{grade._id}' role='tab' aria-controls='G#{grade._id}' aria-selected='false') #{grade.name}
                                 .col-7.col-sm-9
                                   #vert-tabs-tabContent.tab-content
-                                    
+                                  if(curriculum.grades.length>0)  
                                     each grade in curriculum.grades
                                       div(id="G#{grade._id}" class="tab-pane fade" role='tabpanel' aria-labelledby='G#{grade._id}-tab')
                                         h1 #{grade.name}                                  
@@ -264,14 +264,11 @@ html
                                         br
                                         h6 የክፍሉ አላማ
                                         p #{grade.description}
-                            // /.modal-dialog
-                          // /.tab-content
-                        // /.card-body
-                            else
-                              .col-12.col-sm-6.col-md-3
-                                button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
-                                  .fas.fa-plus.nav-plus
-                                a(href="#" class="users-list-name") ስርዓተ ትምህርት መድብ
+                        else
+                          .col-12.col-sm-6.col-md-3
+                            button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
+                              .fas.fa-plus.nav-plus
+                            a(href="#" class="users-list-name") ስርዓተ ትምህርት መድብ
                      
                       #management.tab-pane
                         .row
@@ -389,3 +386,10 @@ html
         "autoWidth": false,
       });
     }); 
+    // jQuery
+    script(src='../ADMINLITE/plugins/jquery/jquery.min.js')
+    // Bootstrap 4
+    script(src='../ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    // AdminLTE App
+    script(src='../ADMINLITE/dist/js/adminlte.min.js')
+    // AdminLTE for demo purposes

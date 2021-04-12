@@ -56,6 +56,7 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
         membersTel.pop();
         req.session.user.GubayeID = GubayeID;
         classRoom_ModelAccessor.gubayeDetail(GubayeID,function(err, gubaye){
+            console.log(gubaye)
             curriculum_ModelAccessor.detailedCurriculumDetail(gubaye.curriculum,function(err, curriculum){
                 if(err)
                 {
@@ -356,21 +357,13 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
         membersTel.pop();
         req.session.user.GubayeID = GubayeID;
         classRoom_ModelAccessor.gubayeDetail(GubayeID,function(err, gubaye){
-            
-        console.log("gubaye.curriculum =",gubaye.curriculum)
-            curriculum_ModelAccessor.detailedCurriculumDetail(gubaye.curriculum == "none"?ObjectId(""):gubaye.curriculum,function(err, curriculum){
-                if(err)
-                {
-                    console.log("curriculum",curriculum)
-                    next(err)
-                }
-                else
-                {
-                    console.log("curriculum",curriculum)
-                    if(!curriculum || curriculum == "none") 
+            console.log("gubaye.curriculum.nius =",gubaye.curriculum)
+            if(gubaye.curriculum != "60701692b1a1c822e0f45291")
+            {
+                curriculum_ModelAccessor.detailedCurriculumDetail(gubaye.curriculum,function(err, curriculum){
+                    if(err)
                     {
-                        req.session.curriculum = {};
-                        req.session.curriculums = [];
+                        next(err)
                     }
                     else
                     {
@@ -457,24 +450,89 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                 req.session.user.allusers = users;
                                                 course_ModelAccessor.allCourses((error,courses)=>{
                                                     req.session.courses = courses
-                                                    // return res.render("Workspaces/SierateTimhert/templates/courseTSDA.jade",req.session)
-                                                    classRoom_ModelAccessor.notAddedCourses(GubayeID,function(error, unjoinedCourses, JoinedCourses){
-                                                        req.session.unjoinedCourses = unjoinedCourses
-                                                        req.session.JoinedCourses = JoinedCourses;
+
                                                         console.log("req.session", req.session)
                                                         res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
                                                         
-                                                    })
                                                 })
                                             })
                                     })
                                 }
                             })       
-                        })
-                
+                        })   
                     }
+                })
             }
-        })    
+            else
+            {
+                req.session.curriculum = {};
+                req.session.curriculums = [];
+                course_ModelAccessor.allCourses(function(err,allCourses){
+                    classRoom_ModelAccessor.gubayeDetail(GubayeID,function(error,gubaye){
+                        if(error)
+                        {
+                            return next(error);                
+                        }
+                        if(gubaye.members.length>0)
+                        {
+                            for(var i = 0; i<gubaye.members.length;i++){
+                                membersTel.push(gubaye.members[i].memberId)
+                            }
+                            UserModelAccessor.userObjectByTel(membersTel,function(error,contacts){
+                                req.session.user.gubaye = gubaye; 
+                                req.session.user.gubayemembers = contacts;
+                                classRoomInd_ModelAccessor.NonMemberUsers(GubayeID,function(error,users){
+                                    var tela = []
+                                    tela.pop();
+                                        for(var i = 0; i<users.length; i++)
+                                        {
+                                            tela.push(users[i].userTel)
+                                        }
+                                        UserModelAccessor.userObjectByTel(tela,function(error, userWithName){
+                                            for(var i = 0; i<users.length; i++)
+                                            {
+    
+                                                users[i].name = userWithName[i].name
+                                            }
+                                            req.session.user.allusers = users;
+                                            course_ModelAccessor.allCourses((error,courses)=>{
+                                                    req.session.courses = courses
+                                                    res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)     
+                                                })               
+                                            })
+                                        })
+                                })
+                        }
+                        else
+                        {
+                            req.session.user.gubaye = gubaye; 
+                            req.session.user.gubayemembers =[];
+                            classRoomInd_ModelAccessor.NonMemberUsers(GubayeID,function(error,users){
+                                var tela = []
+                                tela.pop();
+                                    for(var i = 0; i<users.length; i++)
+                                    {
+                                        tela.push(users[i].userTel)
+                                    }
+                                    UserModelAccessor.userObjectByTel(tela,function(error, userWithName){
+                                        for(var i = 0; i<users.length; i++)
+                                        {
+    
+                                            users[i].name = userWithName[i].name
+                                        }
+                                        req.session.user.allusers = users;
+                                        course_ModelAccessor.allCourses((error,courses)=>{
+                                            req.session.courses = courses
+                                                console.log("req.session", req.session)
+                                                res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
+
+                                        })
+                                    })
+                            })
+                        }
+                    })       
+                })   
+            }    
         })
     }); 
     router.post('/Gubaye_Nius_Sebsabi/upload/gubaye/:gubayeId/profileImage', mid.requiresToBeSTKNS,mid.updateUserData,

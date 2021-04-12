@@ -41,7 +41,7 @@ html
                 .card.card-primary.card-outline
                   .card-body.box-profile
                     .text-center
-                      img.profile-user-img.img-fluid.img-circle(src='#{user.pro_img}', alt='User profile picture')
+                      img.profile-user-img.img-fluid.img-circle(src='#{user.pro_img}', style="height:150px; width:150px;" alt='User profile picture')
                     |                 
                     h3.profile-username.text-center #{user.name}
                     h5.profile-username.text-center #{user.cname}
@@ -96,7 +96,7 @@ html
                             span(aria-hidden='true') ×
                         .modal-body
                           .text-center
-                            img.profile-user-img.img-fluid.img-circle#gubayeImg(style="width:300px;" src='#{user.pro_img}', alt='User profile picture')
+                            img.profile-user-img.img-fluid.img-circle#gubayeImg(style="height:500x; width:500px;" src='#{user.pro_img}', alt='User profile picture')
                           .form-group
                             br
                             label(for='exampleInputFile') የመግለጫ ምስል ይምረጡ

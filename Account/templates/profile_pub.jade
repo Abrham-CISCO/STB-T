@@ -41,9 +41,10 @@ html
                 .card.card-primary.card-outline
                   .card-body.box-profile
                     .text-center
-                      img.profile-user-img.img-fluid.img-circle(src='/STB/STB/#{loadeduser.pro_img}', alt='User profile picture')
+                      img.profile-user-img.img-fluid.img-circle(style="height:150px; width:150px;" src='#{loadeduser.pro_img}', alt='User profile picture')
                     |                 
                     h3.profile-username.text-center #{loadeduser.name}
+                    button(type='button', class="btn btn-block btn-primary", data-toggle='modal', data-target='#modal_pic-sm') ምስል በትልቁ እይ
                     |                 
                     p.text-muted.text-center
                     |                 
@@ -80,6 +81,16 @@ html
                           tr
                             td ስልክ ቁጥር :
                             td #{loadeduser.telephone}
+                  #modal_pic-sm.modal.fade(style='display: none;', aria-hidden='true')
+                    .modal-dialog.modal_pic-sm
+                      .modal-content
+                        .modal-header
+                          h5.modal-title የ#{loadeduser.name} የመግለጫ ምስል
+                          button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') ×
+                        .modal-body
+                          .text-center
+                            img.profile-user-img.img-fluid.img-circle#gubayeImg(style="height:500px; width:500px;" src='#{loadeduser.pro_img}', alt='User profile picture')                            
       footer.main-footer 
         include ../../SharedComponents/Layouts/footer.jade
     // jQuery
