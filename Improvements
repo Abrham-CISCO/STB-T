@@ -14,9 +14,9 @@ Last Items
     Profile System
         COMPLETED Enable users to set up their profile image
     User Navigation
-        When gubaye is opened the gubaye menu should be active
+        COMPLETED When gubaye is opened the gubaye menu should be active
     User Login LogOut
-        Session Expire
+        COMPLETED Session Expire
         Password Meter
     Session
         Do not send password to the client

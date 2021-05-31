@@ -35,6 +35,7 @@
     var Notification = require('./SharedComponents/Notification/route');
 // Models
   var socketmodel = require('./SharedComponents/Models/socket');
+const { createInterface } = require('readline');
 // Mongoose Setup 
   //mongoose connection
   mongoose.connect(config.mongoUrl);
@@ -205,6 +206,39 @@ app.use(passport.session());
     // Parse to JSON
   app.use(express.json());
   app.use(express.urlencoded({extended: true}));
+  
+  //Here define a middleware that controls the session. the middleware should 
+  //check any user requests if it is made in 5 minutes of the previous request and if it is not
+  //it should Prompt the user to login again if it is it should reset the timer
+  var elappsedTime, maxTime=0;
+
+  app.use(function(req,res,next){
+    console.log("This code is excuted from index.js")
+    if(req.session.user) {
+      elappsedTime = Date.now() - req.session.user.lastAccess;
+      req.session.user.lastAccess = Date.now();
+      if(maxTime<elappsedTime)
+      {
+        maxTime = elappsedTime;
+      }
+    }
+    else console.log("Not Excuted");
+
+    console.log("Last User access was ",maxTime," seconds ago.");
+    if(maxTime>20000) 
+      {
+        maxTime = 0;
+        res.redirect("/STB/Accounts/logout");
+      }
+      else
+      {
+        maxTime = 0;
+        next();
+      }      
+
+
+  })
+
   
 
   // Route Definations
