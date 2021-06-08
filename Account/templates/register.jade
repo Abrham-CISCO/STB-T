@@ -56,14 +56,21 @@ html
               .input-group-append
                 .input-group-text
                   span.fas.fa-envelope
-            |         
+            |  
+            h6 የይለፍ ቃሎ በትንሹ 
+            ul 
+              li ስድስት ፊደላትን መያዝ አለበት።
+              li አንድ uppercase letter ፣ lowercase letter ፣ ቁጥር እና የተለየ ፊደል መያዝ አለበት።
+
+            span#StrengthDisp   
             .input-group.mb-3
-              input.form-control(type='password', placeholder='የይለፍ ቃል', name='password')
+              input.form-control(type='password', placeholder='የይለፍ ቃል', name='password' id='PassEntry')
               |           
               .input-group-append
                 .input-group-text
                   span.fas.fa-lock
-            |         
+            | 
+            p 
             .input-group.mb-3
               input.form-control(type='password', placeholder='የይለፍ ቃል በድጋሜ', name='rpassword')
               |           
@@ -84,7 +91,7 @@ html
                   </div>
               // /.col
               .col-4
-                button.btn.btn-primary.btn-block(type='submit') &#x1218;&#x12DD;&#x130D;&#x1260;&#x129D;
+                button.btn.btn-primary.btn-block#submit(type='submit') &#x1218;&#x12DD;&#x130D;&#x1260;&#x129D;
               // /.col
           //
             <div class="social-auth-links text-center">
@@ -104,6 +111,7 @@ html
     // /.register-box
     // jQuery
     script(src='static/ADMINLITE/plugins/jquery/jquery.min.js')
+    script(src='../account/js/register.js')
     // Bootstrap 4
     script(src='static/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
     // AdminLTE App

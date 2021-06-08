@@ -17,7 +17,7 @@ Last Items
         COMPLETED When gubaye is opened the gubaye menu should be active
     User Login LogOut
         COMPLETED Session Expire
-        Password Meter
+        COMPLETED Password Meter (https://www.section.io/engineering-education/password-strength-checker-javascript/)
     Session
         Do not send password to the client
         use middlewares to forbid unauthenticated users from accessing restricted pages
