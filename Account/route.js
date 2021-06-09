@@ -65,7 +65,7 @@ router.get('/logout', function(req,res,next){
     }
  });
 
- router.get('/All', function(req,res,next){
+ router.get('/All', mid.requireSignIn, function(req,res,next){
     UserModelAccessor.allUsers(function(error,Users){
         res.json({
             response:Users
@@ -73,7 +73,7 @@ router.get('/logout', function(req,res,next){
     })
  });
 
- router.get('/Info/:userId',function(req,res,next){
+ router.get('/Info/:userId', mid.requireSignIn,function(req,res,next){
      var UserId = req.params.userId
      UserModelAccessor.userData(UserId,function(error,user){
          if(error){
@@ -90,7 +90,7 @@ router.get('/logout', function(req,res,next){
      });
  });
 
- router.get('/MyInfo/',function(req,res,next){
+ router.get('/MyInfo/',mid.requireSignIn,function(req,res,next){
     var UserId = req.session.userId;
     UserModelAccessor.userData(UserId,function(error,user){
         if(error){
@@ -320,7 +320,7 @@ router.get('/home', mid.requireSignIn, function(req,res,next){
     });
     });
 
-router.get('/public/profile/:telephone', function(req,res,next){
+router.get('/public/profile/:telephone',mid.requireSignIn, function(req,res,next){
     var Tel = req.params.telephone;    
 
     UserModelAccessor.profileLoaderByTel(Tel,req.session.user, function(error,user, askerObject){
@@ -362,13 +362,6 @@ router.post('/CHPWD', function(req,res,next){
         err.status = 401;
         return next(err);        
     }     
-});
-
-router.get('/User', function(req,res,next){
-    var telephoneArray = ["0923276844","0911675507"];
-    UserModelAccessor.userObjectByTel(telephoneArray,function(error,users){
-        res.json(users);
-    })
 });
 
 router.post('/forgotPassword', function(req,res,next){
@@ -435,7 +428,7 @@ generateRandomNumber = function()
     return (Math.floor(Math.random()*1000000) + 1 );
 }
 
-router.get('/add/:subDepartment/:role/:userTelephone', function(req,res,next){
+router.get('/add/:subDepartment/:role/:userTelephone',mid.requireSignIn, function(req,res,next){
     var subDepartment = req.params.subDepartment;
     var role = req.params.role;
     var userTelephone = req.params.userTelephone;
@@ -445,7 +438,7 @@ router.get('/add/:subDepartment/:role/:userTelephone', function(req,res,next){
     })
 });
 
-router.get('/remove/:subDepartment/:role/:userTelephone', function(req,res,next){
+router.get('/remove/:subDepartment/:role/:userTelephone',mid.requireSignIn, function(req,res,next){
     var subDepartment = req.params.subDepartment;
     var role = req.params.role;
     var userTelephone = req.params.userTelephone;
