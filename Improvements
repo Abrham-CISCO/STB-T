@@ -20,11 +20,12 @@ Last Items
         COMPLETED Password Meter (https://www.section.io/engineering-education/password-strength-checker-javascript/)
     Session
         Do not send password to the client
-        use middlewares to forbid unauthenticated users from accessing restricted pages
+        COMPLETED use middlewares to forbid unauthenticated users from accessing restricted pages
     General 
         COMPLETED Give title to all pages.
         NOT NECESSARY move all socket codes from index.js to a single file
         COMPLETED Copyright : Give yourself credit
+        Detach አምደ ተዋሕዶ link
 ስዕራተ ትምህርት Sub System
     Gubaieyat
         COMPLETED don't let the users delete Gubaye

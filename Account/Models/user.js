@@ -96,7 +96,7 @@ UserSchema.pre('save', function(next){
 
 // Chat socket tools
     UserSchema.statics.getChatSocketID = function(telephone, callback){
-        User.findOne({telephone: telephone})
+        User.findOne({telephone: telephone},{hash:false, salt:false})
             .exec(function(error,user){
                 if(error){
                     return callback(error);
@@ -120,7 +120,7 @@ UserSchema.pre('save', function(next){
     }
 //Authenticate input against database documents
 UserSchema.statics.authenticate = function(telephone, password, callback){
-    User.findOne({telephone: telephone})
+    User.findOne({telephone: telephone},{hash:false, salt:false})
         .exec(function(error,user){
             if(error){
                 return callback(error);
@@ -142,7 +142,7 @@ UserSchema.statics.authenticate = function(telephone, password, callback){
 
 //based on an inputted telehphone determine the username
 UserSchema.statics.IDentifyUserName = function(telephone,callback){
-    User.findOne({telephone:telephone},{password:false})
+    User.findOne({telephone:telephone},{hash:false, salt:false})
         .exec(function(error, user){
             if(error){
                 return callback(error);
@@ -157,7 +157,7 @@ UserSchema.statics.IDentifyUserName = function(telephone,callback){
 
 //based on an inputted telehphone determine the username
 UserSchema.statics.UserByTelephone = function(telephone,callback){
-    User.findOne({telephone:telephone},{password:false})
+    User.findOne({telephone:telephone},{hash:false, salt:false})
         .exec(function(error, user){
             if(error){
                 return callback(error);
@@ -171,7 +171,7 @@ UserSchema.statics.UserByTelephone = function(telephone,callback){
 }
 
 UserSchema.statics.Allusers = function(callback){
-    User.find({},{password:false})
+    User.find({},{hash:false, salt:false})
         .exec(function(error, user){
             if(error){
 
@@ -184,7 +184,7 @@ UserSchema.statics.Allusers = function(callback){
         });
 }
 UserSchema.statics.UserById = function(UserId, callback){
-    User.findOne({_id:UserId},{password:false})
+    User.findOne({_id:UserId},{hash:false, salt:false})
         .exec(function(error, user){
             if(error){
             }
@@ -325,7 +325,7 @@ UserSchema.statics.addMember = function(telephoneArray, groupID, groupName, call
         }
         for(var i =0; i<user.length;i++)
         {
-            User.findOne({telephone:telephoneArray[i]})
+            User.findOne({telephone:telephoneArray[i]},{hash:false, salt:false})
             .exec(function(error,user){
                 user.classRoom.push({class_ID:groupID})
                 // skip the password do not save it.
