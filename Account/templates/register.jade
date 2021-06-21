@@ -10,53 +10,51 @@ html
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
-  body.hold-transition.register-page(style="background-image: url('../../STB/Account/static/bkgrnd.jpg');")
+  body.hold-transition.register-page(style="background-image: url('../../STB/Account/static/bkgrnd.JPG');")
     .register-box
-      //
-        <div class="register-logo">
-        <a href="/"><b>አምደ ተዋሕዶ ሰንበት ትምህርት ቤት</b></a>
-        </div>
       .card
         .card-body.register-card-body
           p.login-box-msg
             img.brand-image.img-circle.elevation-3(src='../../STB/Account/static/logo.jpg', alt='አምደ ተዋሕዶ Logo', style='opacity: .8', width='100')
             br
-            br
-            | &nbsp;&nbsp;&nbsp; &#x12A0;&#x12F2;&#x1235; &#x12A0;&#x1263;&#x120D; &#x1218;&#x1218;&#x12DD;&#x1308;&#x1262;&#x12EB; &#x1245;&#x133D;
-          |       
+            | &nbsp;&nbsp;&nbsp; &#x12A0;&#x12F2;&#x1235; &#x12A0;&#x1263;&#x120D; &#x1218;&#x1218;&#x12DD;&#x1308;&#x1262;&#x12EB; &#x1245;&#x133D;       
           form(action='../../STB/Accounts/register', method='post')
-            .input-group.mb-3
-              input.form-control(type='text', placeholder='ሙሉ ስም', name='name')
-              |           
-              .input-group-append
-                .input-group-text
-                  span.fas.fa-user
-            |         
-            .input-group.mb-3
-              input.form-control(type='text', placeholder='የክርስትና ስም', name='cname')
-              |           
-              .input-group-append
-                .input-group-text
-                  span.fas.fa-user
-            |         
-            .form-group
-              select.form-control(name='sex')
-                option ወንድ
-                option ሴት
-            .input-group.mb-3
-              input.form-control(type='text', placeholder='ስልክ ቁጥር', name='telephone', id='tel')
-              |           
-              .input-group-append
-                .input-group-text
-                  span.fas.fa-phone
-            |         
-            .input-group.mb-3
-              input.form-control(type='email', placeholder='ኢ-ሜል', name='email')
-              |           
-              .input-group-append
-                .input-group-text
-                  span.fas.fa-envelope
-            |  
+            .row
+              .col-6
+                .input-group.mb-3
+                  input.form-control(type='text', placeholder='ሙሉ ስም', name='name')
+                  |           
+                  .input-group-append
+                    .input-group-text
+                      span.fas.fa-user
+                |         
+                .input-group.mb-3
+                  input.form-control(type='text', placeholder='የክርስትና ስም', name='cname')
+                  |           
+                  .input-group-append
+                    .input-group-text
+                      span.fas.fa-user
+                |         
+                .form-group
+                  select.form-control(name='sex')
+                    option ወንድ
+                    option ሴት
+              .col-6
+                .input-group.mb-3
+                  input.form-control(type='text', placeholder='ስልክ ቁጥር', name='telephone', id='tel')
+                  |           
+                  .input-group-append
+                    .input-group-text
+                      span.fas.fa-phone
+                |         
+                .input-group.mb-3
+                  input.form-control(type='email', placeholder='ኢ-ሜል', name='email')
+                  |           
+                  .input-group-append
+                    .input-group-text
+                      span.fas.fa-envelope
+                |  
+            
             h6 የይለፍ ቃሎ በትንሹ 
             ul 
               li ስድስት ፊደላትን መያዝ አለበት።
@@ -111,7 +109,7 @@ html
     // /.register-box
     // jQuery
     script(src='static/ADMINLITE/plugins/jquery/jquery.min.js')
-    script(src='../account/js/register.js')
+    script(src='../Account/js/register.js')
     // Bootstrap 4
     script(src='static/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
     // AdminLTE App

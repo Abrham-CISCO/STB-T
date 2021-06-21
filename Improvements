@@ -41,3 +41,31 @@ Last Items
         COMPLETED Fix the course Outline Problem : Make it start with an empty file prompting user to add new
             course out line.
         COMPLETED Fix the Gubaye List Problem.
+
+Deployment Corrective actions
+    እንኳን ደህና መጣችሁ page
+        COMPLETED Background image is not visible
+    የይለፍ ቃሌን አላስታውሰውም page
+        COMPLETED Background image is not visible
+    አዲስ አባል ነኝ እንደ አዲስ መዝግቡኝ page
+        COMPLETED Background image is not visible
+        COMPLETED password meter is not working
+        the full form is not visible
+    profile page    
+        ምስል ቅይር button is not working
+    Admin previlage
+        ሰብሳቢ page   
+            አብረሀም ጌታቸው link is not working
+            profile pic is not displayed
+        ስርዓተ ትምህርት page
+        የአብነት ትምህርት page
+            ቤት link is not working
+            left side menu "የአብነት ትምህርት" link is not highlighted
+        ጸሐፊ page
+            ቤት link is not working
+        መምህራን ምደባ page
+            left side menu "መምህራን ምደባ" link is not highlighted
+            ቤት link is not working
+        የርቀት ትምህርት page
+            ቤት link is not working
+            left side menu "የርቀት ትምህርት" link is not highlighted
