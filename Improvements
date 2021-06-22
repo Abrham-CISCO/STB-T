@@ -50,13 +50,13 @@ Deployment Corrective actions
     አዲስ አባል ነኝ እንደ አዲስ መዝግቡኝ page
         COMPLETED Background image is not visible
         COMPLETED password meter is not working
-        the full form is not visible
+        COMPLETED the full form is not visible
     profile page    
-        ምስል ቅይር button is not working
+        COMPLETED ምስል ቅይር button is not working
     Admin previlage
         ሰብሳቢ page   
-            አብረሀም ጌታቸው link is not working
-            profile pic is not displayed
+            COMPLETED አብረሀም ጌታቸው link is not working
+            COMPLETED profile pic is not displayed
         ስርዓተ ትምህርት page
         የአብነት ትምህርት page
             ቤት link is not working
