@@ -60,12 +60,34 @@ Deployment Corrective actions
         ስርዓተ ትምህርት page
         የአብነት ትምህርት page
             COMPLETED ቤት link is not working
-            left side menu "የአብነት ትምህርት" link is not highlighted
+            COMPLETED left side menu "የአብነት ትምህርት" link is not highlighted
         ጸሐፊ page
             COMPLETED ቤት link is not working
         መምህራን ምደባ page
-            left side menu "መምህራን ምደባ" link is not highlighted
+            COMPLETED left side menu "መምህራን ምደባ" link is not highlighted
             COMPLETED ቤት link is not working
         የርቀት ትምህርት page
             COMPLETED ቤት link is not working
-            left side menu "የርቀት ትምህርት" link is not highlighted
+            COMPLETED left side menu "የርቀት ትምህርት" link is not highlighted
+        Error Page
+             COMPLETED Megbiya link is not working
+        Sebsabi Page
+            Member assignment feature missing from 
+                COMPLETED Tsehafi
+                COMPLETED Sierate Timhert
+                COMPLETED Memhran Mideba
+                COMPLETED Abinet Tmhrt
+                COMPLETED Riket Tmhrt
+        Nius Sebsabi Page
+            Sierate Timhert Kifil
+                Gubaye creator page is not working
+                Sierate Timhert page
+                    is not responsive on mobiles
+                    Class adding feature is not working
+                    Humberger menu is not working
+        Nius Abal Page
+            Sierate Timhert Kifil
+                Member showing feature is not working
+                Sierate Timhert page
+                    link to the Sierate Timhert page is not working
+                    is not responsive on mobiles
