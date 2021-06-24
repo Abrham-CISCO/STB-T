@@ -127,7 +127,7 @@ for(var i = 0; i<MembersID.length; i++)
 
 function CreateClass()
 {
-  var socket = io('/gubaye');
+  var socket = io('/STB/gubaye');
   className = document.getElementById("gname").value;
   socket.emit('CreateGubaye',className);
   console.log(className)
