@@ -1,4 +1,3 @@
-const { countOfTKMembers } = require("../../../Account/Models/user_model_accessor");
 const curriculum = require("../models/curriculum");
 
 function addCourseToGrade(curriculumId,gradeId)

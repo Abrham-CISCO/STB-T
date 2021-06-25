@@ -63,7 +63,6 @@ app.use(passport.session());
   // var StaticFilePath = 'C:\\wamp64\\www\\TK';
   var StaticFilePath = __dirname;
   app.use('/STB',express.static(StaticFilePath))
-
     // Socket.io setup for messaging
     var chat = io.of('/chat')
     chat.on('connection', (socket)=>{
