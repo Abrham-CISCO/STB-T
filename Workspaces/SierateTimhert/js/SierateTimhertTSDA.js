@@ -1,5 +1,3 @@
-const curriculum = require("../models/curriculum");
-
 function addCourseToGrade(curriculumId,gradeId)
 {
   // The function of this function is to construct an array that contain list of selected 
