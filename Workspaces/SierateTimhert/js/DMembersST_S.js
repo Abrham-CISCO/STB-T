@@ -127,8 +127,7 @@ for(var i = 0; i<MembersID.length; i++)
 
 function CreateClass()
 {
-  //https://abruthtech.com/STB/
-  var socket = io('https://abruthtech.com/STB/gubaye');
+  var socket = io('/STB/gubaye');
   className = document.getElementById("gname").value;
   socket.emit('CreateGubaye',className);
   console.log(className)
