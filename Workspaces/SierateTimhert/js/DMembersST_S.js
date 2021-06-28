@@ -128,6 +128,11 @@ for(var i = 0; i<MembersID.length; i++)
 function CreateClass()
 {
   var socket = io('/STB/gubaye');
+
+  socket.on("connect_error", (err) => {
+    console.log(`connect_error due to ${err.message}`);
+  });
+
   className = document.getElementById("gname").value;
   socket.emit('CreateGubaye',className);
   console.log(className)
@@ -136,4 +141,6 @@ function CreateClass()
     alert(Confirmation);
     window.location.href = "/SirateTimhert/SubDepartmentAdmin";
   });
+
+
 }

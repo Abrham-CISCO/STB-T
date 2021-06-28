@@ -10,7 +10,7 @@
 
 // Creating An Express server 
   var server  = app.listen(80);
-  var io = require('socket.io')(80);
+  var io = require('socket.io').listen(server);
 
 // Local Imports
   var authenticate = require('./Account/authenticate')
