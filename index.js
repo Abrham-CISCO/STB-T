@@ -1,14 +1,16 @@
 // External components
   var express = require('express');
   var app = express();
-  var http = require('http').createServer(app);
-  var io = require('socket.io')(http);
   var bodyParser = require('body-parser');
   var mongoose = require('mongoose');
   var session = require('express-session');
   var MongoStore = require('connect-mongo')(session);
   var passport = require('passport')
   var autonumber = require('mongoose-auto-number')
+
+// Creating An Express server 
+  var server  = app.listen(80);
+  var io = require('socket.io').listen(server);
 
 // Local Imports
   var authenticate = require('./Account/authenticate')
@@ -267,10 +269,7 @@ app.use(function(err,req,res,next){
     });
 })
 
-// Creating An Express server 
-http.listen(80, () => {
-  console.log('listening on port:3000');
-});
+
 
 app.get('/STB', function(req,res){
   res.render('Account/templates/menu.jade');
