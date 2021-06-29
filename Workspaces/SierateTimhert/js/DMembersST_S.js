@@ -127,7 +127,7 @@ for(var i = 0; i<MembersID.length; i++)
 
 function CreateClass()
 {
-  var socket = io('/STB/gubaye').connect('https://abruthtech.com', {secure: true});;
+  var socket = io('/STB/gubaye')
 
   socket.on("connect_error", (err) => {
     console.log(`connect_error due to ${err.message}`);
