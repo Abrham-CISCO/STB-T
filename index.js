@@ -9,7 +9,6 @@
   var autonumber = require('mongoose-auto-number')
 
 // Creating An Express server 
-  var server  = app.listen(80);
   var http = require('http').createServer(app);
   var io = require('socket.io')(http);
 
@@ -271,7 +270,10 @@ app.use(function(err,req,res,next){
     });
 })
 
-
+// Creating An Express server 
+http.listen(80, () => {
+  console.log('listening on port:80');
+});
 
 app.get('/STB', function(req,res){
   res.render('Account/templates/menu.jade');
