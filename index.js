@@ -9,10 +9,7 @@
   var autonumber = require('mongoose-auto-number')
 
 // Creating An Express server 
-  //var server  = app.listen(80);
-  //var io = require('socket.io').listen(server);
-
-
+  var server  = app.listen(80);
   var http = require('http').createServer(app);
   var io = require('socket.io')(http);
 
