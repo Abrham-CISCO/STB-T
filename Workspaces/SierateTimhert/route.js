@@ -14,7 +14,7 @@ const curriculum = require('./models/curriculum');
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, 'C:/wamp64/www/TK/Workspaces/SierateTimhert/static');
+        cb(null, '/Workspaces/SierateTimhert/static');
     },
     filename: (req,file,cb) => {
         cb(null, file.originalname)
