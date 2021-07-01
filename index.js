@@ -271,8 +271,8 @@ app.use(function(err,req,res,next){
 })
 
 // Creating An Express server 
-http.listen(80, () => {
-  console.log('listening on port:80');
+http.listen(1500, () => {
+  console.log('listening on port:1500');
 });
 
 app.get('/STB', function(req,res){
