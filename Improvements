@@ -84,7 +84,17 @@ Deployment Corrective actions
             Sierate Timhert page
                 COMPLETED is not responsive on mobiles
                 Class adding feature is not working
+                Class editing feature shall not return JSON
                 Humberger menu is not working
+                Courses Page
+                    Redirects to unpreviledged page
+            Gubaye Page
+                ምስል ቀይር : Is not working
+                ስርዓተ ትምህርት መድብ button won't display modal
+                ከGubaye description በፊት የጉባኤ አስተዳዳሪ ስም ይኑር
+            Courses Page 
+                All file uploads are not working
+                ዝርዝር ላይ "የጉባኤው ስም" የሚለው በ"ትምህርቱ ስም" ተብሎ ይቀየር
     Nius Abal Page
         Sierate Timhert Kifil
             COMPLETED Member showing feature is not working
