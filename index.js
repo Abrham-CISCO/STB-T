@@ -227,7 +227,7 @@ app.use(passport.session());
     else console.log("Not Excuted");
 
     console.log("Last User access was ",maxTime," seconds ago.");
-    if(maxTime>100000) 
+    if(maxTime>10000000) 
       {
         maxTime = 0;
         res.redirect("/STB/Accounts/logout");

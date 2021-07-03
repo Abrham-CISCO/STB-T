@@ -1531,7 +1531,8 @@ router.post('/curriculum/:curriculum_id/edit_grade/',mid.requireSignIn, function
         }
         else
         {
-            res.json(resp);
+            var url = '/ሽጥብ/SirateTimhert/SubDepartmentAdmin/curriculum/'+req.params.curriculum_id;
+            res.redirect(url);
         }
     })
 })
