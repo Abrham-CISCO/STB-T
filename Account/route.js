@@ -22,7 +22,7 @@ router.use(express.urlencoded({extended: true}));
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, '/home/abruthtechcom/public_html/TK_REP/Workspaces/SierateTimhert/static');
+        cb(null, '/home/abruthtechcom/public_html/TK_REP/Account/static');
     },
     filename: (req,file,cb) => {
         cb(null, file.originalname)
