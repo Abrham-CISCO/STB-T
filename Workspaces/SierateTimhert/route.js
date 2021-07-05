@@ -1516,7 +1516,7 @@ router.post('/curriculum/:curriculum_id/grade/',mid.requireSignIn, function(req,
         else
         {
             curriculum_ModelAccessor.notAddedCoursesPerCurriculum(curriculum_id, function(err, response){
-                var url="/STB/SirateTimhert/curriculum/" + curriculum_id;
+                var url="/STB/SirateTimhert/SubDepartmentAdmin/curriculum/" + curriculum_id;
                 req.session.NAcourses = response;
                 res.redirect(url);
             }) 
