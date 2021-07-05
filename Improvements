@@ -80,16 +80,17 @@ Deployment Corrective actions
                 COMPLETED Riket Tmhrt
     Nius Sebsabi Page
         Sierate Timhert Kifil
-            Gubaye creator page is not working
+            COMPLETED Gubaye creator page is not working
             Sierate Timhert page
                 COMPLETED is not responsive on mobiles
                 Class adding feature is not working
                 COMPLETED Class editing feature shall not return JSON
+                COMPLETED Class editing feature shall not forward to an invalid URL
                 COMPLETED Humberger menu is not working
                 Courses Page
-                    Redirects to unpreviledged page
-            Gubaye Page 
-                ምስል ቀይር : Is not working
+                  COMPLETED Redirects to unpreviledged page
+            Gubaye Page
+                COMPLETED ምስል ቀይር : Is not working
                 ስርዓተ ትምህርት መድብ button won't display modal
                 ከGubaye description በፊት የጉባኤ አስተዳዳሪ ስም ይኑር
             Courses Page 

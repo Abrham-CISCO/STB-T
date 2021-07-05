@@ -1507,18 +1507,18 @@ router.post('/curriculum',mid.requireSignIn,mid.updateUserData, mid.requiresToBe
 });
 //  mid.requireSignIn, mid.updateUserData,mid.requiresToBeSTKNS,
 router.post('/curriculum/:curriculum_id/grade/',mid.requireSignIn, function(req,res,next){
-    curriculum_ModelAccessor.createGrade(req.params.curriculum_id,req.body.created_By,req.body.gradeName, req.body.description,function(err,resp){
+    var curriculum_id = req.params.curriculum_id;
+    curriculum_ModelAccessor.createGrade(curriculum_id,req.body.created_By,req.body.gradeName, req.body.description,function(err,resp){
         if(err)
         {
             next(err);
         }
         else
         {
-            curriculum_ModelAccessor.notAddedCourses("60217b11fc167410cc020a99", "6027f3b670efbc1c6451bd6d", function(err, response){
-                var url="/STB/SirateTimhert/curriculum/" + req.params.curriculum_id;
+            curriculum_ModelAccessor.notAddedCoursesPerCurriculum(curriculum_id, function(err, response){
+                var url="/STB/SirateTimhert/curriculum/" + curriculum_id;
                 req.session.NAcourses = response;
                 res.redirect(url);
-                // res.json(response);
             }) 
         }
     })
@@ -1531,7 +1531,7 @@ router.post('/curriculum/:curriculum_id/edit_grade/',mid.requireSignIn, function
         }
         else
         {
-            var url = '/ሽጥብ/SirateTimhert/SubDepartmentAdmin/curriculum/'+req.params.curriculum_id;
+            var url = '/STB/SirateTimhert/SubDepartmentAdmin/curriculum/'+req.params.curriculum_id;
             res.redirect(url);
         }
     })

@@ -139,7 +139,7 @@ function CreateClass()
   
   socket.on('CreateGubaye',function(Confirmation){
     alert(Confirmation);
-    window.location.href = "/SirateTimhert/SubDepartmentAdmin";
+    window.location.href = "/STB/SirateTimhert/SubDepartmentAdmin";
   });
 
 
