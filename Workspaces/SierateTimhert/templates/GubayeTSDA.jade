@@ -56,6 +56,9 @@ html
                     button(type='button', class="btn btn-block btn-primary", data-toggle='modal', data-target='#modal_pic-sm') ምስል ቀይር
                     ul.list-group.list-group-unbordered.mb-3
                       li.list-group-item
+                        b አስተባባሪ
+                        p #{user.gubaye.leader}
+                      li.list-group-item
                         b ዝርዝር
                         p #{user.gubaye.description}
               .col-md-9
@@ -317,22 +320,20 @@ html
                         .modal-dialog.modal_pic-sm
                           .modal-content
                             .modal-header
-                              h5.modal-title ጉባኤ #{user.gubaye.name} : የጉባኤ ምስል መቀየሪያ
+                              h5.modal-title ጉባኤ #{user.gubaye.name} : ስርዓተ ትምህርት መመደቢያ
                               button.close(type='button', data-dismiss='modal', aria-label='Close')
                                 span(aria-hidden='true') ×
                             .modal-body
-                              .text-center
-                                img.profile-user-img.img-fluid.img-circle#gubayeImg(style="width:300px;" src='#{user.gubaye.profilePic}', alt='User profile picture')
-                              .form-group
-                                br
-                                label(for='exampleInputFile') የጉባኤ ምስል ይምረጡ
-                                br
-                                .input-group
-                                  form(method="post" enctype="multipart/form-data" action="/STB/SirateTimhert/Gubaye_Nius_Sebsabi/upload/gubaye/#{user.gubaye._id}/profileImage")
-                                    input(type='file' name="gubayePicFile" accept="image/*")
-                                    button.btn.btn-primary(type="submit") Upload                                  
+                              .form-group(data-select2-id='39')
+                                label ወደ ጉባኤው ለማስገባት የሚፈልጉትን ስርዓተ ትምህርት ይምረጡና ሲጨርሱ ጨምር የሚለውን በተን ይጫኑ 
+                                select.select2.select2-hidden-accessible(data-placeholder='ስርዓተ ትምህርት ይምረጡ', style='width: 100%;', data-select2-id='7', tabindex='-1', aria-hidden='true')
+                                  each uuser in user.allusers
+                                    option(data-select2-id='#{uuser._id}' value='#{uuser._id}') #{uuser.name}
+                    
+                                                         
                             .modal-footer.justify-content-between
                               button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
+                              button.btn.btn-primary(type='button' onclick="addmembers('#{user.gubaye._id}');") ጨምር
                           // /.modal-dialog
  
                       #modal_pic-sm.modal.fade(style='display: none;', aria-hidden='true')
