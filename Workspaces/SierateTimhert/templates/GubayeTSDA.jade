@@ -223,8 +223,6 @@ html
                                 $(this).bootstrapSwitch('state', $(this).prop('checked'));
                                 });
                                 })
-
-
                             .modal-footer.justify-content-between
                               button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
                               button.btn.btn-primary(type='button' onclick="addmembers('#{user.gubaye._id}');") ጨምር
@@ -266,7 +264,7 @@ html
                                         p #{grade.description}
                         else
                           .col-12.col-sm-6.col-md-3
-                            button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
+                            button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal_curr-sm')
                               .fas.fa-plus.nav-plus
                             a(href="#" class="users-list-name") ስርዓተ ትምህርት መድብ
                      
@@ -315,6 +313,28 @@ html
                               // /.card-body
                             // /.nav-tabs-custom
                           // /.col
+                      #modal_curr-sm.modal.fade(style='display: none;', aria-hidden='true')
+                        .modal-dialog.modal_pic-sm
+                          .modal-content
+                            .modal-header
+                              h5.modal-title ጉባኤ #{user.gubaye.name} : የጉባኤ ምስል መቀየሪያ
+                              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                            .modal-body
+                              .text-center
+                                img.profile-user-img.img-fluid.img-circle#gubayeImg(style="width:300px;" src='#{user.gubaye.profilePic}', alt='User profile picture')
+                              .form-group
+                                br
+                                label(for='exampleInputFile') የጉባኤ ምስል ይምረጡ
+                                br
+                                .input-group
+                                  form(method="post" enctype="multipart/form-data" action="/STB/SirateTimhert/Gubaye_Nius_Sebsabi/upload/gubaye/#{user.gubaye._id}/profileImage")
+                                    input(type='file' name="gubayePicFile" accept="image/*")
+                                    button.btn.btn-primary(type="submit") Upload                                  
+                            .modal-footer.justify-content-between
+                              button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
+                          // /.modal-dialog
+ 
                       #modal_pic-sm.modal.fade(style='display: none;', aria-hidden='true')
                         .modal-dialog.modal_pic-sm
                           .modal-content
