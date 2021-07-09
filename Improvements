@@ -109,12 +109,12 @@ Deployment Corrective actions
             ዳሽ ቦርዱ ላይ ያሉ Icons አይሰሩም
             ስርዓተ ትምህርት ዳሽ ቦርድ ከዳሽቦርድ ተመርጦ ካልተመጣ በስተቀር ከተማሪዎች ዳሽቦርድ Access ማድረግ አይቻልም።
         Sebsabi Page
-            ከሰብሳቢ ወደ Profile የሚወስደው link "አብረሀም ጌታቸው" አይሰራም።
+            COMPLETED ከሰብሳቢ ወደ Profile የሚወስደው link "አብረሀም ጌታቸው" አይሰራም።
         የሁሉም ክፍል መመደቢያ "ሰብሳቢ" ወይንም "አባል" የሚለው በተን ባዶ list በሚሆንበት ጊዜ መስራት የለበትም Error message ማሳየት አለበት።
         Sierate Timhert Kifil
             Sierate Timhert page
                 COMPLETED Humberger menu is not working 
         Gubaye Page
-            ከGubaye description በፊት የጉባኤ አስተዳዳሪ ስም ይኑር
+            COMPLETED ከGubaye description በፊት የጉባኤ አስተዳዳሪ ስም ይኑር
         Public Course Page  
-            ወደ ቤት link አይሰራም
+            COMPLETED ወደ ቤት link አይሰራም
