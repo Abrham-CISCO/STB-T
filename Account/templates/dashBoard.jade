@@ -390,6 +390,30 @@ html
                                       td #{curriculum.description}
                             else
                               #curriculums.tab-pane
+                                table#example4.table.table-bordered.table-striped
+                                  thead
+                                    tr
+                                      th ስም
+                                      th መስራች
+                                      th ክፍል
+                                      th ኮርሶች
+                                      th ዝርዝር 
+                                  each curriculum in dashCurriculums
+                                    script. 
+                                      var coursesCount = 0;
+                                    tr 
+                                      td 
+                                        a(href="/STB/SirateTimhert/DepartmentAdmin/curriculum/#{curriculum._id}") #{curriculum.name}
+                                      td #{curriculum.created_By}
+                                      td #{curriculum.grades.length}
+                                      td 
+                                        #courseCount 
+                                      each grade in curriculum.grades
+                                        script.
+                                          coursesCount = coursesCount + #{grade.courses.length};
+                                          document.getElementById("courseCount").innerText = coursesCount; 
+                                      
+                                      td #{curriculum.description}
 
 
 

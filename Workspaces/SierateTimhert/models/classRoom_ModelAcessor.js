@@ -110,7 +110,6 @@ const UpdateGubaye_ForMember = (ClassRoomID, gubayeName, Description,  callback)
     classRoom.UpdateInfo_ForMember(ClassRoomID, gubayeName, Description, function(error, result){
         if(error)
         {
-            console.log(error)
             callback(error)
         }
         else{

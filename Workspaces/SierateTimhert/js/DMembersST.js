@@ -17,6 +17,7 @@ xhr.onreadystatechange = function(){
       Output += "<table style='width: 100%'><tr><td><select id='OPT' class='form-control select2 select2-hidden-accessible' style='width: 100%;' data-select2-id='1' tabindex='-1' aria-hidden='true'>"
       NotLeader = [];
       NotMember = [];
+
       for(var i = 0; i < users.response.length; i++)
       {        
         for(var j = 0; j<10; j++)
@@ -30,7 +31,8 @@ xhr.onreadystatechange = function(){
                 NotMember.push(users.response[i]);
             }
         }
-    }
+
+      }
     for(var k = 0; k<NotLeader.length;k++){
       for(var l = 0; l < NotMember.length; l++)
       {
@@ -104,44 +106,46 @@ xhr.send();
 Load();
 function Assign(UserType)
 {
-
   var UserID;
   var CandidatesList = document.getElementById("OPT");
-  for(var m=0; m<CandidatesList.length; m++)
+  if(CandidatesList.length>0)
   {
-    if (CandidatesList.options[m].selected == true)
+    for(var m=0; m<CandidatesList.length; m++)
     {
-      UserID = (CandidatesList.options[m].id);
+      if (CandidatesList.options[m].selected == true)
+      {
+        UserID = (CandidatesList.options[m].id);
+      }
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState === 4){
+        if(xhr.status === 200 ){
+          Load();
+        } else if (xhr.status === 404) {
+          //file not found
+        } else if (xhr.status === 500) {
+          //server had a problem
+        }
+      }
+    }  
+    if (UserType == 1)
+    {
+      link = "/STB/accounts/add/"+DepartmentID+"/Leader/"+UserID;
+      xhr.open('GET',link);
+      xhr.send();
+    
+    }
+    else if (UserType == 0)  
+    {
+      link = "/STB/accounts/add/"+DepartmentID+"/Member/"+UserID;
+      xhr.open('GET',link);
+      xhr.send();
     }
   }
-  
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function(){
-  
-  if(xhr.readyState === 4){
-    if(xhr.status === 200 ){
-      Load();
-    } else if (xhr.status === 404) {
-       //file not found
-    } else if (xhr.status === 500) {
-       //server had a problem
-    }
-  }
-  }  
-
-
-  if (UserType == 1)
+  else
   {
-    link = "/STB/accounts/add/"+DepartmentID+"/Leader/"+UserID;
-    xhr.open('GET',link);
-    xhr.send();
-  
-  }
-  if (UserType == 0)  
-  {
-  link = "/STB/accounts/add/"+DepartmentID+"/Member/"+UserID;
-  xhr.open('GET',link);
-  xhr.send();
+    alert("ምንም ተማሪ አልመረጡም። እባክኦ ተማሪ ይምረጡ!")
   }
 };
 

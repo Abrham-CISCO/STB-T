@@ -93,7 +93,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                             //All curriculums
                                                             curriculum_ModelAccessor.allCurriculums(function(err,curriculums){
                                                                 req.session.curriculums = curriculums;
-                                                                console.log(req.session);
                                                                 curriculums.forEach(curr=>{
                                                                     if(curr._id = gubaye.curriculum)
                                                                     {
@@ -106,7 +105,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                                                     }
                                                                                 })
                                                                             })
-                                                                            console.log("Course List: ",curriculum.grades[1].courses)
                                                                         })
                                                                         req.session.curriculums = curriculums;
                                                                         res.render("Workspaces/SierateTimhert/templates/Gubaye.jade",req.session)                                                                                                                
@@ -139,8 +137,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                 req.session.user.allusers = users;
                                                 course_ModelAccessor.allCourses((error,courses)=>{
                                                     req.session.courses = courses
-
-                                                        console.log("req.session", req.session)
                                                         res.render("Workspaces/SierateTimhert/templates/Gubaye.jade",req.session)
                                                         
                                                 })
@@ -222,7 +218,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                     req.session.user.allusers = users;
                                     course_ModelAccessor.allCourses((error,courses)=>{
                                             req.session.courses = courses
-                                            console.log("req.session", req.session)
                                             res.render("Workspaces/SierateTimhert/templates/Gubaye.jade",req.session)
                                     })
                                 })
@@ -293,7 +288,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                             //All curriculums
                                                             curriculum_ModelAccessor.allCurriculums(function(err,curriculums){
                                                                 req.session.curriculums = curriculums;
-                                                                console.log(req.session);
                                                                 curriculums.forEach(curr=>{
                                                                     if(curr._id = gubaye.curriculum)
                                                                     {
@@ -306,7 +300,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                                                     }
                                                                                 })
                                                                             })
-                                                                            console.log("Course List: ",curriculum.grades[1].courses)
                                                                         })
                                                                         req.session.curriculums = curriculums;
                                                                         res.render("Workspaces/SierateTimhert/templates/GubayeTDA.jade",req.session)                                                                                                                
@@ -339,8 +332,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                 req.session.user.allusers = users;
                                                 course_ModelAccessor.allCourses((error,courses)=>{
                                                     req.session.courses = courses
-
-                                                        console.log("req.session", req.session)
                                                         res.render("Workspaces/SierateTimhert/templates/GubayeTDA.jade",req.session)
                                                         
                                                 })
@@ -422,7 +413,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                     req.session.user.allusers = users;
                                     course_ModelAccessor.allCourses((error,courses)=>{
                                             req.session.courses = courses
-                                            console.log("req.session", req.session)
                                             res.render("Workspaces/SierateTimhert/templates/GubayeTDA.jade",req.session)
                                     })
                                 })
@@ -537,7 +527,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                             //All curriculums
                                                             curriculum_ModelAccessor.allCurriculums(function(err,curriculums){
                                                                 req.session.curriculums = curriculums;
-                                                                console.log(req.session);
                                                                 curriculums.forEach(curr=>{
                                                                     if(curr._id = gubaye.curriculum)
                                                                     {
@@ -550,7 +539,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                                                     }
                                                                                 })
                                                                             })
-                                                                            console.log("Course List: ",curriculum.grades[1].courses)
                                                                         })
                                                                         req.session.curriculums = curriculums;
                                                                         res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)                                                                                                                
@@ -583,8 +571,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                 req.session.user.allusers = users;
                                                 course_ModelAccessor.allCourses((error,courses)=>{
                                                     req.session.courses = courses
-
-                                                        console.log("req.session", req.session)
                                                         res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
                                                         
                                                 })
@@ -666,7 +652,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                     req.session.user.allusers = users;
                                     course_ModelAccessor.allCourses((error,courses)=>{
                                             req.session.courses = courses
-                                            console.log("req.session", req.session)
                                             res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)
                                     })
                                 })
@@ -679,7 +664,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
     router.post('/Gubaye_Nius_Sebsabi/upload/gubaye/:gubayeId/profileImage',mid.requireSignIn, mid.requiresToBeSTKNS,mid.updateUserData,
         uploadImage.single('gubayePicFile'), function(req,res,next){
              var gubayeId = req.params.gubayeId;
-             console.log(req)
              var img = "/STB/Workspaces/SierateTimhert/static/" + req.file.originalname;
              classRoom_ModelAccessor.ussignGubayePic(gubayeId,img,function(err,resp){
                 var url = "/STB/SirateTimhert/Gubaye_Nius_Sebsabi/"+gubayeId;
@@ -788,7 +772,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                             //All curriculums
                                                             curriculum_ModelAccessor.allCurriculums(function(err,curriculums){
                                                                 req.session.curriculums = curriculums;
-                                                                console.log(req.session);
                                                                 curriculums.forEach(curr=>{
                                                                     if(curr._id = gubaye.curriculum)
                                                                     {
@@ -801,7 +784,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                                                     }
                                                                                 })
                                                                             })
-                                                                            console.log("Course List: ",curriculum.grades[1].courses)
                                                                         })
                                                                         req.session.curriculums = curriculums;
                                                                         res.render("Workspaces/SierateTimhert/templates/GubayeTSDM.jade",req.session)                                                                                                                
@@ -834,8 +816,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                 req.session.user.allusers = users;
                                                 course_ModelAccessor.allCourses((error,courses)=>{
                                                     req.session.courses = courses
-
-                                                        console.log("req.session", req.session)
                                                         res.render("Workspaces/SierateTimhert/templates/GubayeTSDM.jade",req.session)
                                                         
                                                 })
@@ -917,7 +897,6 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                     req.session.user.allusers = users;
                                     course_ModelAccessor.allCourses((error,courses)=>{
                                             req.session.courses = courses
-                                            console.log("req.session", req.session)
                                             res.render("Workspaces/SierateTimhert/templates/GubayeTSDM.jade",req.session)
                                     })
                                 })
@@ -1014,14 +993,14 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
             }
             else
             {
-                console.log("returnedCourse.markList.",returnedCourse.markList.sort((b,a)=> {
+                returnedCourse.markList.sort((b,a)=> {
                     var aColumn = (a.column_1_value + a.column_2_value + a.column_3_value + a.column_4_value + a.column_5_value
                         + a.column_6_value + a.column_7_value + a.column_8_value + a.column_9_value + a.column_10_value);
                     var bColumn = (b.column_1_value + b.column_2_value + b.column_3_value + b.column_4_value + b.column_5_value
                         + b.column_6_value + b.column_7_value + b.column_8_value + b.column_9_value + b.column_10_value);
 
                     return aColumn - bColumn
-                }))
+                })
                 req.session.returnedCourse = returnedCourse;
                 course_ModelAccessor.allCourses((courses)=>{
                     req.session.courses = courses
@@ -1359,9 +1338,7 @@ router.get('/curriculum/:curriculumId', mid.requireSignIn,mid.updateUserData, fu
                     else
                     {
                         //use mongoose populate to pupulate course details on to each courses before sending it to 
-                        //the front end
-                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                        
-                        console.log("req.session.unregisteredCoursesPerGrade", req.session.unregisteredCoursesPerGrade);
+                        //the front end                  
                         return res.render("Workspaces/SierateTimhert/templates/SierateTimhertpublic.jade",req.session)  
                     }
                 })   
@@ -1392,12 +1369,10 @@ router.get('/DepartmentAdmin/curriculum/:curriculumId', mid.requireSignIn, mid.r
                     {
                         //use mongoose populate to pupulate course details on to each courses before sending it to 
                         //the front end
-                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                        
-                        console.log("req.session.unregisteredCoursesPerGrade", req.session.curriculum.gubayeat);
+                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                  
                         classRoom_ModelAccessor.Gubaeyat(function(err,classRooms){
                             curriculum.gubayeat.forEach(gubaye=>{
                                 classRooms.forEach(classRoom=>{
-                                    console.log(classRoom._id,gubaye.id)
                                     if(gubaye.id.toString() == classRoom._id.toString())
                                     {
                                         gubaye.name = classRoom.name;
@@ -1439,7 +1414,6 @@ router.get('/SubDepartmentAdmin/curriculum/:curriculumId', mid.requireSignIn, mi
                         classRoom_ModelAccessor.Gubaeyat(function(err,classRooms){
                             curriculum.gubayeat.forEach(gubaye=>{
                                 classRooms.forEach(classRoom=>{
-                                    console.log(classRoom._id,gubaye.id)
                                     if(gubaye.id.toString() == classRoom._id.toString())
                                     {
                                         gubaye.name = classRoom.name;
@@ -1477,12 +1451,10 @@ router.get('/SubDepartmentMember/curriculum/:curriculumId', mid.requireSignIn,mi
                     {
                         //use mongoose populate to pupulate course details on to each courses before sending it to 
                         //the front end
-                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                        
-                        console.log("req.session.unregisteredCoursesPerGrade", req.session.curriculum.gubayeat);
+                        req.session.unregisteredCoursesPerGrade = unregisteredCoursesPerGrade;                  
                         classRoom_ModelAccessor.Gubaeyat(function(err,classRooms){
                             curriculum.gubayeat.forEach(gubaye=>{
                                 classRooms.forEach(classRoom=>{
-                                    console.log(classRoom._id,gubaye.id)
                                     if(gubaye.id.toString() == classRoom._id.toString())
                                     {
                                         gubaye.name = classRoom.name;

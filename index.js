@@ -83,7 +83,7 @@ app.use(passport.session());
       socket.on('chat',function(message,reciever_address,sender_address,domain){
         MessagingModel_Acc.sendMessage(sender_address,reciever_address,domain,{message:message},function()
         {
-          console.log(message,reciever_address,sender_address);
+//          console.log(message,reciever_address,sender_address);
         });
         UserModel_Acc.getChatSocket(reciever_address,function(error,ChatSocketID){
           socket.to(ChatSocketID).emit('chat',message,reciever_address,sender_address);
@@ -128,7 +128,6 @@ app.use(passport.session());
               }
               else{
                 Course_ModelAccessor.addstudentsToCourse(course_ids,gubayeId,function(err,confirmation){
-                  console.log(course_ids)
                   socket.emit('AddGubayeCourses',confirmation)
                 })
               }
@@ -159,7 +158,6 @@ app.use(passport.session());
     curriculum.on('connection', (socket)=>{
       socket.on('addCurriculum',function(curriculumName,gubayeID){
         curriculum_ModelAccessor.curriculumByName(curriculumName,function(err,singleCurriculum){
-          console.log("singleCurriculum",singleCurriculum._id)
           curriculum_ModelAccessor.addCurriculumToGubaye(singleCurriculum._id,gubayeID,function(err,response){
             socket.emit('addCurriculum',"Added")
           })
@@ -179,7 +177,6 @@ app.use(passport.session());
     {
     socket.on('updateCourse', function(registeredChanges, registeredColumnNameChanges, courseId, gubayeId){
         Course_ModelAccessor.UpdateMarkList(registeredChanges, registeredColumnNameChanges, gubayeId, courseId, function(error,notification){
-          console.log(notification)
           socket.emit('updateCourse',"Created")
         })
       });
@@ -192,7 +189,6 @@ app.use(passport.session());
       
       socket.on('updateAttendance', function(registeredChanges, courseId, gubayeId){
         Course_ModelAccessor.upadteAttenance(registeredChanges, gubayeId, courseId, function(error,notification){
-          console.log(notification)
           socket.emit('updateAttendance',notification)
         })
       });
@@ -215,7 +211,6 @@ app.use(passport.session());
   var elappsedTime, maxTime=0;
 
   app.use(function(req,res,next){
-    console.log("This code is excuted from index.js")
     if(req.session.user) {
       elappsedTime = Date.now() - req.session.user.lastAccess;
       req.session.user.lastAccess = Date.now();
@@ -237,8 +232,6 @@ app.use(passport.session());
         maxTime = 0;
         next();
       }      
-
-
   })
 
   
