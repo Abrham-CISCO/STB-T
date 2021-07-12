@@ -105,9 +105,23 @@ Deployment Corrective actions
                 COMPLETED Humberger menu is not working
     Sebsabi Page
         Dashboard
+            ተማሪዎች በሚለው ታብ ስር ተማሪዎች click ሲደረጉ ወደ profile ውሰድ
+            ኮርሶች በሚለው ታብ ስር ኮርሶች click ሲደረጉ ወደ ኮርስ ውሰድ
+            ጉባኤያት በሚለው ታብ ስር ጉባኤዎች click ሲደረጉ ወደ ጉባኤ ውሰድ
+            ጉባኤያት በሚለው ታብ ስር አስተዳዳሪ click ሲደረጉ ወደ profile ውሰድ
+            ትምህርት ክፍል አባላት በሚለው ታብ ስር አባላት click ሲደረጉ ወደ profile ውሰድ
+            ስርዓተ ትምህርት በሚለው ታብ ስር መስራች click ሲደረጉ ወደ profile ውሰድ
             ለመጀመሪያ ጊዜ ሎጊን ሲደረግ የዳሽቦርዱ ካውንተሮች አይሰሩም
             ዳሽ ቦርዱ ላይ ያሉ Icons አይሰሩም
             ስርዓተ ትምህርት ዳሽ ቦርድ ከዳሽቦርድ ተመርጦ ካልተመጣ በስተቀር ከተማሪዎች ዳሽቦርድ Access ማድረግ አይቻልም።
+        ጸሀፊ page
+            መግለጫ እይ ሊንክ አይሰራም
+        መምህራን ምደባ Page
+            መግለጫ እይ ሊንክ አይሰራም
+        የአብነት ትምህርት page
+            መግለጫ እይ ሊንክ አይሰራም
+        የርቀት ትምህርት page
+            መግለጫ እይ ሊንክ አይሰራም
         Sebsabi Page
             COMPLETED ከሰብሳቢ ወደ Profile የሚወስደው link "አብረሀም ጌታቸው" አይሰራም።
         የሁሉም ክፍል መመደቢያ "ሰብሳቢ" ወይንም "አባል" የሚለው በተን ባዶ list በሚሆንበት ጊዜ መስራት የለበትም Error message ማሳየት አለበት።
@@ -116,5 +130,28 @@ Deployment Corrective actions
                 COMPLETED Humberger menu is not working 
         Gubaye Page
             COMPLETED ከGubaye description በፊት የጉባኤ አስተዳዳሪ ስም ይኑር
+            gubaye sidebar link should not be active
+            ምስል በትልቁ እይ የሚል button ይኑር
         Public Course Page  
             COMPLETED ወደ ቤት link አይሰራም
+        Course Page
+    Nius Sebsabi Page
+        ጸሀፊ Page
+            Page title should be ጸሀፊ፡ ሰብሳቢ
+            sidebar link is not highlighted
+        መምህራን ምደባ Page
+            መግለጫ እይ ሊንክ አይሰራም
+        የአብነት ትምህርት page
+            መግለጫ እይ ሊንክ አይሰራም
+        የርቀት ትምህርት page
+            መግለጫ እይ ሊንክ አይሰራም
+        ጉባኤ Page
+            Member adding feature is not working 
+            Member adding dropdown does not display correctly
+            ስርዓተ ትምህርት መመደቢያው ትክክለኛውን ዝርዝር አያሳይም
+            ስርዓተ ትምህርት መመደቢያው Back end አይሰራም
+        Courses Page    
+            course outline ማጥፊያው አይሰራም። refresh ሲደረግ አይጠፋም
+            ኮርስ መጨመሪያው feature አይሰራም።
+            መስራች should be clickable and shall forward to the profile
+            
