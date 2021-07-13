@@ -200,9 +200,7 @@ const addCurriculumToGubaye = (curriculumId, gubayeId, callback) => {
     classRoom_ModelAccessor.gubayeDetail(gubayeId,function(err,gubayeDetail){
         if(gubayeDetail.curriculum == "none")
         {
-            console.log("curriculumId inside addCTG", curriculumId)
             curriculum.findById(curriculumId).then(singleCurriculum=>{
-                console.log(singleCurriculum)
                 var course_ids = []; course_ids.pop();
                 singleCurriculum.grades.forEach(grade=>{
                     grade.courses.forEach(course=>{
@@ -239,15 +237,12 @@ const addCurriculumToGubaye = (curriculumId, gubayeId, callback) => {
 
 const curriculumByName = (curriculumName,callback) => {
     // curriculum.findOne({name:curriculumName}).then((singleCurriculum)=> {
-    //     console.log(curriculumName);
     //     callback(null, singleCurriculum);
     // }).catch((err)=>callback(err,false));
     allCurriculums(function(err,currs){
         currs.forEach(singleCurriculum=>{
             singleCurriculum.name = singleCurriculum.name.trim()
-            console.log("'",singleCurriculum.name.trim(), "'","==", "'",curriculumName.trim(),"'",">",singleCurriculum.name == curriculumName);
             if(singleCurriculum.name == curriculumName){
-                console.log(singleCurriculum._id);
             callback(null, singleCurriculum);        
             }
         })    

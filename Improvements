@@ -122,6 +122,8 @@ Deployment Corrective actions
             መግለጫ እይ ሊንክ አይሰራም
         የርቀት ትምህርት page
             መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED ዳሽ ቦርዱ ላይ ያሉ Icons አይሰሩም
+            COMPLETED ስርዓተ ትምህርት ዳሽ ቦርድ ከዳሽቦርድ ተመርጦ ካልተመጣ በስተቀር ከተማሪዎች ዳሽቦርድ Access ማድረግ አይቻልም።
         Sebsabi Page
             COMPLETED ከሰብሳቢ ወደ Profile የሚወስደው link "አብረሀም ጌታቸው" አይሰራም።
         የሁሉም ክፍል መመደቢያ "ሰብሳቢ" ወይንም "አባል" የሚለው በተን ባዶ list በሚሆንበት ጊዜ መስራት የለበትም Error message ማሳየት አለበት።
