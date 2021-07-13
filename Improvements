@@ -156,4 +156,16 @@ Deployment Corrective actions
             course outline ማጥፊያው አይሰራም። refresh ሲደረግ አይጠፋም
             ኮርስ መጨመሪያው feature አይሰራም።
             መስራች should be clickable and shall forward to the profile
+    Nius Abal Page
+        መምህራን ምደባ Page
+            መግለጫ እይ ሊንክ አይሰራም
+        የአብነት ትምህርት page
+            መግለጫ እይ ሊንክ አይሰራም
+        የርቀት ትምህርት page
+            መግለጫ እይ ሊንክ አይሰራም
+        Gubaye Page
+            sidebar gubaye link shall not be active
+        Sierate Timhert Page
+            Link to course is not working
+
             
