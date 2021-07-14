@@ -76,7 +76,7 @@ xhr.onreadystatechange = function(){
                 Output += "</ul></div><div class='col-5 text-center'><img src='" + users.response[i].pro_img +"' alt='' class='img-circle img-fluid'>";
                 Output += "</div></div></div><div class='card-footer'><div class='text-right'>"
                 // Output += "<button onclick = LoadChatBox('"+ users.response[i].telephone +"') class='btn btn-sm bg-teal'><i class='fas fa-comments' ></i></button>&nbsp;";
-                Output += "<a href='/accounts/public/profile/"+users.response[i].telephone+"' class='btn btn-sm btn-primary')><i class='fas fa-user'></i>  መግለጫ እይ";
+                Output += "<a href='/STB/accounts/public/profile/"+users.response[i].telephone+"' class='btn btn-sm btn-primary')><i class='fas fa-user'></i>  መግለጫ እይ";
                 Output += "</a></div></div></div></div>";
                 }
             }

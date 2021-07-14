@@ -115,13 +115,13 @@ Deployment Corrective actions
             ዳሽ ቦርዱ ላይ ያሉ Icons አይሰሩም
             ስርዓተ ትምህርት ዳሽ ቦርድ ከዳሽቦርድ ተመርጦ ካልተመጣ በስተቀር ከተማሪዎች ዳሽቦርድ Access ማድረግ አይቻልም።
         ጸሀፊ page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
         መምህራን ምደባ Page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
         የአብነት ትምህርት page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
         የርቀት ትምህርት page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
             COMPLETED ዳሽ ቦርዱ ላይ ያሉ Icons አይሰሩም
             COMPLETED ስርዓተ ትምህርት ዳሽ ቦርድ ከዳሽቦርድ ተመርጦ ካልተመጣ በስተቀር ከተማሪዎች ዳሽቦርድ Access ማድረግ አይቻልም።
         Sebsabi Page
@@ -142,11 +142,11 @@ Deployment Corrective actions
             Page title should be ጸሀፊ፡ ሰብሳቢ
             sidebar link is not highlighted
         መምህራን ምደባ Page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
         የአብነት ትምህርት page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
         የርቀት ትምህርት page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
         ጉባኤ Page
             Member adding feature is not working 
             Member adding dropdown does not display correctly
@@ -158,11 +158,11 @@ Deployment Corrective actions
             መስራች should be clickable and shall forward to the profile
     Nius Abal Page
         መምህራን ምደባ Page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
         የአብነት ትምህርት page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
         የርቀት ትምህርት page
-            መግለጫ እይ ሊንክ አይሰራም
+            COMPLETED መግለጫ እይ ሊንክ አይሰራም
         Gubaye Page
             sidebar gubaye link shall not be active
         Sierate Timhert Page

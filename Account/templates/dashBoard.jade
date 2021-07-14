@@ -139,7 +139,9 @@ html
                                       tr
                                         td 
                                           div(id= "number_#{user._id}")
-                                        td #{user.name}
+                                        td 
+                                          a(href="/STB/accounts/public/profile/#{user.telephone}")
+                                            #{user.name}
                                         td #{user.cname}
                                         td #{user.telephone}
                                         td #{user.email}
@@ -165,7 +167,9 @@ html
                                       tr
                                         td 
                                           div(id= "number_#{user._id}")
-                                        td #{user.name}
+                                        td 
+                                          a(href="/STB/accounts/public/profile/#{user.telephone}")
+                                            #{user.name}
                                         td #{user.cname}
                                         td #{user.telephone}
                                         td #{user.email}
@@ -192,7 +196,9 @@ html
                                       tr
                                         td 
                                           div(id= "number_#{course._id}")
-                                        td #{course.name}
+                                        td
+                                          a(href="/STB/SirateTimhert/course/sebsabi/#{course._id}")
+                                            #{course.name}
                                         td #{course.createdAt}
                                         td #{course.attendance.length}
                                         td #{course.books.length}
@@ -221,7 +227,9 @@ html
                                       tr
                                         td 
                                           div(id= "number_#{course._id}")
-                                        td #{course.name}
+                                        td
+                                          a(href="/STB/SirateTimhert/course/sebsabi/#{course._id}")
+                                            #{course.name}
                                         td #{course.createdAt}
                                         td #{course.attendance.length}
                                         td #{course.books.length}
@@ -248,7 +256,9 @@ html
                                       tr
                                         td 
                                           div(id= "number_#{gubaye._id}")
-                                        td #{gubaye.name}
+                                        td 
+                                          a(href="/STB/SirateTimhert/Gubaye_Sebsabi/#{gubaye._id}")
+                                            #{gubaye.name}
                                         td #{gubaye.createdAt}
                                         td #{gubaye.members.length}
                                         td #{gubaye.leader}
@@ -274,7 +284,9 @@ html
                                       tr
                                         td 
                                           div(id= "number_#{gubaye._id}")
-                                        td #{gubaye.name}
+                                        td
+                                          a(href="/STB/SirateTimhert/Gubaye_Sebsabi/#{gubaye._id}")
+                                            #{gubaye.name}
                                         td #{gubaye.createdAt}
                                         td #{gubaye.members.length}
                                         td #{gubaye.leader}
@@ -311,7 +323,9 @@ html
                                       tr
                                         td 
                                           div(id= "number_M_#{member._id}")
-                                        td #{member.name}
+                                        td
+                                          a(href="/STB/accounts/public/profile/#{member.telephone}") 
+                                            #{member.name}
                                         td #{member.cname}
                                         td #{member.telephone}
                                         td #{member.email}
@@ -350,7 +364,9 @@ html
                                       tr
                                         td 
                                           div(id= "number_M_#{member._id}")
-                                        td #{member.name}
+                                        td
+                                          a(href="/STB/accounts/public/profile/#{member.telephone}") 
+                                            #{member.name}
                                         td #{member.cname}
                                         td #{member.telephone}
                                         td #{member.email}
@@ -414,19 +430,6 @@ html
                                           document.getElementById("courseCount").innerText = coursesCount; 
                                       
                                       td #{curriculum.description}
-
-
-
-
-
-
-              
-                  // /.info-box-content
-                  // /.info-box
-                  // /.col
-
-        // /.container-fluid
-        // Main content
         section.content
           .container-fluid
         // /.content
