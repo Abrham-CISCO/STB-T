@@ -105,11 +105,11 @@ Deployment Corrective actions
                 COMPLETED Humberger menu is not working
     Sebsabi Page
         Dashboard
-            ተማሪዎች በሚለው ታብ ስር ተማሪዎች click ሲደረጉ ወደ profile ውሰድ
-            ኮርሶች በሚለው ታብ ስር ኮርሶች click ሲደረጉ ወደ ኮርስ ውሰድ
-            ጉባኤያት በሚለው ታብ ስር ጉባኤዎች click ሲደረጉ ወደ ጉባኤ ውሰድ
+            COMPLETED ተማሪዎች በሚለው ታብ ስር ተማሪዎች click ሲደረጉ ወደ profile ውሰድ
+            COMPLETED ኮርሶች በሚለው ታብ ስር ኮርሶች click ሲደረጉ ወደ ኮርስ ውሰድ
+            COMPLETED ጉባኤያት በሚለው ታብ ስር ጉባኤዎች click ሲደረጉ ወደ ጉባኤ ውሰድ
             ጉባኤያት በሚለው ታብ ስር አስተዳዳሪ click ሲደረጉ ወደ profile ውሰድ
-            ትምህርት ክፍል አባላት በሚለው ታብ ስር አባላት click ሲደረጉ ወደ profile ውሰድ
+            COMPLETED ትምህርት ክፍል አባላት በሚለው ታብ ስር አባላት click ሲደረጉ ወደ profile ውሰድ
             ስርዓተ ትምህርት በሚለው ታብ ስር መስራች click ሲደረጉ ወደ profile ውሰድ
             ለመጀመሪያ ጊዜ ሎጊን ሲደረግ የዳሽቦርዱ ካውንተሮች አይሰሩም
             ዳሽ ቦርዱ ላይ ያሉ Icons አይሰሩም
@@ -126,21 +126,21 @@ Deployment Corrective actions
             COMPLETED ስርዓተ ትምህርት ዳሽ ቦርድ ከዳሽቦርድ ተመርጦ ካልተመጣ በስተቀር ከተማሪዎች ዳሽቦርድ Access ማድረግ አይቻልም።
         Sebsabi Page
             COMPLETED ከሰብሳቢ ወደ Profile የሚወስደው link "አብረሀም ጌታቸው" አይሰራም።
-        የሁሉም ክፍል መመደቢያ "ሰብሳቢ" ወይንም "አባል" የሚለው በተን ባዶ list በሚሆንበት ጊዜ መስራት የለበትም Error message ማሳየት አለበት።
+        COMPLETED የሁሉም ክፍል መመደቢያ "ሰብሳቢ" ወይንም "አባል" የሚለው በተን ባዶ list በሚሆንበት ጊዜ መስራት የለበትም Error message ማሳየት አለበት።
         Sierate Timhert Kifil
             Sierate Timhert page
                 COMPLETED Humberger menu is not working 
         Gubaye Page
             COMPLETED ከGubaye description በፊት የጉባኤ አስተዳዳሪ ስም ይኑር
-            gubaye sidebar link should not be active
+            COMPLETED gubaye sidebar link should not be active
             ምስል በትልቁ እይ የሚል button ይኑር
         Public Course Page  
             COMPLETED ወደ ቤት link አይሰራም
         Course Page
     Nius Sebsabi Page
         ጸሀፊ Page
-            Page title should be ጸሀፊ፡ ሰብሳቢ
-            sidebar link is not highlighted
+            COMPLETED Page title should be ጸሀፊ፡ ሰብሳቢ
+             COMPLETED sidebar link is not highlighted
         መምህራን ምደባ Page
             COMPLETED መግለጫ እይ ሊንክ አይሰራም
         የአብነት ትምህርት page
@@ -164,8 +164,8 @@ Deployment Corrective actions
         የርቀት ትምህርት page
             COMPLETED መግለጫ እይ ሊንክ አይሰራም
         Gubaye Page
-            sidebar gubaye link shall not be active
+            COMPLETED sidebar gubaye link shall not be active
         Sierate Timhert Page
-            Link to course is not working
+            COMPLETED Link to course is not working
 
             

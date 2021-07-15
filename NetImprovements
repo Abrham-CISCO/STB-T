@@ -1,0 +1,25 @@
+Deployment Corrective actions   
+    Nius Sebsabi Page
+            Gubaye Page
+                ስርዓተ ትምህርት መድብ button won't display modal
+    Sebsabi Page
+        Dashboard
+            ጉባኤያት በሚለው ታብ ስር አስተዳዳሪ click ሲደረጉ ወደ profile ውሰድ
+            ስርዓተ ትምህርት በሚለው ታብ ስር መስራች click ሲደረጉ ወደ profile ውሰድ
+            ለመጀመሪያ ጊዜ ሎጊን ሲደረግ የዳሽቦርዱ ካውንተሮች አይሰሩም
+            ዳሽ ቦርዱ ላይ ያሉ Icons አይሰሩም
+            ስርዓተ ትምህርት ዳሽ ቦርድ ከዳሽቦርድ ተመርጦ ካልተመጣ በስተቀር ከተማሪዎች ዳሽቦርድ Access ማድረግ አይቻልም።
+        Gubaye Page
+            ምስል በትልቁ እይ የሚል button ይኑር
+    Nius Sebsabi Page
+        ጉባኤ Page
+            Member adding feature is not working 
+            Member adding dropdown does not display correctly
+            ስርዓተ ትምህርት መመደቢያው ትክክለኛውን ዝርዝር አያሳይም
+            ስርዓተ ትምህርት መመደቢያው Back end አይሰራም
+        Courses Page    
+            course outline ማጥፊያው አይሰራም። refresh ሲደረግ አይጠፋም
+            ኮርስ መጨመሪያው feature አይሰራም።
+            መስራች should be clickable and shall forward to the profile
+
+            

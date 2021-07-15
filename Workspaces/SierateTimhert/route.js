@@ -910,7 +910,7 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
     router.get('/course/public/:courseId',mid.requireSignIn, function(req,res,next){
         return res.render("Workspaces/SierateTimhert/templates/course.jade",req.session)
     })
-    router.get('/course/sebsabi/:courseId',mid.requireSignIn,mid.requiresToBeLeader,mid.updateUserData, function(req,res,next){
+    router.get('/course/sebsabi/:courseId',mid.requireSignIn,mid.updateUserData, function(req,res,next){
         course_ModelAccessor.courseDetail(req.params.courseId,function(error, returnedCourse)
         {
             if(error)
