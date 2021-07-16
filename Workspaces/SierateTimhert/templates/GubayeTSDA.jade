@@ -340,15 +340,7 @@ html
                                 span(aria-hidden='true') ×
                             .modal-body
                               .text-center
-                                img.profile-user-img.img-fluid.img-circle#gubayeImg(style="width:300px;" src='#{user.gubaye.profilePic}', alt='User profile picture')
-                              .form-group
-                                br
-                                label(for='exampleInputFile') የጉባኤ ምስል ይምረጡ
-                                br
-                                .input-group
-                                  form(method="post" enctype="multipart/form-data" action="/STB/SirateTimhert/Gubaye_Nius_Sebsabi/upload/gubaye/#{user.gubaye._id}/profileImage")
-                                    input(type='file' name="gubayePicFile" accept="image/*")
-                                    button.btn.btn-primary(type="submit") Upload                                  
+                                img.profile-user-img.img-fluid.img-circle#gubayeImg(style="width:300px;" src='#{user.gubaye.profilePic}', alt='User profile picture')                                
                             .modal-footer.justify-content-between
                               button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
                           // /.modal-dialog
@@ -357,14 +349,14 @@ html
           .container-fluid
       footer.main-footer 
         include ../../../SharedComponents/Layouts/footer.jade
-  script(src='../../STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
-  script(src='../../STB/ADMINLITE/dist/js/demo.js')
-  script(src='../../STB/ADMINLITE/plugins/datatables/jquery.dataTables.js')
-  script(src='../../STB/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')
-  script(src='../../STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
-  link(rel='stylesheet', href='/STB/ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
+  script(src='../../ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+  script(src='../../ADMINLITE/dist/js/demo.js')
+  script(src='../../ADMINLITE/plugins/datatables/jquery.dataTables.js')
+  script(src='../../ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')
+  script(src='../../ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+  link(rel='stylesheet', href='../ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
   
-  script(src='../../STB/ADMINLITE/dist/js/adminlte.min.js')
+  script(src='../../ADMINLITE/dist/js/adminlte.min.js')
 
   script.
     function handleFiles() {
