@@ -10,7 +10,7 @@ html
     // Tell the browser to be responsive to screen width
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Font Awesome
-    link(rel='stylesheet', href='https://localhost:3000/adminlite/plugins/fontawesome-free/css/all.min.css')
+    link(rel='stylesheet', href='../ADMINLITE/plugins/fontawesome-free/css/all.min.css')
     // Ionicons
     link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
     // Theme style
@@ -49,6 +49,7 @@ html
                     p.text-muted.text-center
                     |     
                     //used to delete group
+                    button(type='button', class="btn btn-block btn-primary", data-toggle='modal', data-target='#modal_pic-sm') ምስል ቀይር
                     ul.list-group.list-group-unbordered.mb-3
                       li.list-group-item
                         b አስተባባሪ
@@ -109,25 +110,32 @@ html
                                                   if(course.activated)
                                                     p Non Active
                                                   if(!course.activated)
-                                                    p Active
+                                                    p Active 
                                         br
                                         h6 የክፍሉ አላማ
                                         p #{grade.description}
-                            // /.modal-dialog
-                          // /.tab-content
-                        // /.card-body
-                            else
-                              .col-12.col-sm-6.col-md-3
-                                button(type='button', class="btn btn-block btn-primary btn-lg", data-toggle='modal', data-target='#modal-course')
-                                  .fas.fa-plus.nav-plus
-                                a(href="#" class="users-list-name") ስርዓተ ትምህርት መድብ
-                     
-                  // /.card-body
-                // /.nav-tabs-custom
-              // /.col
-            // /.row
-          // /.container-fluid
-        // Main content
+                  #modal_pic-sm.modal.fade(style='display: none;', aria-hidden='true')
+                    .modal-dialog.modal_pic-sm
+                      .modal-content
+                        .modal-header
+                          h5.modal-title ጉባኤ #{user.gubaye.name} : የጉባኤ ምስል መቀየሪያ
+                          button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') ×
+                        .modal-body
+                          .text-center
+                            img.profile-user-img.img-fluid.img-circle#gubayeImg(style="width:300px;" src='#{user.gubaye.profilePic}', alt='User profile picture')
+                          .form-group
+                            br
+                            label(for='exampleInputFile') የጉባኤ ምስል ይምረጡ
+                            br
+                            .input-group
+                              form(method="post" enctype="multipart/form-data" action="/STB/SirateTimhert/Gubaye_Nius_Sebsabi/upload/gubaye/#{user.gubaye._id}/profileImage")
+                                input(type='file' name="gubayePicFile" accept="image/*")
+                                button.btn.btn-primary(type="submit") Upload                                  
+                        .modal-footer.justify-content-between
+                          button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
+                      // /.modal-dialog
+ 
         section.content
           .container-fluid
           // /.container-fluid
@@ -136,12 +144,12 @@ html
       footer.main-footer 
         include ../../../SharedComponents/Layouts/footer.jade
     // Bootstrap 4
-    script(src='/STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+    script(src='../ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
     // AdminLTE App
-    script(src='/STB/ADMINLITE/dist/js/adminlte.min.js')
+    script(src='../ADMINLITE/dist/js/adminlte.min.js')
     // AdminLTE for demo purposes
-    script(src='/STB/ADMINLITE/dist/js/demo.js')
-    script(src="/STB/ADMINLITE/plugins/datatables/jquery.dataTables.js")
-    script(src="/STB/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js")
+    script(src='../ADMINLITE/dist/js/demo.js')
+    script(src="../ADMINLITE/plugins/datatables/jquery.dataTables.js")
+    script(src="../ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js")
     script.
       document.getElementById('3').className = "nav-link active"

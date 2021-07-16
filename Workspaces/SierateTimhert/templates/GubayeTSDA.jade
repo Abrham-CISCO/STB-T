@@ -311,11 +311,6 @@ html
                                       .form-group.row
                                         .offset-sm-2.col-sm-10
                                           button.btn.btn-primary(type='button' onclick="updateGubaye()") መዝግብ
-                                  // /.tab-pane
-                                // /.tab-content
-                              // /.card-body
-                            // /.nav-tabs-custom
-                          // /.col
                       #modal_curr-sm.modal.fade(style='display: none;', aria-hidden='true')
                         .modal-dialog.modal_pic-sm
                           .modal-content
@@ -327,8 +322,8 @@ html
                               .form-group(data-select2-id='39')
                                 label ወደ ጉባኤው ለማስገባት የሚፈልጉትን ስርዓተ ትምህርት ይምረጡና ሲጨርሱ ጨምር የሚለውን በተን ይጫኑ 
                                 select.select2.select2-hidden-accessible(data-placeholder='ስርዓተ ትምህርት ይምረጡ', style='width: 100%;', data-select2-id='7', tabindex='-1', aria-hidden='true')
-                                  each uuser in user.allusers
-                                    option(data-select2-id='#{uuser._id}' value='#{uuser._id}') #{uuser.name}
+                                  each curriculum in curriculums
+                                    option(data-select2-id='#{curriculum._id}' value='#{curriculum._id}') #{curriculum.name}
                     
                                                          
                             .modal-footer.justify-content-between
@@ -357,30 +352,16 @@ html
                             .modal-footer.justify-content-between
                               button.btn.btn-default(type='button', data-dismiss='modal') ዝጋ
                           // /.modal-dialog
-                    // /.tab-content
-                  // /.card-body
-                // /.nav-tabs-custom
-              // /.col
-            // /.row
-          // /.container-fluid
-        // Main content
+     
         section.content
           .container-fluid
-          // /.container-fluid
-        // /.content
-      // /.content-wrapper
       footer.main-footer 
         include ../../../SharedComponents/Layouts/footer.jade
-    // jQuery
-    // Bootstrap 4
-    script(src='../../STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
-    // AdminLTE for demo purposes
-    script(src='../../STB/ADMINLITE/dist/js/demo.js')
-    // DataTables
+  script(src='../../STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
+  script(src='../../STB/ADMINLITE/dist/js/demo.js')
   script(src='../../STB/ADMINLITE/plugins/datatables/jquery.dataTables.js')
   script(src='../../STB/ADMINLITE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')
   script(src='../../STB/ADMINLITE/plugins/bootstrap/js/bootstrap.bundle.min.js')
-  // DataTables
   link(rel='stylesheet', href='/STB/ADMINLITE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')
   
   script(src='../../STB/ADMINLITE/dist/js/adminlte.min.js')
