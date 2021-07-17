@@ -715,7 +715,7 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
           }
           else
           {
-              res.redirect('/SirateTimhert/SubDepartmentAdmin')
+              res.redirect('/STB/SirateTimhert/SubDepartmentAdmin')
           }
           
         })

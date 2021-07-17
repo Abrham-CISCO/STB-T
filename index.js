@@ -182,7 +182,7 @@ app.use(passport.session());
       });
       socket.on('removeCourseOutline', function(courseId){
         Course_ModelAccessor.editCourse(courseId,{courseOutline:""},function(err,resp){
-          socket.emit('removeCourseOutline', 'Course Outline Removed')
+          socket.emit('removeCourseOutline',  resp)
         })
       })
       socket.on('updateCourseDetail', function(courseId, courseName, description){
