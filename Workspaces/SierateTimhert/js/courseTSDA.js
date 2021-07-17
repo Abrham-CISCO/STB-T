@@ -1,7 +1,7 @@
 courseCoutLineIframe = document.getElementById('courseOutlineIFrame')
 fileUpload = document.getElementById("Cfile_upload")
 removeBtn = document.getElementById("btnRemoveCourseOutline")
-console.log(courseCoutLineIframe.src)
+var socket = io('/course');
 if(courseCoutLineIframe.src == "/null/")
 {
 fileUpload.style.display = "block";
@@ -15,7 +15,7 @@ else
     courseCoutLineIframe.style.display = "block"
 }
     var btnObj = {
-        first : 0,
+        courseId : 0,
         removeCourseOutline: function() 
         {
           courseCoutLineIframe.src = ""
@@ -25,13 +25,16 @@ else
 
           var btnRemoveCourseOutline = document.getElementById('btnRemoveCourseOutline')
           btnRemoveCourseOutline.style.display = 'none'
-          
+          socket.emit('removeCourseOutline',this.courseId)
+          socket.on('removeCourseOutline',function(Confirmation){
+              console.log(Confirmation);
+          });
+
         }
     }
     
     function updateCourse()
-    {
-        var socket = io('/course');
+    {    
         var courseName = document.getElementById("name").value;
         var description = document.getElementById("description").value
         var courseId = document.getElementById("_id").value
@@ -40,33 +43,3 @@ else
             window.location.href = "/STB/SirateTimhert/course/nius_sebsabi/"+courseId;
         });
     }
-    // // Front end design using object Oriented programming and closure
-    // class sampleClass
-    // {
-    //     constructor(params) {
-            
-    //     }
-    // }
-
-    // class MemberCard
-    // {
-    //     constructor(name,_Id,phone,email,membershipStatus)
-    //     {
-    //         name = this.name;
-    //         Id = this.Id;
-    //         phone = this.phone;
-    //         email = this.email;
-    //         membershipStatus = this.membershipStatus;
-    //     }
-    // }
-
-    // var AbrhamGetachew = new MemberCard("Abrham Getachew", "0084","0923276844","abrhamcisco@gmail.com","none")
-    // // closure is created now
-    // function add(x)
-    // {
-    //     return function(y)
-    //     {
-    //         return x + y
-    //     }
-    // }
-    // var y = add(1)(2);

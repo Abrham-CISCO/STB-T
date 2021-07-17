@@ -175,11 +175,16 @@ app.use(passport.session());
     var course = io.of('/course')
     course.on('connection', (socket)=>
     {
-    socket.on('updateCourse', function(registeredChanges, registeredColumnNameChanges, courseId, gubayeId){
+      socket.on('updateCourse', function(registeredChanges, registeredColumnNameChanges, courseId, gubayeId){
         Course_ModelAccessor.UpdateMarkList(registeredChanges, registeredColumnNameChanges, gubayeId, courseId, function(error,notification){
           socket.emit('updateCourse',"Created")
         })
       });
+      socket.on('removeCourseOutline', function(courseId){
+        Course_ModelAccessor.editCourse(courseId,{courseOutline:""},function(err,resp){
+          socket.emit('removeCourseOutline', 'Course Outline Removed')
+        })
+      })
       socket.on('updateCourseDetail', function(courseId, courseName, description){
         Course_ModelAccessor.editCourse(courseId,{description:description,name:courseName},function(error, notification){
           socket.emit('updateCourseDetail','up to date')
