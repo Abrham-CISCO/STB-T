@@ -70,7 +70,7 @@ html
                                 .row 
                                   .col-12
                                     if(returnedCourse.courseOutline.toString() != "")
-                                      button.btn.btn-block.btn-outline-danger.btn-sm(type='button' id="btnRemoveCourseOutline" onclick = "btnObj.removeCourseOutline()") አጥፋ
+                                      button.btn.btn-block.btn-outline-danger.btn-sm(type='button' id="btnRemoveCourseOutline" onclick = " btnObj.courseId='#{returnedCourse._id}'; btnObj.removeCourseOutline();") አጥፋ
                           form(role="form" enctype="multipart/form-data" method = "post" action="/STB/SirateTimhert/Gubaye_Nius_Sebsabi/upload/#{returnedCourse._id}/courseoutline")  
                             .card-body(style='display: block;')
                               .form-group#Cfile_upload
@@ -176,19 +176,7 @@ html
 
                                         .form-group.row
                                           .offset-sm-2.col-sm-10
-                                            button.btn.btn-primary(type='button' onclick="updateCourse()") መዝግብ
-                                    // /.tab-pane
-                                  // /.tab-content
-                                // /.card-body
-                              // /.nav-tabs-custom
-                            // /.col
-                    // /.tab-content
-                  // /.card-body
-                // /.nav-tabs-custom
-              // /.col
-            // /.row
-          // /.container-fluid
-        // Main content
+                                            button.btn.btn-primary(type='button' onclick="updateCourse()") መዝግብ     
         section.content
           .container-fluid
           // /.container-fluid
