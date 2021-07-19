@@ -528,22 +528,18 @@ const uploadImage = multer({storage:storage, fileFilter:imageFileFilter});
                                                             curriculum_ModelAccessor.allCurriculums(function(err,curriculums){
                                                                 req.session.curriculums = curriculums;
                                                                 curriculums.forEach(curr=>{
-                                                                    if(curr._id = gubaye.curriculum)
+                                                                    if(curr._id == gubaye.curriculum)
                                                                     {
                                                                         curr.grades.forEach(grade=>{
                                                                             grade.courses.forEach(course=>{
                                                                                 allCourses.forEach(singleCourse=>{
-                                                                                    if(singleCourse._id == course.course_id)
-                                                                                    {
-                                                                                        course.course_name = singleCourse.name;
-                                                                                    }
+                                                                                    if(singleCourse._id == course.course_id) course.course_name = singleCourse.name;
                                                                                 })
                                                                             })
                                                                         })
-                                                                        req.session.curriculums = curriculums;
-                                                                        res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)                                                                                                                
                                                                     }
                                                                 })
+                                                                res.render("Workspaces/SierateTimhert/templates/GubayeTSDA.jade",req.session)                                                                                                                
                                                             }) 
                                                         })
                                                     })
